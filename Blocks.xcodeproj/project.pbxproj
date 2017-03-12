@@ -7,24 +7,69 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF1B1CC21E55AC8B00D0E50D /* GamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1B1CC11E55AC8B00D0E50D /* GamePresenter.swift */; };
+		FF340C061E56432500EE82E1 /* GameAssambler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF340C051E56432500EE82E1 /* GameAssambler.swift */; };
+		FF9B685D1E4D1678006376CA /* BlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9B685C1E4D1678006376CA /* BlocksTests.swift */; };
+		FF9B68651E4D1797006376CA /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9B68641E4D1797006376CA /* GameViewController.swift */; };
+		FF9B68671E4D17E7006376CA /* GameInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9B68661E4D17E7006376CA /* GameInteractor.swift */; };
+		FFA44A2F1E452D20000B4829 /* TetramonioDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA44A2E1E452D20000B4829 /* TetramonioDataProvider.swift */; };
+		FFA44A341E452EBF000B4829 /* Tetramonios.plist in Resources */ = {isa = PBXBuildFile; fileRef = FFA44A331E452EBF000B4829 /* Tetramonios.plist */; };
+		FFA44A371E45344F000B4829 /* TetramonioType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA44A361E45344F000B4829 /* TetramonioType.swift */; };
+		FFCB88AA1E563E8600BF4B90 /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCB88A91E563E8600BF4B90 /* ScoreManager.swift */; };
+		FFE6D62D1E59A47A0060C1C8 /* FieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6D62C1E59A47A0060C1C8 /* FieldCell.swift */; };
 		FFFBBFBB1E4521700052D68B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFBA1E4521700052D68B /* AppDelegate.swift */; };
-		FFFBBFBD1E4521700052D68B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFBC1E4521700052D68B /* ViewController.swift */; };
 		FFFBBFC01E4521700052D68B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFFBBFBE1E4521700052D68B /* Main.storyboard */; };
 		FFFBBFC21E4521700052D68B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFFBBFC11E4521700052D68B /* Assets.xcassets */; };
-		FFFBBFC51E4521700052D68B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFFBBFC31E4521700052D68B /* LaunchScreen.storyboard */; };
+		FFFBBFE21E4523A10052D68B /* Tetramonio.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFE11E4523A10052D68B /* Tetramonio.swift */; };
+		FFFBBFEA1E4525050052D68B /* TetramonioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFE91E4525050052D68B /* TetramonioManager.swift */; };
+		FFFBBFF01E4526C50052D68B /* GameLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFEF1E4526C50052D68B /* GameLogicManager.swift */; };
+		FFFBBFF51E4527DB0052D68B /* CellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFF41E4527DB0052D68B /* CellData.swift */; };
+		FFFBBFF71E45283A0052D68B /* CellState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFF61E45283A0052D68B /* CellState.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		FF9B685F1E4D1678006376CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFFBBFAF1E4521700052D68B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FFFBBFB61E4521700052D68B;
+			remoteInfo = Blocks;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		FF1B1CC11E55AC8B00D0E50D /* GamePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePresenter.swift; sourceTree = "<group>"; };
+		FF340C051E56432500EE82E1 /* GameAssambler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameAssambler.swift; sourceTree = "<group>"; };
+		FF9B685A1E4D1678006376CA /* BlocksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlocksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF9B685C1E4D1678006376CA /* BlocksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocksTests.swift; sourceTree = "<group>"; };
+		FF9B685E1E4D1678006376CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF9B68641E4D1797006376CA /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		FF9B68661E4D17E7006376CA /* GameInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameInteractor.swift; sourceTree = "<group>"; };
+		FFA44A2E1E452D20000B4829 /* TetramonioDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetramonioDataProvider.swift; sourceTree = "<group>"; };
+		FFA44A331E452EBF000B4829 /* Tetramonios.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Tetramonios.plist; path = ../../etris/Etris/Tetramonios.plist; sourceTree = "<group>"; };
+		FFA44A361E45344F000B4829 /* TetramonioType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetramonioType.swift; sourceTree = "<group>"; };
+		FFCB88A91E563E8600BF4B90 /* ScoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreManager.swift; sourceTree = "<group>"; };
+		FFE6D62C1E59A47A0060C1C8 /* FieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldCell.swift; sourceTree = "<group>"; };
 		FFFBBFB71E4521700052D68B /* Blocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFFBBFBA1E4521700052D68B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FFFBBFBC1E4521700052D68B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FFFBBFBF1E4521700052D68B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FFFBBFC11E4521700052D68B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FFFBBFC41E4521700052D68B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FFFBBFC61E4521700052D68B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FFFBBFE11E4523A10052D68B /* Tetramonio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tetramonio.swift; sourceTree = "<group>"; };
+		FFFBBFE91E4525050052D68B /* TetramonioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetramonioManager.swift; sourceTree = "<group>"; };
+		FFFBBFEF1E4526C50052D68B /* GameLogicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLogicManager.swift; sourceTree = "<group>"; };
+		FFFBBFF41E4527DB0052D68B /* CellData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellData.swift; sourceTree = "<group>"; };
+		FFFBBFF61E45283A0052D68B /* CellState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		FF9B68571E4D1678006376CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FFFBBFB41E4521700052D68B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -35,10 +80,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FF9B685B1E4D1678006376CA /* BlocksTests */ = {
+			isa = PBXGroup;
+			children = (
+				FF9B685C1E4D1678006376CA /* BlocksTests.swift */,
+				FF9B685E1E4D1678006376CA /* Info.plist */,
+			);
+			path = BlocksTests;
+			sourceTree = "<group>";
+		};
+		FFA44A2D1E452C4F000B4829 /* TetramoniosDataProvider */ = {
+			isa = PBXGroup;
+			children = (
+				FFA44A2E1E452D20000B4829 /* TetramonioDataProvider.swift */,
+			);
+			name = TetramoniosDataProvider;
+			sourceTree = "<group>";
+		};
+		FFA44A301E452E11000B4829 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FFA44A321E452E5F000B4829 /* SupportingFiles */,
+				FFA44A311E452E54000B4829 /* Images */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		FFA44A311E452E54000B4829 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				FFFBBFC11E4521700052D68B /* Assets.xcassets */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		FFA44A321E452E5F000B4829 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				FFA44A331E452EBF000B4829 /* Tetramonios.plist */,
+				FFFBBFC61E4521700052D68B /* Info.plist */,
+			);
+			name = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		FFCB88A61E563E1C00BF4B90 /* ScoreManager */ = {
+			isa = PBXGroup;
+			children = (
+				FFCB88A91E563E8600BF4B90 /* ScoreManager.swift */,
+			);
+			name = ScoreManager;
+			sourceTree = "<group>";
+		};
 		FFFBBFAE1E4521700052D68B = {
 			isa = PBXGroup;
 			children = (
 				FFFBBFB91E4521700052D68B /* Blocks */,
+				FF9B685B1E4D1678006376CA /* BlocksTests */,
 				FFFBBFB81E4521700052D68B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -47,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				FFFBBFB71E4521700052D68B /* Blocks.app */,
+				FF9B685A1E4D1678006376CA /* BlocksTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -54,19 +152,143 @@
 		FFFBBFB91E4521700052D68B /* Blocks */ = {
 			isa = PBXGroup;
 			children = (
-				FFFBBFBA1E4521700052D68B /* AppDelegate.swift */,
-				FFFBBFBC1E4521700052D68B /* ViewController.swift */,
+				FFFBBFCC1E4521840052D68B /* Classes */,
+				FFA44A301E452E11000B4829 /* Resources */,
 				FFFBBFBE1E4521700052D68B /* Main.storyboard */,
-				FFFBBFC11E4521700052D68B /* Assets.xcassets */,
-				FFFBBFC31E4521700052D68B /* LaunchScreen.storyboard */,
-				FFFBBFC61E4521700052D68B /* Info.plist */,
 			);
 			path = Blocks;
+			sourceTree = "<group>";
+		};
+		FFFBBFCC1E4521840052D68B /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				FFFBBFCE1E4521AA0052D68B /* Modules */,
+				FFFBBFCD1E45218D0052D68B /* Common */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		FFFBBFCD1E45218D0052D68B /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				FFFBBFBA1E4521700052D68B /* AppDelegate.swift */,
+				FFFBBFE31E45241D0052D68B /* Enteties */,
+				FFFBBFDC1E4522FC0052D68B /* Managers */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		FFFBBFCE1E4521AA0052D68B /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				FFFBBFD01E4521DA0052D68B /* Game */,
+			);
+			name = Modules;
+			sourceTree = "<group>";
+		};
+		FFFBBFD01E4521DA0052D68B /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				FFFBBFD11E4522000052D68B /* View */,
+				FFFBBFD51E4522390052D68B /* Assambler */,
+				FFFBBFD31E4522100052D68B /* Presenter */,
+				FFFBBFD21E4522060052D68B /* Interractor */,
+			);
+			name = Game;
+			sourceTree = "<group>";
+		};
+		FFFBBFD11E4522000052D68B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FFE6D62C1E59A47A0060C1C8 /* FieldCell.swift */,
+				FF9B68641E4D1797006376CA /* GameViewController.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		FFFBBFD21E4522060052D68B /* Interractor */ = {
+			isa = PBXGroup;
+			children = (
+				FF9B68661E4D17E7006376CA /* GameInteractor.swift */,
+			);
+			name = Interractor;
+			sourceTree = "<group>";
+		};
+		FFFBBFD31E4522100052D68B /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				FF1B1CC11E55AC8B00D0E50D /* GamePresenter.swift */,
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		FFFBBFD51E4522390052D68B /* Assambler */ = {
+			isa = PBXGroup;
+			children = (
+				FF340C051E56432500EE82E1 /* GameAssambler.swift */,
+			);
+			name = Assambler;
+			sourceTree = "<group>";
+		};
+		FFFBBFDC1E4522FC0052D68B /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				FFCB88A61E563E1C00BF4B90 /* ScoreManager */,
+				FFA44A2D1E452C4F000B4829 /* TetramoniosDataProvider */,
+				FFFBBFEE1E4526AF0052D68B /* GameLogicManager */,
+				FFFBBFED1E4526A20052D68B /* TetramonioManager */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		FFFBBFE31E45241D0052D68B /* Enteties */ = {
+			isa = PBXGroup;
+			children = (
+				FFFBBFE11E4523A10052D68B /* Tetramonio.swift */,
+				FFFBBFF41E4527DB0052D68B /* CellData.swift */,
+				FFA44A361E45344F000B4829 /* TetramonioType.swift */,
+				FFFBBFF61E45283A0052D68B /* CellState.swift */,
+			);
+			name = Enteties;
+			sourceTree = "<group>";
+		};
+		FFFBBFED1E4526A20052D68B /* TetramonioManager */ = {
+			isa = PBXGroup;
+			children = (
+				FFFBBFE91E4525050052D68B /* TetramonioManager.swift */,
+			);
+			name = TetramonioManager;
+			sourceTree = "<group>";
+		};
+		FFFBBFEE1E4526AF0052D68B /* GameLogicManager */ = {
+			isa = PBXGroup;
+			children = (
+				FFFBBFEF1E4526C50052D68B /* GameLogicManager.swift */,
+			);
+			name = GameLogicManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		FF9B68591E4D1678006376CA /* BlocksTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF9B68631E4D1678006376CA /* Build configuration list for PBXNativeTarget "BlocksTests" */;
+			buildPhases = (
+				FF9B68561E4D1678006376CA /* Sources */,
+				FF9B68571E4D1678006376CA /* Frameworks */,
+				FF9B68581E4D1678006376CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FF9B68601E4D1678006376CA /* PBXTargetDependency */,
+			);
+			name = BlocksTests;
+			productName = BlocksTests;
+			productReference = FF9B685A1E4D1678006376CA /* BlocksTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		FFFBBFB61E4521700052D68B /* Blocks */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FFFBBFC91E4521700052D68B /* Build configuration list for PBXNativeTarget "Blocks" */;
@@ -94,6 +316,11 @@
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = QuasarClaster;
 				TargetAttributes = {
+					FF9B68591E4D1678006376CA = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = FFFBBFB61E4521700052D68B;
+					};
 					FFFBBFB61E4521700052D68B = {
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
@@ -114,34 +341,70 @@
 			projectRoot = "";
 			targets = (
 				FFFBBFB61E4521700052D68B /* Blocks */,
+				FF9B68591E4D1678006376CA /* BlocksTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		FF9B68581E4D1678006376CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FFFBBFB51E4521700052D68B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFFBBFC51E4521700052D68B /* LaunchScreen.storyboard in Resources */,
 				FFFBBFC21E4521700052D68B /* Assets.xcassets in Resources */,
 				FFFBBFC01E4521700052D68B /* Main.storyboard in Resources */,
+				FFA44A341E452EBF000B4829 /* Tetramonios.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		FF9B68561E4D1678006376CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF9B685D1E4D1678006376CA /* BlocksTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FFFBBFB31E4521700052D68B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFFBBFBD1E4521700052D68B /* ViewController.swift in Sources */,
+				FF1B1CC21E55AC8B00D0E50D /* GamePresenter.swift in Sources */,
+				FFFBBFEA1E4525050052D68B /* TetramonioManager.swift in Sources */,
+				FFFBBFE21E4523A10052D68B /* Tetramonio.swift in Sources */,
+				FFE6D62D1E59A47A0060C1C8 /* FieldCell.swift in Sources */,
+				FFFBBFF01E4526C50052D68B /* GameLogicManager.swift in Sources */,
+				FFFBBFF51E4527DB0052D68B /* CellData.swift in Sources */,
+				FF340C061E56432500EE82E1 /* GameAssambler.swift in Sources */,
+				FF9B68651E4D1797006376CA /* GameViewController.swift in Sources */,
+				FF9B68671E4D17E7006376CA /* GameInteractor.swift in Sources */,
+				FFFBBFF71E45283A0052D68B /* CellState.swift in Sources */,
+				FFCB88AA1E563E8600BF4B90 /* ScoreManager.swift in Sources */,
+				FFA44A2F1E452D20000B4829 /* TetramonioDataProvider.swift in Sources */,
+				FFA44A371E45344F000B4829 /* TetramonioType.swift in Sources */,
 				FFFBBFBB1E4521700052D68B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FF9B68601E4D1678006376CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FFFBBFB61E4521700052D68B /* Blocks */;
+			targetProxy = FF9B685F1E4D1678006376CA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		FFFBBFBE1E4521700052D68B /* Main.storyboard */ = {
@@ -152,17 +415,35 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		FFFBBFC31E4521700052D68B /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FFFBBFC41E4521700052D68B /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		FF9B68611E4D1678006376CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = BlocksTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.quasarius.BlocksTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Blocks.app/Blocks";
+			};
+			name = Debug;
+		};
+		FF9B68621E4D1678006376CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = BlocksTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.quasarius.BlocksTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Blocks.app/Blocks";
+			};
+			name = Release;
+		};
 		FFFBBFC71E4521700052D68B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -283,6 +564,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		FF9B68631E4D1678006376CA /* Build configuration list for PBXNativeTarget "BlocksTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF9B68611E4D1678006376CA /* Debug */,
+				FF9B68621E4D1678006376CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FFFBBFB21E4521700052D68B /* Build configuration list for PBXProject "Blocks" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -299,6 +589,7 @@
 				FFFBBFCB1E4521700052D68B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
