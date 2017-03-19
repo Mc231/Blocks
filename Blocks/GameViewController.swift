@@ -6,7 +6,6 @@
 //  Copyright © 2017 QuasarClaster. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 // MARK: - Check this
@@ -16,36 +15,53 @@ protocol GameViewOutput {
     func restartGame()
     func getMaxScore()
     func getCurrentScore()
-    func handleTouchedCellWithData(_ cellData: CellData)
+    func handleTouchedCell(with data: CellData)
 }
 
 protocol GameViewInput: class {
-    func displayTetramonios(_ tetramonios: [Tetramonio])
-    func displayMaxScore(_ score: Int)
-    func displayCurrentScore(_ score: Int)
-    func updateCells(with cellData: [CellData])
+    func display(tetramonios: [Tetramonio])
+    func display(max score: Int)
+    func display(current score: Int)
+    func update(cellData: [CellData])
 }
 
 class GameViewController: UIViewController {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var field: UICollectionView!
     @IBOutlet weak var maxScoreLabel: UILabel!
     @IBOutlet weak var currentScoreLabel: UILabel!
+    @IBOutlet weak var figure1ImageView: UIImageView!
+    @IBOutlet weak var figure2ImageView: UIImageView!
+    @IBOutlet weak var field: UICollectionView!
     
     // MARK: - Properties
     
     var presenter: GameViewOutput!
     var tetramonios = [Tetramonio]()
+    
+    // MARK: - Constants
+    
+    fileprivate let numberOfRows = 8
 
     // MARK: - Inizialization
     
     override func awakeFromNib() {
         super.awakeFromNib()
         GameAssambler.sharedInstance.configureGameInfoModule(view: self)
+    }
+    
+    // MARK - UIViewController
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         presenter.generateTetramonios()
         updateScore()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        field.collectionViewLayout.invalidateLayout()
     }
     
     // MARK: - IBActions
@@ -87,9 +103,19 @@ class GameViewController: UIViewController {
                     debugPrint("Failed to cast to FieldCell \(#line)")
                     return
                 }
-                presenter.handleTouchedCellWithData(<#T##cellData: CellData##CellData#>)
+             //   presenter.handleTouchedCellWithData(<#T##cellData: CellData##CellData#>)
             }
         }
+    }
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension GameViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = Int(UIScreen.main.bounds.size.width) / numberOfRows
+        let height = width
+        return CGSize(width: width, height: height)
     }
 }
 
@@ -97,20 +123,21 @@ class GameViewController: UIViewController {
 
 extension GameViewController: GameViewInput {
     
-    func updateCells(with cellData: [CellData]) {
+    func update(cellData: [CellData]) {
         
     }
 
-    func displayTetramonios(_ tetramonios: [Tetramonio]) {
+    func display(tetramonios: [Tetramonio]) {
         print("Tetramomniso")
     }
     
-    func displayCurrentScore(_ score: Int) {
+    func display(current score: Int) {
         let scoreToSet = String(score)
+        debugPrint(scoreToSet)
         currentScoreLabel.text = scoreToSet
     }
     
-    func displayMaxScore(_ score: Int) {
+    func display(max score: Int) {
         let scoreToSet = String(score)
         maxScoreLabel.text = scoreToSet
     }
@@ -124,6 +151,11 @@ extension GameViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FieldCell.cellIdentifier, for: indexPath) as? FieldCell else{
+            fatalError("Could not deque cell")
+        }
+        
+        return cell
     }
 }

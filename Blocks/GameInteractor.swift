@@ -35,23 +35,23 @@ class GameInteractor: GameInteractorInput {
     
     func generateTetramoniosFromManager() {
          let tetramonios = tetramoniomManager?.generateTetramonios()
-         presenter?.provideTetramonios(tetramonios)
+         presenter?.provideTetramonios(tetramonios!)
     }
     
     func restartGame() {
         generateTetramoniosFromManager()
-        presenter?.provideCurrentScore(0)
+        presenter?.provideCurrentScore(12)
         // Change score to null
     }
     
     func getCurrentScore() {
         // Get score from user defaults or core data
-        presenter?.provideCurrentScore(0)
+        presenter?.provideCurrentScore(231)
     }
     
     func getMaxScore() {
            // Get score from user defaults or core data
-        presenter?.provideMaxScore(0)
+        presenter?.provideMaxScore(231)
     }
     
     func getCurrentTetramonios(_ tetramonios: ([Tetramonio]) -> ()) {

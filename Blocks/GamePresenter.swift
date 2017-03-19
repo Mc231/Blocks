@@ -12,25 +12,25 @@ protocol GamePresenterInput: GameViewOutput, GameInteractorOutput {
     
 }
 
-class GameInfoPresenter: GamePresenterInput {
+class GamePresenter: GamePresenterInput {
     
     weak var view: GameViewInput?
-    var interractor: GameInfoInteractorInput?
+    var interractor: GameInteractorInput?
     
     func generateTetramonios() {
         interractor?.generateTetramoniosFromManager()
     }
     
     func provideTetramonios(_ tetramonios: [Tetramonio]) {
-        view?.displayTetramonios(tetramonios)
+        view?.display(tetramonios: tetramonios)
     }
     
     func provideMaxScore(_ score: Int) {
-        view?.displayMaxScore(score)
+        view?.display(max: score)
     }
     
     func provideCurrentScore(_ score: Int) {
-        view?.displayCurrentScore(score)
+        view?.display(current: score)
     }
     
     func restartGame() {
@@ -47,5 +47,13 @@ class GameInfoPresenter: GamePresenterInput {
     
     func provideCurrentTetramonios(_ tetramonios: ([Tetramonio]) -> ()) {
         interractor?.getCurrentTetramonios(tetramonios)
+    }
+    
+    func handleTouchedCell(with data: CellData) {
+        
+    }
+    
+    func updateCells(_ updatedData: [CellData]) {
+        
     }
 }

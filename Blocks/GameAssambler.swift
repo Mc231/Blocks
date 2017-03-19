@@ -15,7 +15,7 @@ class GameAssambler {
     static let sharedInstance = GameAssambler()
     
     func configureGameInfoModule(view: GameViewController) {
-        let presenter = GameInfoPresenter()
+        let presenter = GamePresenter()
         presenter.view = view
         let interractor = GameInteractor()
         interractor.presenter = presenter
