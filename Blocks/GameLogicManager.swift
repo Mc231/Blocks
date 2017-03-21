@@ -68,6 +68,24 @@ final class GameLogicManager: GameLogicInput {
     
     // MARK: - Private methods
     
+    private func check(ordered tetramonio: [Tetramonio]) -> Tetramonio? {
+        let firstCell = tetramonio[0].id
+        let secondCell = tetramonio[1].id
+        let thirdCell = tetramonio[2].id
+        let fourthCell = tetramonio[4].id
+        
+        for currentTetramonio in tetramonios {
+            let firstConstant = currentTetramonio.indexes[0]
+            let secondConstant = currentTetramonio.indexes[1]
+            let thirdConstant = currentTetramonio.indexes[2]
+            
+            if (secondCell == firstCell + firstConstant) && (thirdCell == firstCell + secondConstant) &&  (fourthCell == firstCell + thirdConstant) {
+                return currentTetramonio
+            }
+        }
+        return nil
+    }
+    
     private func checkTetramonio() {
         // Add logic gor check figure
        
