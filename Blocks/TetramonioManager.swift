@@ -9,31 +9,54 @@
 import Foundation
 
 protocol TetramonioProtocol {
-    func generateTetramonios() -> [Tetramonio]
-    func updateTetramonios(_ oldTetramonios: [Tetramonio], newTetramonios: [Tetramonio])
-    func getTetramonios(_ currentTetramonios: ([Tetramonio]) -> Void)
+    func generateTetramonios(_ updateIndex: Int) -> [Tetramonio]
 }
 
 class TetramonioManager: TetramonioProtocol {
     
-    let tetramonios: [Tetramonio]
+    private let tetramonios: [Tetramonio]
+    private var currentTetramonios = [Tetramonio]()
     
     init() {
         self.tetramonios = TetramonioDataProvider.sharedProvider.parseTetramonios()
     }
     
-    func generateTetramonios() -> [Tetramonio] {
+    func generateTetramonios(_ updateIndex: Int = -1) -> [Tetramonio] {
         var result = [Tetramonio]()
         
-        let firstTetramonioIndex =  Int(arc4random_uniform(18))
-        let secondTetramonioIndex = Int(arc4random_uniform(18))
-        
-        if firstTetramonioIndex != secondTetramonioIndex {
-            result.append(tetramonios[firstTetramonioIndex])
-            result.append(tetramonios[secondTetramonioIndex])
+        if updateIndex == -1 {
+            let firstTetramonioIndex = generateRandomIndex()
+            let secondTetramonioIndex = generateRandomIndex()
+            
+            if firstTetramonioIndex != secondTetramonioIndex {
+                result.append(tetramonios[firstTetramonioIndex])
+                result.append(tetramonios[secondTetramonioIndex])
+            }else{
+                return generateTetramonios()
+            }
         }else{
-            return generateTetramonios()
+            let firstTetrmonio = currentTetramonios.first
+            let lastTetramonio = currentTetramonios.last
+            if updateIndex == 0 {
+                let randomTetamonio = generateRandomIndex()
+                if firstTetrmonio?.id.rawValue == randomTetamonio {
+                    generateTetramonios(0)
+                }else{
+                  result.append(tetramonios[randomTetamonio])
+                  result.append(lastTetramonio!)
+                }
+            }else{
+                let randomTetamonio = generateRandomIndex()
+                if lastTetramonio?.id.rawValue == randomTetamonio {
+                    generateTetramonios(1)
+                }else{
+                    result.append(firstTetrmonio)
+                    result.append(tetramonios[randomTetamonio])
+                }
+            }
         }
+        
+        currentTetramonios = result
         
         return result
     }
@@ -44,5 +67,11 @@ class TetramonioManager: TetramonioProtocol {
     
     func getTetramonios(_ currentTetramonios: ([Tetramonio]) -> ()) {
         currentTetramonios(tetramonios)
+    }
+    
+    // MARK: - Private methods
+    
+    private func generateRandomIndex() -> Int {
+        return Int(arc4random_uniform(18))
     }
 }
