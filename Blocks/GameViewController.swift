@@ -12,6 +12,7 @@ import UIKit
 
 protocol GameViewOutput {
     func generateTetramonios()
+    func createField()
     func restartGame()
     func getMaxScore()
     func getCurrentScore()
@@ -20,6 +21,7 @@ protocol GameViewOutput {
 
 protocol GameViewInput: class {
     func display(tetramonios: [Tetramonio])
+    func display(field withData: [CellData])
     func display(max score: Int)
     func display(current score: Int)
     func update(cellData: [CellData])
@@ -39,6 +41,11 @@ class GameViewController: UIViewController {
     
     var presenter: GameViewOutput!
     var tetramonios = [Tetramonio]()
+    var fieldData = [CellData]() {
+        didSet{
+            field.reloadData()
+        }
+    }
     
     // MARK: - Constants
     
@@ -56,6 +63,7 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.generateTetramonios()
+        presenter.createField()
         updateScore()
     }
     
@@ -97,13 +105,13 @@ class GameViewController: UIViewController {
             return
         }
         
-        for (_, view) in view.subviews.enumerated() {
+        for (_, view) in field.subviews.enumerated() {
             if view is FieldCell && view.frame.contains(touchPoint) {
                 guard let cell = view as? FieldCell else {
                     debugPrint("Failed to cast to FieldCell \(#line)")
                     return
                 }
-             //   presenter.handleTouchedCellWithData(<#T##cellData: CellData##CellData#>)
+                presenter.handleTouchedCell(with: cell.cellData)
             }
         }
     }
@@ -124,7 +132,12 @@ extension GameViewController: UICollectionViewDelegateFlowLayout {
 extension GameViewController: GameViewInput {
     
     func update(cellData: [CellData]) {
-        
+        fieldData = cellData
+        field.reloadData()
+    }
+    
+    func display(field withData: [CellData]) {
+        fieldData = withData
     }
 
     func display(tetramonios: [Tetramonio]) {
@@ -155,6 +168,8 @@ extension GameViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FieldCell.cellIdentifier, for: indexPath) as? FieldCell else{
             fatalError("Could not deque cell")
         }
+
+        cell.cellData = fieldData[indexPath.row]
         
         return cell
     }

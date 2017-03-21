@@ -23,22 +23,6 @@ class TetramonioManager: TetramonioProtocol {
     }
     
     func generateTetramonios() -> [Tetramonio] {
-      return generateTetramoniosForGameStart()
-    }
-    
-    func updateTetramonios(_ oldTetramonios: [Tetramonio], newTetramonios: [Tetramonio]) {
-        
-    }
-    
-    func getTetramonios(_ currentTetramonios: ([Tetramonio]) -> ()) {
-        currentTetramonios(tetramonios)
-    }
-
-    
-    // MARK: - Private methods
-    
-    private func generateTetramoniosForGameStart() -> [Tetramonio] {
-        
         var result = [Tetramonio]()
         
         let firstTetramonioIndex =  Int(arc4random_uniform(18))
@@ -52,5 +36,13 @@ class TetramonioManager: TetramonioProtocol {
         }
         
         return result
+    }
+    
+    func updateTetramonios(_ oldTetramonios: [Tetramonio], newTetramonios: [Tetramonio]) {
+        
+    }
+    
+    func getTetramonios(_ currentTetramonios: ([Tetramonio]) -> ()) {
+        currentTetramonios(tetramonios)
     }
 }

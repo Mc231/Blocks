@@ -25,6 +25,14 @@ class GamePresenter: GamePresenterInput {
         view?.display(tetramonios: tetramonios)
     }
     
+    func createField() {
+        interractor?.generateField()
+    }
+    
+    func provideField(_ field: [CellData]) {
+        view?.display(field: field)
+    }
+    
     func provideMaxScore(_ score: Int) {
         view?.display(max: score)
     }
@@ -50,10 +58,10 @@ class GamePresenter: GamePresenterInput {
     }
     
     func handleTouchedCell(with data: CellData) {
-        
+        interractor?.handleTouchedCellWithData(data)
     }
     
     func updateCells(_ updatedData: [CellData]) {
-        
+        view?.update(cellData: updatedData)
     }
 }

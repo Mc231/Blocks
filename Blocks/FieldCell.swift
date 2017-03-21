@@ -12,6 +12,18 @@ class FieldCell: UICollectionViewCell {
     
     static let cellIdentifier = "FieldCell"
     
-    var cellData: CellData!
+    var cellData: CellData! {
+        didSet{
+            switch cellData.state {
+            case .empty:
+                backgroundColor = UIColor.white
+            case .placed:
+                backgroundColor = UIColor.orange
+            case .selected:
+                backgroundColor = UIColor.red
+                
+            }
+        }
+    }
     
 }

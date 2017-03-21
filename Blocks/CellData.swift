@@ -9,8 +9,11 @@
 import Foundation
 
 struct CellData {
+    
     let id: Int
-    let x: Int
-    let y: Int
     var state: CellState
+    
+    mutating func chageState(newState: CellState) {
+        self.state = newState
+    }
 }

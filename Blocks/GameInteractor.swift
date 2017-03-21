@@ -10,6 +10,7 @@ import Foundation
 
 protocol GameInteractorInput: class {
     func generateTetramoniosFromManager()
+    func generateField()
     func restartGame()
     func getCurrentScore()
     func getMaxScore()
@@ -20,6 +21,7 @@ protocol GameInteractorInput: class {
 
 protocol GameInteractorOutput: class {
     func provideTetramonios(_ tetramonios: [Tetramonio])
+    func provideField(_ field: [CellData])
     func provideMaxScore(_ score: Int)
     func provideCurrentScore(_ score: Int)
     func updateCells(_ updatedData: [CellData])
@@ -29,13 +31,21 @@ class GameInteractor: GameInteractorInput {
     
     weak var presenter: GameInteractorOutput!
     
-    var gameLogic: GameLogicInput?
-    var tetramoniomManager: TetramonioManager?
-    var scoreManager: ScoreManagerProtocol?
+    private var gameLogic: GameLogicInput?
+    private var tetramoniomManager: TetramonioManager?
+    private var scoreManager: ScoreManagerProtocol?
     
     func generateTetramoniosFromManager() {
          let tetramonios = tetramoniomManager?.generateTetramonios()
+        
          presenter?.provideTetramonios(tetramonios!)
+    }
+    
+    func generateField() {
+        guard let fieldData = gameLogic?.createField() else {
+            fatalError("Field data could not be nil")
+        }
+        presenter.provideField(fieldData)
     }
     
     func restartGame() {
@@ -59,8 +69,8 @@ class GameInteractor: GameInteractorInput {
     }
     
     func handleTouchedCellWithData(_ cellData: CellData) {
-        gameLogic?.handleCurrentTetramonioData(tetramonioData: cellData) { updatedCellData in
-            presenter?.updateCells(updatedCellData)
+        gameLogic?.updateField(with: cellData) { updatedCellData in
+        presenter?.updateCells(updatedCellData)
         }
     }
     
