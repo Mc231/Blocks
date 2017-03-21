@@ -13,12 +13,14 @@ import Foundation
  */
 
 struct Tetramonio {
-    let id: TetramonioType
+    // WARNING: - Pay attention
+   // let id: TetramonioType
+    let id: Int
     let indexes: [Int]
     let gameOverIndexes: [Int]
     
     init(dictionary: NSDictionary) {
-        self.id = dictionary.object(forKey: "id") as? TetramonioType ?? .None
+        self.id = dictionary.object(forKey: "id") as? Int ?? 0
         self.indexes = dictionary.object(forKey: "tetramonioIndexes") as? [Int] ?? [Int]()
         self.gameOverIndexes = dictionary.object(forKey: "gameOverIndexes") as? [Int] ?? [Int]()
     }

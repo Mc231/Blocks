@@ -23,13 +23,14 @@ final class GameLogicManager: GameLogicInput {
     // MARK: - Constants
     
     private let numberOfCells = 64
+    private let numberOfCellsInTetramonio = 4
     
     // MARK: - Prioperties
 
     private var field = [CellData]()
     private var currentTetramonio = [CellData]() {
         didSet {
-            if currentTetramonio.count == 4 {
+            if currentTetramonio.count == numberOfCellsInTetramonio {
                checkTetramonio()
             }else{
                 appendCellToCurrentTetramonio()
@@ -69,6 +70,10 @@ final class GameLogicManager: GameLogicInput {
     
     private func checkTetramonio() {
         // Add logic gor check figure
+       
+        let orderedTetramonio = currentTetramonio.sorted(by: {$0.id < $1.id})
+        debugPrint(orderedTetramonio)
+        
         for cellData in currentTetramonio {
             guard let cellIndex = field.index(where: {$0.id == cellData.id}) else {
                 fatalError("Index could not be nil")

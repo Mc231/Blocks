@@ -31,14 +31,16 @@ class GameInteractor: GameInteractorInput {
     
     weak var presenter: GameInteractorOutput!
     
-    private var gameLogic: GameLogicInput?
-    private var tetramoniomManager: TetramonioManager?
-    private var scoreManager: ScoreManagerProtocol?
+    var gameLogic: GameLogicInput?
+    var tetramoniomManager: TetramonioManager?
+    var scoreManager: ScoreManagerProtocol?
     
     func generateTetramoniosFromManager() {
-         let tetramonios = tetramoniomManager?.generateTetramonios()
-        
-         presenter?.provideTetramonios(tetramonios!)
+        guard let tetramonios = tetramoniomManager?.generateTetramonios() else {
+            fatalError("Generated tetramonios could not be nil")
+        }
+         gameLogic?.setCurrentTetramonios(tetramonios)
+         presenter?.provideTetramonios(tetramonios)
     }
     
     func generateField() {
