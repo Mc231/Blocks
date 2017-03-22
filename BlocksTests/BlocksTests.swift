@@ -24,7 +24,7 @@ class BlocksTests: XCTestCase {
     // MARK: - TetramonioDataPRoviderTest
     
     func testTetramonioDataProvider() {
-       XCTAssertTrue(TetramonioDataProvider.sharedProvider.parseTetramonios().count == 20)
+       XCTAssertTrue(TetramonioDataProvider.sharedProvider.parseTetramonios().count == 19)
     }
     
     // MARK: - TetramonioManagerTests

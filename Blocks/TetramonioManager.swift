@@ -69,12 +69,4 @@ class TetramonioManager: TetramonioProtocol {
         
         return result
     }
-    
-    func updateTetramonios(_ oldTetramonios: [Tetramonio], newTetramonios: [Tetramonio]) {
-        
-    }
-    
-    func getTetramonios(_ currentTetramonios: ([Tetramonio]) -> ()) {
-        currentTetramonios(tetramonios)
-    }
 }

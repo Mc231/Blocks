@@ -21,9 +21,7 @@ class FieldCell: UICollectionViewCell {
                 backgroundColor = UIColor.orange
             case .selected:
                 backgroundColor = UIColor.red
-                
             }
         }
     }
-    
 }

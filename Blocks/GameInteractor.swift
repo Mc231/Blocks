@@ -67,7 +67,7 @@ class GameInteractor: GameInteractorInput {
     }
     
     func getCurrentTetramonios(_ tetramonios: ([Tetramonio]) -> ()) {
-        tetramoniomManager?.getTetramonios(tetramonios)
+     //   tetramoniomManager?.getTetramonios(tetramonios)
     }
     
     func handleTouchedCellWithData(_ cellData: CellData) {
