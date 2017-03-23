@@ -11,7 +11,7 @@ import UIKit
 // MARK: - Check this
 
 protocol GameViewOutput {
-    func generateTetramonios()
+    func generateTetramoniosForGameStart()
     func createField()
     func restartGame()
     func getMaxScore()
@@ -62,7 +62,7 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.generateTetramonios()
+        presenter.generateTetramoniosForGameStart()
         presenter.createField()
         updateScore()
     }

@@ -38,11 +38,14 @@ class BlocksTests: XCTestCase {
     }
     
     func testTetramonioManagerUpdateFirstTetramonio() {
-        let tetramonios = manager.generateTetramonios()
-        let updatedTetramonios = manager.generateTetramonios(.firtTetramonio)
-        XCTAssertEqual(tetramonios.count, updatedTetramonios.count)
-        XCTAssertNotEqual(tetramonios.first?.id, updatedTetramonios.first?.id)
-        XCTAssertEqual(tetramonios.last?.id, updatedTetramonios.last?.id)
+        
+        for _ in 0...10000 {
+            let tetramonios = manager.generateTetramonios()
+            let updatedTetramonios = manager.generateTetramonios(.firtTetramonio)
+            XCTAssertEqual(tetramonios.count, updatedTetramonios.count)
+            XCTAssertNotEqual(tetramonios.first?.id, updatedTetramonios.first?.id)
+            XCTAssertEqual(tetramonios.last?.id, updatedTetramonios.last?.id)
+        }
     }
     
     func testTetramonioManagerUpdateSecondTetramonio() {
@@ -67,10 +70,10 @@ class BlocksTests: XCTestCase {
     func testRandomFunc() {
         var result = Set<Int>()
         
-        while result.count != 20 {
+        while result.count != 19 {
             let randomNum = Int.randomNum
             result.insert(randomNum)
         }
-        XCTAssertTrue(result.count == 20)
+        XCTAssertTrue(result.count == 19)
     }
 }

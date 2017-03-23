@@ -9,7 +9,7 @@
 import Foundation
 
 protocol GameInteractorInput: class {
-    func generateTetramoniosFromManager()
+    func generateTetramonios(generationType: GenerationType)
     func generateField()
     func restartGame()
     func getCurrentScore()
@@ -27,31 +27,37 @@ protocol GameInteractorOutput: class {
     func updateCells(_ updatedData: [CellData])
 }
 
-class GameInteractor: GameInteractorInput {
+class GameInteractor {
     
-    weak var presenter: GameInteractorOutput!
+    // MARK: - Properties
     
-    var gameLogic: GameLogicInput?
+    weak var presenter: GameInteractorOutput?
+    var gameLogic: GameLogicManagerInput?
     var tetramoniomManager: TetramonioManager?
     var scoreManager: ScoreManagerProtocol?
+}
+
+// MARK: - GameInteractorInput
+
+extension GameInteractor: GameInteractorInput {
     
-    func generateTetramoniosFromManager() {
-        guard let tetramonios = tetramoniomManager?.generateTetramonios() else {
+    func generateTetramonios(generationType: GenerationType = .gameStart) {
+        guard let tetramonios = tetramoniomManager?.generateTetramonios(generationType) else {
             fatalError("Generated tetramonios could not be nil")
         }
-         gameLogic?.setCurrentTetramonios(tetramonios)
-         presenter?.provideTetramonios(tetramonios)
+        gameLogic?.setCurrentTetramonios(tetramonios)
+        presenter?.provideTetramonios(tetramonios)
     }
     
     func generateField() {
         guard let fieldData = gameLogic?.createField() else {
             fatalError("Field data could not be nil")
         }
-        presenter.provideField(fieldData)
+        presenter?.provideField(fieldData)
     }
     
     func restartGame() {
-        generateTetramoniosFromManager()
+        generateTetramonios()
         presenter?.provideCurrentScore(12)
         // Change score to null
     }
@@ -62,21 +68,34 @@ class GameInteractor: GameInteractorInput {
     }
     
     func getMaxScore() {
-           // Get score from user defaults or core data
+        // Get score from user defaults or core data
         presenter?.provideMaxScore(231)
     }
     
     func getCurrentTetramonios(_ tetramonios: ([Tetramonio]) -> ()) {
-     //   tetramoniomManager?.getTetramonios(tetramonios)
+        tetramoniomManager?.getTetramonios(tetramonios)
     }
     
     func handleTouchedCellWithData(_ cellData: CellData) {
         gameLogic?.updateField(with: cellData) { updatedCellData in
-        presenter?.updateCells(updatedCellData)
+            presenter?.updateCells(updatedCellData)
         }
     }
     
     func setCurrentTetramonios(_ tetramonios: [Tetramonio]) {
         gameLogic?.setCurrentTetramonios(tetramonios)
+    }
+}
+
+// MARK: - GameLogicOutputDelegate 
+
+extension GameInteractor: GameLogicManagerOutput {
+  
+    func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, matchesTetramonio: Tetramonio, matchIndex: Int) {
+        debugPrint(matchIndex)
+        guard let generationType = GenerationType(rawValue: matchIndex) else {
+            fatalError("Generation type could not be nil")
+        }
+        generateTetramonios(generationType: generationType)
     }
 }

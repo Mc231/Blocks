@@ -25,5 +25,6 @@ class GameAssambler {
         presenter.interractor = interractor
         interractor.tetramoniomManager = tetramonioManager
         interractor.gameLogic = gameLogic
+        gameLogic.interractor = interractor
     }
 }

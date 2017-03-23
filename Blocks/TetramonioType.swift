@@ -28,5 +28,5 @@ enum TetramonioType: Int {
     case T = 16
     case T90 = 17
     case T270 = 18
-    
+    case None = -1
 }

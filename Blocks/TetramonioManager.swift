@@ -10,6 +10,7 @@ import Foundation
 
 protocol TetramonioProtocol {
     func generateTetramonios(_ generationType: GenerationType) -> [Tetramonio]
+    func getTetramonios(_ currentTetramonios: ([Tetramonio]) -> ())
 }
 
 enum GenerationType: Int {
@@ -46,17 +47,17 @@ class TetramonioManager: TetramonioProtocol {
                 fatalError("Tetramonios could not be nil")
             }
             
+             let randomTetamonio = Int.randomNum
+            
             if generationType == .firtTetramonio {
-                let randomTetamonio = Int.randomNum
-                if firstTetrmonio.id == randomTetamonio {
+                if firstTetrmonio.id.rawValue == randomTetamonio && lastTetramonio.id.rawValue != firstTetrmonio.id.rawValue {
                     _ = generateTetramonios(.firtTetramonio)
                 }else{
                   result.append(tetramonios[randomTetamonio])
                   result.append(lastTetramonio)
                 }
             }else{
-                let randomTetamonio = Int.randomNum
-                if lastTetramonio.id == randomTetamonio {
+                if lastTetramonio.id.rawValue == randomTetamonio  && lastTetramonio.id.rawValue != firstTetrmonio.id.rawValue {
                     _ = generateTetramonios(.secondTetramonio)
                 }else{
                     result.append(firstTetrmonio)
@@ -68,5 +69,9 @@ class TetramonioManager: TetramonioProtocol {
         currentTetramonios = result
         
         return result
+    }
+    
+    func getTetramonios(_ currentTetramonios: ([Tetramonio]) -> ()) {
+        currentTetramonios(tetramonios)
     }
 }

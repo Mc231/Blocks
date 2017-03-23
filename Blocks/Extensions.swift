@@ -11,6 +11,6 @@ import Foundation
 extension Int {
     
     static var randomNum: Int {
-        return Int(arc4random_uniform(20))
+        return Int(arc4random_uniform(19))
     }
 }
