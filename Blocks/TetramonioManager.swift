@@ -47,22 +47,21 @@ class TetramonioManager: TetramonioProtocol {
                 fatalError("Tetramonios could not be nil")
             }
             
-             let randomTetamonio = Int.randomNum
-            
+             var randomTetamonio = Int.randomNum
+            // WArning fux this
             if generationType == .firtTetramonio {
-                if firstTetrmonio.id.rawValue == randomTetamonio && lastTetramonio.id.rawValue != firstTetrmonio.id.rawValue {
-                    _ = generateTetramonios(.firtTetramonio)
-                }else{
+                
+                while  firstTetrmonio.id.rawValue == randomTetamonio {
+                    randomTetamonio = Int.randomNum
+                }
                   result.append(tetramonios[randomTetamonio])
                   result.append(lastTetramonio)
-                }
             }else{
-                if lastTetramonio.id.rawValue == randomTetamonio  && lastTetramonio.id.rawValue != firstTetrmonio.id.rawValue {
-                    _ = generateTetramonios(.secondTetramonio)
-                }else{
+                while lastTetramonio.id.rawValue == randomTetamonio {
+                    randomTetamonio = Int.randomNum
+                }
                     result.append(firstTetrmonio)
                     result.append(tetramonios[randomTetamonio])
-                }
             }
         }
         
