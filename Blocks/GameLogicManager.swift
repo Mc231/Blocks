@@ -15,7 +15,7 @@ protocol GameLogicManagerInput {
 }
 
 protocol GameLogicManagerProtocol: class {
-    func checkTetramonio() -> Tetramonio?
+    func checkTetramonio(with cellData: [CellData]) -> Tetramonio?
     func appendCellToCurrentTetramonio(cellData: CellData)
 }
 
@@ -36,15 +36,11 @@ class GameLogicManager: GameLogicManagerProtocol {
     weak var interractor: GameLogicManagerOutput?
     fileprivate var field = [CellData]()
     fileprivate var currentTetramonio = [CellData]()
-    fileprivate var tetramonios = [Tetramonio]() {
-        didSet{
-            debugPrint(tetramonios)
-        }
-    }
+    fileprivate var tetramonios = [Tetramonio]()
     
-    func checkTetramonio() -> Tetramonio? {
+    func checkTetramonio(with cellData: [CellData]) -> Tetramonio? {
         var result: Tetramonio? = nil
-        let orderedCellData = currentTetramonio.sorted(by: {$0.id < $1.id})
+        let orderedCellData = cellData.sorted(by: {$0.id < $1.id})
         
         let firstCell  = orderedCellData[0].id
         let secondCell = orderedCellData[1].id
@@ -92,7 +88,7 @@ class GameLogicManager: GameLogicManagerProtocol {
         currentTetramonio.append(cellData)
         
         if currentTetramonio.count == numberOfCellsInTetramonio {
-            guard let tetramonio = checkTetramonio(),
+            guard let tetramonio = checkTetramonio(with: currentTetramonio),
                   let checkIndex = tetramonios.index(where: {$0.id == tetramonio.id}) else{
                 return
             }

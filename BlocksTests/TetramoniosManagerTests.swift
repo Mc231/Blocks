@@ -11,16 +11,6 @@ import XCTest
 
 class TetramoniosManagerTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-    }
-    
-    override func tearDown() {
-        super.tearDown()
-    }
-    
-    // MARK: - TetramonioManagerTests
-    
     let manager = TetramonioManager()
     
     func testTetramonioManagerGenerateTetramonios() {
@@ -44,5 +34,4 @@ class TetramoniosManagerTests: XCTestCase {
         XCTAssertNotEqual(tetramonios.last?.id, updatedTetramonios.last?.id)
         XCTAssertEqual(tetramonios.first?.id, updatedTetramonios.first?.id)
     }
-    
 }

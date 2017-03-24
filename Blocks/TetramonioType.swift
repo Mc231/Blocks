@@ -13,11 +13,11 @@ enum TetramonioType: Int {
     case Ih = 1
     case o  = 2
     case L90 = 3
-    case L270 = 4
+    case J90 = 4
     case L180 = 5
     case J = 6
     case J270 = 7
-    case J90  = 8
+    case L270  = 8
     case J180 = 9
     case L = 10
     case S = 11

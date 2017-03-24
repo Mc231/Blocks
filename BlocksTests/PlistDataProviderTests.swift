@@ -1,5 +1,5 @@
 //
-//  TetramonioDataProviderTest.swift
+//  PlistDataProviderTests.swift
 //  Blocks
 //
 //  Created by Volodya on 3/24/17.
@@ -9,9 +9,10 @@
 import XCTest
 @testable import Blocks
 
-class TetramonioDataProviderTest: XCTestCase {
+class PlistDataProviderTests: XCTestCase {
     
-    func testTetramonioDataProvider() {
-     
+    func testPlistDataProviderGoodPlist() {
+  
     }
+    
 }
