@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FF0472081E81D56D0054FE13 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0472071E81D56D0054FE13 /* Extensions.swift */; };
 		FF1B1CC21E55AC8B00D0E50D /* GamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1B1CC11E55AC8B00D0E50D /* GamePresenter.swift */; };
+		FF33CF811E8509E0007969C6 /* PlistDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF33CF801E8509E0007969C6 /* PlistDataProvider.swift */; };
 		FF340C061E56432500EE82E1 /* GameAssambler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF340C051E56432500EE82E1 /* GameAssambler.swift */; };
 		FF76B0BB1E847EC0001969FA /* TetramoniosManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF76B0BA1E847EC0001969FA /* TetramoniosManagerTests.swift */; };
 		FF76B0BD1E847F52001969FA /* TetramonioDataProviderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF76B0BC1E847F52001969FA /* TetramonioDataProviderTest.swift */; };
@@ -45,6 +46,7 @@
 /* Begin PBXFileReference section */
 		FF0472071E81D56D0054FE13 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FF1B1CC11E55AC8B00D0E50D /* GamePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePresenter.swift; sourceTree = "<group>"; };
+		FF33CF801E8509E0007969C6 /* PlistDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistDataProvider.swift; sourceTree = "<group>"; };
 		FF340C051E56432500EE82E1 /* GameAssambler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameAssambler.swift; sourceTree = "<group>"; };
 		FF76B0BA1E847EC0001969FA /* TetramoniosManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetramoniosManagerTests.swift; sourceTree = "<group>"; };
 		FF76B0BC1E847F52001969FA /* TetramonioDataProviderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetramonioDataProviderTest.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				FFA44A2E1E452D20000B4829 /* TetramonioDataProvider.swift */,
+				FF33CF801E8509E0007969C6 /* PlistDataProvider.swift */,
 			);
 			name = TetramoniosDataProvider;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				FFFBBFF71E45283A0052D68B /* CellState.swift in Sources */,
 				FFCB88AA1E563E8600BF4B90 /* ScoreManager.swift in Sources */,
 				FF0472081E81D56D0054FE13 /* Extensions.swift in Sources */,
+				FF33CF811E8509E0007969C6 /* PlistDataProvider.swift in Sources */,
 				FFB82A8A1E7D2F2A0043BD53 /* Blocks.xcdatamodeld in Sources */,
 				FFA44A2F1E452D20000B4829 /* TetramonioDataProvider.swift in Sources */,
 				FFA44A371E45344F000B4829 /* TetramonioType.swift in Sources */,

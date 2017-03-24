@@ -23,9 +23,8 @@ class GameLogicTests: XCTestCase {
     
     let gameLogic = GameLogicManager()
     
-    func testGameLogicCreateField() -> [CellData] {
+    func testGameLogicCreateField() {
         let field = gameLogic.createField()
         XCTAssertTrue(field.count == 64)
-        return field
     }
 }

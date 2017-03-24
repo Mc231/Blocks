@@ -9,39 +9,30 @@
 import Foundation
 
 /**
-    This singletopne class provides data for all possible Tetramonios
+    This class provide data for all possible Tetramonios
  */
 
-class TetramonioDataProvider {
+class TetremonioDataProvider: PlistDataProvider {
     
-    // MARK: - Singletone Stuff
+    // MARK: - Inizialization
     
-    static let sharedProvider = TetramonioDataProvider()
-    
-    private init() {
-   
+    required init(resource: String = "Tetramonios") {
+        super.init(resource: resource)
     }
     
-    // MARK: - Public Methods
+    // MARK: - Public methods
     
-    func parseTetramonios() -> [Tetramonio] {
-        var tetromonios = [Tetramonio]()
+    func getTetramonios() -> [Tetramonio] {
+        var result = [Tetramonio]()
+        let tetramonios = getArrayData()
         
-        guard let path = Bundle.main.path(forResource: "Tetramonios", ofType: "plist") else {
-            fatalError("Failed to parse Tetramonios plist")
-        }
-       
-        guard let parsedTetramonios = NSArray(contentsOfFile: path) else {
-            fatalError("Failed to create array from plist")
-        }
-        
-        for tetramonio in parsedTetramonios {
+        for tetramonio in tetramonios {
             guard let teramonioData = tetramonio as? NSDictionary else {
                 fatalError("Failed to parse teramonio dictionary")
             }
             let parsedTeramonio = Tetramonio(dictionary: teramonioData)
-            tetromonios.append(parsedTeramonio)
+            result.append(parsedTeramonio)
         }
-        return tetromonios
+        return result
     }
 }

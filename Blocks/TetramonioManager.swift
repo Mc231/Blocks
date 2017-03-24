@@ -22,10 +22,12 @@ enum GenerationType: Int {
 class TetramonioManager: TetramonioProtocol {
     
     private let tetramonios: [Tetramonio]
+    private let tetramonioDataProvider: TetremonioDataProvider
     private var currentTetramonios = [Tetramonio]()
     
-    init() {
-        self.tetramonios = TetramonioDataProvider.sharedProvider.parseTetramonios()
+    init(tetramonioDataProvider: TetremonioDataProvider = TetremonioDataProvider()) {
+        self.tetramonioDataProvider = tetramonioDataProvider
+        self.tetramonios = tetramonioDataProvider.getTetramonios()
     }
     
     func generateTetramonios(_ generationType: GenerationType = .gameStart) -> [Tetramonio] {

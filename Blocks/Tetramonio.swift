@@ -9,7 +9,7 @@
 import Foundation
 
 /**
-    This struct represent basic Tetramonio from Teris
+    This struct represent basic Tetramonios from clasic Teris
  */
 
 struct Tetramonio {
