@@ -18,6 +18,7 @@ protocol GameLogicManagerInput {
 protocol GameLogicManagerProtocol: class {
     func checkTetramonio(with cellData: [CellData]) -> Tetramonio?
     func appendCellToCurrentTetramonio(cellData: CellData)
+    func checkForLines()
     func checkGameOver() -> Bool
 }
 
@@ -116,9 +117,51 @@ class GameLogicManager: GameLogicManagerProtocol {
             }
         }
         
+        checkForLines()
+        
         if checkGameOver() {
             interractor?.gameLogicManager(self, gameOver: true)
         }
+    }
+    
+    func checkForLines() {
+        let placedCells = field.filter( {$0.state == .placed})
+        
+        if placedCells.count == 0 {
+            return
+        }
+        
+        var cellsData = [[CellData]]()
+        let numberOfCellsInRow = 8
+        var cellCounter = 1
+        var currentRow = [CellData]()
+        
+        for cell in 1..<placedCells.count {
+            let firstCellData  = placedCells[cell-1]
+            let secondCellData = placedCells[cell]
+            
+            if secondCellData.id - firstCellData.id == 1 {
+                // WARNING: - Add set here
+                if !currentRow.contains(where: { $0.id == firstCellData.id }) {
+                    currentRow.append(firstCellData)
+                }else if !currentRow.contains(where: { $0.id == secondCellData.id }) {
+                    currentRow.append(secondCellData)
+                }
+                cellCounter += 1
+                
+                if cellCounter == numberOfCellsInRow {
+                    currentRow.append(secondCellData)
+                    cellsData.append(currentRow)
+                    currentRow.removeAll()
+                    cellCounter = 1
+                }
+            }else{
+                currentRow.removeAll()
+                cellCounter = 1
+            }
+        }
+        
+        
     }
     
     func checkGameOver() -> Bool {
