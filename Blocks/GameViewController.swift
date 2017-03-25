@@ -33,8 +33,8 @@ class GameViewController: UIViewController {
     
     @IBOutlet weak var maxScoreLabel: UILabel!
     @IBOutlet weak var currentScoreLabel: UILabel!
-    @IBOutlet weak var figure1ImageView: UIImageView!
-    @IBOutlet weak var figure2ImageView: UIImageView!
+    @IBOutlet weak var firstTetramonioImageView: UIImageView!
+    @IBOutlet weak var secondTetramonioImageView: UIImageView!
     @IBOutlet weak var field: UICollectionView!
     
     // MARK: - Properties
@@ -141,7 +141,13 @@ extension GameViewController: GameViewInput {
     }
 
     func display(tetramonios: [Tetramonio]) {
-        print("Tetramomniso")
+        // WARNING: - Refactore this
+    
+        let firstImage = tetramonios.first?.id.rawValue
+        let secondImage = tetramonios.last?.id.rawValue
+  
+        firstTetramonioImageView.image = UIImage(named: String(describing: firstImage!))
+        secondTetramonioImageView.image = UIImage(named: String(describing: secondImage!))
     }
     
     func display(current score: Int) {

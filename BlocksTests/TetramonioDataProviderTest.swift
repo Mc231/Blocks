@@ -11,7 +11,8 @@ import XCTest
 
 class TetramonioDataProviderTest: XCTestCase {
     
-    func testTetramonioDataProvider() {
-     
+    func testTetramonioDataProviderCorrectNumberOfTerteamonios() {
+        let tetramonioDataProvider = TetremonioDataProvider()
+        XCTAssertEqual(tetramonioDataProvider.getTetramonios().count, 19)
     }
 }

@@ -17,11 +17,12 @@ protocol GameLogicManagerInput {
 protocol GameLogicManagerProtocol: class {
     func checkTetramonio(with cellData: [CellData]) -> Tetramonio?
     func appendCellToCurrentTetramonio(cellData: CellData)
+    func checkGameOver() -> Bool
 }
 
 protocol GameLogicManagerOutput: class {
-    func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, matchesTetramonio: Tetramonio, matchIndex: Int)
- //   func checkGameOver()
+    func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, matchesTetramonio: Tetramonio?, matchIndex: Int)
+    func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, gameOver: Bool)
 }
 
 class GameLogicManager: GameLogicManagerProtocol {
@@ -39,7 +40,7 @@ class GameLogicManager: GameLogicManagerProtocol {
     fileprivate var tetramonios = [Tetramonio]()
     
     func checkTetramonio(with cellData: [CellData]) -> Tetramonio? {
-        var result: Tetramonio? = nil
+
         let orderedCellData = cellData.sorted(by: {$0.id < $1.id})
         
         let firstCell  = orderedCellData[0].id
@@ -57,41 +58,45 @@ class GameLogicManager: GameLogicManagerProtocol {
                 if (secondCell == firstCell + firstConstant)
                     && (thirdCell == secondCell + secondConstant)
                     &&  (fourthCell == thirdCell + thirdConstant) {
-                    result = currentTetramonio
+                    return currentTetramonio
                 }
             }else{
                 if (secondCell == firstCell + firstConstant)
                     && (thirdCell == firstCell + secondConstant)
                     &&  (fourthCell == firstCell + thirdConstant) {
-                    result = currentTetramonio
+                    return currentTetramonio
                 }
             }
         }
         
-        for cellData in currentTetramonio {
-            guard let cellIndex = field.index(where: {$0.id == cellData.id}) else {
-                fatalError("Index could not be nil")
-            }
-            
-            if result != nil {
-              field[cellIndex].chageState(newState: .placed)
-            }else{
-              field[cellIndex].chageState(newState: .empty)
-            }
-        }
-        
-        currentTetramonio.removeAll()
-        return result
+        return nil
     }
     
     func appendCellToCurrentTetramonio(cellData: CellData) {
         currentTetramonio.append(cellData)
         
         if currentTetramonio.count == numberOfCellsInTetramonio {
-            guard let tetramonio = checkTetramonio(with: currentTetramonio),
-                  let checkIndex = tetramonios.index(where: {$0.id == tetramonio.id}) else{
+            
+            let tetramonio = checkTetramonio(with: currentTetramonio)
+            
+            for cellData in currentTetramonio {
+                guard let cellIndex = field.index(where: {$0.id == cellData.id}) else {
+                    fatalError("Index could not be nil")
+                }
+                
+                if tetramonio != nil {
+                    field[cellIndex].chageState(newState: .placed)
+                }else{
+                    field[cellIndex].chageState(newState: .empty)
+                }
+            }
+            
+            currentTetramonio.removeAll()
+            
+            guard let checkIndex = tetramonios.index(where: {$0.id == tetramonio?.id}) else{
                 return
             }
+            
             interractor?.gameLogicManager(self, matchesTetramonio: tetramonio, matchIndex: checkIndex )
         }else{
             for cellData in currentTetramonio {
@@ -106,6 +111,44 @@ class GameLogicManager: GameLogicManagerProtocol {
                 }
             }
         }
+        
+        if checkGameOver() {
+            interractor?.gameLogicManager(self, gameOver: true)
+        }
+    }
+    
+    func checkGameOver() -> Bool {
+        
+        for tetramonio in tetramonios {
+            let firstGameOverIndex = tetramonio.gameOverIndexes[0]
+            let secondGameOverIndex = tetramonio.gameOverIndexes[1]
+            let thirdGameOverIndex = tetramonio.gameOverIndexes[2]
+            
+            for (index,_) in field.enumerated() {
+                let firstIndex  = index + firstGameOverIndex
+                let secondIndex = index + secondGameOverIndex
+                let thirdIndex  = index + thirdGameOverIndex
+                
+                if firstIndex < numberOfCells && secondIndex < numberOfCells && thirdIndex < numberOfCells && field[index].state != .placed {
+                    let firstCell = field[index]
+                    let secondCell = field[firstIndex]
+                    let thirdCell = field[secondIndex]
+                    let fourthCell = field[thirdIndex]
+                    let possibleTetramonioArray = [firstCell, secondCell, thirdCell, fourthCell]
+                    let possibleTetramonio = checkTetramonio(with: possibleTetramonioArray)
+                    
+                    if !firstCell.isCellPlaced()
+                        && !secondCell.isCellPlaced()
+                        && !thirdCell.isCellPlaced()
+                        && !fourthCell.isCellPlaced()
+                        && possibleTetramonio?.id.rawValue == tetramonio.id.rawValue {
+                        return false
+                    }
+                }
+            }
+        }
+        
+        return true
     }
 }
 

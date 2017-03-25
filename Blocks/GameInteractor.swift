@@ -91,11 +91,14 @@ extension GameInteractor: GameInteractorInput {
 
 extension GameInteractor: GameLogicManagerOutput {
   
-    func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, matchesTetramonio: Tetramonio, matchIndex: Int) {
-        debugPrint(matchIndex)
+    func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, matchesTetramonio: Tetramonio?, matchIndex: Int) {
         guard let generationType = GenerationType(rawValue: matchIndex) else {
             fatalError("Generation type could not be nil")
         }
         generateTetramonios(generationType: generationType)
+    }
+    
+    func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, gameOver: Bool) {
+        debugPrint("Game is Over Vovan")
     }
 }

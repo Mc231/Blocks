@@ -9,8 +9,8 @@
 import Foundation
 
 enum TetramonioType: Int {
-    case Iv = 0
-    case Ih = 1
+    case Ih = 0
+    case Iv = 1
     case o  = 2
     case L90 = 3
     case J90 = 4

@@ -137,9 +137,9 @@
                     <connections>
                         <outlet property="currentScoreLabel" destination="7Y5-pk-MAt" id="vP9-z7-1kt"/>
                         <outlet property="field" destination="Ol0-AI-6XO" id="EFg-5X-ZXb"/>
-                        <outlet property="figure1ImageView" destination="yfe-6f-HyG" id="HMo-Is-bb2"/>
-                        <outlet property="figure2ImageView" destination="oJE-ob-InC" id="bvG-aI-fsI"/>
+                        <outlet property="firstTetramonioImageView" destination="yfe-6f-HyG" id="jFt-xC-8Ha"/>
                         <outlet property="maxScoreLabel" destination="TNQ-8y-G3I" id="mM4-i2-eez"/>
+                        <outlet property="secondTetramonioImageView" destination="oJE-ob-InC" id="hkg-TU-8yE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8FF-XW-8Hk" userLabel="First Responder" sceneMemberID="firstResponder"/>

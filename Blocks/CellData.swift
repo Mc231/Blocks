@@ -10,10 +10,20 @@ import Foundation
 
 struct CellData {
     
+    // MARK: - Properties
+    
     let id: Int
     var state: CellState
     
+    // MARK: - Mutating methods
+    
     mutating func chageState(newState: CellState) {
         self.state = newState
+    }
+}
+
+extension CellData {
+    func isCellPlaced() -> Bool {
+        return self.state == .placed
     }
 }
