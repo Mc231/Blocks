@@ -12,6 +12,7 @@ protocol GameLogicManagerInput {
     func updateField(with tetramonioData: CellData, callback: (_ updatedData: [CellData]) -> Void)
     func setCurrentTetramonios(_ tetramonios: [Tetramonio])
     func createField() -> [CellData]
+    func restartGame(callback: (_ field: [CellData]) -> ())
 }
 
 protocol GameLogicManagerProtocol: class {
@@ -23,6 +24,7 @@ protocol GameLogicManagerProtocol: class {
 protocol GameLogicManagerOutput: class {
     func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, matchesTetramonio: Tetramonio?, matchIndex: Int)
     func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, gameOver: Bool)
+    func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, didChange score: Int)
 }
 
 class GameLogicManager: GameLogicManagerProtocol {
@@ -38,6 +40,7 @@ class GameLogicManager: GameLogicManagerProtocol {
     fileprivate var field = [CellData]()
     fileprivate var currentTetramonio = [CellData]()
     fileprivate var tetramonios = [Tetramonio]()
+    private let scorePerTetramonio = 4
     
     func checkTetramonio(with cellData: [CellData]) -> Tetramonio? {
 
@@ -97,7 +100,8 @@ class GameLogicManager: GameLogicManagerProtocol {
                 return
             }
             
-            interractor?.gameLogicManager(self, matchesTetramonio: tetramonio, matchIndex: checkIndex )
+            interractor?.gameLogicManager(self, matchesTetramonio: tetramonio, matchIndex: checkIndex)
+            interractor?.gameLogicManager(self, didChange: scorePerTetramonio)
         }else{
             for cellData in currentTetramonio {
                 
@@ -181,5 +185,10 @@ extension GameLogicManager: GameLogicManagerInput {
         }
         field = result
         return result
+    }
+    
+    func restartGame(callback: ([CellData]) -> ()) {
+        field.removeAll()
+        callback(createField())
     }
 }

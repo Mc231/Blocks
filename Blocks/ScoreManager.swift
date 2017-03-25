@@ -9,18 +9,52 @@
 import Foundation
 
 protocol ScoreManagerProtocol {
-    func setScore(_ score: Int)
-    func setMaxScore(_ score: Int)
-    // Fix namingo of this protocol
+    func setScore(_ score: Int, callback: (String,String,Bool) -> ())
+    func getCurrentScore() -> String
+    func getBestScore() -> String
+    func resetCurrentScore() -> String
 }
 
 class ScoreManager: ScoreManagerProtocol {
     
-    func setScore(_ score: Int) {
-        
+    // WARNING: - Add core data service for feching and saving max score
+    
+    // MARK: - Properties
+    
+    private var currentScore: Int
+    private var bestScore: Int
+    
+    // MARK: - Inizialization
+    
+    init() {
+        self.currentScore = 0
+        self.bestScore = 0
     }
     
-    func setMaxScore(_ score: Int) {
+    func setScore(_ score: Int, callback: (String, String, Bool) -> ()) {
+        currentScore += score
         
+        if currentScore > bestScore {
+            bestScore = currentScore
+        }
+        // WARNING: - Make this string localizble
+        
+        let score = "Score: \(currentScore)"
+        let maxScore = "Best: \(bestScore)"
+        
+        callback(score, maxScore, true)
+    }
+    
+    func getCurrentScore() -> String {
+        return "Score: \(currentScore)"
+    }
+    
+    func getBestScore() -> String {
+        return "Best: \(bestScore)"
+    }
+    
+    func resetCurrentScore() -> String {
+        currentScore = 0
+        return "Score: \(currentScore)"
     }
 }

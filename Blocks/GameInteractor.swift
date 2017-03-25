@@ -22,8 +22,8 @@ protocol GameInteractorInput: class {
 protocol GameInteractorOutput: class {
     func provideTetramonios(_ tetramonios: [Tetramonio])
     func provideField(_ field: [CellData])
-    func provideMaxScore(_ score: Int)
-    func provideCurrentScore(_ score: Int)
+    func provideMaxScore(_ score: String)
+    func provideCurrentScore(_ score: String)
     func updateCells(_ updatedData: [CellData])
 }
 
@@ -58,18 +58,21 @@ extension GameInteractor: GameInteractorInput {
     
     func restartGame() {
         generateTetramonios()
-        presenter?.provideCurrentScore(12)
+        presenter?.provideCurrentScore((scoreManager?.resetCurrentScore())!)
+        gameLogic?.restartGame(callback: { (field) in
+            presenter?.provideField(field)
+        })
         // Change score to null
     }
     
     func getCurrentScore() {
         // Get score from user defaults or core data
-        presenter?.provideCurrentScore(231)
+        presenter?.provideCurrentScore((scoreManager?.getCurrentScore())!)
     }
     
     func getMaxScore() {
         // Get score from user defaults or core data
-        presenter?.provideMaxScore(231)
+        presenter?.provideMaxScore((scoreManager?.getBestScore())!)
     }
     
     func getCurrentTetramonios(_ tetramonios: ([Tetramonio]) -> ()) {
@@ -78,7 +81,7 @@ extension GameInteractor: GameInteractorInput {
     
     func handleTouchedCellWithData(_ cellData: CellData) {
         gameLogic?.updateField(with: cellData) { updatedCellData in
-            presenter?.updateCells(updatedCellData)
+        presenter?.updateCells(updatedCellData)
         }
     }
     
@@ -100,5 +103,15 @@ extension GameInteractor: GameLogicManagerOutput {
     
     func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, gameOver: Bool) {
         debugPrint("Game is Over Vovan")
+    }
+    
+    func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, didChange score: Int) {
+        // WARNING: - Refactore this 
+            scoreManager?.setScore(score, callback: { (score, best, status) in
+                if status {
+                  presenter?.provideMaxScore(best)
+                    presenter?.provideCurrentScore(score)
+                }
+            })
     }
 }

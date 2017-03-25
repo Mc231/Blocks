@@ -28,11 +28,10 @@ class TetramoniosManagerTests: XCTestCase {
     }
     
     func testTetramonioManagerUpdateSecondTetramonio() {
-        for _ in 0...1000 {
         let tetramonios = manager.generateTetramonios()
         let updatedTetramonios = manager.generateTetramonios(.secondTetramonio)
         XCTAssertEqual(tetramonios.count, updatedTetramonios.count)
         XCTAssertNotEqual(tetramonios.last?.id, updatedTetramonios.last?.id)
-        XCTAssertEqual(tetramonios.first?.id, updatedTetramonios.first?.id) }
+        XCTAssertEqual(tetramonios.first?.id, updatedTetramonios.first?.id)
     }
 }

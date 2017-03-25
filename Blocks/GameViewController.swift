@@ -22,8 +22,8 @@ protocol GameViewOutput {
 protocol GameViewInput: class {
     func display(tetramonios: [Tetramonio])
     func display(field withData: [CellData])
-    func display(max score: Int)
-    func display(current score: Int)
+    func display(max score: String)
+    func display(current score: String)
     func update(cellData: [CellData])
 }
 
@@ -150,15 +150,12 @@ extension GameViewController: GameViewInput {
         secondTetramonioImageView.image = UIImage(named: String(describing: secondImage!))
     }
     
-    func display(current score: Int) {
-        let scoreToSet = String(score)
-        debugPrint(scoreToSet)
-        currentScoreLabel.text = scoreToSet
+    func display(current score: String) {
+        currentScoreLabel.text = score
     }
     
-    func display(max score: Int) {
-        let scoreToSet = String(score)
-        maxScoreLabel.text = scoreToSet
+    func display(max score: String) {
+        maxScoreLabel.text = score
     }
 }
 

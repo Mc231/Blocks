@@ -15,7 +15,7 @@ class RandomTests: XCTestCase {
         var result = Set<Int>()
         
         while result.count != 19 {
-            let randomNum = Int.randomNum
+            let randomNum = Int.randomNum(maxValue: 19)
             result.insert(randomNum)
         }
         XCTAssertTrue(result.count == 19)

@@ -36,6 +36,9 @@
                                         <rect key="frame" x="96" y="67" width="50" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Restart"/>
+                                        <connections>
+                                            <action selector="restartGameWithSender:" destination="9Qo-fH-zdy" eventType="touchUpInside" id="LDi-yw-dhv"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>

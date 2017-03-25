@@ -10,7 +10,8 @@ import Foundation
 
 extension Int {
     
-    static var randomNum: Int {
-        return Int(arc4random_uniform(19))
+    static func randomNum(maxValue: Int) -> Int {
+        let uintMaxValue = UInt32(maxValue)
+        return Int(arc4random_uniform(uintMaxValue))
     }
 }

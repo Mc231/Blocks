@@ -21,6 +21,8 @@ enum GenerationType: Int {
 
 class TetramonioManager: TetramonioProtocol {
     
+    // MARK: - Properties
+    
     private let tetramonios: [Tetramonio]
     private let tetramonioDataProvider: TetremonioDataProvider
     private var currentTetramonios = [Tetramonio]()
@@ -32,10 +34,10 @@ class TetramonioManager: TetramonioProtocol {
     
     func generateTetramonios(_ generationType: GenerationType = .gameStart) -> [Tetramonio] {
         var result = [Tetramonio]()
-        
+        let numOfTetramonios = tetramonios.count
         if generationType == .gameStart {
-            let firstTetramonioIndex = Int.randomNum
-            let secondTetramonioIndex = Int.randomNum
+            let firstTetramonioIndex = Int.randomNum(maxValue: numOfTetramonios)
+            let secondTetramonioIndex = Int.randomNum(maxValue: numOfTetramonios)
             
             if firstTetramonioIndex != secondTetramonioIndex {
                 result.append(tetramonios[firstTetramonioIndex])
@@ -49,18 +51,18 @@ class TetramonioManager: TetramonioProtocol {
                 fatalError("Tetramonios could not be nil")
             }
             
-             var randomTetamonio = Int.randomNum
+             var randomTetamonio = Int.randomNum(maxValue: numOfTetramonios)
             // WArning fux this
             if generationType == .firtTetramonio {
                 
-                while  firstTetrmonio.id.rawValue == randomTetamonio {
-                    randomTetamonio = Int.randomNum
+                while firstTetrmonio.id.rawValue == randomTetamonio || randomTetamonio == lastTetramonio.id.rawValue {
+                    randomTetamonio = Int.randomNum(maxValue: numOfTetramonios)
                 }
                   result.append(tetramonios[randomTetamonio])
                   result.append(lastTetramonio)
             }else{
-                while lastTetramonio.id.rawValue == randomTetamonio {
-                    randomTetamonio = Int.randomNum
+                while lastTetramonio.id.rawValue == randomTetamonio || randomTetamonio == firstTetrmonio.id.rawValue {
+                    randomTetamonio = Int.randomNum(maxValue: numOfTetramonios)
                 }
                     result.append(firstTetrmonio)
                     result.append(tetramonios[randomTetamonio])

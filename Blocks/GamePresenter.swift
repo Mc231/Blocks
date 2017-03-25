@@ -33,11 +33,11 @@ class GamePresenter: GamePresenterInput {
         view?.display(field: field)
     }
     
-    func provideMaxScore(_ score: Int) {
+    func provideMaxScore(_ score: String) {
         view?.display(max: score)
     }
     
-    func provideCurrentScore(_ score: Int) {
+    func provideCurrentScore(_ score: String) {
         view?.display(current: score)
     }
     
