@@ -12,7 +12,8 @@ struct CellData {
     
     // MARK: - Properties
     
-    let id: Int
+    let x: Int
+    let y: Int
     var state: CellState
     
     // MARK: - Mutating methods

@@ -132,20 +132,14 @@ class GameLogicTests: XCTestCase {
     
     func checkTetramonioGameOverIndexes(id: Int) -> Bool {
         gameLogic.setCurrentTetramonios([tetramonios[id]])
+        
         let gameOverIndexes = tetramonios[id].gameOverIndexes
-        debugPrint(gameOverIndexes)
-        debugPrint(tetramonios[id])
         let firstCell  = field[28]
         let secondCell = field[28 + gameOverIndexes[0]]
         let thirdCell  = field[28 + gameOverIndexes[1]]
         let fourthCell = field[28 + gameOverIndexes[2]]
-        
-        debugPrint(firstCell)
-        debugPrint(secondCell)
-        debugPrint(thirdCell)
-        debugPrint(fourthCell)
-        
         let possibleTetramonio = [firstCell, secondCell, thirdCell, fourthCell]
+        
         return gameLogic.checkTetramonio(with: possibleTetramonio)?.id == tetramonios[id].id
     }
 }

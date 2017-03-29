@@ -18,7 +18,7 @@ protocol GameLogicManagerInput {
 protocol GameLogicManagerProtocol: class {
     func checkTetramonio(with cellData: [CellData]) -> Tetramonio?
     func appendCellToCurrentTetramonio(cellData: CellData)
-    func checkForLines()
+    func checkForLines(verticalLines: Bool)
     func checkGameOver() -> Bool
 }
 
@@ -26,6 +26,7 @@ protocol GameLogicManagerOutput: class {
     func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, matchesTetramonio: Tetramonio?, matchIndex: Int)
     func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, gameOver: Bool)
     func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, didChange score: Int)
+    func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, didUpdate field: [CellData])
 }
 
 class GameLogicManager: GameLogicManagerProtocol {
@@ -45,12 +46,12 @@ class GameLogicManager: GameLogicManagerProtocol {
     
     func checkTetramonio(with cellData: [CellData]) -> Tetramonio? {
 
-        let orderedCellData = cellData.sorted(by: {$0.id < $1.id})
+        let orderedCellData = cellData.sorted(by: {$0.x < $1.x})
         
-        let firstCell  = orderedCellData[0].id
-        let secondCell = orderedCellData[1].id
-        let thirdCell  = orderedCellData[2].id
-        let fourthCell = orderedCellData[3].id
+        let firstCell  = orderedCellData[0].x
+        let secondCell = orderedCellData[1].x
+        let thirdCell  = orderedCellData[2].x
+        let fourthCell = orderedCellData[3].x
         
         for currentTetramonio in tetramonios {
             
@@ -84,7 +85,7 @@ class GameLogicManager: GameLogicManagerProtocol {
             let tetramonio = checkTetramonio(with: currentTetramonio)
             
             for cellData in currentTetramonio {
-                guard let cellIndex = field.index(where: {$0.id == cellData.id}) else {
+                guard let cellIndex = field.index(where: {$0.x == cellData.x}) else {
                     fatalError("Index could not be nil")
                 }
                 
@@ -106,7 +107,7 @@ class GameLogicManager: GameLogicManagerProtocol {
         }else{
             for cellData in currentTetramonio {
                 
-                guard let cellIndex = field.index(where: {$0.id == cellData.id}) else {
+                guard let cellIndex = field.index(where: {$0.x == cellData.x}) else {
                     fatalError("Index could not be nil")
                 }
                 
@@ -118,14 +119,17 @@ class GameLogicManager: GameLogicManagerProtocol {
         }
         
         checkForLines()
+        checkForLines(verticalLines: true)
         
         if checkGameOver() {
             interractor?.gameLogicManager(self, gameOver: true)
         }
     }
     
-    func checkForLines() {
-        let placedCells = field.filter( {$0.state == .placed})
+    func checkForLines(verticalLines: Bool = false) {
+        
+        let allPlacedCells = field.filter( {$0.state == .placed})
+        let placedCells = verticalLines ? allPlacedCells.sorted(by: {$0.y < $1.y}) : allPlacedCells
         
         if placedCells.count == 0 {
             return
@@ -135,16 +139,17 @@ class GameLogicManager: GameLogicManagerProtocol {
         let numberOfCellsInRow = 8
         var cellCounter = 1
         var currentRow = [CellData]()
-        
+        debugPrint("all cells \(placedCells)")
         for cell in 1..<placedCells.count {
             let firstCellData  = placedCells[cell-1]
             let secondCellData = placedCells[cell]
+            let condition = verticalLines ? secondCellData.y == firstCellData.y : secondCellData.x - firstCellData.x == 1
             
-            if secondCellData.id - firstCellData.id == 1 {
+            if condition {
                 // WARNING: - Add set here
-                if !currentRow.contains(where: { $0.id == firstCellData.id }) {
+                if !currentRow.contains(where: { $0.x == firstCellData.x }) {
                     currentRow.append(firstCellData)
-                }else if !currentRow.contains(where: { $0.id == secondCellData.id }) {
+                }else if !currentRow.contains(where: { $0.x == secondCellData.x }) {
                     currentRow.append(secondCellData)
                 }
                 cellCounter += 1
@@ -161,7 +166,32 @@ class GameLogicManager: GameLogicManagerProtocol {
             }
         }
         
-        
+        for row in cellsData {
+            for cell in row {
+                guard let cellIndex = field.index(where: {$0.x == cell.x}) else {
+                    fatalError("Index could not be nil")
+                }
+         
+                field[cellIndex].chageState(newState: .empty)
+                
+                if !verticalLines {
+                
+                    var upperCellIndex = cellIndex - numberOfCellsInRow
+                    var  previousIndex = 0
+                    while upperCellIndex > 0 {
+                        if field[upperCellIndex].isCellPlaced() {
+                            field[upperCellIndex].chageState(newState: .empty)
+                            if previousIndex != 0 {
+                                field[previousIndex].chageState(newState: .placed)
+                            }
+                        }
+                        previousIndex = upperCellIndex
+                        upperCellIndex -= 8
+                    }
+                }
+            }
+            interractor?.gameLogicManager(self, didUpdate: field)
+        }
     }
     
     func checkGameOver() -> Bool {
@@ -204,7 +234,7 @@ class GameLogicManager: GameLogicManagerProtocol {
 extension GameLogicManager: GameLogicManagerInput {
 
     func updateField(with tetramonioData: CellData, callback: (_ updatedData: [CellData]) -> ()) {
-        if !currentTetramonio.contains(where: {$0.id == tetramonioData.id }) && tetramonioData.state == .empty {
+        if !currentTetramonio.contains(where: {$0.x == tetramonioData.x }) && tetramonioData.state == .empty {
             appendCellToCurrentTetramonio(cellData: tetramonioData)
         }
         callback(field)
@@ -217,13 +247,17 @@ extension GameLogicManager: GameLogicManagerInput {
     func createField() -> [CellData] {
         
         var result = [CellData]()
-        var cellId = 0
+        var x = 0
+        var y = 0
         for _ in 0..<numberOfCells {
-            cellId += 1
-            if (cellId % 10 == 9) {
-                cellId = cellId+2
+            x += 1
+            if (x % 10 == 9) {
+                x = x+2
             }
-            let cellData = CellData(id: cellId, state: .empty)
+            
+            y = x % 10
+            
+            let cellData = CellData(x: x, y: y, state: .empty)
             result.append(cellData)
         }
         field = result

@@ -114,4 +114,8 @@ extension GameInteractor: GameLogicManagerOutput {
                 }
             })
     }
+    
+    func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, didUpdate field: [CellData]) {
+        presenter?.provideField(field)
+    }
 }
