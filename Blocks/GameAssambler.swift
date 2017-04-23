@@ -19,7 +19,8 @@ class GameAssambler {
         presenter.view = view
         let interractor = GameInteractor()
         interractor.presenter = presenter
-        let tetramonioManager = TetramonioManager()
+        let tetramonioDataProvider = TetremonioDataProvider()
+        let tetramonioManager = TetramonioManager(tetramonioDataProvider: tetramonioDataProvider)
         let gameLogic = GameLogicManager()
         let scoreManager = ScoreManager()
         view.presenter = presenter

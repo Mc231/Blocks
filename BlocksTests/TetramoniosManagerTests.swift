@@ -11,7 +11,7 @@ import XCTest
 
 class TetramoniosManagerTests: XCTestCase {
     
-    let manager = TetramonioManager()
+    let manager = TetramonioManager(tetramonioDataProvider: TetremonioDataProvider())
     
     func testTetramonioManagerGenerateTetramonios() {
         let tetramonios = manager.generateTetramonios()

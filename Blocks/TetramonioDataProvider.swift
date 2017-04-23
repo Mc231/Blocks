@@ -12,19 +12,23 @@ import Foundation
     This class provide data for all possible Tetramonios
  */
 
-class TetremonioDataProvider: PlistDataProvider {
+class TetremonioDataProvider {
+    
+    // MARK: - Properties
+    
+    private let dataProvider: DataProvider
     
     // MARK: - Inizialization
     
-    required init(resource: String = "Tetramonios") {
-        super.init(resource: resource)
+    init(dataProvider: DataProvider = PlistDataProvider(resource: "Tetramonios", type: "plist")) {
+        self.dataProvider = dataProvider
     }
     
     // MARK: - Public methods
     
     func getTetramonios() -> [Tetramonio] {
         var result = [Tetramonio]()
-        let tetramonios = getArrayData()
+        let tetramonios = dataProvider.getData()
         
         for tetramonio in tetramonios {
             guard let teramonioData = tetramonio as? NSDictionary else {

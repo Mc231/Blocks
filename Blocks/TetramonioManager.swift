@@ -27,7 +27,7 @@ class TetramonioManager: TetramonioProtocol {
     private let tetramonioDataProvider: TetremonioDataProvider
     private var currentTetramonios = [Tetramonio]()
     
-    init(tetramonioDataProvider: TetremonioDataProvider = TetremonioDataProvider()) {
+    init(tetramonioDataProvider: TetremonioDataProvider) {
         self.tetramonioDataProvider = tetramonioDataProvider
         self.tetramonios = tetramonioDataProvider.getTetramonios()
     }

@@ -9,41 +9,38 @@
 import Foundation
 
 /// Basic plist data provider protocol
-protocol PlistDataProviderProcotcol: class {
-    init(resource: String)
-    func getArrayData() -> NSArray
+protocol DataProvider: class {
+    init(resource: String, type: String)
+    func getData() -> NSArray
 }
 
 /// This class is Base data provider class
 
-class PlistDataProvider: PlistDataProviderProcotcol {
-    
-    // MARK: - Constants
-    
-    private let type = "plist"
+class PlistDataProvider: DataProvider {
     
     // MARK: - Properties
     
-    private(set) var resource: String
-    private(set) var path: String
+    private let resource: String
+    private let path: String
+    private let type: String
     
     // MARK: - Inizialization
     
-    required init(resource: String) {
+    required init(resource: String, type: String) {
         self.resource = resource
-        
+        self.type = type
         guard let path = Bundle.main.path(forResource: resource, ofType: type) else {
-            fatalError("Failed to parser")
+            fatalError("Resource could not be nil")
         }
         self.path = path
     }
     
     // MARK: - Public methods
     
-    func getArrayData() -> NSArray {
+    func getData() -> NSArray {
         guard let parsedData = NSArray(contentsOfFile: path) else {
-            fatalError("Failed to parse array data")
+            fatalError("Failed to parse data")
         }
-        return parsedData
+        return parsedData 
     }
 }

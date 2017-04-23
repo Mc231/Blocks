@@ -45,7 +45,7 @@ extension GameInteractor: GameInteractorInput {
         guard let tetramonios = tetramoniomManager?.generateTetramonios(generationType) else {
             fatalError("Generated tetramonios could not be nil")
         }
-        gameLogic?.setCurrentTetramonios(tetramonios)
+        gameLogic?.updateTetramonios(tetramonios)
         presenter?.provideTetramonios(tetramonios)
     }
     
@@ -86,7 +86,7 @@ extension GameInteractor: GameInteractorInput {
     }
     
     func setCurrentTetramonios(_ tetramonios: [Tetramonio]) {
-        gameLogic?.setCurrentTetramonios(tetramonios)
+        gameLogic?.updateTetramonios(tetramonios)
     }
 }
 

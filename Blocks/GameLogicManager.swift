@@ -10,13 +10,12 @@ import Foundation
 
 protocol GameLogicManagerInput {
     func updateField(with tetramonioData: CellData, callback: (_ updatedData: [CellData]) -> Void)
-    func setCurrentTetramonios(_ tetramonios: [Tetramonio])
+    func updateTetramonios(_ tetramonios: [Tetramonio])
     func createField() -> [CellData]
     func restartGame(callback: (_ field: [CellData]) -> ())
 }
 
 protocol GameLogicManagerProtocol: class {
-    func checkTetramonio(with cellData: [CellData]) -> Tetramonio?
     func appendCellToCurrentTetramonio(cellData: CellData)
     func checkForLines(verticalLines: Bool)
     func checkGameOver() -> Bool
@@ -42,47 +41,16 @@ class GameLogicManager: GameLogicManagerProtocol {
     fileprivate var field = [CellData]()
     fileprivate var currentTetramonio = [CellData]()
     fileprivate var tetramonios = [Tetramonio]()
+    fileprivate let checkTetramonioManager = CheckTetramonioManager()
     private let scorePerTetramonio = 4
     
-    func checkTetramonio(with cellData: [CellData]) -> Tetramonio? {
-
-        let orderedCellData = cellData.sorted(by: {$0.x < $1.x})
-        
-        let firstCell  = orderedCellData[0].x
-        let secondCell = orderedCellData[1].x
-        let thirdCell  = orderedCellData[2].x
-        let fourthCell = orderedCellData[3].x
-        
-        for currentTetramonio in tetramonios {
-            
-            let firstConstant = currentTetramonio.indexes[0]
-            let secondConstant = currentTetramonio.indexes[1]
-            let thirdConstant = currentTetramonio.indexes[2]
-            
-            if currentTetramonio.id == .Ih || currentTetramonio.id == .Iv {
-                if (secondCell == firstCell + firstConstant)
-                    && (thirdCell == secondCell + secondConstant)
-                    &&  (fourthCell == thirdCell + thirdConstant) {
-                    return currentTetramonio
-                }
-            }else{
-                if (secondCell == firstCell + firstConstant)
-                    && (thirdCell == firstCell + secondConstant)
-                    &&  (fourthCell == firstCell + thirdConstant) {
-                    return currentTetramonio
-                }
-            }
-        }
-        
-        return nil
-    }
     
     func appendCellToCurrentTetramonio(cellData: CellData) {
         currentTetramonio.append(cellData)
         
         if currentTetramonio.count == numberOfCellsInTetramonio {
             
-            let tetramonio = checkTetramonio(with: currentTetramonio)
+            let tetramonio = checkTetramonioManager.checkTetramonio(with: currentTetramonio)
             
             for cellData in currentTetramonio {
                 guard let cellIndex = field.index(where: {$0.x == cellData.x}) else {
@@ -212,7 +180,7 @@ class GameLogicManager: GameLogicManagerProtocol {
                     let thirdCell = field[secondIndex]
                     let fourthCell = field[thirdIndex]
                     let possibleTetramonioArray = [firstCell, secondCell, thirdCell, fourthCell]
-                    let possibleTetramonio = checkTetramonio(with: possibleTetramonioArray)
+                    let possibleTetramonio = checkTetramonioManager.checkTetramonio(with: possibleTetramonioArray)
                     
                     if !firstCell.isCellPlaced()
                         && !secondCell.isCellPlaced()
@@ -240,8 +208,9 @@ extension GameLogicManager: GameLogicManagerInput {
         callback(field)
     }
     
-    func setCurrentTetramonios(_ tetramonios: [Tetramonio]) {
+    func updateTetramonios(_ tetramonios: [Tetramonio]) {
         self.tetramonios = tetramonios
+        self.checkTetramonioManager.updateTetramonios(tetramonios)
     }
     
     func createField() -> [CellData] {

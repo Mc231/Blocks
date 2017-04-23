@@ -13,6 +13,7 @@ class GameLogicTests: XCTestCase {
     
     let gameLogic = GameLogicManager()
     let tetramonios = TetremonioDataProvider().getTetramonios()
+    let checkTetramonioManager = CheckTetramonioManager()
     
     lazy var field: [CellData] = {
         let field = self.gameLogic.createField()
@@ -125,14 +126,15 @@ class GameLogicTests: XCTestCase {
     // MARK: - Private methods
     
     func checkTetramonio(id: Int, firstIndex: Int, secondIndex: Int, thirdIndex: Int, fourthIndex: Int) -> Bool {
-        gameLogic.setCurrentTetramonios([tetramonios[id]])
+        gameLogic.updateTetramonios([tetramonios[id]])
+        checkTetramonioManager.updateTetramonios([tetramonios[id]])
         let currentTetramonio = [field[firstIndex], field[secondIndex], field[thirdIndex], field[fourthIndex]]
-        return gameLogic.checkTetramonio(with: currentTetramonio)?.id == tetramonios[id].id
+        return checkTetramonioManager.checkTetramonio(with: currentTetramonio)?.id == tetramonios[id].id
     }
     
     func checkTetramonioGameOverIndexes(id: Int) -> Bool {
-        gameLogic.setCurrentTetramonios([tetramonios[id]])
-        
+        gameLogic.updateTetramonios([tetramonios[id]])
+        checkTetramonioManager.updateTetramonios([tetramonios[id]])
         let gameOverIndexes = tetramonios[id].gameOverIndexes
         let firstCell  = field[28]
         let secondCell = field[28 + gameOverIndexes[0]]
@@ -140,6 +142,6 @@ class GameLogicTests: XCTestCase {
         let fourthCell = field[28 + gameOverIndexes[2]]
         let possibleTetramonio = [firstCell, secondCell, thirdCell, fourthCell]
         
-        return gameLogic.checkTetramonio(with: possibleTetramonio)?.id == tetramonios[id].id
+        return checkTetramonioManager.checkTetramonio(with: possibleTetramonio)?.id == tetramonios[id].id
     }
 }
