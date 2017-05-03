@@ -18,7 +18,7 @@ class GamePresenter: GamePresenterInput {
     var interractor: GameInteractorInput?
     
     func generateTetramoniosForGameStart() {
-        interractor?.generateTetramonios(generationType: .gameStart)
+        interractor?.generateTetramoniosFor(.gameStart)
     }
     
     func provideTetramonios(_ tetramonios: [Tetramonio]) {

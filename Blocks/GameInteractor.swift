@@ -9,7 +9,7 @@
 import Foundation
 
 protocol GameInteractorInput: class {
-    func generateTetramonios(generationType: GenerationType)
+    func generateTetramoniosFor(_ type: GenerationType)
     func generateField()
     func restartGame()
     func getCurrentScore()
@@ -41,8 +41,8 @@ class GameInteractor {
 
 extension GameInteractor: GameInteractorInput {
     
-    func generateTetramonios(generationType: GenerationType = .gameStart) {
-        guard let tetramonios = tetramoniomManager?.generateTetramonios(generationType) else {
+    func generateTetramoniosFor(_ type: GenerationType) {
+        guard let tetramonios = tetramoniomManager?.generateTetramonios(type) else {
             fatalError("Generated tetramonios could not be nil")
         }
         gameLogic?.updateTetramonios(tetramonios)
@@ -57,7 +57,7 @@ extension GameInteractor: GameInteractorInput {
     }
     
     func restartGame() {
-        generateTetramonios()
+        generateTetramoniosFor(.gameStart)
         presenter?.provideCurrentScore((scoreManager?.resetCurrentScore())!)
         gameLogic?.restartGame(callback: { (field) in
             presenter?.provideField(field)
@@ -98,7 +98,7 @@ extension GameInteractor: GameLogicManagerOutput {
         guard let generationType = GenerationType(rawValue: matchIndex) else {
             fatalError("Generation type could not be nil")
         }
-        generateTetramonios(generationType: generationType)
+        generateTetramoniosFor(generationType)
     }
     
     func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, gameOver: Bool) {
