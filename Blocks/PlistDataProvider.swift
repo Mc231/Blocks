@@ -11,7 +11,7 @@ import Foundation
 /// Basic plist data provider protocol
 protocol DataProvider: class {
     init(resource: String, type: String)
-    func getData() -> NSArray
+    func getData<T>() -> T.Type?
 }
 
 /// This class is Base data provider class
@@ -35,12 +35,10 @@ class PlistDataProvider: DataProvider {
         self.path = path
     }
     
-    // MARK: - Public methods
-    
-    func getData() -> NSArray {
+    func getData<T>() -> T? {
         guard let parsedData = NSArray(contentsOfFile: path) else {
             fatalError("Failed to parse data")
         }
-        return parsedData 
+        return parsedData as? T
     }
 }

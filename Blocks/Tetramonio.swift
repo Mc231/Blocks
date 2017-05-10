@@ -16,10 +16,14 @@ struct Tetramonio {
     let id: TetramonioType
     let indexes: [Int]
     let gameOverIndexes: [Int]
+}
+
+extension Tetramonio {
     
     init(dictionary: NSDictionary) {
         self.id = TetramonioType(rawValue: dictionary.object(forKey: "id") as? Int ?? -1) ?? .None
         self.indexes = dictionary.object(forKey: "tetramonioIndexes") as? [Int] ?? [Int]()
         self.gameOverIndexes = dictionary.object(forKey: "gameOverIndexes") as? [Int] ?? [Int]()
     }
+    
 }

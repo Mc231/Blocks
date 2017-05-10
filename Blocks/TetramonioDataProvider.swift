@@ -28,7 +28,9 @@ class TetremonioDataProvider {
     
     func getTetramonios() -> [Tetramonio] {
         var result = [Tetramonio]()
-        let tetramonios = dataProvider.getData()
+        guard let tetramonios: NSArray = dataProvider.getData() else {
+            fatalError("Tetramonios is of wrong type")
+        }
         
         for tetramonio in tetramonios {
             guard let teramonioData = tetramonio as? NSDictionary else {
