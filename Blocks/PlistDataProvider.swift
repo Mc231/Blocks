@@ -11,7 +11,7 @@ import Foundation
 /// Basic plist data provider protocol
 protocol DataProvider: class {
     init(resource: String, type: String)
-    func getData<T>() -> T.Type?
+    func getData<T>() -> T?
 }
 
 /// This class is Base data provider class

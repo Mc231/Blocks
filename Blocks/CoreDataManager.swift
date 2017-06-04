@@ -1,27 +1,27 @@
-//
-//  CoreDataManager.swift
-//  Blocks
-//
-//  Created by Volodya on 5/3/17.
-//  Copyright © 2017 QuasarClaster. All rights reserved.
-//
-
-import Foundation
-import CoreData
-
-typealias CoreDataCompletionHandler = (_ object: NSManagedObjectContext? ,_ success: Bool, _ error: Error?) -> Void
-
-protocol CoreDataManagerProtocol {
+ //
+ //  CoreDataManager.swift
+ //  Blocks
+ //
+ //  Created by Volodya on 5/3/17.
+ //  Copyright © 2017 QuasarClaster. All rights reserved.
+ //
+ 
+ import Foundation
+ import CoreData
+ 
+ 
+ typealias CoreDataCompletionHandler = (_ object: NSManagedObject? ,_ success: Bool, _ error: Error?) -> Void
+ 
+ protocol CoreDataManagerProtocol {
+    
+    func create<T: NSManagedObject>(_ object: T.Type) -> T? where T: EntityDescription
     func save<T: NSManagedObject>(_ object: T, completion: @escaping CoreDataCompletionHandler)
-    func update<T: NSManagedObject>(_ object: T, completion: CoreDataCompletionHandler)
-    func delete<T: NSManagedObject>(_ object: T, completion: CoreDataCompletionHandler)
-    func get<T: NSManagedObject>(_ object: T, completion: CoreDataCompletionHandler)
-}
-
-class CoreDataManager {
+ }
+ 
+ class CoreDataManager {
     
     // MARK: - Constatns
-
+    
     private let kBlocksDataModelExtension = "momd"
     private let kSqliteExtensionWithDot = ".sqlite"
     
@@ -78,4 +78,44 @@ class CoreDataManager {
         return persistentStoreCoordinator
         
     }()
-}
+ }
+ 
+ // MARK: - CoreDataManagerProtocol
+ 
+ extension CoreDataManager: CoreDataManagerProtocol {
+    
+    func create<T : NSManagedObject>(_ object: T.Type) -> T? where T : EntityDescription {
+        guard let entityDescription = NSEntityDescription.entity(forEntityName: object.entityName, in: managedObjectContext) else {
+            debugPrint("Failed to create nsmangedobject context")
+            return nil
+        }
+        let object = NSManagedObject(entity: entityDescription, insertInto: managedObjectContext) as? T
+        return object
+    }
+    
+    func save<T : NSManagedObject>(_ object: T, completion: @escaping (NSManagedObject?, Bool, Error?) -> Void) {
+        managedObjectContext.perform {
+            do {
+                try object.managedObjectContext?.save()
+                completion(object, true, nil)
+            } catch let error {
+                completion(nil, false, error)
+                debugPrint("\(self) \(error)")
+            }
+        }
+    }
+ }
+ 
+ protocol EntityDescription: class {
+    static var entityName: String {get}
+ }
+ 
+ extension EntityDescription {
+    static var entityName: String {
+        return String(describing: self)
+    }
+ }
+ 
+ extension NSManagedObject: EntityDescription {
+    
+ }

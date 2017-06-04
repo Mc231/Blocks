@@ -22,10 +22,10 @@ protocol GameLogicManagerProtocol: class {
 }
 
 protocol GameLogicManagerOutput: class {
-    func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, matchesTetramonio: Tetramonio?, matchIndex: Int)
-    func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, gameOver: Bool)
-    func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, didChange score: Int)
-    func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, didUpdate field: [CellData])
+    func gameLogicManager(_ manager: GameLogicManagerInput, matchesTetramonio: Tetramonio?, matchIndex: Int)
+    func gameLogicManager(_ manager: GameLogicManagerInput, gameOver: Bool)
+    func gameLogicManager(_ manager: GameLogicManagerInput, didChange score: Int)
+    func gameLogicManager(_ manager: GameLogicManagerInput, didUpdate field: [CellData])
 }
 
 class GameLogicManager: GameLogicManagerProtocol {
