@@ -22,8 +22,13 @@ class CoredDataManagerTest: XCTestCase {
             game.maxScore = 231
             game.score = 100
             game.secondFigure = 121
-            
+            let expectation = XCTestExpectation()
+            expectation.
             manager.save(game, completion: { (object, success, error) in
+                XCTAssertNil(error)
+                XCTAssertTrue(success)
+                XCTAssertNil(object)
+                expectation.fulfill()
                 debugPrint(object)
                 debugPrint(success)
                 debugPrint(error)

@@ -10,12 +10,13 @@
  import CoreData
  
  
- typealias CoreDataCompletionHandler = (_ object: NSManagedObject? ,_ success: Bool, _ error: Error?) -> Void
+ typealias CoreDataCompletionHandler = (_ success: Bool, _ error: Error?) -> Void
  
  protocol CoreDataManagerProtocol {
-    
     func create<T: NSManagedObject>(_ object: T.Type) -> T? where T: EntityDescription
     func save<T: NSManagedObject>(_ object: T, completion: @escaping CoreDataCompletionHandler)
+    func fetch<T: NSManagedObject>(_ object: T.Type, predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?) -> [T]? where T: EntityDescription
+    func delete<T: NSManagedObject>(_ object: T)
  }
  
  class CoreDataManager {
@@ -37,7 +38,7 @@
     
     // MARK: - CoreData Stack
     
-    private(set) lazy var managedObjectContext: NSManagedObjectContext = {
+    fileprivate lazy var managedObjectContext: NSManagedObjectContext = {
         let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator
         return managedObjectContext
@@ -83,7 +84,7 @@
  // MARK: - CoreDataManagerProtocol
  
  extension CoreDataManager: CoreDataManagerProtocol {
-    
+
     func create<T : NSManagedObject>(_ object: T.Type) -> T? where T : EntityDescription {
         guard let entityDescription = NSEntityDescription.entity(forEntityName: object.entityName, in: managedObjectContext) else {
             debugPrint("Failed to create nsmangedobject context")
@@ -93,16 +94,33 @@
         return object
     }
     
-    func save<T : NSManagedObject>(_ object: T, completion: @escaping (NSManagedObject?, Bool, Error?) -> Void) {
+    func save<T : NSManagedObject>(_ object: T, completion: @escaping (Bool, Error?) -> Void) {
         managedObjectContext.perform {
             do {
                 try object.managedObjectContext?.save()
-                completion(object, true, nil)
+                completion(true, nil)
             } catch let error {
-                completion(nil, false, error)
+                completion(false, error)
                 debugPrint("\(self) \(error)")
             }
         }
+    }
+    
+    func fetch<T : NSManagedObject>(_ object: T.Type, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) -> [T]? where T: EntityDescription {
+        let request = NSFetchRequest<T>(entityName: object.entityName)
+        request.predicate = predicate
+        request.sortDescriptors = sortDescriptors
+        do {
+           let objects = try managedObjectContext.fetch(request) as? [T] 
+            return objects
+        } catch {
+                debugPrint("\(self) \(error)")
+        }
+        return nil
+    }
+    
+    func delete<T : NSManagedObject>(_ object: T) {
+        managedObjectContext.delete(object)
     }
  }
  

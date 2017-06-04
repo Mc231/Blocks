@@ -12,10 +12,6 @@ import CoreData
 
 extension Game {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Game> {
-        return NSFetchRequest<Game>(entityName: "Game");
-    }
-
     @NSManaged public var firstFigure: Int16
     @NSManaged public var maxScore: Int32
     @NSManaged public var score: Int32
