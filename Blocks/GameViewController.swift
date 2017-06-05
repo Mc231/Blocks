@@ -11,11 +11,8 @@ import UIKit
 // MARK: - Check this
 
 protocol GameViewOutput {
-    func generateTetramoniosForGameStart()
-    func createField()
+    func startGame()
     func restartGame()
-    func getMaxScore()
-    func getCurrentScore()
     func handleTouchedCell(with data: CellData)
 }
 
@@ -24,7 +21,6 @@ protocol GameViewInput: class {
     func display(field withData: [CellData])
     func display(max score: String)
     func display(current score: String)
-    func update(cellData: [CellData])
 }
 
 class GameViewController: UIViewController {
@@ -62,9 +58,7 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.generateTetramoniosForGameStart()
-        presenter.createField()
-        updateScore()
+        presenter.startGame()
     }
     
     override func viewWillLayoutSubviews() {
@@ -91,11 +85,6 @@ class GameViewController: UIViewController {
     }
     
     // MARK: - Private methods
-    
-    private func updateScore() {
-        presenter.getCurrentScore()
-        presenter.getMaxScore()
-    }
     
     private func handleTouchForEvent(_ event: UIEvent?) {
         let touches = event?.allTouches?.first
@@ -131,13 +120,9 @@ extension GameViewController: UICollectionViewDelegateFlowLayout {
 
 extension GameViewController: GameViewInput {
     
-    func update(cellData: [CellData]) {
-        fieldData = cellData
-        field.reloadData()
-    }
-    
     func display(field withData: [CellData]) {
         fieldData = withData
+        field.reloadData()
     }
 
     func display(tetramonios: [Tetramonio]) {

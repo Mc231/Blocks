@@ -8,6 +8,7 @@
 
 import Foundation
 
+// TODO: - Remove this
 protocol ScoreManagerProtocol {
     func setScore(_ score: Int, callback: (String,String,Bool) -> ())
     func getCurrentScore() -> String

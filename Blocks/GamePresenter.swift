@@ -17,16 +17,20 @@ class GamePresenter: GamePresenterInput {
     weak var view: GameViewInput?
     var interractor: GameInteractorInput?
     
-    func generateTetramoniosForGameStart() {
-        interractor?.generateTetramoniosFor(.gameStart)
+    func startGame() {
+        interractor?.startGame()
+    }
+    
+    func restartGame() {
+        interractor?.restartGame()
+    }
+    
+    func handleTouchedCell(with data: CellData) {
+        interractor?.handleTouchedCellWithData(data)
     }
     
     func provideTetramonios(_ tetramonios: [Tetramonio]) {
         view?.display(tetramonios: tetramonios)
-    }
-    
-    func createField() {
-        interractor?.generateField()
     }
     
     func provideField(_ field: [CellData]) {
@@ -39,29 +43,5 @@ class GamePresenter: GamePresenterInput {
     
     func provideCurrentScore(_ score: String) {
         view?.display(current: score)
-    }
-    
-    func restartGame() {
-        interractor?.restartGame()
-    }
-    
-    func getMaxScore() {
-        interractor?.getMaxScore()
-    }
-    
-    func getCurrentScore() {
-        interractor?.getCurrentScore()
-    }
-    
-    func provideCurrentTetramonios(_ tetramonios: ([Tetramonio]) -> ()) {
-        interractor?.getCurrentTetramonios(tetramonios)
-    }
-    
-    func handleTouchedCell(with data: CellData) {
-        interractor?.handleTouchedCellWithData(data)
-    }
-    
-    func updateCells(_ updatedData: [CellData]) {
-        view?.update(cellData: updatedData)
     }
 }

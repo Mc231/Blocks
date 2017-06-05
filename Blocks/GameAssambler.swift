@@ -25,9 +25,9 @@ class GameAssambler {
         let scoreManager = ScoreManager()
         view.presenter = presenter
         presenter.interractor = interractor
-        interractor.tetramoniomManager = tetramonioManager
         interractor.gameLogic = gameLogic
         interractor.scoreManager = scoreManager
         gameLogic.interractor = interractor
+        gameLogic.tetramoniomManager = tetramonioManager
     }
 }

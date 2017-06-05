@@ -25,6 +25,15 @@ struct CellData {
 
 extension CellData {
     
+    init (from cell: Cell){
+        x = cell.x
+        y = cell.y
+        guard let storedState = CellState(rawValue: cell.state) else {
+            fatalError("Impossible cell state")
+        }
+        state = storedState
+    }
+    
     func isCellPlaced() -> Bool {
         return self.state == .placed
     }

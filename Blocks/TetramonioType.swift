@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum TetramonioType: Int {
+enum TetramonioType: Int16 {
     case Ih = 0
     case Iv = 1
     case o  = 2

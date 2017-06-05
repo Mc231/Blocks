@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Int {
+extension Int16 {
     
     static func randomNum(maxValue: Int) -> Int {
         let uintMaxValue = UInt32(maxValue)

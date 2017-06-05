@@ -16,8 +16,8 @@ protocol TetreamonioCoreDataManagerInput: class {
     
     func getCurrentScore() -> Int32
     func getMaxScore() -> Int32
-    func getFieldCells() -> [CellData]?
-    func getCurrentTetramonios() -> [Tetramonio]?
+    func getFieldCells() -> [CellData]
+    func getCurrentTetramonios() -> [Int16]?
 }
 
 class TetreamonioCoreDataManager {
@@ -41,15 +41,61 @@ class TetreamonioCoreDataManager {
 
 extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
     
-    func getCurrentTetramonios() -> [Tetramonio]? {
-        guard let firstTetramonio = game?.firstTetramonio,
+    func getCurrentTetramonios() -> [Int16]? {
+        guard let firstTetramonio =  game?.firstTetramonio,
             let lastTetramonio = game?.secondTetramonio else {
                 return nil
         }
+        return [firstTetramonio, lastTetramonio]
     }
 
-    func getFieldCells() -> [CellData]? {
-        <#code#>
+    func getFieldCells() -> [CellData] {
+        var result = [CellData]()
+        let storedCells = coreDataManager.fetch(Cell.self, predicate: nil, sortDescriptors: nil)
+        
+        if storedCells?.count == 0 {
+            result = createField()
+        }else{
+            // TODO: - Fix force unwrap
+            for cell in storedCells! {
+                let cellData = CellData(from: cell)
+                result.append(cellData)
+            }
+        }
+        return result
+    }
+    
+    private func createField() -> [CellData] {
+        var result = [CellData]()
+        var x: Int16 = 0
+        var y: Int16 = 0
+        // TODO: - Add to constant
+        for _ in 0..<GameLogicManager.numberOfCells {
+            x += 1
+            if (x % 10 == 9) {
+                x = x+2
+            }
+            
+            y = x % 10
+            // TODO: - Fix force unwrap
+            let cell = coreDataManager.create(Cell.self)
+            cell?.x = x
+            cell?.y = y
+            cell?.state = 0
+            game?.addToCells(cell!)
+            coreDataManager.save(cell, completion: nil)
+        }
+        coreDataManager.save(game, completion: nil)
+        
+        // TODO: - Fix this fuck
+        let storedCells = coreDataManager.fetch(Cell.self, predicate: nil, sortDescriptors: nil)
+        
+        for cell in storedCells! {
+            let cellData = CellData(from: cell)
+            result.append(cellData)
+        }
+      
+        return result
     }
 
     func getMaxScore() -> Int32 {
@@ -89,7 +135,7 @@ extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
                     fatalError("Failed to create new instance fo cell")
                 }
                 //todo refactore this
-                cell.id = Int16(fieldCell.x)
+                //cell.id = Int16(fieldCell.x)
                 cell.state = fieldCell.state.rawValue
                 game?.addToCells(cell)
                 coreDataManager.save(cell, completion: nil)

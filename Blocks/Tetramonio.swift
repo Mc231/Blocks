@@ -21,9 +21,8 @@ struct Tetramonio {
 extension Tetramonio {
     
     init(dictionary: NSDictionary) {
-        self.id = TetramonioType(rawValue: dictionary.object(forKey: "id") as? Int ?? -1) ?? .None
+        self.id = TetramonioType(rawValue: dictionary.object(forKey: "id") as? Int16 ?? -1) ?? .None
         self.indexes = dictionary.object(forKey: "tetramonioIndexes") as? [Int] ?? [Int]()
         self.gameOverIndexes = dictionary.object(forKey: "gameOverIndexes") as? [Int] ?? [Int]()
     }
-    
 }

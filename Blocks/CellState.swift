@@ -9,7 +9,7 @@
 import Foundation
 
 enum CellState: Int16 {
-    case empty
-    case selected
-    case placed
+    case empty = 0
+    case selected = 1
+    case placed = 2
 }
