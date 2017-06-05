@@ -110,7 +110,7 @@ extension GameInteractor: GameLogicManagerOutput {
             scoreManager?.setScore(score, callback: { (score, best, status) in
                 if status {
                   presenter?.provideMaxScore(best)
-                    presenter?.provideCurrentScore(score)
+                  presenter?.provideCurrentScore(score)
                 }
             })
     }

@@ -2,7 +2,7 @@
 //  Game+CoreDataClass.swift
 //  Blocks
 //
-//  Created by Volodya on 6/4/17.
+//  Created by Volodya on 6/5/17.
 //  Copyright © 2017 QuasarClaster. All rights reserved.
 //
 

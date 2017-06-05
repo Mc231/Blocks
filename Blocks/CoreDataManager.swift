@@ -10,11 +10,12 @@
  import CoreData
  
  
- typealias CoreDataCompletionHandler = (_ success: Bool, _ error: Error?) -> Void
+ typealias CoreDataCompletionHandler = ((_ success: Bool?, _ error: Error?) -> ())?
  
  protocol CoreDataManagerProtocol {
     func create<T: NSManagedObject>(_ object: T.Type) -> T? where T: EntityDescription
-    func save<T: NSManagedObject>(_ object: T, completion: @escaping CoreDataCompletionHandler)
+    func save<T: NSManagedObject>(_ object: T?, completion: CoreDataCompletionHandler)
+    func findFirstOrCreate<T: NSManagedObject>(_ object: T.Type, predicate: NSPredicate?) -> T?
     func fetch<T: NSManagedObject>(_ object: T.Type, predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?) -> [T]? where T: EntityDescription
     func delete<T: NSManagedObject>(_ object: T)
  }
@@ -39,7 +40,7 @@
     // MARK: - CoreData Stack
     
     fileprivate lazy var managedObjectContext: NSManagedObjectContext = {
-        let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator
         return managedObjectContext
     }()
@@ -94,16 +95,25 @@
         return object
     }
     
-    func save<T : NSManagedObject>(_ object: T, completion: @escaping (Bool, Error?) -> Void) {
+    func save<T : NSManagedObject>(_ object: T?, completion: CoreDataCompletionHandler) {
         managedObjectContext.perform {
             do {
-                try object.managedObjectContext?.save()
-                completion(true, nil)
+                try object?.managedObjectContext?.save()
+                completion?(true, nil)
             } catch let error {
-                completion(false, error)
+                completion?(false, error)
                 debugPrint("\(self) \(error)")
             }
         }
+    }
+    
+    func findFirstOrCreate<T : NSManagedObject>(_ object: T.Type, predicate: NSPredicate?) -> T? {
+        if let objects = fetch(object, predicate: predicate), !objects.isEmpty {
+            debugPrint("\(self) instance fetched")
+            return objects.first
+        }
+        debugPrint("\(self) new instance created")
+        return create(object)
     }
     
     func fetch<T : NSManagedObject>(_ object: T.Type, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) -> [T]? where T: EntityDescription {
@@ -111,7 +121,7 @@
         request.predicate = predicate
         request.sortDescriptors = sortDescriptors
         do {
-           let objects = try managedObjectContext.fetch(request) as? [T] 
+           let objects = try managedObjectContext.fetch(request) as [T] 
             return objects
         } catch {
                 debugPrint("\(self) \(error)")

@@ -12,8 +12,8 @@ struct CellData {
     
     // MARK: - Properties
     
-    let x: Int
-    let y: Int
+    let x: Int16
+    let y: Int16
     var state: CellState
     
     // MARK: - Mutating methods
@@ -24,6 +24,7 @@ struct CellData {
 }
 
 extension CellData {
+    
     func isCellPlaced() -> Bool {
         return self.state == .placed
     }

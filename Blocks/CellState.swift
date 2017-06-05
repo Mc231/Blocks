@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum CellState {
+enum CellState: Int16 {
     case empty
     case selected
     case placed

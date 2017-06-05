@@ -12,7 +12,8 @@ import CoreData
 
 extension Cell {
 
-    @NSManaged public var id: Int16
+    @NSManaged public var x: Int16
+    @NSManaged public var y: Int16
     @NSManaged public var state: Int16
     @NSManaged public var game: Game?
 
