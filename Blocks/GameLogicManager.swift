@@ -11,7 +11,7 @@ import Foundation
 protocol GameLogicManagerInput {
     func generateTetramoniosFor(_ type: GenerationType) -> [Tetramonio]
     func updateField(with tetramonioData: CellData, callback: (_ updatedData: [CellData]) -> Void)
-    func startGame(completion: (_ tetramonios: [Tetramonio], _ field: [CellData], _ currentScore: Int32, _ bestScore: Int32) -> ())
+    func startGame(completion: (_ tetramonios: [Tetramonio], _ field: [CellData], _ currentScore: Int32, _ bestScore: Int32) -> Void)
     func restartGame(callback: (_ field: [CellData]) -> ())
 }
 
@@ -38,12 +38,17 @@ class GameLogicManager: GameLogicManagerProtocol {
     // MARK: - Prioperties
     
     weak var interractor: GameLogicManagerOutput?
-    var tetramoniomManager: TetramonioManager?
+    var tetramoniosManager: TetramonioManager?
     var tetramonioCoreDataManager: TetreamonioCoreDataManagerInput?
-    fileprivate var field = [CellData]()
+    fileprivate var field = [CellData](){
+        didSet{
+            tetramonioCoreDataManager?.store(fieldCells: field)
+        }
+    }
     fileprivate var currentTetramonio = [CellData]()
     fileprivate var tetramonios = [Tetramonio](){
         didSet{
+            tetramonioCoreDataManager?.store(current: tetramonios)
             self.checkTetramonioManager.updateTetramonios(tetramonios)
         }
     }
@@ -208,14 +213,15 @@ class GameLogicManager: GameLogicManagerProtocol {
 // MARK: - GameLogicInput
 
 extension GameLogicManager: GameLogicManagerInput {
-    // TODO: - Mabaye move it to another protocol
+    
+    @discardableResult
     func generateTetramoniosFor(_ type: GenerationType) -> [Tetramonio] {
-        guard let tetramonios = tetramoniomManager?.generateTetramonios(type) else {
+        guard let tetramonios = tetramoniosManager?.generateTetramonios(type) else {
             fatalError("Generated tetramonios could not be nil")
         }
-        if type != .gameStart {
-            interractor?.gameLogicManager(self, didUpdate: tetramonios)
-        }
+     
+        interractor?.gameLogicManager(self, didUpdate: tetramonios)
+        self.tetramonios = tetramonios
         return tetramonios
     }
 
@@ -226,27 +232,39 @@ extension GameLogicManager: GameLogicManagerInput {
         callback(field)
     }
     
-    func startGame(completion: ([Tetramonio], [CellData], Int32, Int32) -> ()) {
+    func startGame(completion: ([Tetramonio], [CellData], Int32, Int32) -> Void) {
         
         var tetramonios = [Tetramonio]()
-        if let storedTetramonios = tetramonioCoreDataManager?.getCurrentTetramonios() {
-            // TODO: - Fix fore unwrup of optional
-            tetramonios = (tetramoniomManager?.getTetramoniosFrom(indexes: storedTetramonios))!
+        if let storedTetramonios = tetramonioCoreDataManager?.getCurrentTetramonios(),
+            let unwraprdTetramonios = tetramoniosManager?.getTetramoniosFrom(indexes: storedTetramonios) {
+            tetramonios = unwraprdTetramonios
+            tetramoniosManager?.currentTetramonios = tetramonios
+            self.tetramonios = tetramonios
         }else{
             tetramonios = generateTetramoniosFor(.gameStart)
         }
         
-        let cellData = tetramonioCoreDataManager?.getFieldCells()
-        let currentScore = tetramonioCoreDataManager?.getCurrentScore()
-        let maxScore = tetramonioCoreDataManager?.getMaxScore()
-        // TODO: - Fix force unwrap
-        completion(tetramonios, cellData!, currentScore!, maxScore!)
+        guard let cellData = tetramonioCoreDataManager?.getFieldCells(),
+            let currentScore = tetramonioCoreDataManager?.getCurrentScore(),
+            let maxScore = tetramonioCoreDataManager?.getMaxScore() else {
+                fatalError("Score or field cell can not be nil can not be nil")
+        }
+        
+        let storedTetramonio = cellData.filter({$0.state == .selected})
+        
+        if !storedTetramonio.isEmpty {
+            currentTetramonio = storedTetramonio
+        }
+        
+     
+        field = cellData
+        completion(tetramonios, cellData, currentScore, maxScore)
     }
     
     func restartGame(callback: ([CellData]) -> ()) {
         generateTetramoniosFor(.gameStart)
-        field.removeAll()
-        // TODO: - Fix this
-      //  callback(createField())
+        // TODO: - add nulling of score
+        field = (tetramonioCoreDataManager?.resetCells())!
+        callback(field)
     }
 }

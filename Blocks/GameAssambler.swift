@@ -23,11 +23,13 @@ class GameAssambler {
         let tetramonioManager = TetramonioManager(tetramonioDataProvider: tetramonioDataProvider)
         let gameLogic = GameLogicManager()
         let scoreManager = ScoreManager()
+        let coreDataManager = CoreDataManager(modelName: "Blocks")
         view.presenter = presenter
         presenter.interractor = interractor
         interractor.gameLogic = gameLogic
         interractor.scoreManager = scoreManager
         gameLogic.interractor = interractor
-        gameLogic.tetramoniomManager = tetramonioManager
+        gameLogic.tetramoniosManager = tetramonioManager
+        gameLogic.tetramonioCoreDataManager = TetreamonioCoreDataManager(coreDataManager: coreDataManager)
     }
 }

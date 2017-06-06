@@ -11,6 +11,7 @@ import Foundation
 protocol TetramonioProtocol {
     func generateTetramonios(_ generationType: GenerationType) -> [Tetramonio]
     func getTetramoniosFrom(indexes: [Int16]?) -> [Tetramonio]
+    var currentTetramonios: [Tetramonio] {get set}
 }
 
 enum GenerationType: Int {
@@ -25,7 +26,7 @@ class TetramonioManager: TetramonioProtocol {
     
     private let tetramonios: [Tetramonio]
     private let tetramonioDataProvider: TetremonioDataProvider
-    private var currentTetramonios = [Tetramonio]()
+    var currentTetramonios = [Tetramonio]()
     
     init(tetramonioDataProvider: TetremonioDataProvider) {
         self.tetramonioDataProvider = tetramonioDataProvider

@@ -17,6 +17,7 @@ protocol TetreamonioCoreDataManagerInput: class {
     func getCurrentScore() -> Int32
     func getMaxScore() -> Int32
     func getFieldCells() -> [CellData]
+    func resetCells() -> [CellData]
     func getCurrentTetramonios() -> [Int16]?
 }
 
@@ -30,10 +31,12 @@ class TetreamonioCoreDataManager {
         return self.coreDataManager.findFirstOrCreate(Game.self, predicate: nil)
     }()
     
+    
     // MARK: - Inizialization
     
     init(coreDataManager: CoreDataManagerProtocol) {
         self.coreDataManager = coreDataManager
+        // Ensure that game instance is created
     }
 }
 
@@ -43,15 +46,18 @@ extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
     
     func getCurrentTetramonios() -> [Int16]? {
         guard let firstTetramonio =  game?.firstTetramonio,
-            let lastTetramonio = game?.secondTetramonio else {
+            let lastTetramonio = game?.secondTetramonio, firstTetramonio != lastTetramonio else {
                 return nil
         }
         return [firstTetramonio, lastTetramonio]
     }
 
     func getFieldCells() -> [CellData] {
+
         var result = [CellData]()
-        let storedCells = coreDataManager.fetch(Cell.self, predicate: nil, sortDescriptors: nil)
+        // TODo: - fix this
+        let xSortDesciptor = NSSortDescriptor(key: "x", ascending: true)
+        let storedCells = coreDataManager.fetch(Cell.self, predicate: nil, sortDescriptors: [xSortDesciptor])
         
         if storedCells?.count == 0 {
             result = createField()
@@ -62,6 +68,27 @@ extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
                 result.append(cellData)
             }
         }
+        return result
+    }
+    
+    func resetCells() -> [CellData] {
+        let xSortDesciptor = NSSortDescriptor(key: "x", ascending: true)
+        let storedCells = coreDataManager.fetch(Cell.self, predicate: nil, sortDescriptors: [xSortDesciptor])
+        for cell in storedCells! {
+            cell.state = 0
+            coreDataManager.save(cell, completion: nil)
+        }
+        coreDataManager.save(game, completion: nil)
+        
+        // TODO: - Fix this fuck
+    
+        let storedCells2 = coreDataManager.fetch(Cell.self, predicate: nil, sortDescriptors: [xSortDesciptor])
+            var result = [CellData]()
+        for cell in storedCells2! {
+            let cellData = CellData(from: cell)
+            result.append(cellData)
+        }
+        
         return result
     }
     
@@ -88,7 +115,8 @@ extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
         coreDataManager.save(game, completion: nil)
         
         // TODO: - Fix this fuck
-        let storedCells = coreDataManager.fetch(Cell.self, predicate: nil, sortDescriptors: nil)
+        let xSortDesciptor = NSSortDescriptor(key: "x", ascending: true)
+        let storedCells = coreDataManager.fetch(Cell.self, predicate: nil, sortDescriptors: [xSortDesciptor])
         
         for cell in storedCells! {
             let cellData = CellData(from: cell)
@@ -123,21 +151,10 @@ extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
     func store(fieldCells: [CellData]) {
         if let cells = coreDataManager.fetch(Cell.self, predicate: nil, sortDescriptors: nil), !cells.isEmpty {
             for fieldCell in fieldCells {
-                guard let cell = coreDataManager.findFirstOrCreate(Cell.self, predicate: NSPredicate(format: "id == %d", fieldCell.x)) else {
+                guard let cell = coreDataManager.findFirstOrCreate(Cell.self, predicate: NSPredicate(format: "x == %d", fieldCell.x)) else {
                     fatalError("Cell data is corrupted")
                 }
                 cell.state = fieldCell.state.rawValue
-                coreDataManager.save(cell, completion: nil)
-            }
-        }else{
-            for fieldCell in fieldCells {
-                guard let cell = coreDataManager.create(Cell.self) else {
-                    fatalError("Failed to create new instance fo cell")
-                }
-                //todo refactore this
-                //cell.id = Int16(fieldCell.x)
-                cell.state = fieldCell.state.rawValue
-                game?.addToCells(cell)
                 coreDataManager.save(cell, completion: nil)
             }
         }
