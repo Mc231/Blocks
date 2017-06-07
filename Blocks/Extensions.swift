@@ -8,10 +8,11 @@
 
 import Foundation
 
+
 extension Int16 {
     
-    static func randomNum(maxValue: Int) -> Int {
+    static func randomNum(maxValue: Int) -> Int16 {
         let uintMaxValue = UInt32(maxValue)
-        return Int(arc4random_uniform(uintMaxValue))
+        return Int16(arc4random_uniform(uintMaxValue))
     }
 }

@@ -34,7 +34,7 @@ class GameViewController: UIViewController {
     
     // MARK: - Properties
     
-    var presenter: GameViewOutput!
+    var presenter: GameViewOutput?
     var tetramonios = [Tetramonio]()
     var fieldData = [CellData]() {
         didSet{
@@ -57,7 +57,7 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.startGame()
+        presenter?.startGame()
     }
     
     override func viewWillLayoutSubviews() {
@@ -68,7 +68,7 @@ class GameViewController: UIViewController {
     // MARK: - IBActions
     
     @IBAction func restartGame(sender: UIButton) {
-        presenter.restartGame()
+        presenter?.restartGame()
     }
     
     // MARK: - Touches methods
@@ -99,7 +99,7 @@ class GameViewController: UIViewController {
                     debugPrint("Failed to cast to FieldCell \(#line)")
                     return
                 }
-                presenter.handleTouchedCell(with: cell.cellData)
+                presenter?.handleTouchedCell(with: cell.cellData)
             }
         }
     }

@@ -28,6 +28,8 @@ class TetramonioManager: TetramonioProtocol {
     private let tetramonioDataProvider: TetremonioDataProvider
     var currentTetramonios = [Tetramonio]()
     
+    // MARK: - Inizialization
+    
     init(tetramonioDataProvider: TetremonioDataProvider) {
         self.tetramonioDataProvider = tetramonioDataProvider
         self.tetramonios = tetramonioDataProvider.getTetramonios()
@@ -41,8 +43,8 @@ class TetramonioManager: TetramonioProtocol {
             let secondTetramonioIndex = Int16.randomNum(maxValue: numOfTetramonios)
             
             if firstTetramonioIndex != secondTetramonioIndex {
-                result.append(tetramonios[firstTetramonioIndex])
-                result.append(tetramonios[secondTetramonioIndex])
+                result.append(tetramonios[Int(firstTetramonioIndex)])
+                result.append(tetramonios[Int(secondTetramonioIndex)])
             }else{
                 return generateTetramonios()
             }
@@ -52,19 +54,18 @@ class TetramonioManager: TetramonioProtocol {
                 fatalError("Tetramonios could not be nil")
             }
             
-            // TODO: - fix garbage with int 16
-             var randomTetamonio = Int16(Int16.randomNum(maxValue: numOfTetramonios))
-            // WArning fux this
+             var randomTetamonio = Int16.randomNum(maxValue: numOfTetramonios)
+           
             if generationType == .firtTetramonio {
                 
                 while firstTetrmonio.id.rawValue == randomTetamonio || randomTetamonio == lastTetramonio.id.rawValue {
-                    randomTetamonio = Int16(Int16.randomNum(maxValue: numOfTetramonios))
+                    randomTetamonio = Int16.randomNum(maxValue: numOfTetramonios)
                 }
                   result.append(tetramonios[Int(randomTetamonio)])
                   result.append(lastTetramonio)
             }else{
                 while lastTetramonio.id.rawValue == randomTetamonio || randomTetamonio == firstTetrmonio.id.rawValue {
-                    randomTetamonio = Int16(Int16.randomNum(maxValue: numOfTetramonios))
+                    randomTetamonio = Int16.randomNum(maxValue: numOfTetramonios)
                 }
                     result.append(firstTetrmonio)
                     result.append(tetramonios[Int(randomTetamonio)])

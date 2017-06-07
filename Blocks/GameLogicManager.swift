@@ -124,7 +124,7 @@ class GameLogicManager: GameLogicManagerProtocol {
         let numberOfCellsInRow = 8
         var cellCounter = 1
         var currentRow = [CellData]()
-        debugPrint("all cells \(placedCells)")
+        
         for cell in 1..<placedCells.count {
             let firstCellData  = placedCells[cell-1]
             let secondCellData = placedCells[cell]
