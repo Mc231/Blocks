@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FF0472081E81D56D0054FE13 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0472071E81D56D0054FE13 /* Extensions.swift */; };
 		FF1B1CC21E55AC8B00D0E50D /* GamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1B1CC11E55AC8B00D0E50D /* GamePresenter.swift */; };
+		FF289FF21EE8AF4100AD397C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FF289FF41EE8AF4100AD397C /* Localizable.strings */; };
 		FF2BA0BC1EE3F80500263D95 /* Cell+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2BA0BA1EE3F80500263D95 /* Cell+CoreDataClass.swift */; };
 		FF2BA0BD1EE3F80500263D95 /* Cell+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2BA0BB1EE3F80500263D95 /* Cell+CoreDataProperties.swift */; };
 		FF33CF811E8509E0007969C6 /* PlistDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF33CF801E8509E0007969C6 /* PlistDataProvider.swift */; };
@@ -55,6 +56,8 @@
 /* Begin PBXFileReference section */
 		FF0472071E81D56D0054FE13 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FF1B1CC11E55AC8B00D0E50D /* GamePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePresenter.swift; sourceTree = "<group>"; };
+		FF289FF31EE8AF4100AD397C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FF289FF51EE8AF4500AD397C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FF2BA0BA1EE3F80500263D95 /* Cell+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cell+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FF2BA0BB1EE3F80500263D95 /* Cell+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cell+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FF33CF801E8509E0007969C6 /* PlistDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistDataProvider.swift; sourceTree = "<group>"; };
@@ -150,6 +153,7 @@
 		FF9748BB1EE8ADB300213F10 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
+				FF289FF41EE8AF4100AD397C /* Localizable.strings */,
 			);
 			name = Localization;
 			sourceTree = "<group>";
@@ -436,6 +440,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFFBBFC21E4521700052D68B /* Assets.xcassets in Resources */,
+				FF289FF21EE8AF4100AD397C /* Localizable.strings in Resources */,
 				FFFBBFC01E4521700052D68B /* Main.storyboard in Resources */,
 				FFA44A341E452EBF000B4829 /* Tetramonios.plist in Resources */,
 			);
@@ -499,6 +504,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		FF289FF41EE8AF4100AD397C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FF289FF31EE8AF4100AD397C /* Base */,
+				FF289FF51EE8AF4500AD397C /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		FFFBBFBE1E4521700052D68B /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

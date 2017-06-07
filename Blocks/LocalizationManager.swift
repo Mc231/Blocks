@@ -21,9 +21,9 @@ enum Localization {
             var localization: String {
                 switch self {
                 case .current(let currentScore):
-                    return String(format: NSLocalizedString("Score_d", comment: "current score"), currentScore)
+                    return String(format: NSLocalizedString("Score:_d", comment: "current score"), currentScore)
                 case .best(let bestScore):
-                    return String(format: NSLocalizedString("Best_d", comment: "best score"), bestScore)
+                    return String(format: NSLocalizedString("Best:_d", comment: "best score"), bestScore)
                 }
             }
         }
