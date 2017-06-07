@@ -14,25 +14,25 @@ import CoreData
 class CoredDataManagerTest: XCTestCase {
     
     func testCoreDataManager() {
-        let manager = CoreDataManager(modelName: "Blocks")
-        debugPrint(manager.managedObjectContext)
-        
-        if let game = manager.create(Game.self) {
-            game.firstFigure = 12
-            game.maxScore = 231
-            game.score = 100
-            game.secondFigure = 121
-            let expectation = XCTestExpectation()
-            expectation.
-            manager.save(game, completion: { (object, success, error) in
-                XCTAssertNil(error)
-                XCTAssertTrue(success)
-                XCTAssertNil(object)
-                expectation.fulfill()
-                debugPrint(object)
-                debugPrint(success)
-                debugPrint(error)
-            })
+//        let manager = CoreDataManager(modelName: "Blocks")
+//        debugPrint(manager.managedObjectContext)
+//        
+//        if let game = manager.create(Game.self) {
+//            game.firstFigure = 12
+//            game.maxScore = 231
+//            game.score = 100
+//            game.secondFigure = 121
+//            let expectation = XCTestExpectation()
+//            expectation.
+//            manager.save(game, completion: { (object, success, error) in
+//                XCTAssertNil(error)
+//                XCTAssertTrue(success)
+//                XCTAssertNil(object)
+//                expectation.fulfill()
+//                debugPrint(object)
+//                debugPrint(success)
+//                debugPrint(error)
+//            })
         }
     }
 }

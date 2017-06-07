@@ -30,7 +30,6 @@
 		FFA44A341E452EBF000B4829 /* Tetramonios.plist in Resources */ = {isa = PBXBuildFile; fileRef = FFA44A331E452EBF000B4829 /* Tetramonios.plist */; };
 		FFA44A371E45344F000B4829 /* TetramonioType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA44A361E45344F000B4829 /* TetramonioType.swift */; };
 		FFB82A8A1E7D2F2A0043BD53 /* Blocks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFB82A881E7D2F2A0043BD53 /* Blocks.xcdatamodeld */; };
-		FFCB88AA1E563E8600BF4B90 /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCB88A91E563E8600BF4B90 /* ScoreManager.swift */; };
 		FFE6D62D1E59A47A0060C1C8 /* FieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6D62C1E59A47A0060C1C8 /* FieldCell.swift */; };
 		FFFBBFBB1E4521700052D68B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFBA1E4521700052D68B /* AppDelegate.swift */; };
 		FFFBBFC01E4521700052D68B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFFBBFBE1E4521700052D68B /* Main.storyboard */; };
@@ -78,7 +77,6 @@
 		FFA44A331E452EBF000B4829 /* Tetramonios.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Tetramonios.plist; path = ../../etris/Etris/Tetramonios.plist; sourceTree = "<group>"; };
 		FFA44A361E45344F000B4829 /* TetramonioType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetramonioType.swift; sourceTree = "<group>"; };
 		FFB82A891E7D2F2A0043BD53 /* Blocks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Blocks.xcdatamodel; sourceTree = "<group>"; };
-		FFCB88A91E563E8600BF4B90 /* ScoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreManager.swift; sourceTree = "<group>"; };
 		FFE6D62C1E59A47A0060C1C8 /* FieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldCell.swift; sourceTree = "<group>"; };
 		FFFBBFB71E4521700052D68B /* Blocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFFBBFBA1E4521700052D68B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -188,14 +186,6 @@
 			name = SupportingFiles;
 			sourceTree = "<group>";
 		};
-		FFCB88A61E563E1C00BF4B90 /* ScoreManager */ = {
-			isa = PBXGroup;
-			children = (
-				FFCB88A91E563E8600BF4B90 /* ScoreManager.swift */,
-			);
-			name = ScoreManager;
-			sourceTree = "<group>";
-		};
 		FFFBBFAE1E4521700052D68B = {
 			isa = PBXGroup;
 			children = (
@@ -301,7 +291,6 @@
 			isa = PBXGroup;
 			children = (
 				FF858C5B1EBA6C1C003EFEA3 /* CoreDataManager */,
-				FFCB88A61E563E1C00BF4B90 /* ScoreManager */,
 				FFA44A2D1E452C4F000B4829 /* TetramoniosDataProvider */,
 				FFFBBFEE1E4526AF0052D68B /* GameLogicManager */,
 				FFFBBFED1E4526A20052D68B /* TetramonioManager */,
@@ -470,7 +459,6 @@
 				FF9B68671E4D17E7006376CA /* GameInteractor.swift in Sources */,
 				FF2BA0BD1EE3F80500263D95 /* Cell+CoreDataProperties.swift in Sources */,
 				FFFBBFF71E45283A0052D68B /* CellState.swift in Sources */,
-				FFCB88AA1E563E8600BF4B90 /* ScoreManager.swift in Sources */,
 				FF0472081E81D56D0054FE13 /* Extensions.swift in Sources */,
 				FF33CF811E8509E0007969C6 /* PlistDataProvider.swift in Sources */,
 				FFB82A8A1E7D2F2A0043BD53 /* Blocks.xcdatamodeld in Sources */,

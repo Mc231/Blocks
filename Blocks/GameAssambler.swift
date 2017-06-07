@@ -10,11 +10,8 @@ import Foundation
 
 class GameAssambler {
     
-    private init () {}
     
-    static let sharedInstance = GameAssambler()
-    
-    func configureGameInfoModule(view: GameViewController) {
+    class func configureGameModule(in view: GameViewController) {
         let presenter = GamePresenter()
         presenter.view = view
         let interractor = GameInteractor()
@@ -22,12 +19,10 @@ class GameAssambler {
         let tetramonioDataProvider = TetremonioDataProvider()
         let tetramonioManager = TetramonioManager(tetramonioDataProvider: tetramonioDataProvider)
         let gameLogic = GameLogicManager()
-        let scoreManager = ScoreManager()
-        let coreDataManager = CoreDataManager(modelName: "Blocks")
         view.presenter = presenter
         presenter.interractor = interractor
         interractor.gameLogic = gameLogic
-        interractor.scoreManager = scoreManager
+        let coreDataManager = CoreDataManager(modelName: "Blocks")
         gameLogic.interractor = interractor
         gameLogic.tetramoniosManager = tetramonioManager
         gameLogic.tetramonioCoreDataManager = TetreamonioCoreDataManager(coreDataManager: coreDataManager)

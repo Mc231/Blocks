@@ -11,13 +11,12 @@ import Foundation
 protocol TetreamonioCoreDataManagerInput: class {
     func store(current tetramonios: [Tetramonio])
     func store(fieldCells: [CellData])
-    func store(bestScore: Int)
-    func store(currentScore: Int)
+    func increaseAndStoreScore(for quantity: Int, completion: @escaping (Int32, Int32) -> ())
     
     func getCurrentScore() -> Int32
-    func getMaxScore() -> Int32
+    func getBestScore() -> Int32
     func getFieldCells() -> [CellData]
-    func resetCells() -> [CellData]
+    func restartGame(completion: (Int32, Int32, [CellData]) -> ())
     func getCurrentTetramonios() -> [Int16]?
 }
 
@@ -71,25 +70,31 @@ extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
         return result
     }
     
-    func resetCells() -> [CellData] {
+    func restartGame(completion: (Int32, Int32, [CellData]) -> ()) {
+         game?.score = 0
         let xSortDesciptor = NSSortDescriptor(key: "x", ascending: true)
         let storedCells = coreDataManager.fetch(Cell.self, predicate: nil, sortDescriptors: [xSortDesciptor])
         for cell in storedCells! {
             cell.state = 0
             coreDataManager.save(cell, completion: nil)
         }
+    
         coreDataManager.save(game, completion: nil)
         
         // TODO: - Fix this fuck
-    
+        
         let storedCells2 = coreDataManager.fetch(Cell.self, predicate: nil, sortDescriptors: [xSortDesciptor])
-            var result = [CellData]()
+        var field = [CellData]()
         for cell in storedCells2! {
             let cellData = CellData(from: cell)
-            result.append(cellData)
+            field.append(cellData)
         }
         
-        return result
+        guard let game = game else {
+            fatalError("Game instance can not be nil")
+        }
+        
+        completion(game.score, game.bestScore, field)
     }
     
     private func createField() -> [CellData] {
@@ -126,7 +131,7 @@ extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
         return result
     }
 
-    func getMaxScore() -> Int32 {
+    func getBestScore() -> Int32 {
         guard let bestScore = game?.bestScore else{
             return 0
         }
@@ -162,14 +167,22 @@ extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
         coreDataManager.save(game, completion: nil)
     }
     
-    func store(bestScore: Int) {
-        // TODO: - Investigate this
-        game?.bestScore = Int32(bestScore)
-        coreDataManager.save(game, completion: nil)
-    }
-    
-    func store(currentScore: Int) {
-        game?.score = Int32(currentScore)
-        coreDataManager.save(game, completion: nil)
+    func increaseAndStoreScore(for quantity: Int, completion: @escaping (Int32, Int32) -> ()) {
+        let newScore = getCurrentScore() + quantity
+        var bestScore = getBestScore()
+        
+        if bestScore < newScore {
+            bestScore = newScore
+            game?.bestScore = bestScore
+        }
+        game?.score = newScore
+        
+        coreDataManager.save(game) { (result, error) in
+            if error == nil && result == true {
+                completion(newScore, bestScore)
+            }else{
+                debugPrint("Failed to update score")
+            }
+        }
     }
 }

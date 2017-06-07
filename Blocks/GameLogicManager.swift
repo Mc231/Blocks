@@ -12,7 +12,7 @@ protocol GameLogicManagerInput {
     func generateTetramoniosFor(_ type: GenerationType) -> [Tetramonio]
     func updateField(with tetramonioData: CellData, callback: (_ updatedData: [CellData]) -> Void)
     func startGame(completion: (_ tetramonios: [Tetramonio], _ field: [CellData], _ currentScore: Int32, _ bestScore: Int32) -> Void)
-    func restartGame(callback: (_ field: [CellData]) -> ())
+    func restartGame(callback: @escaping (Int32, Int32, [CellData]) -> ())
 }
 
 protocol GameLogicManagerProtocol: class {
@@ -23,7 +23,7 @@ protocol GameLogicManagerProtocol: class {
 
 protocol GameLogicManagerOutput: class {
     func gameOver()
-    func gameLogicManager(_ manager: GameLogicManagerInput, didChange score: Int)
+    func gameLogicManager(_ manager: GameLogicManagerInput, didChange score: Int32, and bestScore: Int32)
     func gameLogicManager(_ manager: GameLogicManagerInput, didUpdate field: [CellData])
     func gameLogicManager(_ manager: GameLogicManagerInput, didUpdate tetramonios: [Tetramonio])
 }
@@ -83,8 +83,12 @@ class GameLogicManager: GameLogicManagerProtocol {
             }
             
             generateTetramoniosFor(generationType)
-            // TODO: - Add saving of the score
-            interractor?.gameLogicManager(self, didChange: scorePerTetramonio)
+            tetramonioCoreDataManager?.increaseAndStoreScore(for: scorePerTetramonio, completion: { [weak self] (currentScore, bestScore) in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.interractor?.gameLogicManager(strongSelf, didChange: currentScore, and: bestScore)
+            })
         }else{
             for cellData in currentTetramonio {
                 
@@ -112,7 +116,7 @@ class GameLogicManager: GameLogicManagerProtocol {
         let allPlacedCells = field.filter( {$0.state == .placed})
         let placedCells = verticalLines ? allPlacedCells.sorted(by: {$0.y < $1.y}) : allPlacedCells
         
-        if placedCells.count == 0 {
+        if placedCells.isEmpty {
             return
         }
         
@@ -246,7 +250,7 @@ extension GameLogicManager: GameLogicManagerInput {
         
         guard let cellData = tetramonioCoreDataManager?.getFieldCells(),
             let currentScore = tetramonioCoreDataManager?.getCurrentScore(),
-            let maxScore = tetramonioCoreDataManager?.getMaxScore() else {
+            let bestScore = tetramonioCoreDataManager?.getBestScore() else {
                 fatalError("Score or field cell can not be nil can not be nil")
         }
         
@@ -256,15 +260,18 @@ extension GameLogicManager: GameLogicManagerInput {
             currentTetramonio = storedTetramonio
         }
         
-     
         field = cellData
-        completion(tetramonios, cellData, currentScore, maxScore)
+        completion(tetramonios, cellData, currentScore, bestScore)
     }
     
-    func restartGame(callback: ([CellData]) -> ()) {
+    func restartGame(callback: @escaping (Int32, Int32, [CellData]) -> ()) {
         generateTetramoniosFor(.gameStart)
-        // TODO: - add nulling of score
-        field = (tetramonioCoreDataManager?.resetCells())!
-        callback(field)
+        tetramonioCoreDataManager?.restartGame(completion: { [weak self] (score, bestScore, field) in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.field = field
+            callback(score, bestScore, field)
+        })
     }
 }

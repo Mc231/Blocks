@@ -19,8 +19,7 @@ protocol GameViewOutput {
 protocol GameViewInput: class {
     func display(tetramonios: [Tetramonio])
     func display(field withData: [CellData])
-    func display(max score: String)
-    func display(current score: String)
+    func displayScore(current: Int32, best: Int32)
 }
 
 class GameViewController: UIViewController {
@@ -51,7 +50,7 @@ class GameViewController: UIViewController {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        GameAssambler.sharedInstance.configureGameInfoModule(view: self)
+        GameAssambler.configureGameModule(in: self)
     }
     
     // MARK - UIViewController
@@ -119,7 +118,7 @@ extension GameViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - GameViewInput
 
 extension GameViewController: GameViewInput {
-    
+
     func display(field withData: [CellData]) {
         fieldData = withData
         field.reloadData()
@@ -135,12 +134,10 @@ extension GameViewController: GameViewInput {
         secondTetramonioImageView.image = UIImage(named: String(describing: secondImage!))
     }
     
-    func display(current score: String) {
-        currentScoreLabel.text = score
-    }
-    
-    func display(max score: String) {
-        maxScoreLabel.text = score
+    func displayScore(current: Int32, best: Int32) {
+        // TODO: - Localize this and rename label
+        currentScoreLabel.text = "Score: \(current)"
+        maxScoreLabel.text = "Best: \(best)"
     }
 }
 
