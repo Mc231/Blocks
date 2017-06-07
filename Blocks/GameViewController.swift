@@ -125,13 +125,14 @@ extension GameViewController: GameViewInput {
     }
 
     func display(tetramonios: [Tetramonio]) {
-        // WARNING: - Refactore this
     
-        let firstImage = tetramonios.first?.id.rawValue
-        let secondImage = tetramonios.last?.id.rawValue
+        guard let firstImageId = tetramonios.first?.id.rawValue,
+            let secondImageId = tetramonios.last?.id.rawValue else {
+                fatalError("Imposible image id")
+        }
   
-        firstTetramonioImageView.image = UIImage(named: String(describing: firstImage!))
-        secondTetramonioImageView.image = UIImage(named: String(describing: secondImage!))
+        firstTetramonioImageView.image = UIImage(named: String(describing: firstImageId))
+        secondTetramonioImageView.image = UIImage(named: String(describing: secondImageId))
     }
     
     func displayScore(current: Int32, best: Int32) {
