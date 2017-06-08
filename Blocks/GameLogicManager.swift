@@ -46,7 +46,11 @@ class GameLogicManager: GameLogicManagerProtocol {
         }
     }
     
-    fileprivate var currentTetramonio = [CellData]()
+    fileprivate var currentTetramonio = [CellData](){
+        didSet{
+            debugPrint("Count",currentTetramonio.count)
+        }
+    }
     fileprivate var tetramonios = [Tetramonio](){
         didSet{
             tetramonioCoreDataManager?.store(current: tetramonios)
@@ -58,10 +62,14 @@ class GameLogicManager: GameLogicManagerProtocol {
     
     
     func appendCellToCurrentTetramonio(cellData: CellData) {
-        
-        if cellData.state == .empty {
-            currentTetramonio.append(cellData)
+        guard let index = field.index(where: {$0.x == cellData.x}) else {
+            fatalError("Index can not be nil")
         }
+        if field[index].state == .placed && cellData.state == .empty {
+            currentTetramonio.removeFirst()
+        }
+        
+        currentTetramonio.append(cellData)
         
         if currentTetramonio.count == numberOfCellsInTetramonio {
             
