@@ -45,6 +45,7 @@ class GameLogicManager: GameLogicManagerProtocol {
             tetramonioCoreDataManager?.store(fieldCells: field)
         }
     }
+    
     fileprivate var currentTetramonio = [CellData]()
     fileprivate var tetramonios = [Tetramonio](){
         didSet{
@@ -57,7 +58,10 @@ class GameLogicManager: GameLogicManagerProtocol {
     
     
     func appendCellToCurrentTetramonio(cellData: CellData) {
-        currentTetramonio.append(cellData)
+        
+        if cellData.state == .empty {
+            currentTetramonio.append(cellData)
+        }
         
         if currentTetramonio.count == numberOfCellsInTetramonio {
             

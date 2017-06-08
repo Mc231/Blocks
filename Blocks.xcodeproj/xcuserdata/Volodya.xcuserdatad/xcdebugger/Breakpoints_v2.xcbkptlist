@@ -168,11 +168,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "518650907.265286"
+            timestampString = "518653624.64078"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
             landmarkName = "checkGameOver()"
             landmarkType = "7">
          </BreakpointContent>
@@ -184,11 +184,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "518479406.645929"
+            timestampString = "518653624.64078"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "GameLogicManager"
             landmarkType = "3">
          </BreakpointContent>
@@ -200,11 +200,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "518479406.645929"
+            timestampString = "518653624.64078"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "appendCellToCurrentTetramonio(cellData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -216,11 +216,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "518650907.265286"
+            timestampString = "518653624.64078"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
             landmarkName = "checkForLines(verticalLines:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -246,11 +246,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "518650907.265286"
+            timestampString = "518653624.64078"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
             landmarkName = "checkGameOver()"
             landmarkType = "7">
          </BreakpointContent>
@@ -262,11 +262,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "518650907.265286"
+            timestampString = "518653624.64078"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "checkGameOver()"
             landmarkType = "7">
          </BreakpointContent>
@@ -278,11 +278,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "518650907.265286"
+            timestampString = "518653624.64078"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
             landmarkName = "appendCellToCurrentTetramonio(cellData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -294,11 +294,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "518650907.265286"
+            timestampString = "518653624.64078"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "checkForLines(verticalLines:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -310,11 +310,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "518650907.265286"
+            timestampString = "518653624.64078"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
             landmarkName = "checkForLines(verticalLines:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -534,11 +534,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "518650907.265286"
+            timestampString = "518653624.64078"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "startGame(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -582,23 +582,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "518650907.265286"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "253"
-            endingLineNumber = "253"
-            landmarkName = "startGame(completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "518650907.265286"
+            timestampString = "518653624.64078"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "257"
@@ -614,11 +598,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "518650907.265286"
+            timestampString = "518653624.64078"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "268"
-            endingLineNumber = "268"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
+            landmarkName = "startGame(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Blocks/GameLogicManager.swift"
+            timestampString = "518653624.64078"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
             landmarkName = "startGame(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -646,11 +646,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "518650907.265286"
+            timestampString = "518653624.64078"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "244"
-            endingLineNumber = "244"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
             landmarkName = "startGame(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -662,11 +662,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "518650907.265286"
+            timestampString = "518653624.64078"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "253"
-            endingLineNumber = "253"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
             landmarkName = "startGame(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -828,6 +828,38 @@
             startingLineNumber = "69"
             endingLineNumber = "69"
             landmarkName = "store(fieldCells:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Blocks/CheckTetramonioManager.swift"
+            timestampString = "518652683.819121"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "checkTetramonio(with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Blocks/CheckTetramonioManager.swift"
+            timestampString = "518652686.210156"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "checkTetramonio(with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
