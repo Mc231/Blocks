@@ -62,11 +62,18 @@ class GameLogicManager: GameLogicManagerProtocol {
     
     
     func appendCellToCurrentTetramonio(cellData: CellData) {
-        guard let index = field.index(where: {$0.x == cellData.x}) else {
-            fatalError("Index can not be nil")
-        }
-        if field[index].state == .placed && cellData.state == .empty {
-            currentTetramonio.removeFirst()
+      
+        // Removing selected cell from currnet tetramonio if it is there
+        for fieldCell in field {
+            for cellInTeramonio in currentTetramonio {
+                if fieldCell.x == cellInTeramonio.x {
+                    if fieldCell.state == .placed && cellInTeramonio.state == .empty {
+                        if  let index = currentTetramonio.index(where: {$0.x == fieldCell.x}) {
+                            currentTetramonio.remove(at: index)
+                        }
+                    }
+                }
+            }
         }
         
         currentTetramonio.append(cellData)
