@@ -9,12 +9,9 @@
  import Foundation
  import CoreData
  
- 
- typealias CoreDataCompletionHandler = ((_ success: Bool?, _ error: Error?) -> ())?
- 
  protocol CoreDataManagerProtocol {
     func create<T: NSManagedObject>(_ object: T.Type) -> T? where T: EntityDescription
-    func save<T: NSManagedObject>(_ object: T?, completion: CoreDataCompletionHandler)
+    func save<T: NSManagedObject>(_ object: T?)
     func findFirstOrCreate<T: NSManagedObject>(_ object: T.Type, predicate: NSPredicate?) -> T?
     func fetch<T: NSManagedObject>(_ object: T.Type, predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?) -> [T]? where T: EntityDescription
     func delete<T: NSManagedObject>(_ object: T)
@@ -95,13 +92,11 @@
         return object
     }
     
-    func save<T : NSManagedObject>(_ object: T?, completion: CoreDataCompletionHandler) {
+    func save<T : NSManagedObject>(_ object: T?) {
         managedObjectContext.perform {
             do {
                 try object?.managedObjectContext?.save()
-                completion?(true, nil)
             } catch let error {
-                completion?(false, error)
                 debugPrint("\(self) \(error)")
             }
         }

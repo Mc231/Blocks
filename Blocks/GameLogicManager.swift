@@ -175,8 +175,8 @@ class GameLogicManager: GameLogicManagerProtocol {
                     }
                 }
             }
-            interractor?.gameLogicManager(self, didUpdate: field)
         }
+        interractor?.gameLogicManager(self, didUpdate: field)
     }
     
     func checkGameOver() -> Bool {

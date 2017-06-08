@@ -57,21 +57,20 @@ extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
         
         game?.firstTetramonio = firstTetramonio
         game?.secondTetramonio = lastTetramono
-        coreDataManager.save(game, completion: nil)
+        coreDataManager.save(game)
     }
     
     func store(fieldCells: [CellData]) {
-        if let cells = coreDataManager.fetch(Cell.self, predicate: nil, sortDescriptors: nil), !cells.isEmpty {
-            for fieldCell in fieldCells {
-                guard let cell = coreDataManager.findFirstOrCreate(Cell.self, predicate: NSPredicate(format: "x == %d", fieldCell.x)) else {
-                    fatalError("Cell data is corrupted")
-                }
-                cell.state = fieldCell.state.rawValue
-                coreDataManager.save(cell, completion: nil)
+        for (index, storedCell) in storedCells.enumerated() {
+            let fieldCell = fieldCells[index]
+            if storedCell.state != fieldCell.state.rawValue {
+               storedCell.state = fieldCell.state.rawValue
+               self.coreDataManager.save(storedCell)
             }
         }
+        
         // Ensure theat everything saved
-        coreDataManager.save(game, completion: nil)
+        coreDataManager.save(game)
     }
     
     func increaseAndStoreScore(for quantity: Int, completion: @escaping (Int32, Int32) -> ()) {
@@ -84,13 +83,8 @@ extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
         }
         game?.score = newScore
         
-        coreDataManager.save(game) { (result, error) in
-            if error == nil && result == true {
-                completion(newScore, bestScore)
-            }else{
-                debugPrint("Failed to update score")
-            }
-        }
+        coreDataManager.save(game)
+        completion(newScore, bestScore)
     }
     
     func getCurrentScore() -> Int32 {
@@ -127,11 +121,11 @@ extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
         
         for cell in storedCells {
             cell.state = 0
-            coreDataManager.save(cell, completion: nil)
+            coreDataManager.save(cell)
         }
         
         game?.score = 0
-        coreDataManager.save(game, completion: nil)
+        coreDataManager.save(game)
         var field = [CellData]()
         
         for cell in storedCells {
@@ -172,9 +166,9 @@ extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
             cell.y = y
             cell.state = 0
             game?.addToCells(cell)
-            coreDataManager.save(cell, completion: nil)
+            coreDataManager.save(cell)
         }
-        coreDataManager.save(game, completion: nil)
+        coreDataManager.save(game)
         
         for cell in storedCells {
             let cellData = CellData(from: cell)

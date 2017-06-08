@@ -404,6 +404,7 @@
 					};
 					FFFBBFB61E4521700052D68B = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = M3FHKUJ7Z3;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -647,6 +648,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = M3FHKUJ7Z3;
 				INFOPLIST_FILE = Blocks/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.quasarius.Blocks;
@@ -659,6 +661,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = M3FHKUJ7Z3;
 				INFOPLIST_FILE = Blocks/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.quasarius.Blocks;
