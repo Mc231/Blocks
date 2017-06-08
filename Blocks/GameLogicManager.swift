@@ -22,7 +22,7 @@ protocol GameLogicManagerProtocol: class {
 }
 
 protocol GameLogicManagerOutput: class {
-    func gameOver()
+    func gameOver(currentScore: Int32)
     func gameLogicManager(_ manager: GameLogicManagerInput, didChange score: Int32, and bestScore: Int32)
     func gameLogicManager(_ manager: GameLogicManagerInput, didUpdate field: [CellData])
     func gameLogicManager(_ manager: GameLogicManagerInput, didUpdate tetramonios: [Tetramonio])
@@ -107,7 +107,10 @@ class GameLogicManager: GameLogicManagerProtocol {
         checkForLines(verticalLines: true)
         
         if checkGameOver() {
-            interractor?.gameOver()
+            guard let score = tetramonioCoreDataManager?.getCurrentScore() else {
+                fatalError("Manager can not be nil")
+            }
+            interractor?.gameOver(currentScore: score)
         }
     }
     

@@ -18,6 +18,7 @@ protocol GameInteractorOutput: class {
     func provideTetramonios(_ tetramonios: [Tetramonio])
     func provideField(_ field: [CellData])
     func provideScore(current: Int32, best: Int32)
+    func gameOver(currentScore: Int32)
 }
 
 class GameInteractor {
@@ -65,8 +66,9 @@ extension GameInteractor: GameInteractorInput {
 
 extension GameInteractor: GameLogicManagerOutput {
     
-    func gameOver() {
-        debugPrint("Game is Over Vovan")
+    func gameOver(currentScore: Int32) {
+        debugPrint("Game Over")
+        presenter?.gameOver(currentScore: currentScore)
     }
     
     func gameLogicManager(_ manager: GameLogicManagerInput, didChange score: Int32, and bestScore: Int32) {

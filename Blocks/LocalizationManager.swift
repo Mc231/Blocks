@@ -27,5 +27,24 @@ enum Localization {
                 }
             }
         }
+        enum GameOverAlert: LocalizationProtocol {
+            case title
+            case message(Int32)
+            case restartTitle
+            case cancelTitle
+            
+            var localization: String {
+                switch self {
+                case .title:
+                    return NSLocalizedString("Game_Over", comment: "Game Over alert title")
+                case .message(let currentScore):
+                    return String(format: NSLocalizedString("Your_Score_is_d", comment: "Your score title"), currentScore)
+                case .restartTitle:
+                    return NSLocalizedString("Restart", comment: "Restart title")
+                case .cancelTitle:
+                    return NSLocalizedString("Cancel", comment: "Cancel title")
+                }
+            }
+        }
     }
 }

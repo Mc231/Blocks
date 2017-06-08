@@ -29,6 +29,10 @@ class GamePresenter: GamePresenterInput {
         interractor?.handleTouchedCellWithData(data)
     }
     
+    func gameOver(currentScore: Int32) {
+        view?.showGameOverAlert(currentScore: currentScore)
+    }
+    
     func provideTetramonios(_ tetramonios: [Tetramonio]) {
         view?.display(tetramonios: tetramonios)
     }

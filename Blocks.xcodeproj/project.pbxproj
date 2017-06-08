@@ -12,6 +12,7 @@
 		FF289FF21EE8AF4100AD397C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FF289FF41EE8AF4100AD397C /* Localizable.strings */; };
 		FF2BA0BC1EE3F80500263D95 /* Cell+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2BA0BA1EE3F80500263D95 /* Cell+CoreDataClass.swift */; };
 		FF2BA0BD1EE3F80500263D95 /* Cell+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2BA0BB1EE3F80500263D95 /* Cell+CoreDataProperties.swift */; };
+		FF32D45F1EE9F6E200A15F9E /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF32D45E1EE9F6E200A15F9E /* AlertManager.swift */; };
 		FF33CF811E8509E0007969C6 /* PlistDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF33CF801E8509E0007969C6 /* PlistDataProvider.swift */; };
 		FF340C061E56432500EE82E1 /* GameAssambler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF340C051E56432500EE82E1 /* GameAssambler.swift */; };
 		FF73EBEA1EE55A27003F069B /* TetramonioCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF73EBE91EE55A27003F069B /* TetramonioCoreDataManager.swift */; };
@@ -60,6 +61,7 @@
 		FF289FF51EE8AF4500AD397C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FF2BA0BA1EE3F80500263D95 /* Cell+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cell+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FF2BA0BB1EE3F80500263D95 /* Cell+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cell+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FF32D45E1EE9F6E200A15F9E /* AlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		FF33CF801E8509E0007969C6 /* PlistDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistDataProvider.swift; sourceTree = "<group>"; };
 		FF340C051E56432500EE82E1 /* GameAssambler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameAssambler.swift; sourceTree = "<group>"; };
 		FF73EBE91EE55A27003F069B /* TetramonioCoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetramonioCoreDataManager.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				FFA44A2D1E452C4F000B4829 /* TetramoniosDataProvider */,
 				FFFBBFEE1E4526AF0052D68B /* GameLogicManager */,
 				FFFBBFED1E4526A20052D68B /* TetramonioManager */,
+				FF32D45E1EE9F6E200A15F9E /* AlertManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 				FF9B68671E4D17E7006376CA /* GameInteractor.swift in Sources */,
 				FF2BA0BD1EE3F80500263D95 /* Cell+CoreDataProperties.swift in Sources */,
 				FF9748BA1EE8AA1E00213F10 /* LocalizationManager.swift in Sources */,
+				FF32D45F1EE9F6E200A15F9E /* AlertManager.swift in Sources */,
 				FFFBBFF71E45283A0052D68B /* CellState.swift in Sources */,
 				FF0472081E81D56D0054FE13 /* Extensions.swift in Sources */,
 				FF33CF811E8509E0007969C6 /* PlistDataProvider.swift in Sources */,

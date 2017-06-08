@@ -20,6 +20,7 @@ protocol GameViewInput: class {
     func display(tetramonios: [Tetramonio])
     func display(field withData: [CellData])
     func displayScore(current: Int32, best: Int32)
+    func showGameOverAlert(currentScore: Int32)
 }
 
 class GameViewController: UIViewController {
@@ -118,6 +119,19 @@ extension GameViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - GameViewInput
 
 extension GameViewController: GameViewInput {
+
+    func showGameOverAlert(currentScore: Int32) {
+        let title = Localization.Game.GameOverAlert.title.localization
+        let message = Localization.Game.GameOverAlert.message(currentScore).localization
+        let restartActionTitle = Localization.Game.GameOverAlert.restartTitle.localization
+        let cancelActionTitle = Localization.Game.GameOverAlert.cancelTitle.localization
+        AlertManager.show(in: self, title: title, message: message, okActionTitle: restartActionTitle, cancelActionTitle: cancelActionTitle) { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.presenter?.restartGame()
+        }
+    }
 
     func display(field withData: [CellData]) {
         fieldData = withData

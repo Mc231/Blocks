@@ -1,10 +1,11 @@
-/* 
-  Localizable.strings
-  Blocks
+/*
+ Localizable.strings
+ Blocks
+ 
+ Created by Volodya on 6/8/17.
+ Copyright © 2017 QuasarClaster. All rights reserved.
+ */
 
-  Created by Volodya on 6/8/17.
-  Copyright © 2017 QuasarClaster. All rights reserved.
-*/
 
 /*
  Score
@@ -12,3 +13,12 @@
 
 "Score:_d" = "Score: %1$d";
 "Best:_d" = "Best: %1$d";
+
+/*
+ GameOver Alert
+ */
+
+"Game_Over" = "Game Over";
+"Your_Score_is_d" = "Your socre is %1$d";
+"Restart" = "Restart";
+"Cancel" = "Cancel";
