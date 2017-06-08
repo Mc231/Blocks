@@ -24,9 +24,9 @@ class AlertManager {
             okActionCompletion()
         }
         let cancelAction = UIAlertAction(title: cancelActionTitle, style: .cancel, handler: nil)
-        
+        // TODO: - Investigate what is better alert type
         alert.addAction(okAction)
-        alert.addAction(cancelAction)
+       // alert.addAction(cancelAction)
         viewController.present(alert, animated: true, completion: nil)
     }
 }

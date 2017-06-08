@@ -32,9 +32,9 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bx1-Pf-bD0">
-                                        <rect key="frame" x="96" y="67" width="50" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bx1-Pf-bD0">
+                                        <rect key="frame" x="96" y="51.5" width="80" height="80"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="Restart"/>
                                         <connections>
                                             <action selector="restartGameWithSender:" destination="9Qo-fH-zdy" eventType="touchUpInside" id="LDi-yw-dhv"/>
@@ -46,7 +46,9 @@
                                     <constraint firstItem="TNQ-8y-G3I" firstAttribute="height" secondItem="KNR-g8-wFY" secondAttribute="height" multiplier="0.2631" id="G8M-dP-H1j"/>
                                     <constraint firstAttribute="trailing" secondItem="TNQ-8y-G3I" secondAttribute="trailing" constant="8" id="JMv-1I-t90"/>
                                     <constraint firstItem="TNQ-8y-G3I" firstAttribute="top" secondItem="KNR-g8-wFY" secondAttribute="top" constant="8" id="P7o-5C-674"/>
+                                    <constraint firstAttribute="bottom" secondItem="bx1-Pf-bD0" secondAttribute="bottom" constant="2" id="UgJ-1H-Sc1"/>
                                     <constraint firstItem="TNQ-8y-G3I" firstAttribute="leading" secondItem="KNR-g8-wFY" secondAttribute="leading" constant="8" id="jq2-wP-LG4"/>
+                                    <constraint firstAttribute="trailing" secondItem="bx1-Pf-bD0" secondAttribute="trailing" constant="11.5" id="kpf-F0-7FL"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BhK-Oh-ztG">
@@ -118,6 +120,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="bx1-Pf-bD0" firstAttribute="width" secondItem="yfe-6f-HyG" secondAttribute="width" id="3Kz-ap-AQI"/>
                             <constraint firstItem="KNR-g8-wFY" firstAttribute="top" secondItem="tOF-Mc-IjA" secondAttribute="bottom" id="4AC-nB-ryi"/>
                             <constraint firstAttribute="trailing" secondItem="Ol0-AI-6XO" secondAttribute="trailing" id="5u5-fM-PRM"/>
                             <constraint firstItem="KNR-g8-wFY" firstAttribute="width" secondItem="BhK-Oh-ztG" secondAttribute="width" id="BAW-ct-Ku0"/>
@@ -127,6 +130,7 @@
                             <constraint firstItem="Jvy-SO-vpQ" firstAttribute="top" secondItem="Ol0-AI-6XO" secondAttribute="bottom" id="O8b-vu-xag"/>
                             <constraint firstItem="Ol0-AI-6XO" firstAttribute="top" secondItem="KNR-g8-wFY" secondAttribute="bottom" constant="8" id="Ohw-H4-KlB"/>
                             <constraint firstItem="Ol0-AI-6XO" firstAttribute="leading" secondItem="wIt-uZ-FIp" secondAttribute="leading" id="c9a-Ly-gSW"/>
+                            <constraint firstItem="bx1-Pf-bD0" firstAttribute="height" secondItem="yfe-6f-HyG" secondAttribute="height" id="fMU-Da-7tm"/>
                             <constraint firstAttribute="trailing" secondItem="BhK-Oh-ztG" secondAttribute="trailing" id="lWU-iN-mHY"/>
                             <constraint firstItem="Ol0-AI-6XO" firstAttribute="top" secondItem="BhK-Oh-ztG" secondAttribute="bottom" constant="8" id="r0e-iI-eE1"/>
                             <constraint firstItem="KNR-g8-wFY" firstAttribute="leading" secondItem="wIt-uZ-FIp" secondAttribute="leading" id="spA-Ho-SLg"/>
@@ -147,7 +151,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8FF-XW-8Hk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="902" y="191"/>
+            <point key="canvasLocation" x="901.60000000000002" y="190.25487256371815"/>
         </scene>
     </scenes>
 </document>
