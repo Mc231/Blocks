@@ -116,6 +116,25 @@ extension GameViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - UICollectionViewDataSource
+
+extension GameViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return Constatns.Field.numberOfCellsOnField;
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FieldCell.cellIdentifier, for: indexPath) as? FieldCell else{
+            fatalError("Could not deque cell")
+        }
+        
+        cell.cellData = fieldData[indexPath.row]
+        
+        return cell
+    }
+}
+
 // MARK: - GameViewInput
 
 extension GameViewController: GameViewInput {
@@ -125,7 +144,7 @@ extension GameViewController: GameViewInput {
         let message = Localization.Game.GameOverAlert.message(currentScore).localization
         let restartActionTitle = Localization.Game.GameOverAlert.restartTitle.localization
         let cancelActionTitle = Localization.Game.GameOverAlert.cancelTitle.localization
-        AlertManager.show(in: self, title: title, message: message, okActionTitle: restartActionTitle, cancelActionTitle: cancelActionTitle) { [weak self] in
+        showAlert(in: self, title: title, message: message, okActionTitle: restartActionTitle, cancelActionTitle: cancelActionTitle) { [weak self] in
             guard let strongSelf = self else {
                 return
             }
@@ -156,21 +175,8 @@ extension GameViewController: GameViewInput {
     }
 }
 
-// MARK: - UICollectionViewDataSource
+// MARK: - AlertShowable
 
-extension GameViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 64;
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FieldCell.cellIdentifier, for: indexPath) as? FieldCell else{
-            fatalError("Could not deque cell")
-        }
+extension GameViewController: AlertShowable {
 
-        cell.cellData = fieldData[indexPath.row]
-        
-        return cell
-    }
 }

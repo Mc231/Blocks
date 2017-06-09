@@ -8,26 +8,14 @@
 
 import Foundation
 
-class CheckTetramonioManager {
-    
-    // MARK: - Properties
-    
-    private var tetramonios: [Tetramonio]
-    
-    // MARK: - Inizialization
-    
-    init(tetramonios: [Tetramonio] = [Tetramonio]()) {
-        self.tetramonios = tetramonios
-    }
-    
-    // MARK: - Public methods
-    
-    func updateTetramonios(_ tetramonios: [Tetramonio]) {
-        self.tetramonios = tetramonios
-    }
-    
-    func checkTetramonio(with cellData: [CellData]) -> Tetramonio? {
-        
+protocol TetramonioChecker {
+    func checkTetramonio(from cellData: [CellData], with tetramonios: [Tetramonio]) -> Tetramonio?
+}
+
+// MARK: - Default Implementation
+
+extension TetramonioChecker {
+    func checkTetramonio(from cellData: [CellData], with tetramonios: [Tetramonio]) -> Tetramonio? {
         let orderedCellData = cellData.sorted(by: {$0.x < $1.x})
         
         let firstCell  = orderedCellData[0].x

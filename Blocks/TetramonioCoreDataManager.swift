@@ -152,7 +152,7 @@ extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
         var result = [CellData]()
         var x: Int16 = 0
         var y: Int16 = 0
-        for _ in 0..<GameLogicManager.numberOfCells {
+        for _ in 0..<Constatns.Field.numberOfCellsOnField {
             x += 1
             if (x % 10 == 9) {
                 x = x+2
