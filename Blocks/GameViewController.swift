@@ -169,7 +169,6 @@ extension GameViewController: GameViewInput {
     }
     
     func displayScore(current: Int32, best: Int32) {
-        // TODO: - Localize this and rename label
         currentScoreLabel.text = Localization.Game.Score.current(current).localization
         maxScoreLabel.text = Localization.Game.Score.best(best).localization
     }

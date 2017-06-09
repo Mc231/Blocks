@@ -15,10 +15,6 @@ protocol GameLogicManagerInput {
     func restartGame(callback: @escaping (Int32, Int32, [CellData]) -> ())
 }
 
-protocol GameLogicManagerProtocol: class {
-    func appendCellToCurrentTetramonio(cellData: CellData)
-}
-
 protocol GameLogicManagerOutput: class {
     func gameOver(currentScore: Int32)
     func gameLogicManager(_ manager: GameLogicManagerInput, didChange score: Int32, and bestScore: Int32)
@@ -26,13 +22,15 @@ protocol GameLogicManagerOutput: class {
     func gameLogicManager(_ manager: GameLogicManagerInput, didUpdate tetramonios: [Tetramonio])
 }
 
-class GameLogicManager: GameLogicManagerProtocol {
+class GameLogicManager {
     
-    // MARK: - Prioperties
+    // MARK: - Public  Prioperties
     
     weak var interractor: GameLogicManagerOutput?
     var tetramoniosManager: TetramonioManager?
     var tetramonioCoreDataManager: TetreamonioCoreDataManagerInput?
+    
+    // MARK: - Fileprivate Properties
     
     fileprivate var field = [CellData](){
         didSet{
@@ -46,27 +44,94 @@ class GameLogicManager: GameLogicManagerProtocol {
         }
     }
     
-    func appendCellToCurrentTetramonio(cellData: CellData) {
-        
+    // MARK: - Fileprivate methods
+    
+    fileprivate func removePlacedCellIfNeeded() {
+        // Removing selected cell from currnet tetramonio if it is there
+        for fieldCell in field {
+            for cellInTeramonio in currentTetramonio {
+                if fieldCell.x == cellInTeramonio.x {
+                    if fieldCell.state == .placed && cellInTeramonio.state == .empty {
+                        if  let index = currentTetramonio.index(where: {$0.x == fieldCell.x}) {
+                            currentTetramonio.remove(at: index)
+                        }
+                    }
+                }
+            }
+        }
     }
-}
-
-// MARK: - TeramonioChecker
-
-extension GameLogicManager: TetramonioChecker {
     
-}
-
-// MARK: - GameOverChecker
-
-extension GameLogicManager: GameOverChecker {
+    fileprivate func checkCurrentTetramonio() {
+        if currentTetramonio.count == Constatns.Tetramonio.numberOfCellsInTetramonio {
+            
+            let tetramonio = checkTetramonio(from: currentTetramonio, with: tetramonios)
+            for cellData in currentTetramonio {
+                guard let cellIndex = field.index(where: {$0.x == cellData.x}) else {
+                    fatalError("Index could not be nil")
+                }
+                
+                if tetramonio != nil {
+                    field[cellIndex].chageState(newState: .placed)
+                }else{
+                    field[cellIndex].chageState(newState: .empty)
+                }
+            }
+            
+            currentTetramonio.removeAll()
+            
+            guard let checkIndex = tetramonios.index(where: {$0.id == tetramonio?.id}),
+                let generationType = GenerationType(rawValue: checkIndex) else {
+                    return
+            }
+            
+            generateTetramoniosFor(generationType)
+            tetramonioCoreDataManager?.increaseAndStoreScore(for: Constatns.Score.scorePerTetramonio, completion: { [weak self] (currentScore, bestScore) in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.interractor?.gameLogicManager(strongSelf, didChange: currentScore, and: bestScore)
+            })
+        }else{
+            for cellData in currentTetramonio {
+                
+                guard let cellIndex = field.index(where: {$0.x == cellData.x}) else {
+                    fatalError("Index could not be nil")
+                }
+                
+                let cell = field[cellIndex]
+                if cell.state  == .empty {
+                    field[cellIndex].chageState(newState: .selected)
+                }
+            }
+        }
+    }
     
-}
-
-// MARK: - FieldCrossLineChecker
-
-extension GameLogicManager: FieldCrossLineChecker {
+    fileprivate func checkCroosLines() {
+        checkForCroosLine(type: .horizontal, at: field) { [weak self] (updatedField) in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.field = updatedField
+            strongSelf.interractor?.gameLogicManager(strongSelf, didUpdate: updatedField)
+        }
+        
+        checkForCroosLine(type: .vertical, at: field) { [weak self] (updatedField) in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.field = updatedField
+            strongSelf.interractor?.gameLogicManager(strongSelf, didUpdate: updatedField)
+        }
+    }
     
+    fileprivate func checkGameOver() {
+        if checkGameOver(for: tetramonios, at: field, with: self) {
+            guard let score = tetramonioCoreDataManager?.getCurrentScore() else {
+                fatalError("Manager can not be nil")
+            }
+            interractor?.gameOver(currentScore: score)
+        }
+    }
 }
 
 // MARK: - GameLogicInput
@@ -86,86 +151,11 @@ extension GameLogicManager: GameLogicManagerInput {
     
     func updateField(with handledData: CellData) {
         if !currentTetramonio.contains(where: {$0.x == handledData.x }) && handledData.state == .empty {
-            // Removing selected cell from currnet tetramonio if it is there
-            for fieldCell in field {
-                for cellInTeramonio in currentTetramonio {
-                    if fieldCell.x == cellInTeramonio.x {
-                        if fieldCell.state == .placed && cellInTeramonio.state == .empty {
-                            if  let index = currentTetramonio.index(where: {$0.x == fieldCell.x}) {
-                                currentTetramonio.remove(at: index)
-                            }
-                        }
-                    }
-                }
-            }
-            
+            removePlacedCellIfNeeded()
             currentTetramonio.append(handledData)
-            
-            if currentTetramonio.count == Constatns.Tetramonio.numberOfCellsInTetramonio {
-                
-                let tetramonio = checkTetramonio(from: currentTetramonio, with: tetramonios)
-                for cellData in currentTetramonio {
-                    guard let cellIndex = field.index(where: {$0.x == cellData.x}) else {
-                        fatalError("Index could not be nil")
-                    }
-                    
-                    if tetramonio != nil {
-                        field[cellIndex].chageState(newState: .placed)
-                    }else{
-                        field[cellIndex].chageState(newState: .empty)
-                    }
-                }
-                
-                currentTetramonio.removeAll()
-                
-                guard let checkIndex = tetramonios.index(where: {$0.id == tetramonio?.id}),
-                    let generationType = GenerationType(rawValue: checkIndex) else {
-                        return
-                }
-                
-                generateTetramoniosFor(generationType)
-                tetramonioCoreDataManager?.increaseAndStoreScore(for: Constatns.Score.scorePerTetramonio, completion: { [weak self] (currentScore, bestScore) in
-                    guard let strongSelf = self else {
-                        return
-                    }
-                    strongSelf.interractor?.gameLogicManager(strongSelf, didChange: currentScore, and: bestScore)
-                })
-            }else{
-                for cellData in currentTetramonio {
-                    
-                    guard let cellIndex = field.index(where: {$0.x == cellData.x}) else {
-                        fatalError("Index could not be nil")
-                    }
-                    
-                    let cell = field[cellIndex]
-                    if cell.state  == .empty {
-                        field[cellIndex].chageState(newState: .selected)
-                    }
-                }
-            }
-            
-            checkForCroosLine(type: .horizontal, at: field) { [weak self] (updatedField) in
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.field = updatedField
-                strongSelf.interractor?.gameLogicManager(strongSelf, didUpdate: updatedField)
-            }
-            
-            checkForCroosLine(type: .vertical, at: field) { [weak self] (updatedField) in
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.field = updatedField
-                strongSelf.interractor?.gameLogicManager(strongSelf, didUpdate: updatedField)
-            }
-            
-            if checkGameOver(for: tetramonios, at: field, with: self) {
-                guard let score = tetramonioCoreDataManager?.getCurrentScore() else {
-                    fatalError("Manager can not be nil")
-                }
-                interractor?.gameOver(currentScore: score)
-            }
+            checkCurrentTetramonio()
+            checkCroosLines()
+            checkGameOver()
         }
         interractor?.gameLogicManager(self, didUpdate: field)
     }
@@ -208,4 +198,22 @@ extension GameLogicManager: GameLogicManagerInput {
             callback(score, bestScore, field)
         })
     }
+}
+
+// MARK: - TeramonioChecker
+
+extension GameLogicManager: TetramonioChecker {
+    
+}
+
+// MARK: - GameOverChecker
+
+extension GameLogicManager: GameOverChecker {
+    
+}
+
+// MARK: - FieldCrossLineChecker
+
+extension GameLogicManager: FieldCrossLineChecker {
+    
 }
