@@ -56,9 +56,7 @@ extension GameInteractor: GameInteractorInput {
     }
     
     func handleTouchedCellWithData(_ cellData: CellData) {
-        gameLogic?.updateField(with: cellData) { updatedCellData in
-        presenter?.provideField(updatedCellData)
-        }
+        gameLogic?.updateField(with: cellData)
     }
 }
 

@@ -21,6 +21,8 @@ protocol FieldCrossLineChecker {
 
 extension FieldCrossLineChecker {
     
+    // MARK: - Private methods
+    
     private func getRows(of type: CroosLineType, from placedCells: [CellData]) -> [[CellData]] {
         var cellsData = [[CellData]]()
         var cellCounter = 1
