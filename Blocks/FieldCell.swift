@@ -10,8 +10,6 @@ import UIKit
 
 class FieldCell: UICollectionViewCell {
     
-    static let cellIdentifier = "FieldCell"
-    
     var cellData: CellData! {
         didSet{
             switch cellData.state {

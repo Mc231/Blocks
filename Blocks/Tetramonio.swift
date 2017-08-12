@@ -20,9 +20,15 @@ struct Tetramonio {
 
 extension Tetramonio {
     
+    private enum TetramonioKeys: String {
+        case id = "id"
+        case tetramonioIndexes = "tetramonioIndexes"
+        case gameOverIndexes = "gameOverIndexes"
+    }
+    
     init(dictionary: NSDictionary) {
-        self.id = TetramonioType(rawValue: dictionary.object(forKey: "id") as? Int16 ?? -1) ?? .None
-        self.indexes = dictionary.object(forKey: "tetramonioIndexes") as? [Int] ?? [Int]()
-        self.gameOverIndexes = dictionary.object(forKey: "gameOverIndexes") as? [Int] ?? [Int]()
+        self.id = TetramonioType(rawValue: dictionary.object(forKey: TetramonioKeys.id.rawValue) as? Int16 ?? -1) ?? .None
+        self.indexes = dictionary.object(forKey: TetramonioKeys.tetramonioIndexes.rawValue) as? [Int] ?? [Int]()
+        self.gameOverIndexes = dictionary.object(forKey: TetramonioKeys.gameOverIndexes.rawValue) as? [Int] ?? [Int]()
     }
 }

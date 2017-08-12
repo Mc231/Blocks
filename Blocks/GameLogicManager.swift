@@ -79,12 +79,14 @@ class GameLogicManager {
             
             currentTetramonio.removeAll()
             
-            guard let checkIndex = tetramonios.index(where: {$0.id == tetramonio?.id}),
-                let generationType = GenerationType(rawValue: checkIndex) else {
+            
+            guard let tetramonioGenerateType = tetramonios.index(where: {$0.id == tetramonio?.id})
+                .flatMap({GenerationType(rawValue: $0)}) else {
                     return
             }
             
-            generateTetramoniosFor(generationType)
+            
+            generateTetramoniosFor(tetramonioGenerateType)
             tetramonioCoreDataManager?.increaseAndStoreScore(for: Constatns.Score.scorePerTetramonio, completion: { [weak self] (currentScore, bestScore) in
                 guard let strongSelf = self else {
                     return

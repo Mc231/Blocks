@@ -43,6 +43,12 @@ class GameViewController: UIViewController {
         }
     }
     
+    var cellSize: CGSize {
+        let width = Int(UIScreen.main.bounds.size.width) / numberOfRows
+        let height = width
+        return CGSize(width: width, height: height)
+    }
+    
     // MARK: - Constants
     
     fileprivate let numberOfRows = 8
@@ -110,9 +116,7 @@ class GameViewController: UIViewController {
 
 extension GameViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = Int(UIScreen.main.bounds.size.width) / numberOfRows
-        let height = width
-        return CGSize(width: width, height: height)
+        return cellSize
     }
 }
 
@@ -125,7 +129,7 @@ extension GameViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FieldCell.cellIdentifier, for: indexPath) as? FieldCell else{
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FieldCell.identifier, for: indexPath) as? FieldCell else{
             fatalError("Could not deque cell")
         }
         
@@ -144,7 +148,7 @@ extension GameViewController: GameViewInput {
         let message = Localization.Game.GameOverAlert.message(currentScore).localization
         let restartActionTitle = Localization.Game.GameOverAlert.restartTitle.localization
         let cancelActionTitle = Localization.Game.GameOverAlert.cancelTitle.localization
-        showAlert(in: self, title: title, message: message, okActionTitle: restartActionTitle, cancelActionTitle: cancelActionTitle) { [weak self] in
+        showAlert(title: title, message: message, okActionTitle: restartActionTitle, cancelActionTitle: cancelActionTitle) { [weak self] in
             guard let strongSelf = self else {
                 return
             }
@@ -176,6 +180,6 @@ extension GameViewController: GameViewInput {
 
 // MARK: - AlertShowable
 
-extension GameViewController: AlertShowable {
+extension GameViewController: AlertPresenter {
 
 }

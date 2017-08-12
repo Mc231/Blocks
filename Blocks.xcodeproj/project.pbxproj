@@ -12,7 +12,7 @@
 		FF289FF21EE8AF4100AD397C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FF289FF41EE8AF4100AD397C /* Localizable.strings */; };
 		FF2BA0BC1EE3F80500263D95 /* Cell+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2BA0BA1EE3F80500263D95 /* Cell+CoreDataClass.swift */; };
 		FF2BA0BD1EE3F80500263D95 /* Cell+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2BA0BB1EE3F80500263D95 /* Cell+CoreDataProperties.swift */; };
-		FF32D45F1EE9F6E200A15F9E /* AlertShowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF32D45E1EE9F6E200A15F9E /* AlertShowable.swift */; };
+		FF32D45F1EE9F6E200A15F9E /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF32D45E1EE9F6E200A15F9E /* AlertPresenter.swift */; };
 		FF32D4651EEA11D700A15F9E /* GameOverChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF32D4641EEA11D700A15F9E /* GameOverChecker.swift */; };
 		FF32D4681EEA1BFA00A15F9E /* FieldCroosLineChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF32D4671EEA1BFA00A15F9E /* FieldCroosLineChecker.swift */; };
 		FF32D46A1EEA220100A15F9E /* Constatns.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF32D4691EEA220100A15F9E /* Constatns.swift */; };
@@ -64,7 +64,7 @@
 		FF289FF51EE8AF4500AD397C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FF2BA0BA1EE3F80500263D95 /* Cell+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cell+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FF2BA0BB1EE3F80500263D95 /* Cell+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cell+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		FF32D45E1EE9F6E200A15F9E /* AlertShowable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertShowable.swift; sourceTree = "<group>"; };
+		FF32D45E1EE9F6E200A15F9E /* AlertPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
 		FF32D4641EEA11D700A15F9E /* GameOverChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverChecker.swift; sourceTree = "<group>"; };
 		FF32D4671EEA1BFA00A15F9E /* FieldCroosLineChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldCroosLineChecker.swift; sourceTree = "<group>"; };
 		FF32D4691EEA220100A15F9E /* Constatns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constatns.swift; sourceTree = "<group>"; };
@@ -337,7 +337,7 @@
 				FFA44A2D1E452C4F000B4829 /* TetramoniosDataProvider */,
 				FFFBBFEE1E4526AF0052D68B /* GameLogicManager */,
 				FFFBBFED1E4526A20052D68B /* TetramonioManager */,
-				FF32D45E1EE9F6E200A15F9E /* AlertShowable.swift */,
+				FF32D45E1EE9F6E200A15F9E /* AlertPresenter.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -506,7 +506,7 @@
 				FF32D4681EEA1BFA00A15F9E /* FieldCroosLineChecker.swift in Sources */,
 				FF2BA0BD1EE3F80500263D95 /* Cell+CoreDataProperties.swift in Sources */,
 				FF9748BA1EE8AA1E00213F10 /* LocalizationManager.swift in Sources */,
-				FF32D45F1EE9F6E200A15F9E /* AlertShowable.swift in Sources */,
+				FF32D45F1EE9F6E200A15F9E /* AlertPresenter.swift in Sources */,
 				FFFBBFF71E45283A0052D68B /* CellState.swift in Sources */,
 				FF0472081E81D56D0054FE13 /* Extensions.swift in Sources */,
 				FF33CF811E8509E0007969C6 /* PlistDataProvider.swift in Sources */,

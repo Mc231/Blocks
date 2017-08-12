@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// This enum represent all basic tetramonios type
 enum TetramonioType: Int16 {
     case Ih = 0
     case Iv = 1
