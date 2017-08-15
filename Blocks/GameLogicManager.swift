@@ -24,13 +24,12 @@ protocol GameLogicManagerOutput: class {
 
 class GameLogicManager {
     
-    // MARK: - Public  Prioperties
-    
-    weak var interractor: GameLogicManagerOutput?
-    var tetramoniosManager: TetramonioManager?
-    var tetramonioCoreDataManager: TetreamonioCoreDataManagerInput?
     
     // MARK: - Fileprivate Properties
+    
+    fileprivate weak var interractor: GameLogicManagerOutput?
+    fileprivate var tetramoniosManager: TetramonioProtocol?
+    fileprivate var tetramonioCoreDataManager: TetreamonioCoreDataManagerInput?
     
     fileprivate var field = [CellData](){
         didSet{
@@ -42,6 +41,14 @@ class GameLogicManager {
         didSet{
             tetramonioCoreDataManager?.store(current: tetramonios)
         }
+    }
+    
+    // MARK: - Inizialization
+    
+    init(interractor: GameLogicManagerOutput?, tetramoniosManager: TetramonioProtocol, tetramonioCoreDataManager: TetreamonioCoreDataManagerInput) {
+        self.interractor = interractor
+        self.tetramoniosManager = tetramoniosManager
+        self.tetramonioCoreDataManager = tetramonioCoreDataManager
     }
     
     // MARK: - Fileprivate methods

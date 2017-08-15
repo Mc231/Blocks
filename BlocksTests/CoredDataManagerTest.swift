@@ -33,6 +33,6 @@ class CoredDataManagerTest: XCTestCase {
 //                debugPrint(success)
 //                debugPrint(error)
 //            })
-        }
+       // }
     }
 }
