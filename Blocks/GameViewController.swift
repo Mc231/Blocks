@@ -116,7 +116,7 @@ class GameViewController: UIViewController {
 
 extension GameViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return cellSize
+        return collectionView.tag == 231 ?  CGSize.init(width: firstTetramonioImageView.frame.width / 4, height: firstTetramonioImageView.frame.width / 4) : cellSize
     }
 }
 
@@ -124,7 +124,26 @@ extension GameViewController: UICollectionViewDelegateFlowLayout {
 
 extension GameViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Constatns.Field.numberOfCellsOnField;
+        return collectionView.tag == 231 ? 16 : Constatns.Field.numberOfCellsOnField;
+    }
+    
+    var asd: [CellData] {
+        return [CellData(x: 0, y: 0, state: .empty),
+                CellData(x: 0, y: 0, state: .selected),
+                CellData(x: 0, y: 0, state: .empty),
+                CellData(x: 0, y: 0, state: .empty),
+                CellData(x: 0, y: 0, state: .empty),
+                CellData(x: 0, y: 0, state: .selected),
+                CellData(x: 0, y: 0, state: .selected),
+                CellData(x: 0, y: 0, state: .empty),
+                CellData(x: 0, y: 0, state: .empty),
+                CellData(x: 0, y: 0, state: .empty),
+                CellData(x: 0, y: 0, state: .selected),
+                CellData(x: 0, y: 0, state: .empty),
+                CellData(x: 0, y: 0, state: .empty),
+                CellData(x: 0, y: 0, state: .empty),
+                CellData(x: 0, y: 0, state: .empty),
+                CellData(x: 0, y: 0, state: .empty),]
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -133,7 +152,12 @@ extension GameViewController: UICollectionViewDataSource {
             fatalError("Could not deque cell")
         }
         
-        cell.cellData = fieldData[indexPath.row]
+        if collectionView.tag != 231 {
+           cell.cellData = fieldData[indexPath.row]
+        }else{
+            cell.cellData = asd[indexPath.row]
+        }
+        
         
         return cell
     }
