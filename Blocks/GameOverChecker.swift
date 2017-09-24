@@ -17,6 +17,7 @@ protocol GameOverChecker {
 
 extension GameOverChecker {
     func checkGameOver(for tetramonios: [Tetramonio], at field: [CellData], with checker: TetramonioChecker) -> Bool {
+        
         for tetramonio in tetramonios {
             let firstGameOverIndex = tetramonio.gameOverIndexes[0]
             let secondGameOverIndex = tetramonio.gameOverIndexes[1]

@@ -25,6 +25,12 @@ struct CellData {
 
 extension CellData {
     
+    init(state: CellState) {
+        x = 0
+        y = 0
+        self.state = state
+    }
+    
     init (from cell: Cell){
         x = cell.x
         y = cell.y

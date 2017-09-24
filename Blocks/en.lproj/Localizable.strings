@@ -11,8 +11,8 @@
  Score
  */
 
-"Score:_d" = "Score: %1$d";
-"Best:_d" = "Best: %1$d";
+"Score:_d" = "Score:\n %1$d";
+"Best:_d" = "Best:\n %1$d";
 
 /*
  GameOver Alert

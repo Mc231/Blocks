@@ -29,8 +29,8 @@ class GameViewController: UIViewController {
     
     @IBOutlet weak var maxScoreLabel: UILabel!
     @IBOutlet weak var currentScoreLabel: UILabel!
-    @IBOutlet weak var firstTetramonioImageView: UIImageView!
-    @IBOutlet weak var secondTetramonioImageView: UIImageView!
+    @IBOutlet weak var firstTetramonioView: TetramonioView!
+    @IBOutlet weak var secondTetramonioView: TetramonioView!
     @IBOutlet weak var field: UICollectionView!
     
     // MARK: - Properties
@@ -44,7 +44,8 @@ class GameViewController: UIViewController {
     }
     
     var cellSize: CGSize {
-        let width = Int(UIScreen.main.bounds.size.width) / numberOfRows
+        // TODO: - Fix this
+        let width = Int(UIScreen.main.bounds.size.width - UIScreen.main.bounds.width * 0.1173) / numberOfRows
         let height = width
         return CGSize(width: width, height: height)
     }
@@ -65,6 +66,7 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.startGame()
+        field.register(FieldCell.nib, forCellWithReuseIdentifier: FieldCell.identifier)
     }
     
     override func viewWillLayoutSubviews() {
@@ -93,22 +95,17 @@ class GameViewController: UIViewController {
     // MARK: - Private methods
     
     private func handleTouchForEvent(_ event: UIEvent?) {
-        let touches = event?.allTouches?.first
         
-        guard let touchPoint = touches?.location(in: field) else {
-            debugPrint("Touch point is nil \(#line)")
+        guard let touchPoint = event?.allTouches?.first?.location(in: field) else {
+            debugPrint("Touch point is outside of the field \(#line)")
             return
         }
         
-        for (_, view) in field.subviews.enumerated() {
-            if view is FieldCell && view.frame.contains(touchPoint) {
-                guard let cell = view as? FieldCell else {
-                    debugPrint("Failed to cast to FieldCell \(#line)")
-                    return
-                }
-                presenter?.handleTouchedCell(with: cell.cellData)
-            }
-        }
+        field
+            .subviews
+            .filter({$0 is FieldCell && $0.frame.contains(touchPoint)})
+            .flatMap({$0 as? FieldCell})
+            .forEach({presenter?.handleTouchedCell(with: $0.cellData)})
     }
 }
 
@@ -116,7 +113,7 @@ class GameViewController: UIViewController {
 
 extension GameViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return collectionView.tag == 231 ?  CGSize.init(width: firstTetramonioImageView.frame.width / 4, height: firstTetramonioImageView.frame.width / 4) : cellSize
+        return cellSize
     }
 }
 
@@ -124,26 +121,7 @@ extension GameViewController: UICollectionViewDelegateFlowLayout {
 
 extension GameViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return collectionView.tag == 231 ? 16 : Constatns.Field.numberOfCellsOnField;
-    }
-    
-    var asd: [CellData] {
-        return [CellData(x: 0, y: 0, state: .empty),
-                CellData(x: 0, y: 0, state: .selected),
-                CellData(x: 0, y: 0, state: .empty),
-                CellData(x: 0, y: 0, state: .empty),
-                CellData(x: 0, y: 0, state: .empty),
-                CellData(x: 0, y: 0, state: .selected),
-                CellData(x: 0, y: 0, state: .selected),
-                CellData(x: 0, y: 0, state: .empty),
-                CellData(x: 0, y: 0, state: .empty),
-                CellData(x: 0, y: 0, state: .empty),
-                CellData(x: 0, y: 0, state: .selected),
-                CellData(x: 0, y: 0, state: .empty),
-                CellData(x: 0, y: 0, state: .empty),
-                CellData(x: 0, y: 0, state: .empty),
-                CellData(x: 0, y: 0, state: .empty),
-                CellData(x: 0, y: 0, state: .empty),]
+        return Constatns.Field.numberOfCellsOnField;
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -152,13 +130,7 @@ extension GameViewController: UICollectionViewDataSource {
             fatalError("Could not deque cell")
         }
         
-        if collectionView.tag != 231 {
-           cell.cellData = fieldData[indexPath.row]
-        }else{
-            cell.cellData = asd[indexPath.row]
-        }
-        
-        
+        cell.cellData = fieldData[indexPath.row]
         return cell
     }
 }
@@ -186,14 +158,14 @@ extension GameViewController: GameViewInput {
     }
 
     func display(tetramonios: [Tetramonio]) {
-    
-        guard let firstImageId = tetramonios.first?.id.rawValue,
-            let secondImageId = tetramonios.last?.id.rawValue else {
-                fatalError("Imposible image id")
+        
+        guard let firstTetramonioIndexes = tetramonios.first?.displayTetramonioIndexes,
+              let secondTetramonioIndexes = tetramonios.last?.displayTetramonioIndexes else {
+                fatalError("Imposible Tetramonio indexes")
         }
-  
-        firstTetramonioImageView.image = UIImage(named: String(describing: firstImageId))
-        secondTetramonioImageView.image = UIImage(named: String(describing: secondImageId))
+        
+        firstTetramonioView.update(with: firstTetramonioIndexes)
+        secondTetramonioView.update(with: secondTetramonioIndexes)
     }
     
     func displayScore(current: Int32, best: Int32) {
@@ -204,6 +176,4 @@ extension GameViewController: GameViewInput {
 
 // MARK: - AlertShowable
 
-extension GameViewController: AlertPresenter {
-
-}
+extension GameViewController: AlertPresenter { }

@@ -55,8 +55,8 @@ class GameLogicManager {
     
     fileprivate func removePlacedCellIfNeeded() {
         // Removing selected cell from currnet tetramonio if it is there
-        for fieldCell in field {
-            for cellInTeramonio in currentTetramonio {
+        field.forEach { (fieldCell) in
+            currentTetramonio.forEach({ (cellInTeramonio) in
                 if fieldCell.x == cellInTeramonio.x {
                     if fieldCell.state == .placed && cellInTeramonio.state == .empty {
                         if  let index = currentTetramonio.index(where: {$0.x == fieldCell.x}) {
@@ -64,7 +64,7 @@ class GameLogicManager {
                         }
                     }
                 }
-            }
+            })
         }
     }
     
@@ -72,7 +72,7 @@ class GameLogicManager {
         if currentTetramonio.count == Constatns.Tetramonio.numberOfCellsInTetramonio {
             
             let tetramonio = checkTetramonio(from: currentTetramonio, with: tetramonios)
-            for cellData in currentTetramonio {
+            currentTetramonio.forEach({ (cellData) in
                 guard let cellIndex = field.index(where: {$0.x == cellData.x}) else {
                     fatalError("Index could not be nil")
                 }
@@ -82,10 +82,9 @@ class GameLogicManager {
                 }else{
                     field[cellIndex].chageState(newState: .empty)
                 }
-            }
+            })
             
             currentTetramonio.removeAll()
-            
             
             guard let tetramonioGenerateType = tetramonios.index(where: {$0.id == tetramonio?.id})
                 .flatMap({GenerationType(rawValue: $0)}) else {
@@ -101,8 +100,7 @@ class GameLogicManager {
                 strongSelf.interractor?.gameLogicManager(strongSelf, didChange: currentScore, and: bestScore)
             })
         }else{
-            for cellData in currentTetramonio {
-                
+            currentTetramonio.forEach({ (cellData) in
                 guard let cellIndex = field.index(where: {$0.x == cellData.x}) else {
                     fatalError("Index could not be nil")
                 }
@@ -111,7 +109,7 @@ class GameLogicManager {
                 if cell.state  == .empty {
                     field[cellIndex].chageState(newState: .selected)
                 }
-            }
+            })
         }
     }
     

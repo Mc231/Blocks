@@ -14,11 +14,11 @@ class FieldCell: UICollectionViewCell {
         didSet{
             switch cellData.state {
             case .empty:
-                backgroundColor = UIColor.white
+                backgroundColor = UIColor.CellBackgrounds.empty
             case .placed:
-                backgroundColor = UIColor.orange
+                backgroundColor = UIColor.CellBackgrounds.placed
             case .selected:
-                backgroundColor = UIColor.red
+                backgroundColor = UIColor.CellBackgrounds.selected
             }
         }
     }
