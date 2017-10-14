@@ -25,10 +25,6 @@ class GamePresenter: GamePresenterInput {
         interractor?.restartGame()
     }
     
-    func undoMove() {
-        interractor?.undoMove()
-    }
-    
     func handleTouchedCell(with data: CellData) {
         interractor?.handleTouchedCellWithData(data)
     }

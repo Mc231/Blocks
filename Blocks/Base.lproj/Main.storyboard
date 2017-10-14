@@ -94,7 +94,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXe-nU-jZe">
-                                                <rect key="frame" x="4" y="0.0" width="80.5" height="41"/>
+                                                <rect key="frame" x="4" y="0.0" width="168" height="41"/>
                                                 <color key="backgroundColor" red="0.92941176470588238" green="0.91764705882352937" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Restart">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -104,33 +104,17 @@
                                                     <action selector="restartGameWithSender:" destination="9Qo-fH-zdy" eventType="touchUpInside" id="7YE-CJ-hVT"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1le-4x-vtp">
-                                                <rect key="frame" x="91.5" y="0.0" width="80.5" height="41"/>
-                                                <color key="backgroundColor" red="0.92941176470588238" green="0.91764705882352937" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" title="Undo">
-                                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="undoMoveWithSender:" destination="9Qo-fH-zdy" eventType="touchUpInside" id="drw-bq-0Xg"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="VeG-eF-Ny3" firstAttribute="height" secondItem="1CK-oX-hz4" secondAttribute="height" id="1l7-x3-Bpm"/>
-                                            <constraint firstItem="1le-4x-vtp" firstAttribute="top" secondItem="bpa-9o-h4m" secondAttribute="top" id="CPf-um-LRM"/>
                                             <constraint firstAttribute="trailing" secondItem="VeG-eF-Ny3" secondAttribute="trailing" id="MDF-Z7-HLV"/>
                                             <constraint firstAttribute="bottom" secondItem="1CK-oX-hz4" secondAttribute="bottom" id="W5v-aF-UHO"/>
                                             <constraint firstItem="VeG-eF-Ny3" firstAttribute="width" secondItem="1CK-oX-hz4" secondAttribute="width" id="XBR-J9-Rcc"/>
                                             <constraint firstItem="uXe-nU-jZe" firstAttribute="top" secondItem="bpa-9o-h4m" secondAttribute="top" id="XqZ-tT-hlT"/>
-                                            <constraint firstItem="1le-4x-vtp" firstAttribute="width" secondItem="uXe-nU-jZe" secondAttribute="width" id="YsZ-NK-KCs"/>
                                             <constraint firstItem="uXe-nU-jZe" firstAttribute="leading" secondItem="1CK-oX-hz4" secondAttribute="leading" id="ayY-SF-UrI"/>
-                                            <constraint firstItem="uXe-nU-jZe" firstAttribute="trailing" secondItem="1CK-oX-hz4" secondAttribute="trailing" id="b89-Qu-KeO"/>
-                                            <constraint firstItem="1le-4x-vtp" firstAttribute="height" secondItem="uXe-nU-jZe" secondAttribute="height" id="euz-tM-amv"/>
                                             <constraint firstAttribute="bottom" secondItem="VeG-eF-Ny3" secondAttribute="bottom" constant="1" id="nfe-2U-vOD"/>
                                             <constraint firstItem="1CK-oX-hz4" firstAttribute="leading" secondItem="bpa-9o-h4m" secondAttribute="leading" constant="4" id="svc-0l-Jla"/>
-                                            <constraint firstItem="1le-4x-vtp" firstAttribute="trailing" secondItem="VeG-eF-Ny3" secondAttribute="trailing" id="wrX-xs-tve"/>
-                                            <constraint firstItem="1le-4x-vtp" firstAttribute="leading" secondItem="VeG-eF-Ny3" secondAttribute="leading" id="zHW-dS-53P"/>
+                                            <constraint firstItem="uXe-nU-jZe" firstAttribute="trailing" secondItem="VeG-eF-Ny3" secondAttribute="trailing" id="tcA-hk-fOi"/>
                                         </constraints>
                                     </view>
                                 </subviews>

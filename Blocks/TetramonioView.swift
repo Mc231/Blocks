@@ -58,6 +58,7 @@ class TetramonioView: UIView {
     
     private func configureCollectionView() {
         collectionView.register(FieldCell.nib, forCellWithReuseIdentifier: FieldCell.identifier)
+        
         for _ in 0..<self.numberOfCellsInField {
             dataSource.append(CellData(state: .empty))
         }

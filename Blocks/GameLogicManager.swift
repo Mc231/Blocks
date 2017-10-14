@@ -13,7 +13,6 @@ protocol GameLogicManagerInput {
     func updateField(with handledCell: CellData)
     func startGame(completion: (_ tetramonios: [Tetramonio], _ field: [CellData], _ currentScore: Int32, _ bestScore: Int32) -> Void)
     func restartGame(callback: @escaping (Int32, Int32, [CellData]) -> ())
-    func undoMove(callback: @escaping ([CellData]) -> ())
 }
 
 protocol GameLogicManagerOutput: class {
@@ -32,7 +31,6 @@ class GameLogicManager {
     fileprivate var tetramoniosManager: TetramonioProtocol?
     fileprivate var tetramonioCoreDataManager: TetreamonioCoreDataManagerInput?
     
-    fileprivate var history = [[CellData]]()
     fileprivate var field = [CellData](){
         didSet{
             tetramonioCoreDataManager?.store(fieldCells: field)
@@ -76,9 +74,7 @@ class GameLogicManager {
             
             let tetramonio = checkTetramonio(from: currentTetramonio, with: tetramonios)
             
-            if tetramonio != nil {
-                history.append(field)
-            }
+            
             
             currentTetramonio.forEach({ (cellData) in
                 guard let cellIndex = field.index(where: {$0.x == cellData.x}) else {
@@ -91,7 +87,6 @@ class GameLogicManager {
                     field[cellIndex].chageState(newState: .empty)
                 }
             })
-            
             
             currentTetramonio.removeAll()
             
@@ -204,14 +199,6 @@ extension GameLogicManager: GameLogicManagerInput {
         
         self.field = field
         completion(tetramonios, field, currentScore, bestScore)
-    }
-    
-    // TODO: - Refactore this
-    func undoMove(callback: @escaping ([CellData]) -> ()) {
-        if let lastPossibleUndo = history.last {
-            history.removeLast()
-            callback(lastPossibleUndo)
-        }
     }
     
     func restartGame(callback: @escaping (Int32, Int32, [CellData]) -> ()) {

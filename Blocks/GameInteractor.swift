@@ -11,7 +11,6 @@ import Foundation
 protocol GameInteractorInput: class {
     func startGame()
     func restartGame()
-    func undoMove()
     func handleTouchedCellWithData(_ cellData: CellData)
 }
 
@@ -43,13 +42,6 @@ extension GameInteractor: GameInteractorInput {
             strongSelf.presenter?.provideTetramonios(tetramonios)
             strongSelf.presenter?.provideField(cellData)
             strongSelf.presenter?.provideScore(current: currentScore, best: bestScore)
-        })
-    }
-    
-    func undoMove() {
-        gameLogic?.undoMove(callback: { [weak self] (fieldOnPreviousMove) in
-            guard let strongSelf = self else { return }
-            strongSelf.presenter?.provideField(fieldOnPreviousMove)
         })
     }
     

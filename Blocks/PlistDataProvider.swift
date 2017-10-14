@@ -15,7 +15,6 @@ protocol DataProvider: class {
 }
 
 /// This class is Base data provider class
-
 class PlistDataProvider: DataProvider {
     
     // MARK: - Properties

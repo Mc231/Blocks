@@ -13,7 +13,6 @@ import UIKit
 protocol GameViewOutput {
     func startGame()
     func restartGame()
-    func undoMove()
     func handleTouchedCell(with data: CellData)
 }
 
@@ -79,10 +78,6 @@ class GameViewController: UIViewController {
     
     @IBAction private func restartGame(sender: UIButton) {
         presenter?.restartGame()
-    }
-    
-    @IBAction private func undoMove(sender: UIButton) {
-        presenter?.undoMove()
     }
     
     // MARK: - Touches methods
