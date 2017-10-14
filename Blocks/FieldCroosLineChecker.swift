@@ -57,6 +57,7 @@ extension FieldCrossLineChecker {
         return cellsData
     }
     
+    // TODO: - Refactore this
     func checkForCroosLine(type: CroosLineType, at field: [CellData], completion: ([CellData]) -> ()) {
         var field = field
         

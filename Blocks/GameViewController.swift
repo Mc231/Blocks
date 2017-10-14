@@ -13,6 +13,7 @@ import UIKit
 protocol GameViewOutput {
     func startGame()
     func restartGame()
+    func undoMove()
     func handleTouchedCell(with data: CellData)
 }
 
@@ -27,11 +28,11 @@ class GameViewController: UIViewController {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var maxScoreLabel: UILabel!
-    @IBOutlet weak var currentScoreLabel: UILabel!
-    @IBOutlet weak var firstTetramonioView: TetramonioView!
-    @IBOutlet weak var secondTetramonioView: TetramonioView!
-    @IBOutlet weak var field: UICollectionView!
+    @IBOutlet fileprivate weak var maxScoreLabel: UILabel!
+    @IBOutlet fileprivate weak var currentScoreLabel: UILabel!
+    @IBOutlet fileprivate weak var firstTetramonioView: TetramonioView!
+    @IBOutlet fileprivate weak var secondTetramonioView: TetramonioView!
+    @IBOutlet fileprivate weak var field: UICollectionView!
     
     // MARK: - Properties
     
@@ -76,8 +77,12 @@ class GameViewController: UIViewController {
     
     // MARK: - IBActions
     
-    @IBAction func restartGame(sender: UIButton) {
+    @IBAction private func restartGame(sender: UIButton) {
         presenter?.restartGame()
+    }
+    
+    @IBAction private func undoMove(sender: UIButton) {
+        presenter?.undoMove()
     }
     
     // MARK: - Touches methods
