@@ -12,12 +12,20 @@ protocol TetreamonioCoreDataManagerInput: class {
     func store(current tetramonios: [Tetramonio])
     func store(fieldCells: [CellData])
     func increaseAndStoreScore(for quantity: Int, completion: @escaping (Int32, Int32) -> ())
-    func getCurrentScore() -> Int32
-    func getBestScore() -> Int32
-    func getFieldCells() -> [CellData]
     func restartGame(completion: (Int32, Int32, [CellData]) -> ())
-    func getCurrentTetramonios() -> [Int16]?
     func createField() -> [CellData]
+    
+    /// Current game score
+    var currentScore: Int32 { get }
+    
+    /// Best game score
+    var bestScore: Int32 { get }
+    
+    /// Current field
+    var field: [CellData] { get }
+    
+    /// Current tetramonios
+    var tetramoniosIndexes: [Int16] { get }
 }
 
 class TetreamonioCoreDataManager {
@@ -48,7 +56,7 @@ class TetreamonioCoreDataManager {
 // MARK: - TetreamonioCoreDataManagerInput
 
 extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
-    
+
     func store(current tetramonios: [Tetramonio]) {
         guard let firstTetramonio = tetramonios.first?.id.rawValue,
             let lastTetramono = tetramonios.last?.id.rawValue else {
@@ -74,8 +82,8 @@ extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
     }
     
     func increaseAndStoreScore(for quantity: Int, completion: @escaping (Int32, Int32) -> ()) {
-        let newScore = getCurrentScore() + quantity
-        var bestScore = getBestScore()
+        let newScore = self.currentScore + quantity
+        var bestScore = self.bestScore
         
         if bestScore < newScore {
             bestScore = newScore
@@ -87,51 +95,16 @@ extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
         completion(newScore, bestScore)
     }
     
-    func getCurrentScore() -> Int32 {
-        guard let score = game?.score else {
-            return 0
-        }
-        return score
-    }
-    
-    func getBestScore() -> Int32 {
-        guard let bestScore = game?.bestScore else{
-            return 0
-        }
-        
-        return bestScore
-    }
-    
-    func getFieldCells() -> [CellData] {
-        
-        var result = [CellData]()
-        
-        if storedCells.isEmpty {
-            result = createField()
-        }else{
-            for cell in storedCells {
-                let cellData = CellData(from: cell)
-                result.append(cellData)
-            }
-        }
-        return result
-    }
-    
     func restartGame(completion: (Int32, Int32, [CellData]) -> ()) {
         
-        for cell in storedCells {
+        storedCells.forEach { (cell) in
             cell.state = 0
             coreDataManager.save(cell)
         }
         
         game?.score = 0
         coreDataManager.save(game)
-        var field = [CellData]()
-        
-        for cell in storedCells {
-            let cellData = CellData(from: cell)
-            field.append(cellData)
-        }
+        let field = storedCells.map({CellData(from: $0)})
         
         guard let game = game else {
             fatalError("Game instance can not be nil")
@@ -140,41 +113,52 @@ extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
         completion(game.score, game.bestScore, field)
     }
     
-    func getCurrentTetramonios() -> [Int16]? {
-        guard let firstTetramonio =  game?.firstTetramonio,
-            let lastTetramonio = game?.secondTetramonio, firstTetramonio != lastTetramonio else {
-                return nil
-        }
-        return [firstTetramonio, lastTetramonio]
-    }
-    
     func createField() -> [CellData] {
-        var result = [CellData]()
+
         var x: Int16 = 0
         var y: Int16 = 0
-        for _ in 0..<Constatns.Field.numberOfCellsOnField {
-            x += 1
-            if (x % 10 == 9) {
-                x = x+2
-            }
-            y = x % 10
         
-            guard let cell = coreDataManager.create(Cell.self) else {
-                fatalError("Failed to create cell")
-            }
-            cell.x = x
-            cell.y = y
-            cell.state = 0
-            game?.addToCells(cell)
-            coreDataManager.save(cell)
-        }
-        coreDataManager.save(game)
-        
-        for cell in storedCells {
-            let cellData = CellData(from: cell)
-            result.append(cellData)
+        (0..<Constatns.Field.numberOfCellsOnField)
+            .enumerated()
+            .forEach { (loopData) in
+                x += 1
+                if (x % 10 == 9) {
+                    x = x+2
+                }
+                y = x % 10
+                
+                guard let cell = coreDataManager.create(Cell.self) else {
+                    fatalError("Failed to create cell")
+                }
+                cell.x = x
+                cell.y = y
+                cell.state = 0
+                game?.addToCells(cell)
+                coreDataManager.save(cell)
         }
       
-        return result
+        coreDataManager.save(game)
+        
+        return storedCells.flatMap({CellData(from: $0)})
+    }
+    
+    var currentScore: Int32 {
+        return game?.score ?? 0
+    }
+    
+    var bestScore: Int32 {
+        return game?.bestScore ?? 0
+    }
+    
+    var field: [CellData] {
+        return storedCells.isEmpty ? createField() : storedCells.map({CellData(from: $0)})
+    }
+    
+    var tetramoniosIndexes: [Int16] {
+        guard let firstTetramonio =  game?.firstTetramonio,
+            let lastTetramonio = game?.secondTetramonio, firstTetramonio != lastTetramonio else {
+                return [Int16]()
+        }
+        return [firstTetramonio, lastTetramonio]
     }
 }

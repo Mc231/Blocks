@@ -92,6 +92,7 @@ class GameLogicManager {
                 }
             })
             
+            
             currentTetramonio.removeAll()
             
             guard let tetramonioGenerateType = tetramonios.index(where: {$0.id == tetramonio?.id})
@@ -142,7 +143,7 @@ class GameLogicManager {
     
     fileprivate func checkGameOver() {
         if checkGameOver(for: tetramonios, at: field, with: self) {
-            guard let score = tetramonioCoreDataManager?.getCurrentScore() else {
+            guard let score = tetramonioCoreDataManager?.currentScore else {
                 fatalError("Manager can not be nil")
             }
             interractor?.gameOver(currentScore: score)
@@ -180,7 +181,7 @@ extension GameLogicManager: GameLogicManagerInput {
     func startGame(completion: ([Tetramonio], [CellData], Int32, Int32) -> Void) {
         
         var tetramonios = [Tetramonio]()
-        if let storedTetramonios = tetramonioCoreDataManager?.getCurrentTetramonios(),
+        if let storedTetramonios = tetramonioCoreDataManager?.tetramoniosIndexes,
             let unwraprdTetramonios = tetramoniosManager?.getTetramoniosFrom(indexes: storedTetramonios) {
             tetramonios = unwraprdTetramonios
             tetramoniosManager?.currentTetramonios = tetramonios
@@ -189,20 +190,20 @@ extension GameLogicManager: GameLogicManagerInput {
             tetramonios = generateTetramoniosFor(.gameStart)
         }
         
-        guard let cellData = tetramonioCoreDataManager?.getFieldCells(),
-            let currentScore = tetramonioCoreDataManager?.getCurrentScore(),
-            let bestScore = tetramonioCoreDataManager?.getBestScore() else {
+        guard let field = tetramonioCoreDataManager?.field,
+            let currentScore = tetramonioCoreDataManager?.currentScore,
+            let bestScore = tetramonioCoreDataManager?.bestScore else {
                 fatalError("Score or field cell can not be nil can not be nil")
         }
         
-        let storedTetramonio = cellData.filter({$0.state == .selected})
+        let storedTetramonio = field.filter({$0.state == .selected})
         
         if !storedTetramonio.isEmpty {
             currentTetramonio = storedTetramonio
         }
         
-        field = cellData
-        completion(tetramonios, cellData, currentScore, bestScore)
+        self.field = field
+        completion(tetramonios, field, currentScore, bestScore)
     }
     
     // TODO: - Refactore this
