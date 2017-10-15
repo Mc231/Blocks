@@ -25,13 +25,10 @@ protocol GameViewInput: class {
 
 class GameViewController: UIViewController {
     
-    // MARK: - IBOutlets
+    // MARK: - Constants
     
-    @IBOutlet fileprivate weak var maxScoreLabel: UILabel!
-    @IBOutlet fileprivate weak var currentScoreLabel: UILabel!
-    @IBOutlet fileprivate weak var firstTetramonioView: TetramonioView!
-    @IBOutlet fileprivate weak var secondTetramonioView: TetramonioView!
-    @IBOutlet fileprivate weak var field: UICollectionView!
+    fileprivate let numberOfRows = 8
+    private let cellWidthCoof: CGFloat = 0.1173
     
     // MARK: - Properties
     
@@ -44,15 +41,18 @@ class GameViewController: UIViewController {
     }
     
     var cellSize: CGSize {
-        // TODO: - Fix this
-        let width = Int(UIScreen.main.bounds.size.width - UIScreen.main.bounds.width * 0.1173) / numberOfRows
+        let width = Int(UIScreen.main.bounds.size.width - UIScreen.main.bounds.width * cellWidthCoof) / numberOfRows
         let height = width
         return CGSize(width: width, height: height)
     }
     
-    // MARK: - Constants
+    // MARK: - IBOutlets
     
-    fileprivate let numberOfRows = 8
+    @IBOutlet fileprivate weak var maxScoreLabel: UILabel!
+    @IBOutlet fileprivate weak var currentScoreLabel: UILabel!
+    @IBOutlet fileprivate weak var firstTetramonioView: TetramonioView!
+    @IBOutlet fileprivate weak var secondTetramonioView: TetramonioView!
+    @IBOutlet fileprivate weak var field: UICollectionView!
 
     // MARK: - Inizialization
     

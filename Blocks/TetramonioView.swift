@@ -24,8 +24,19 @@ class TetramonioView: UIView {
         return CGSize(width: width, height: height)
     }
     
+    private lazy var collectinViwLayout: UICollectionViewFlowLayout = {
+       var layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 0.5
+        layout.minimumInteritemSpacing = 0.5
+        layout.itemSize = self.cellSize
+        return layout
+    }()
+    
     private lazy var collectionView: UICollectionView = {
-        return UICollectionView(frame: self.bounds, collectionViewLayout: UICollectionViewFlowLayout())
+        var collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: self.collectinViwLayout)
+        collectionView.backgroundColor = UIColor.white
+        collectionView.dataSource = self
+        return collectionView
     }()
     
     // MARK: - Inizialization
@@ -62,34 +73,9 @@ class TetramonioView: UIView {
         for _ in 0..<self.numberOfCellsInField {
             dataSource.append(CellData(state: .empty))
         }
-        collectionView.backgroundColor = UIColor.white
-        collectionView.dataSource = self
-        collectionView.delegate = self
         addSubview(collectionView)
-        collectionView.collectionViewLayout.invalidateLayout()
     }
 }
-
-// MARK: - UICollectionViewDelegateFlowLayout
-
-extension TetramonioView: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return cellSize
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.5
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.5
-    }
-}
-
-// MARK: - UICollectionViewDelegate
-
-extension TetramonioView: UICollectionViewDelegate { }
-
 
 // MARK: - UICollectionViewDataSource
 
