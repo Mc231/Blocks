@@ -28,6 +28,7 @@ protocol TetreamonioCoreDataManagerInput: class {
     var tetramoniosIndexes: [Int16] { get }
 }
 
+/// This class responsable for storing fetching tetramonio from CoreData
 class TetreamonioCoreDataManager {
     
     // MARK: - Properties

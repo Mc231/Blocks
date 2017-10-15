@@ -17,6 +17,7 @@
     func delete<T: NSManagedObject>(_ object: T)
  }
  
+ /// This class manage working of app with core data
  class CoreDataManager {
     
     // MARK: - Constatns
@@ -129,15 +130,7 @@
     }
  }
  
- protocol EntityDescription: class {
-    static var entityName: String {get}
- }
- 
- extension EntityDescription {
-    static var entityName: String {
-        return String(describing: self)
-    }
- }
+ // MARK: - Entity description
  
  extension NSManagedObject: EntityDescription {
     

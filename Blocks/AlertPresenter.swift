@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// This protocol describes presentation of game alerts
 protocol AlertPresenter {
     func showAlert(title: String,
                    message: String,

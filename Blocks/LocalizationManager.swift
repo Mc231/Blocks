@@ -8,10 +8,12 @@
 
 import Foundation
 
+/// Localization protocol
 protocol LocalizationProtocol {
     var localization: String {get}
 }
 
+/// This enum represents localized strings used in app
 enum Localization {
     enum Game {
         enum Score: LocalizationProtocol {

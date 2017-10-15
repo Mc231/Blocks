@@ -22,8 +22,8 @@ protocol GameLogicManagerOutput: class {
     func gameLogicManager(_ manager: GameLogicManagerInput, didUpdate tetramonios: [Tetramonio])
 }
 
+/// This class represents base game logic
 class GameLogicManager {
-    
     
     // MARK: - Fileprivate Properties
     

@@ -8,10 +8,8 @@
 
 import Foundation
 
-/**
-    This class provide data for all possible Tetramonios
- */
 
+/// This class provide data for all possible Tetramonios
 class TetremonioDataProvider {
     
     // MARK: - Properties

@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// This struct represents basic game constatns
 struct Constatns {
     
     struct Tetramonio {
