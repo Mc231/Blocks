@@ -28,10 +28,8 @@ extension AlertPresenter where Self: UIViewController {
         let okAction = UIAlertAction(title: okActionTitle, style: .destructive) { (action) in
             okActionCompletion()
         }
-        let cancelAction = UIAlertAction(title: cancelActionTitle, style: .cancel, handler: nil)
-        // TODO: - Investigate what is better alert type
+     
         alert.addAction(okAction)
-        // alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
     }
 }
