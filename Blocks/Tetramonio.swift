@@ -13,25 +13,28 @@ import Foundation
  */
 
 struct Tetramonio {
-    let id: TetramonioType
+    let identifier: TetramonioType
     let indexes: [Int16]
     let gameOverIndexes: [Int]
     let displayTetramonioIndexes: [Int]
 }
 
 extension Tetramonio {
-    
+
     private enum TetramonioKeys: String {
-        case id = "id"
-        case tetramonioIndexes = "tetramonioIndexes"
-        case gameOverIndexes = "gameOverIndexes"
-        case displayTetramonioIndexes = "displayTetramonioIndexes"
+        case identifier = "id"
+        case tetramonioIndexes
+        case gameOverIndexes
+        case displayTetramonioIndexes
     }
-    
+
     init(dictionary: NSDictionary) {
-        self.id = TetramonioType(rawValue: dictionary.object(forKey: TetramonioKeys.id.rawValue) as? Int16 ?? -1) ?? .noneTetramonio
+        self.identifier
+			= TetramonioType(rawValue: dictionary.object(forKey: TetramonioKeys.identifier.rawValue)
+				as? Int16 ?? -1) ?? .noneTetramonio
         self.indexes = dictionary.object(forKey: TetramonioKeys.tetramonioIndexes.rawValue) as? [Int16] ?? [Int16]()
         self.gameOverIndexes = dictionary.object(forKey: TetramonioKeys.gameOverIndexes.rawValue) as? [Int] ?? [Int]()
-        self.displayTetramonioIndexes = dictionary.object(forKey: TetramonioKeys.displayTetramonioIndexes.rawValue) as? [Int] ?? [Int]()
+        self.displayTetramonioIndexes
+			= dictionary.object(forKey: TetramonioKeys.displayTetramonioIndexes.rawValue) as? [Int] ?? [Int]()
     }
 }

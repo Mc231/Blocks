@@ -24,30 +24,30 @@ protocol GameViewInput: class {
 }
 
 class GameViewController: UIViewController {
-    
+
     // MARK: - Constants
-    
+
     fileprivate let numberOfRows = 8
     private let cellWidthCoof: CGFloat = 0.1173
-    
+
     // MARK: - Properties
-    
+
     var presenter: GameViewOutput?
     var tetramonios = [Tetramonio]()
     var fieldData = [CellData]() {
-        didSet{
+        didSet {
             field.reloadData()
         }
     }
-    
+
     var cellSize: CGSize {
         let width = Int(UIScreen.main.bounds.size.width - UIScreen.main.bounds.width * cellWidthCoof) / numberOfRows
         let height = width
         return CGSize(width: width, height: height)
     }
-    
+
     // MARK: - IBOutlets
-    
+
     @IBOutlet fileprivate weak var maxScoreLabel: UILabel!
     @IBOutlet fileprivate weak var currentScoreLabel: UILabel!
     @IBOutlet fileprivate weak var firstTetramonioView: TetramonioView!
@@ -55,52 +55,52 @@ class GameViewController: UIViewController {
     @IBOutlet fileprivate weak var field: UICollectionView!
 
     // MARK: - Inizialization
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         GameAssambler.configureGameModule(in: self)
     }
-    
-    // MARK - UIViewController
-    
+
+	// MARK: - UIViewController
+
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.startGame()
         field.register(FieldCell.nib, forCellWithReuseIdentifier: FieldCell.identifier)
     }
-    
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         field.collectionViewLayout.invalidateLayout()
     }
-    
+
     // MARK: - IBActions
-    
+
     @IBAction private func restartGame(sender: UIButton) {
         presenter?.restartGame()
     }
-    
+
     // MARK: - Touches methods
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         handleTouchForEvent(event)
     }
-    
+
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
         handleTouchForEvent(event)
     }
-    
+
     // MARK: - Private methods
-    
+
     private func handleTouchForEvent(_ event: UIEvent?) {
-        
+
         guard let touchPoint = event?.allTouches?.first?.location(in: field) else {
             debugPrint("Touch point is outside of the field \(#line)")
             return
         }
-        
+
         field
             .subviews
             .filter({$0 is FieldCell && $0.frame.contains(touchPoint)})
@@ -112,7 +112,10 @@ class GameViewController: UIViewController {
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension GameViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+	// swiftlint:disable vertical_parameter_alignment
+    func collectionView(_ collectionView: UICollectionView,
+						layout collectionViewLayout: UICollectionViewLayout,
+						sizeForItemAt indexPath: IndexPath) -> CGSize {
         return cellSize
     }
 }
@@ -121,15 +124,17 @@ extension GameViewController: UICollectionViewDelegateFlowLayout {
 
 extension GameViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Constatns.Field.numberOfCellsOnField;
+        return Constatns.Field.numberOfCellsOnField
     }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FieldCell.identifier, for: indexPath) as? FieldCell else{
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath)
+		-> UICollectionViewCell {
+
+        guard let cell =
+			collectionView.dequeueReusableCell(withReuseIdentifier: FieldCell.identifier, for: indexPath) as? FieldCell else {
             fatalError("Could not deque cell")
         }
-        
+
         cell.cellData = fieldData[indexPath.row]
         return cell
     }
@@ -144,7 +149,8 @@ extension GameViewController: GameViewInput {
         let message = Localization.Game.GameOverAlert.message(currentScore).localization
         let restartActionTitle = Localization.Game.GameOverAlert.restartTitle.localization
         let cancelActionTitle = Localization.Game.GameOverAlert.cancelTitle.localization
-        showAlert(title: title, message: message, okActionTitle: restartActionTitle, cancelActionTitle: cancelActionTitle) { [weak self] in
+        showAlert(title: title,
+				  message: message, okActionTitle: restartActionTitle, cancelActionTitle: cancelActionTitle) { [weak self] in
             guard let strongSelf = self else {
                 return
             }
@@ -158,16 +164,16 @@ extension GameViewController: GameViewInput {
     }
 
     func display(tetramonios: [Tetramonio]) {
-        
+
         guard let firstTetramonioIndexes = tetramonios.first?.displayTetramonioIndexes,
               let secondTetramonioIndexes = tetramonios.last?.displayTetramonioIndexes else {
                 fatalError("Imposible Tetramonio indexes")
         }
-        
+
         firstTetramonioView.update(with: firstTetramonioIndexes)
         secondTetramonioView.update(with: secondTetramonioIndexes)
     }
-    
+
     func displayScore(current: Int32, best: Int32) {
         currentScoreLabel.text = Localization.Game.Score.current(current).localization
         maxScoreLabel.text = Localization.Game.Score.best(best).localization

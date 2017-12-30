@@ -9,9 +9,9 @@
 import UIKit
 
 class FieldCell: UICollectionViewCell {
-    
+
     var cellData: CellData! {
-        didSet{
+        didSet {
             switch cellData.state {
             case .empty:
                 backgroundColor = UIColor.CellBackgrounds.empty

@@ -10,10 +10,10 @@ import XCTest
 @testable import Blocks
 
 class RandomTests: XCTestCase {
-    
+
     func testRandomFunc() {
         var result = Set<Int16>()
-        
+
         while result.count != 19 {
             let randomNum = Int16.randomNum(maxValue: 19)
             result.insert(randomNum)
@@ -21,4 +21,3 @@ class RandomTests: XCTestCase {
         XCTAssertTrue(result.count == 19)
     }
 }
-

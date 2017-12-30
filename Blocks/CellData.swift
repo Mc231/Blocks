@@ -9,29 +9,29 @@
 import Foundation
 
 struct CellData {
-    
+
     // MARK: - Properties
-    
+
     let xPosition: Int16
     let yPosition: Int16
     var state: CellState
-    
+
     // MARK: - Mutating methods
-    
+
     mutating func chageState(newState: CellState) {
         self.state = newState
     }
 }
 
 extension CellData {
-    
+
     init(state: CellState) {
         xPosition = 0
         yPosition = 0
         self.state = state
     }
-    
-    init (from cell: Cell){
+
+    init (from cell: Cell) {
         xPosition = cell.xPosition
         yPosition = cell.yPosition
         guard let storedState = CellState(rawValue: cell.state) else {
@@ -39,7 +39,7 @@ extension CellData {
         }
         state = storedState
     }
-    
+
     var isCellPlaced: Bool {
         return self.state == .placed
     }

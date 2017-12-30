@@ -16,10 +16,11 @@ protocol LocalizationProtocol {
 /// This enum represents localized strings used in app
 enum Localization {
     enum Game {
+		// swiftlint:disable nesting
         enum Score: LocalizationProtocol {
             case best(Int32)
             case current(Int32)
-            
+
             var localization: String {
                 switch self {
                 case .current(let currentScore):
@@ -29,18 +30,20 @@ enum Localization {
                 }
             }
         }
+		// swiftlint:disable nesting
         enum GameOverAlert: LocalizationProtocol {
             case title
             case message(Int32)
             case restartTitle
             case cancelTitle
-            
+
             var localization: String {
                 switch self {
                 case .title:
                     return NSLocalizedString("Game_Over", comment: "Game Over alert title")
                 case .message(let currentScore):
-                    return String(format: NSLocalizedString("Your_Score_is_d", comment: "Your score title"), currentScore)
+                    return String(format: NSLocalizedString("Your_Score_is_d",
+															comment: "Your score title"), currentScore)
                 case .restartTitle:
                     return NSLocalizedString("Restart", comment: "Restart title")
                 case .cancelTitle:

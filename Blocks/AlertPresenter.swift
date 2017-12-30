@@ -14,7 +14,7 @@ protocol AlertPresenter {
                    message: String,
                    okActionTitle: String,
                    cancelActionTitle: String,
-                   okActionCompletion: @escaping () -> ())
+                   okActionCompletion: @escaping () -> Void)
 }
 
 // MARK: - Default implementation
@@ -24,12 +24,12 @@ extension AlertPresenter where Self: UIViewController {
                    message: String,
                    okActionTitle: String,
                    cancelActionTitle: String,
-                   okActionCompletion: @escaping () -> ()) {
+                   okActionCompletion: @escaping () -> Void) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: okActionTitle, style: .destructive) { (action) in
+        let okAction = UIAlertAction(title: okActionTitle, style: .destructive) { (_) in
             okActionCompletion()
         }
-     
+
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
     }

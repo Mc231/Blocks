@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension Game {
 
     @NSManaged public var firstTetramonio: Int16

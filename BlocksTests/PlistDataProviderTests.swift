@@ -10,11 +10,11 @@ import XCTest
 @testable import Blocks
 
 class PlistDataProviderTests: XCTestCase {
-    
+
     func testPlistDataProviderGoodPlist() {
         // WARNING: - FIX THIS TEST
         let dataProvider = PlistDataProvider(resource: "Tetramonios", type: "plist")
         XCTAssertNotNil(dataProvider.getData())
     }
-    
+
 }

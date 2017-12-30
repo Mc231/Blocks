@@ -10,7 +10,7 @@ import XCTest
 @testable import Blocks
 
 class TetramonioDataProviderTest: XCTestCase {
-    
+
     func testTetramonioDataProviderCorrectNumberOfTerteamonios() {
         let tetramonioDataProvider = TetremonioDataProvider()
         XCTAssertEqual(tetramonioDataProvider.getTetramonios().count, 19)

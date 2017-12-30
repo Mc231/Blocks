@@ -12,7 +12,7 @@ import CoreData
 @testable import Blocks
 
 class CoredDataManagerTest: XCTestCase {
-    
+
     func testCoreDataManager() {
 //        let manager = CoreDataManager(modelName: "Blocks")
 //        debugPrint(manager.managedObjectContext)

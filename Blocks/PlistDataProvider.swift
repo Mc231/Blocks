@@ -16,15 +16,15 @@ protocol DataProvider: class {
 
 /// This class is Base data provider class
 class PlistDataProvider: DataProvider {
-    
+
     // MARK: - Properties
-    
+
     private let resource: String
     private let path: String
     private let type: String
-    
+
     // MARK: - Inizialization
-    
+
     required init(resource: String, type: String) {
         self.resource = resource
         self.type = type
@@ -33,7 +33,7 @@ class PlistDataProvider: DataProvider {
         }
         self.path = path
     }
-    
+
     func getData<T>() -> T? {
         guard let parsedData = NSArray(contentsOfFile: path) else {
             fatalError("Failed to parse data")

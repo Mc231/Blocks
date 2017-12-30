@@ -12,23 +12,23 @@ import Foundation
 class TetremonioDataProvider {
 
     // MARK: - Properties
-    
+
     private let dataProvider: DataProvider
-    
+
     // MARK: - Inizialization
-    
+
     init(dataProvider: DataProvider = PlistDataProvider(resource: "Tetramonios", type: "plist")) {
         self.dataProvider = dataProvider
     }
-    
+
     // MARK: - Public methods
-    
+
     func getTetramonios() -> [Tetramonio] {
         var result = [Tetramonio]()
         guard let tetramonios: NSArray = dataProvider.getData() else {
             fatalError("Tetramonios is of wrong type")
         }
-        
+
         for tetramonio in tetramonios {
             guard let teramonioData = tetramonio as? NSDictionary else {
                 fatalError("Failed to parse teramonio dictionary")
