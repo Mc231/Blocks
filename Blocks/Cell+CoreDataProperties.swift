@@ -9,11 +9,10 @@
 import Foundation
 import CoreData
 
-
 extension Cell {
 
-    @NSManaged public var x: Int16
-    @NSManaged public var y: Int16
+    @NSManaged public var xPosition: Int16
+    @NSManaged public var yPosition: Int16
     @NSManaged public var state: Int16
     @NSManaged public var game: Game?
 

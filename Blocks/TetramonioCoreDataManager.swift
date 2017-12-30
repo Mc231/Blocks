@@ -40,7 +40,7 @@ class TetreamonioCoreDataManager {
     }()
     
     fileprivate var storedCells: [Cell] {
-        let xSortDesciptor = NSSortDescriptor(key: "x", ascending: true)
+        let xSortDesciptor = NSSortDescriptor(key: "xPosition", ascending: true)
         guard let fetchedCells = coreDataManager.fetch(Cell.self, predicate: nil, sortDescriptors: [xSortDesciptor]) else {
             return [Cell]()
         }
@@ -124,15 +124,15 @@ extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
             .forEach { (loopData) in
                 x += 1
                 if (x % 10 == 9) {
-                    x = x+2
+                    x += 2
                 }
                 y = x % 10
                 
                 guard let cell = coreDataManager.create(Cell.self) else {
                     fatalError("Failed to create cell")
                 }
-                cell.x = x
-                cell.y = y
+                cell.xPosition = x
+                cell.yPosition = y
                 cell.state = 0
                 game?.addToCells(cell)
                 coreDataManager.save(cell)

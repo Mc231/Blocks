@@ -58,9 +58,9 @@ class GameLogicManager {
         // Removing selected cell from currnet tetramonio if it is there
         field.forEach { (fieldCell) in
             currentTetramonio.forEach({ (cellInTeramonio) in
-                if fieldCell.x == cellInTeramonio.x {
+                if fieldCell.xPosition == cellInTeramonio.xPosition {
                     if fieldCell.state == .placed && cellInTeramonio.state == .empty {
-                        if  let index = currentTetramonio.index(where: {$0.x == fieldCell.x}) {
+                        if  let index = currentTetramonio.index(where: {$0.xPosition == fieldCell.xPosition}) {
                             currentTetramonio.remove(at: index)
                         }
                     }
@@ -77,7 +77,7 @@ class GameLogicManager {
             
             
             currentTetramonio.forEach({ (cellData) in
-                guard let cellIndex = field.index(where: {$0.x == cellData.x}) else {
+                guard let cellIndex = field.index(where: {$0.xPosition == cellData.xPosition}) else {
                     fatalError("Index could not be nil")
                 }
                 
@@ -106,7 +106,7 @@ class GameLogicManager {
             })
         }else{
             currentTetramonio.forEach({ (cellData) in
-                guard let cellIndex = field.index(where: {$0.x == cellData.x}) else {
+                guard let cellIndex = field.index(where: {$0.xPosition == cellData.xPosition}) else {
                     fatalError("Index could not be nil")
                 }
                 
@@ -162,7 +162,7 @@ extension GameLogicManager: GameLogicManagerInput {
     }
     
     func updateField(with handledData: CellData) {
-        if !currentTetramonio.contains(where: {$0.x == handledData.x }) && handledData.state == .empty {
+        if !currentTetramonio.contains(where: {$0.xPosition == handledData.xPosition }) && handledData.state == .empty {
             removePlacedCellIfNeeded()
             currentTetramonio.append(handledData)
             checkCurrentTetramonio()

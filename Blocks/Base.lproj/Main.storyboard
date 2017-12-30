@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9Qo-fH-zdy">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9Qo-fH-zdy">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -107,11 +107,13 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="VeG-eF-Ny3" firstAttribute="height" secondItem="1CK-oX-hz4" secondAttribute="height" id="1l7-x3-Bpm"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1CK-oX-hz4" secondAttribute="trailing" constant="20" symbolic="YES" id="GKk-wQ-uFP"/>
                                             <constraint firstAttribute="trailing" secondItem="VeG-eF-Ny3" secondAttribute="trailing" id="MDF-Z7-HLV"/>
                                             <constraint firstAttribute="bottom" secondItem="1CK-oX-hz4" secondAttribute="bottom" id="W5v-aF-UHO"/>
                                             <constraint firstItem="VeG-eF-Ny3" firstAttribute="width" secondItem="1CK-oX-hz4" secondAttribute="width" id="XBR-J9-Rcc"/>
                                             <constraint firstItem="uXe-nU-jZe" firstAttribute="top" secondItem="bpa-9o-h4m" secondAttribute="top" id="XqZ-tT-hlT"/>
                                             <constraint firstItem="uXe-nU-jZe" firstAttribute="leading" secondItem="1CK-oX-hz4" secondAttribute="leading" id="ayY-SF-UrI"/>
+                                            <constraint firstItem="VeG-eF-Ny3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bpa-9o-h4m" secondAttribute="leading" constant="20" symbolic="YES" id="lLC-Hf-JQ1"/>
                                             <constraint firstAttribute="bottom" secondItem="VeG-eF-Ny3" secondAttribute="bottom" constant="1" id="nfe-2U-vOD"/>
                                             <constraint firstItem="1CK-oX-hz4" firstAttribute="leading" secondItem="bpa-9o-h4m" secondAttribute="leading" constant="4" id="svc-0l-Jla"/>
                                             <constraint firstItem="uXe-nU-jZe" firstAttribute="trailing" secondItem="VeG-eF-Ny3" secondAttribute="trailing" id="tcA-hk-fOi"/>

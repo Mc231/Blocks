@@ -8,9 +8,7 @@
 
 import Foundation
 
-protocol GamePresenterInput: GameViewOutput, GameInteractorOutput {
-    
-}
+protocol GamePresenterInput: GameViewOutput, GameInteractorOutput {}
 
 class GamePresenter: GamePresenterInput {
     

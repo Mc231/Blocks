@@ -16,12 +16,12 @@ protocol TetramonioChecker {
 
 extension TetramonioChecker {
     func checkTetramonio(from cellData: [CellData], with tetramonios: [Tetramonio]) -> Tetramonio? {
-        let orderedCellData = cellData.sorted(by: {$0.x < $1.x})
+        let orderedCellData = cellData.sorted(by: {$0.xPosition < $1.xPosition})
         
-        let firstCell  = orderedCellData[0].x
-        let secondCell = orderedCellData[1].x
-        let thirdCell  = orderedCellData[2].x
-        let fourthCell = orderedCellData[3].x
+        let firstCell  = orderedCellData[0].xPosition
+        let secondCell = orderedCellData[1].xPosition
+        let thirdCell  = orderedCellData[2].xPosition
+        let fourthCell = orderedCellData[3].xPosition
         
         for currentTetramonio in tetramonios {
             
@@ -29,7 +29,7 @@ extension TetramonioChecker {
             let secondConstant = currentTetramonio.indexes[1]
             let thirdConstant = currentTetramonio.indexes[2]
             
-            if currentTetramonio.id == .Ih || currentTetramonio.id == .Iv {
+            if currentTetramonio.id == .iHTetramonio || currentTetramonio.id == .iVTetramonio {
                 if (secondCell == firstCell + firstConstant)
                     && (thirdCell == secondCell + secondConstant)
                     &&  (fourthCell == thirdCell + thirdConstant) {

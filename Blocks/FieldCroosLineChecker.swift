@@ -14,7 +14,7 @@ enum CroosLineType {
 }
 
 protocol FieldCrossLineChecker {
-    func checkForCroosLine(type: CroosLineType, at field: [CellData], completion: ([CellData]) -> ())
+    func checkForCroosLine(type: CroosLineType, at field: [CellData], completion: ([CellData]) -> Void)
 }
 
 // MARK: - Default implementation
@@ -31,13 +31,13 @@ extension FieldCrossLineChecker {
         for cell in 1..<placedCells.count {
             let firstCellData  = placedCells[cell-1]
             let secondCellData = placedCells[cell]
-            let condition = type == .vertical ? secondCellData.y == firstCellData.y : secondCellData.x - firstCellData.x == 1
+            let condition = type == .vertical ? secondCellData.yPosition == firstCellData.yPosition : secondCellData.xPosition - firstCellData.xPosition == 1
             
             if condition {
                 // WARNING: - Add set here
-                if !currentRow.contains(where: { $0.x == firstCellData.x }) {
+                if !currentRow.contains(where: { $0.xPosition == firstCellData.xPosition }) {
                     currentRow.append(firstCellData)
-                }else if !currentRow.contains(where: { $0.x == secondCellData.x }) {
+                }else if !currentRow.contains(where: { $0.xPosition == secondCellData.xPosition }) {
                     currentRow.append(secondCellData)
                 }
                 cellCounter += 1
@@ -58,11 +58,11 @@ extension FieldCrossLineChecker {
     }
     
     // TODO: - Refactore this
-    func checkForCroosLine(type: CroosLineType, at field: [CellData], completion: ([CellData]) -> ()) {
+    func checkForCroosLine(type: CroosLineType, at field: [CellData], completion: ([CellData]) -> Void) {
         var field = field
         
         let allPlacedCells = field.filter( {$0.state == .placed})
-        let placedCells = type == .vertical ? allPlacedCells.sorted(by: {$0.y < $1.y}) : allPlacedCells
+        let placedCells = type == .vertical ? allPlacedCells.sorted(by: {$0.yPosition < $1.yPosition}) : allPlacedCells
         
         if placedCells.isEmpty {
             return
@@ -72,7 +72,7 @@ extension FieldCrossLineChecker {
         
         for row in cellsData {
             for cell in row {
-                guard let cellIndex = field.index(where: {$0.x == cell.x}) else {
+                guard let cellIndex = field.index(where: {$0.xPosition == cell.xPosition}) else {
                     fatalError("Index could not be nil")
                 }
                 
@@ -83,7 +83,7 @@ extension FieldCrossLineChecker {
                     var upperCellIndex = cellIndex - Constatns.Field.numberOfCellsInRow
                     var  previousIndex = 0
                     while upperCellIndex > 0 {
-                        if field[upperCellIndex].isCellPlaced() {
+                        if field[upperCellIndex].isCellPlaced {
                             field[upperCellIndex].chageState(newState: .empty)
                             if previousIndex != 0 {
                                 field[previousIndex].chageState(newState: .placed)

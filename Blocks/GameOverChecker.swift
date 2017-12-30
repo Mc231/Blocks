@@ -9,8 +9,8 @@
 import Foundation
 
 protocol GameOverChecker {
-    associatedtype tetramonioChecker = TetramonioChecker
-    func checkGameOver(for tetramonios: [Tetramonio], at field: [CellData], with checker: tetramonioChecker) -> Bool
+    associatedtype AsociatedChecker = TetramonioChecker
+    func checkGameOver(for tetramonios: [Tetramonio], at field: [CellData], with checker: AsociatedChecker) -> Bool
 }
 
 // MARK: - Default Implementation
@@ -37,10 +37,10 @@ extension GameOverChecker {
                     
                     let possibleTetramonio = checker.checkTetramonio(from: possibleTetramonioArray, with: tetramonios)
                     
-                    if !firstCell.isCellPlaced()
-                        && !secondCell.isCellPlaced()
-                        && !thirdCell.isCellPlaced()
-                        && !fourthCell.isCellPlaced()
+                    if !firstCell.isCellPlaced
+                        && !secondCell.isCellPlaced
+                        && !thirdCell.isCellPlaced
+                        && !fourthCell.isCellPlaced
                         && possibleTetramonio?.id.rawValue == tetramonio.id.rawValue {
                         return false
                     }

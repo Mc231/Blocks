@@ -12,8 +12,8 @@ struct CellData {
     
     // MARK: - Properties
     
-    let x: Int16
-    let y: Int16
+    let xPosition: Int16
+    let yPosition: Int16
     var state: CellState
     
     // MARK: - Mutating methods
@@ -26,21 +26,21 @@ struct CellData {
 extension CellData {
     
     init(state: CellState) {
-        x = 0
-        y = 0
+        xPosition = 0
+        yPosition = 0
         self.state = state
     }
     
     init (from cell: Cell){
-        x = cell.x
-        y = cell.y
+        xPosition = cell.xPosition
+        yPosition = cell.yPosition
         guard let storedState = CellState(rawValue: cell.state) else {
             fatalError("Impossible cell state")
         }
         state = storedState
     }
     
-    func isCellPlaced() -> Bool {
+    var isCellPlaced: Bool {
         return self.state == .placed
     }
 }

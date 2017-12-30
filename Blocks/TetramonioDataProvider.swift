@@ -8,10 +8,9 @@
 
 import Foundation
 
-
 /// This class provide data for all possible Tetramonios
 class TetremonioDataProvider {
-    
+
     // MARK: - Properties
     
     private let dataProvider: DataProvider
