@@ -10,10 +10,10 @@
  import CoreData
  
  protocol CoreDataManagerProtocol {
-    func create<T: NSManagedObject>(_ object: T.Type) -> T? where T: EntityDescription
+    func create<T: NSManagedObject>(_ object: T.Type) -> T?
     func save<T: NSManagedObject>(_ object: T?)
     func findFirstOrCreate<T: NSManagedObject>(_ object: T.Type, predicate: NSPredicate?) -> T?
-    func fetch<T: NSManagedObject>(_ object: T.Type, predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?) -> [T]? where T: EntityDescription
+    func fetch<T: NSManagedObject>(_ object: T.Type, predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?) -> [T]?
     func delete<T: NSManagedObject>(_ object: T)
  }
  
@@ -84,7 +84,7 @@
  
  extension CoreDataManager: CoreDataManagerProtocol {
 
-    func create<T : NSManagedObject>(_ object: T.Type) -> T? where T : EntityDescription {
+    func create<T : NSManagedObject>(_ object: T.Type) -> T? {
         guard let entityDescription = NSEntityDescription.entity(forEntityName: object.entityName, in: managedObjectContext) else {
             debugPrint("Failed to create nsmangedobject context")
             return nil
@@ -112,7 +112,7 @@
         return create(object)
     }
     
-    func fetch<T : NSManagedObject>(_ object: T.Type, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) -> [T]? where T: EntityDescription {
+    func fetch<T : NSManagedObject>(_ object: T.Type, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) -> [T]? {
         let request = NSFetchRequest<T>(entityName: object.entityName)
         request.predicate = predicate
         request.sortDescriptors = sortDescriptors

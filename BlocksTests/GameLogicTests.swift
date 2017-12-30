@@ -11,7 +11,7 @@ import XCTest
 
 class GameLogicTests: XCTestCase {
     
-    let gameLogic = GameLogicManager()
+   // let gameLogic = GameLogicManager()
     let tetramonios = TetremonioDataProvider().getTetramonios()
 //   // let checkTetramonioManager = CheckTetramonioManager()
 //    

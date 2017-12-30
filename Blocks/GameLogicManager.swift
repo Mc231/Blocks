@@ -177,6 +177,7 @@ extension GameLogicManager: GameLogicManagerInput {
         
         var tetramonios = [Tetramonio]()
         if let storedTetramonios = tetramonioCoreDataManager?.tetramoniosIndexes,
+            !storedTetramonios.isEmpty,
             let unwraprdTetramonios = tetramoniosManager?.getTetramoniosFrom(indexes: storedTetramonios) {
             tetramonios = unwraprdTetramonios
             tetramoniosManager?.currentTetramonios = tetramonios

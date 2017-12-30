@@ -21,6 +21,6 @@ struct Constatns {
     }
     
     struct Score {
-        static let scorePerTetramonio = 4
+        static let scorePerTetramonio: Int32 = 4
     }
 }

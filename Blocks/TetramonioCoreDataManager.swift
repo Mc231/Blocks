@@ -11,7 +11,7 @@ import Foundation
 protocol TetreamonioCoreDataManagerInput: class {
     func store(current tetramonios: [Tetramonio])
     func store(fieldCells: [CellData])
-    func increaseAndStoreScore(for quantity: Int, completion: @escaping (Int32, Int32) -> ())
+    func increaseAndStoreScore(for quantity: Int32, completion: @escaping (Int32, Int32) -> ())
     func restartGame(completion: (Int32, Int32, [CellData]) -> ())
     func createField() -> [CellData]
     
@@ -82,7 +82,7 @@ extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
         coreDataManager.save(game)
     }
     
-    func increaseAndStoreScore(for quantity: Int, completion: @escaping (Int32, Int32) -> ()) {
+    func increaseAndStoreScore(for quantity: Int32, completion: @escaping (Int32, Int32) -> ()) {
         let newScore = self.currentScore + quantity
         var bestScore = self.bestScore
         
