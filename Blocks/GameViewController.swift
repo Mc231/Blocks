@@ -30,7 +30,7 @@ class GameViewController: UIViewController {
     fileprivate let numberOfRows = 8
     private let cellWidthCoof: CGFloat = 0.1173
 
-    // MARK: - Properties
+    // MARK: - Variables
 
     var presenter: GameViewOutput?
     var tetramonios = [Tetramonio]()

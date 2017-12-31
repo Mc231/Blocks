@@ -12,18 +12,24 @@ class TetramonioView: UIView {
 
     // MARK: - Constatns
 
-    private let numberOfCellsInField = 16
+    private let numberOfCellsInField = 15
+	private let isIphone5 = UIDevice.current.screenType == .iPhones5
 
-    // MARK: - Variables
+	// MARK: - Variables
 
     fileprivate lazy var dataSource: [CellData] = [CellData]()
 
+	private var cellPadding: CGFloat {
+		return isIphone5 ? 18 : 2
+	}
+
     fileprivate var cellSize: CGSize {
-        let width = (self.bounds.width - 2) / 4
+        let width = (self.bounds.width - cellPadding) / 4
         let height = width
         return CGSize(width: width, height: height)
     }
 
+	// TODO: - Remove magic numbers
     private lazy var collectinViwLayout: UICollectionViewFlowLayout = {
        var layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0.5
@@ -35,7 +41,14 @@ class TetramonioView: UIView {
     private lazy var collectionView: UICollectionView = {
         var collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: self.collectinViwLayout)
         collectionView.backgroundColor = UIColor.white
+		collectionView.isScrollEnabled = false
         collectionView.dataSource = self
+
+		if isIphone5 {
+			collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+			collectionView.autoresizesSubviews = true
+		}
+
         return collectionView
     }()
 
@@ -69,10 +82,7 @@ class TetramonioView: UIView {
 
     private func configureCollectionView() {
         collectionView.register(FieldCell.nib, forCellWithReuseIdentifier: FieldCell.identifier)
-
-        for _ in 0..<self.numberOfCellsInField {
-            dataSource.append(CellData(state: .empty))
-        }
+		(0...numberOfCellsInField).forEach({_ in dataSource.append(CellData(state: .empty))})
         addSubview(collectionView)
     }
 }

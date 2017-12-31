@@ -56,7 +56,7 @@ class GameLogicManager {
     }
 
     // MARK: - Fileprivate methods
-
+	// TODO: fix this
     fileprivate func removePlacedCellIfNeeded() {
         // Removing selected cell from currnet tetramonio if it is there
         field.forEach { (fieldCell) in
@@ -179,7 +179,7 @@ extension GameLogicManager: GameLogicManagerInput {
         var tetramonios = [Tetramonio]()
         if let storedTetramonios = tetramonioCoreDataManager?.tetramoniosIndexes,
             !storedTetramonios.isEmpty,
-            let unwraprdTetramonios = tetramoniosManager?.getTetramoniosFrom(indexes: storedTetramonios) {
+            let unwraprdTetramonios = tetramoniosManager?.getTetramoniosFrom(storedTetramonios) {
             tetramonios = unwraprdTetramonios
             tetramoniosManager?.currentTetramonios = tetramonios
             self.tetramonios = tetramonios

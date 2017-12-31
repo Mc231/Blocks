@@ -11,6 +11,7 @@ import Foundation
 class GameAssambler {
 
     class func configureGameModule(in view: GameViewController) {
+
         let presenter = GamePresenter()
         presenter.view = view
 

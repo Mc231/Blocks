@@ -10,7 +10,7 @@ import Foundation
 
 protocol TetramonioProtocol {
     func generateTetramonios(_ generationType: GenerationType) -> [Tetramonio]
-    func getTetramoniosFrom(indexes: [Int16]?) -> [Tetramonio]
+    func getTetramoniosFrom(_ indexes: [Int16]?) -> [Tetramonio]
     var currentTetramonios: [Tetramonio] {get set}
 }
 
@@ -26,7 +26,7 @@ class TetramonioManager: TetramonioProtocol {
 
     private let tetramonios: [Tetramonio]
     private let tetramonioDataProvider: TetremonioDataProvider
-    var currentTetramonios = [Tetramonio]()
+	internal var currentTetramonios = [Tetramonio]()
 
     // MARK: - Inizialization
 
@@ -79,18 +79,18 @@ class TetramonioManager: TetramonioProtocol {
         return result
     }
 
-    func getTetramoniosFrom(indexes: [Int16]?) -> [Tetramonio] {
-        var result = [Tetramonio]()
+    func getTetramoniosFrom(_ indexes: [Int16]?) -> [Tetramonio] {
+
         guard let indexes = indexes else {
             fatalError("Indexes can not be nil")
         }
-        for index in indexes {
-            guard let tetramonioIndex = tetramonios.index(where: {$0.identifier.rawValue == index}) else {
-                fatalError("Impossible tetramonio")
-            }
-            let tetamonio = tetramonios[tetramonioIndex]
-            result.append(tetamonio)
-        }
-        return result
+
+		return indexes.reduce(into: [Tetramonio](), { (result, value) in
+			guard let tetramonioIndex = tetramonios.index(where: {$0.identifier.rawValue == value}) else {
+				fatalError("Impossible tetramonio")
+			}
+			let tetamonio = tetramonios[tetramonioIndex]
+			result.append(tetamonio)
+		})
     }
 }

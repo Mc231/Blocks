@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9Qo-fH-zdy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Qo-fH-zdy">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,6 +9,7 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,10 +17,6 @@
         <scene sceneID="WOS-Lq-sx7">
             <objects>
                 <viewController id="9Qo-fH-zdy" customClass="GameViewController" customModule="Blocks" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="tOF-Mc-IjA"/>
-                        <viewControllerLayoutGuide type="bottom" id="Jvy-SO-vpQ"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wIt-uZ-FIp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -45,20 +42,10 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xDw-qa-J8q" customClass="TetramonioView" customModule="Blocks" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="49" width="80" height="80"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="8"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G0Y-q4-7UD" customClass="TetramonioView" customModule="Blocks" customModuleProvider="target">
                                                 <rect key="frame" x="88" y="49" width="80" height="80"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="8"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
                                             </view>
                                         </subviews>
                                         <constraints>
@@ -87,7 +74,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeG-eF-Ny3">
-                                                <rect key="frame" x="91.5" y="48" width="80.5" height="80"/>
+                                                <rect key="frame" x="91.5" y="49" width="80.5" height="80"/>
                                                 <color key="backgroundColor" red="0.92938733100891113" green="0.91808772087097168" blue="0.84795290231704712" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -114,7 +101,7 @@
                                             <constraint firstItem="uXe-nU-jZe" firstAttribute="top" secondItem="bpa-9o-h4m" secondAttribute="top" id="XqZ-tT-hlT"/>
                                             <constraint firstItem="uXe-nU-jZe" firstAttribute="leading" secondItem="1CK-oX-hz4" secondAttribute="leading" id="ayY-SF-UrI"/>
                                             <constraint firstItem="VeG-eF-Ny3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bpa-9o-h4m" secondAttribute="leading" constant="20" symbolic="YES" id="lLC-Hf-JQ1"/>
-                                            <constraint firstAttribute="bottom" secondItem="VeG-eF-Ny3" secondAttribute="bottom" constant="1" id="nfe-2U-vOD"/>
+                                            <constraint firstAttribute="bottom" secondItem="VeG-eF-Ny3" secondAttribute="bottom" id="nfe-2U-vOD"/>
                                             <constraint firstItem="1CK-oX-hz4" firstAttribute="leading" secondItem="bpa-9o-h4m" secondAttribute="leading" constant="4" id="svc-0l-Jla"/>
                                             <constraint firstItem="uXe-nU-jZe" firstAttribute="trailing" secondItem="VeG-eF-Ny3" secondAttribute="trailing" id="tcA-hk-fOi"/>
                                         </constraints>
@@ -158,13 +145,14 @@
                         <constraints>
                             <constraint firstItem="Ol0-AI-6XO" firstAttribute="trailing" secondItem="wIt-uZ-FIp" secondAttribute="trailingMargin" id="45E-jK-gVj"/>
                             <constraint firstItem="Ol0-AI-6XO" firstAttribute="top" secondItem="r2w-TX-RBP" secondAttribute="bottom" constant="10" id="7l1-M7-LfH"/>
-                            <constraint firstItem="r2w-TX-RBP" firstAttribute="top" secondItem="tOF-Mc-IjA" secondAttribute="bottom" constant="8" id="EdJ-PY-0zp"/>
+                            <constraint firstItem="r2w-TX-RBP" firstAttribute="top" secondItem="U1L-6Q-KQ6" secondAttribute="top" constant="8" id="EdJ-PY-0zp"/>
                             <constraint firstItem="r2w-TX-RBP" firstAttribute="height" secondItem="wIt-uZ-FIp" secondAttribute="height" multiplier="0.1934" id="XPK-nR-I6n"/>
                             <constraint firstItem="r2w-TX-RBP" firstAttribute="trailing" secondItem="wIt-uZ-FIp" secondAttribute="trailingMargin" id="bsa-PC-pMw"/>
                             <constraint firstItem="Ol0-AI-6XO" firstAttribute="leading" secondItem="wIt-uZ-FIp" secondAttribute="leadingMargin" id="fjd-Wk-RLo"/>
-                            <constraint firstItem="r2w-TX-RBP" firstAttribute="centerX" secondItem="wIt-uZ-FIp" secondAttribute="centerX" id="jJO-f8-gia"/>
+                            <constraint firstItem="r2w-TX-RBP" firstAttribute="centerX" secondItem="U1L-6Q-KQ6" secondAttribute="centerX" id="jJO-f8-gia"/>
                             <constraint firstItem="r2w-TX-RBP" firstAttribute="leading" secondItem="wIt-uZ-FIp" secondAttribute="leadingMargin" id="yG6-Ss-odi"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="U1L-6Q-KQ6"/>
                     </view>
                     <navigationItem key="navigationItem" id="tr3-Fy-el4">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="4ii-hw-9cf"/>
