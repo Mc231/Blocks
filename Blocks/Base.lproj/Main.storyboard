@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Qo-fH-zdy">
-    <device id="retina4_0" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -18,17 +18,17 @@
             <objects>
                 <viewController id="9Qo-fH-zdy" customClass="GameViewController" customModule="Blocks" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wIt-uZ-FIp">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r2w-TX-RBP">
-                                <rect key="frame" x="16" y="28" width="288" height="110"/>
+                                <rect key="frame" x="16" y="52" width="343" height="157"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XKk-pk-EU1">
-                                        <rect key="frame" x="0.0" y="0.0" width="144" height="110"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="171.66666666666666" height="157"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iu3-Oa-QM6">
-                                                <rect key="frame" x="0.0" y="0.0" width="140" height="36.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="167.66666666666666" height="69.333333333333329"/>
                                                 <color key="backgroundColor" red="0.92786151170730591" green="0.91928261518478394" blue="0.84698832035064697" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <state key="normal" title="Menu">
@@ -37,14 +37,14 @@
                                                 </state>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xDw-qa-J8q" customClass="TetramonioView" customModule="Blocks" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="66" height="65.5"/>
+                                                <rect key="frame" x="0.0" y="77.333333333333343" width="80" height="79.666666666666657"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="xDw-qa-J8q" secondAttribute="height" multiplier="1:1" id="w28-6f-CLZ"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G0Y-q4-7UD" customClass="TetramonioView" customModule="Blocks" customModuleProvider="target">
-                                                <rect key="frame" x="74" y="44.5" width="66" height="65.5"/>
+                                                <rect key="frame" x="88" y="77.333333333333343" width="79.666666666666686" height="79.666666666666657"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
                                         </subviews>
@@ -64,24 +64,24 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bpa-9o-h4m">
-                                        <rect key="frame" x="144" y="0.0" width="144" height="110"/>
+                                        <rect key="frame" x="171.66666666666663" y="0.0" width="171.33333333333337" height="157"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1CK-oX-hz4">
-                                                <rect key="frame" x="4" y="44.5" width="66" height="65.5"/>
+                                                <rect key="frame" x="4" y="77.333333333333343" width="79.666666666666671" height="79.666666666666657"/>
                                                 <color key="backgroundColor" red="0.92941176470588238" green="0.91764705882352937" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeG-eF-Ny3">
-                                                <rect key="frame" x="78" y="44.5" width="66" height="65.5"/>
+                                                <rect key="frame" x="91.666666666666657" y="77.333333333333343" width="79.666666666666657" height="79.666666666666657"/>
                                                 <color key="backgroundColor" red="0.92938733100891113" green="0.91808772087097168" blue="0.84795290231704712" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXe-nU-jZe">
-                                                <rect key="frame" x="4" y="0.0" width="140" height="36.5"/>
+                                                <rect key="frame" x="4" y="0.0" width="167.33333333333334" height="69.333333333333329"/>
                                                 <color key="backgroundColor" red="0.92941176470588238" green="0.91764705882352937" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Restart">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -94,6 +94,7 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="VeG-eF-Ny3" firstAttribute="height" secondItem="1CK-oX-hz4" secondAttribute="height" id="1l7-x3-Bpm"/>
+                                            <constraint firstItem="VeG-eF-Ny3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bpa-9o-h4m" secondAttribute="leading" constant="20" symbolic="YES" id="27I-5Y-l8N"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1CK-oX-hz4" secondAttribute="trailing" constant="20" symbolic="YES" id="GKk-wQ-uFP"/>
                                             <constraint firstAttribute="trailing" secondItem="VeG-eF-Ny3" secondAttribute="trailing" id="MDF-Z7-HLV"/>
                                             <constraint firstItem="1CK-oX-hz4" firstAttribute="top" secondItem="uXe-nU-jZe" secondAttribute="bottom" constant="8" id="UJb-mA-Ivd"/>
@@ -123,12 +124,12 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ol0-AI-6XO">
-                                <rect key="frame" x="16" y="148" width="288" height="288"/>
+                                <rect key="frame" x="16" y="217" width="343" height="343"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Ol0-AI-6XO" secondAttribute="height" multiplier="1:1" id="Dmj-is-cIM"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="1" id="p2A-o3-Hdd">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="p2A-o3-Hdd">
                                     <size key="itemSize" width="30" height="30"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -144,7 +145,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Ol0-AI-6XO" firstAttribute="trailing" secondItem="wIt-uZ-FIp" secondAttribute="trailingMargin" id="45E-jK-gVj"/>
-                            <constraint firstItem="Ol0-AI-6XO" firstAttribute="top" secondItem="r2w-TX-RBP" secondAttribute="bottom" constant="10" id="7l1-M7-LfH"/>
+                            <constraint firstItem="Ol0-AI-6XO" firstAttribute="top" secondItem="r2w-TX-RBP" secondAttribute="bottom" constant="8" id="7l1-M7-LfH"/>
                             <constraint firstItem="r2w-TX-RBP" firstAttribute="top" secondItem="U1L-6Q-KQ6" secondAttribute="top" constant="8" id="EdJ-PY-0zp"/>
                             <constraint firstItem="r2w-TX-RBP" firstAttribute="height" secondItem="wIt-uZ-FIp" secondAttribute="height" multiplier="0.1934" id="XPK-nR-I6n"/>
                             <constraint firstItem="r2w-TX-RBP" firstAttribute="trailing" secondItem="wIt-uZ-FIp" secondAttribute="trailingMargin" id="bsa-PC-pMw"/>
