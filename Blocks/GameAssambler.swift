@@ -9,6 +9,12 @@
 import Foundation
 
 class GameAssambler {
+	
+	// MARK: - Constants
+
+	private static let kDbName = "Blocks"
+
+	// MARK: - Class methods
 
     class func configureGameModule(in view: GameViewController) {
 
@@ -20,7 +26,7 @@ class GameAssambler {
 
         let tetramonioDataProvider = TetremonioDataProvider()
         let tetramonioManager = TetramonioManager(tetramonioDataProvider: tetramonioDataProvider)
-        let coreDataManager = CoreDataManager(modelName: "Blocks")
+        let coreDataManager = CoreDataManager(modelName: kDbName)
         let tetramonioCoreDataManager = TetreamonioCoreDataManager(coreDataManager: coreDataManager)
         let gameLogic = GameLogicManager(interractor: interractor,
 										 tetramoniosManager: tetramonioManager,
