@@ -19,12 +19,8 @@ class TetramonioView: UIView {
 
     fileprivate lazy var dataSource: [CellData] = [CellData]()
 
-	private var cellPadding: CGFloat {
-		return isIphone5 ? 18 : 2
-	}
-
     fileprivate var cellSize: CGSize {
-        let width = (self.bounds.width - cellPadding) / 4
+        let width = (self.bounds.width - 2) / 4
         let height = width
         return CGSize(width: width, height: height)
     }
@@ -43,11 +39,6 @@ class TetramonioView: UIView {
         collectionView.backgroundColor = UIColor.white
 		collectionView.isScrollEnabled = false
         collectionView.dataSource = self
-
-		if isIphone5 {
-			collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-			collectionView.autoresizesSubviews = true
-		}
 
         return collectionView
     }()
