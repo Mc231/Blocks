@@ -15,7 +15,8 @@ class TetramonioView: UIView {
     private let kNumberOfCellsInField = 15
 	private let kCellsMargin: CGFloat = 2
 	private let kNumberOfCells: CGFloat = 4
-	private let kLineSpacing: CGFloat, kInterimSpacing: CGFloat = 0.5
+	private let kLineSpacing: CGFloat = 0.5
+	private let kInterimSpacing: CGFloat = 0.5
 
 	// MARK: - Variables
 
