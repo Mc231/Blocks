@@ -9,12 +9,14 @@
 import Foundation
 
 protocol GameInteractorInput: class {
+	var presenter: GameInteractorOutput? { get set }
     func startGame()
     func restartGame()
     func handleTouchedCellWithData(_ cellData: CellData)
 }
 
 protocol GameInteractorOutput: class {
+	var interractor: GameInteractorInput? { get set }
     func provideTetramonios(_ tetramonios: [Tetramonio])
     func provideField(_ field: [CellData])
     func provideScore(current: Int32, best: Int32)

@@ -11,12 +11,14 @@ import UIKit
 // MARK: - Check this
 
 protocol GameViewOutput {
+	var view: GameViewInput? { get set }
     func startGame()
     func restartGame()
     func handleTouchedCell(with data: CellData)
 }
 
 protocol GameViewInput: class {
+	var presenter: GameViewOutput? { get set }
     func display(tetramonios: [Tetramonio])
     func display(field withData: [CellData])
     func displayScore(current: Int32, best: Int32)
