@@ -58,15 +58,15 @@ class TetramonioManager: TetramonioProtocol {
 
             if generationType == .firtTetramonio {
 
-                while firstTetrmonio.identifier.rawValue == randomTetamonio
-					|| randomTetamonio == lastTetramonio.identifier.rawValue {
+                while firstTetrmonio.type.rawValue == randomTetamonio
+					|| randomTetamonio == lastTetramonio.type.rawValue {
                     randomTetamonio = Int16.randomNum(maxValue: numOfTetramonios)
                 }
                   result.append(tetramonios[Int(randomTetamonio)])
                   result.append(lastTetramonio)
             } else {
-                while lastTetramonio.identifier.rawValue == randomTetamonio
-					|| randomTetamonio == firstTetrmonio.identifier.rawValue {
+                while lastTetramonio.type.rawValue == randomTetamonio
+					|| randomTetamonio == firstTetrmonio.type.rawValue {
                     randomTetamonio = Int16.randomNum(maxValue: numOfTetramonios)
                 }
                     result.append(firstTetrmonio)
@@ -86,7 +86,7 @@ class TetramonioManager: TetramonioProtocol {
         }
 
 		return indexes.reduce(into: [Tetramonio](), { (result, value) in
-			guard let tetramonioIndex = tetramonios.index(where: {$0.identifier.rawValue == value}) else {
+			guard let tetramonioIndex = tetramonios.index(where: {$0.type.rawValue == value}) else {
 				fatalError("Impossible tetramonio")
 			}
 			let tetamonio = tetramonios[tetramonioIndex]

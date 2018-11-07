@@ -91,7 +91,7 @@ class GameLogicManager {
 
             currentTetramonio.removeAll()
 
-            guard let tetramonioGenerateType = tetramonios.index(where: {$0.identifier == tetramonio?.identifier})
+            guard let tetramonioGenerateType = tetramonios.index(where: {$0.type == tetramonio?.type})
                 .flatMap({GenerationType(rawValue: $0)}) else {
                     return
             }

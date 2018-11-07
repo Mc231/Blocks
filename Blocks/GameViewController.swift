@@ -106,7 +106,7 @@ class GameViewController: UIViewController {
         field
             .subviews
             .filter({$0 is FieldCell && $0.frame.contains(touchPoint)})
-            .flatMap({$0 as? FieldCell})
+			.compactMap({$0 as? FieldCell})
             .forEach({presenter?.handleTouchedCell(with: $0.cellData)})
     }
 }

@@ -46,7 +46,7 @@ extension GameOverChecker {
                         && !secondCell.isCellPlaced
                         && !thirdCell.isCellPlaced
                         && !fourthCell.isCellPlaced
-                        && possibleTetramonio?.identifier.rawValue == tetramonio.identifier.rawValue {
+                        && possibleTetramonio?.type.rawValue == tetramonio.type.rawValue {
                         return false
                     }
                 }

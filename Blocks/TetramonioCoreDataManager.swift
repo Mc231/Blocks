@@ -59,8 +59,8 @@ class TetreamonioCoreDataManager {
 extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
 
     func store(current tetramonios: [Tetramonio]) {
-        guard let firstTetramonio = tetramonios.first?.identifier.rawValue,
-            let lastTetramono = tetramonios.last?.identifier.rawValue else {
+        guard let firstTetramonio = tetramonios.first?.type.rawValue,
+            let lastTetramono = tetramonios.last?.type.rawValue else {
                 fatalError("You nedd to pass 2 teramonios")
         }
 
@@ -134,7 +134,7 @@ extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
 
         coreDataManager.save(game)
 
-        return storedCells.flatMap({CellData(from: $0)})
+		return storedCells.compactMap({CellData(from: $0)})
     }
 
     var currentScore: Int32 {

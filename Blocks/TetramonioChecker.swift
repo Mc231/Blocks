@@ -29,7 +29,7 @@ extension TetramonioChecker {
             let secondConstant = currentTetramonio.indexes[1]
             let thirdConstant = currentTetramonio.indexes[2]
 
-            if currentTetramonio.identifier == .iHTetramonio || currentTetramonio.identifier == .iVTetramonio {
+            if currentTetramonio.type == .iH || currentTetramonio.type == .iV {
                 if (secondCell == firstCell + firstConstant)
                     && (thirdCell == secondCell + secondConstant)
                     &&  (fourthCell == thirdCell + thirdConstant) {

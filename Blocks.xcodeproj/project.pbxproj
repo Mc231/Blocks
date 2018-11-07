@@ -36,7 +36,6 @@
 		FF9DE8431EAD5A0400F4128A /* TetramonioChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9DE8421EAD5A0400F4128A /* TetramonioChecker.swift */; };
 		FFA0655F1EC3ABB400B8907D /* CoredDataManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA0655E1EC3ABB400B8907D /* CoredDataManagerTest.swift */; };
 		FFA44A2F1E452D20000B4829 /* TetramonioDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA44A2E1E452D20000B4829 /* TetramonioDataProvider.swift */; };
-		FFA44A371E45344F000B4829 /* TetramonioType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA44A361E45344F000B4829 /* TetramonioType.swift */; };
 		FFA8F9A11FF827530071276A /* Tetramonios.plist in Resources */ = {isa = PBXBuildFile; fileRef = FFA8F9A01FF827520071276A /* Tetramonios.plist */; };
 		FFB82A8A1E7D2F2A0043BD53 /* Blocks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFB82A881E7D2F2A0043BD53 /* Blocks.xcdatamodeld */; };
 		FFE6D62D1E59A47A0060C1C8 /* FieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6D62C1E59A47A0060C1C8 /* FieldCell.swift */; };
@@ -93,7 +92,6 @@
 		FF9DE8421EAD5A0400F4128A /* TetramonioChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetramonioChecker.swift; sourceTree = "<group>"; };
 		FFA0655E1EC3ABB400B8907D /* CoredDataManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoredDataManagerTest.swift; sourceTree = "<group>"; };
 		FFA44A2E1E452D20000B4829 /* TetramonioDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetramonioDataProvider.swift; sourceTree = "<group>"; };
-		FFA44A361E45344F000B4829 /* TetramonioType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetramonioType.swift; sourceTree = "<group>"; };
 		FFA8F9A01FF827520071276A /* Tetramonios.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Tetramonios.plist; sourceTree = "<group>"; };
 		FFB82A891E7D2F2A0043BD53 /* Blocks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Blocks.xcdatamodel; sourceTree = "<group>"; };
 		FFE6D62C1E59A47A0060C1C8 /* FieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldCell.swift; sourceTree = "<group>"; };
@@ -371,7 +369,6 @@
 			isa = PBXGroup;
 			children = (
 				FFFBBFF41E4527DB0052D68B /* CellData.swift */,
-				FFA44A361E45344F000B4829 /* TetramonioType.swift */,
 				FFFBBFE11E4523A10052D68B /* Tetramonio.swift */,
 				FFFBBFF61E45283A0052D68B /* CellState.swift */,
 			);
@@ -422,7 +419,6 @@
 				FFFBBFB31E4521700052D68B /* Sources */,
 				FFFBBFB41E4521700052D68B /* Frameworks */,
 				FFFBBFB51E4521700052D68B /* Resources */,
-				FFA8F9A41FF830410071276A /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -440,7 +436,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = QuasarClaster;
 				TargetAttributes = {
 					FF9B68591E4D1678006376CA = {
@@ -498,23 +494,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		FFA8F9A41FF830410071276A /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		FF9B68561E4D1678006376CA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -560,7 +539,6 @@
 				FF33CF811E8509E0007969C6 /* PlistDataProvider.swift in Sources */,
 				FFB82A8A1E7D2F2A0043BD53 /* Blocks.xcdatamodeld in Sources */,
 				FFA44A2F1E452D20000B4829 /* TetramonioDataProvider.swift in Sources */,
-				FFA44A371E45344F000B4829 /* TetramonioType.swift in Sources */,
 				FFFBBFBB1E4521700052D68B /* AppDelegate.swift in Sources */,
 				FF32D46A1EEA220100A15F9E /* Constatns.swift in Sources */,
 			);
@@ -638,6 +616,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -645,6 +624,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -671,7 +651,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -695,6 +675,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -702,6 +683,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -722,7 +704,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
