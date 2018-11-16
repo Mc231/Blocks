@@ -12,4 +12,5 @@ enum CellState: Int16 {
     case empty = 0
     case selected = 1
     case placed = 2
+	case clear = 3
 }

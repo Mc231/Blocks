@@ -9,6 +9,7 @@
 import UIKit
 
 class TetramonioView: UIView {
+	
 
     // MARK: - Constatns
 
@@ -19,6 +20,19 @@ class TetramonioView: UIView {
 	private let kInterimSpacing: CGFloat = 0.5
 
 	// MARK: - Variables
+	
+	// TODO: - Refactore this
+	var isDragging: Bool = false {
+		didSet{
+			for index in dataSource.indices {
+				let cellData = dataSource[index]
+				if cellData.state != .selected {
+					dataSource[index].chageState(newState: isDragging ? .clear : .empty)
+				}
+			}
+			collectionView.reloadData()
+		}
+	}
 
     fileprivate lazy var dataSource: [CellData] = [CellData]()
 
@@ -39,7 +53,7 @@ class TetramonioView: UIView {
 
     private lazy var collectionView: UICollectionView = {
         var collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: self.collectinViwLayout)
-        collectionView.backgroundColor = UIColor.white
+        collectionView.backgroundColor = UIColor.clear
 		collectionView.isScrollEnabled = false
         collectionView.dataSource = self
 
@@ -63,7 +77,7 @@ class TetramonioView: UIView {
     public func update(with indexes: [Int]) {
 
         for index in dataSource.indices {
-            dataSource[index].chageState(newState: .empty)
+			dataSource[index].chageState(newState: .empty)
         }
 
         indexes.forEach { (index) in
@@ -96,7 +110,7 @@ extension TetramonioView: UICollectionViewDataSource {
 			= collectionView.dequeueReusableCell(withReuseIdentifier: FieldCell.identifier, for: indexPath) as? FieldCell else {
             fatalError("Could not deque cell")
         }
-
+		
         cell.cellData = dataSource[indexPath.row]
         return cell
     }

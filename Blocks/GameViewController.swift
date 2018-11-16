@@ -81,7 +81,47 @@ class GameViewController: UIViewController {
     @IBAction private func restartGame(sender: UIButton) {
         presenter?.restartGame()
     }
+	
+	var initialCenter = CGPoint()
+	var initialWidth = CGFloat.leastNonzeroMagnitude
+	
+	@IBAction private func didTapTetramonio1(_ sender: UIPanGestureRecognizer) {
+		guard let piece = sender.view as? TetramonioView else {return}
+		// Get the changes in the X and Y directions relative to
+		// the superview's coordinate space.
+		let translation = sender.translation(in: piece.superview)
+		if sender.state == .began {
+			// Save the view's original position.
+			field.layer.zPosition = -1
+			piece.isDragging = true
+			self.initialCenter = piece.center
+			self.initialWidth = piece.frame.width
+			let coof = (field.frame.width / 2) / initialWidth
+			piece.transform = CGAffineTransform(scaleX: coof, y: coof)
+		}
+		// Update the position for the .began, .changed, and .ended states
+		if sender.state != .ended {
+			// Add the X and Y translation to the view's original position.
+			let newCenter = CGPoint(x: initialCenter.x + translation.x, y: initialCenter.y + translation.y)
+			piece.center = newCenter
+		}
+		else {
+			// On cancellation, return the piece to its original location.
+			UIView.animate(withDuration: 0.3) {
+				self.field.layer.zPosition = 1
+				piece.isDragging = false
+				piece.center = self.initialCenter
+				let coof = self.initialWidth / piece.bounds.width
+				piece.transform = CGAffineTransform(scaleX: coof, y: coof)
+			}
+		}
 
+	}
+	
+	@IBAction private func didTapTetramonio2(_ sender: UIPanGestureRecognizer) {
+		
+	}
+	
     // MARK: - Touches methods
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
