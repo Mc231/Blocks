@@ -10,7 +10,6 @@ import UIKit
 
 class TetramonioView: UIView {
 	
-
     // MARK: - Constatns
 
     private let kNumberOfCellsInField = 15
@@ -21,7 +20,7 @@ class TetramonioView: UIView {
 
 	// MARK: - Variables
 	
-	// TODO: - Refactore this
+	// TODO: - Refactore this and next variable
 	var isDragging: Bool = false {
 		didSet{
 			for index in dataSource.indices {
@@ -32,6 +31,14 @@ class TetramonioView: UIView {
 			}
 			collectionView.reloadData()
 		}
+	}
+	
+	var tetramonioRects: [FieldCell] {
+		return collectionView
+			.subviews
+			.filter({$0 is FieldCell})
+			.compactMap({$0 as? FieldCell})
+			.filter({$0.cellData.state == .selected})
 	}
 
     fileprivate lazy var dataSource: [CellData] = [CellData]()

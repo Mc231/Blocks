@@ -85,8 +85,10 @@ class GameViewController: UIViewController {
 	var initialCenter = CGPoint()
 	var initialWidth = CGFloat.leastNonzeroMagnitude
 	
+	// TODO: - Refactore this
 	@IBAction private func didTapTetramonio1(_ sender: UIPanGestureRecognizer) {
 		guard let piece = sender.view as? TetramonioView else {return}
+		let tetramonioRects = piece.tetramonioRects
 		// Get the changes in the X and Y directions relative to
 		// the superview's coordinate space.
 		let translation = sender.translation(in: piece.superview)
@@ -103,9 +105,20 @@ class GameViewController: UIViewController {
 		if sender.state != .ended {
 			// Add the X and Y translation to the view's original position.
 			let newCenter = CGPoint(x: initialCenter.x + translation.x, y: initialCenter.y + translation.y)
+			let translation = sender.translation(in: field)
+			field
+				.subviews
+				.filter({$0 is FieldCell})
+				.flatMap({$0 as? FieldCell})
+				.forEach { (fieldCell) in
+					tetramonioRects.forEach({ (cell) in
+						print(cell.frame.intersects(fieldCell.frame))
+					})
+			}
 			piece.center = newCenter
 		}
 		else {
+			
 			// On cancellation, return the piece to its original location.
 			UIView.animate(withDuration: 0.3) {
 				self.field.layer.zPosition = 1
@@ -115,7 +128,6 @@ class GameViewController: UIViewController {
 				piece.transform = CGAffineTransform(scaleX: coof, y: coof)
 			}
 		}
-
 	}
 	
 	@IBAction private func didTapTetramonio2(_ sender: UIPanGestureRecognizer) {
