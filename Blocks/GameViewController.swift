@@ -88,7 +88,7 @@ class GameViewController: UIViewController {
 	// TODO: - Refactore this
 	@IBAction private func didTapTetramonio1(_ sender: UIPanGestureRecognizer) {
 		guard let piece = sender.view as? TetramonioView else {return}
-		let tetramonioRects = piece.tetramonioRects
+
 		// Get the changes in the X and Y directions relative to
 		// the superview's coordinate space.
 		let translation = sender.translation(in: piece.superview)
@@ -100,24 +100,36 @@ class GameViewController: UIViewController {
 			self.initialWidth = piece.frame.width
 			let coof = (field.frame.width / 2) / initialWidth
 			piece.transform = CGAffineTransform(scaleX: coof, y: coof)
+		}else if sender.state == .changed {
+		//	print("Changed")
 		}
 		// Update the position for the .began, .changed, and .ended states
 		if sender.state != .ended {
 			// Add the X and Y translation to the view's original position.
 			let newCenter = CGPoint(x: initialCenter.x + translation.x, y: initialCenter.y + translation.y)
-			let translation = sender.translation(in: field)
-			field
-				.subviews
-				.filter({$0 is FieldCell})
-				.flatMap({$0 as? FieldCell})
-				.forEach { (fieldCell) in
-					tetramonioRects.forEach({ (cell) in
-						print(cell.frame.intersects(fieldCell.frame))
-					})
-			}
 			piece.center = newCenter
 		}
 		else {
+			// TODO : - Refacore
+			let magic = field
+				.subviews
+				.filter({$0 is FieldCell})
+				.flatMap({$0 as? FieldCell})
+				.reduce(into: [FieldCell]()) { (result, fieldCell) in
+					piece.selectedCells.forEach({ (tetramonioCell) in
+						let fieldRect = fieldCell.convert(fieldCell.bounds, to: self.view)
+						let tetramonioRect = tetramonioCell.convert(tetramonioCell.bounds, to: self.view)
+						let intersectRect = fieldRect.intersection(tetramonioRect)
+						if fieldRect.intersects(tetramonioRect) && intersectRect.width >= 32 && intersectRect.height >= 32 {
+						//	if !result.contains(fieldCell) {
+								result.append(fieldCell)
+							//}
+						}
+					})
+				}
+				magic.forEach { (cell) in
+						self.presenter?.handleTouchedCell(with: cell.cellData)
+			}
 			
 			// On cancellation, return the piece to its original location.
 			UIView.animate(withDuration: 0.3) {
@@ -131,7 +143,7 @@ class GameViewController: UIViewController {
 	}
 	
 	@IBAction private func didTapTetramonio2(_ sender: UIPanGestureRecognizer) {
-		
+		didTapTetramonio1(sender)
 	}
 	
     // MARK: - Touches methods

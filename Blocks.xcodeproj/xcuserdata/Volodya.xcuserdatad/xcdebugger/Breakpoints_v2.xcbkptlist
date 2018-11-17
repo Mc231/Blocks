@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameViewController.swift"
-            timestampString = "564102807.638726"
+            timestampString = "564186112.932657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "GameViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -136,7 +136,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/Extensions.swift"
-            timestampString = "536535217.125868"
+            timestampString = "564132516.615466"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "14"
@@ -374,7 +374,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/CellData.swift"
-            timestampString = "564099812.5533201"
+            timestampString = "564183767.951339"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "40"
@@ -438,11 +438,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameViewController.swift"
-            timestampString = "564102807.639486"
+            timestampString = "564186112.933506"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "220"
-            endingLineNumber = "220"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
             landmarkName = "display(tetramonios:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -454,11 +454,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameViewController.swift"
-            timestampString = "564102807.63981"
+            timestampString = "564186112.933903"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "222"
-            endingLineNumber = "222"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
             landmarkName = "display(tetramonios:)"
             landmarkType = "7">
             <Locations>
@@ -502,11 +502,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameViewController.swift"
-            timestampString = "564102807.640113"
+            timestampString = "564186112.93425"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
             landmarkName = "display(tetramonios:)"
             landmarkType = "7">
             <Locations>
@@ -550,11 +550,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameViewController.swift"
-            timestampString = "564102807.640412"
+            timestampString = "564186112.934571"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "223"
-            endingLineNumber = "223"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
             landmarkName = "display(tetramonios:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -566,11 +566,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameViewController.swift"
-            timestampString = "564102807.640709"
+            timestampString = "564186112.934891"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
             landmarkName = "display(tetramonios:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -582,7 +582,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "559293800.840588"
+            timestampString = "564184333.553129"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "176"
@@ -598,7 +598,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "559293800.840634"
+            timestampString = "564184333.553174"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "109"
@@ -614,7 +614,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "559293800.840678"
+            timestampString = "564184333.553231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "98"
@@ -822,7 +822,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "559293800.840952"
+            timestampString = "564184333.553388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "182"
@@ -838,7 +838,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "559293800.8410029"
+            timestampString = "564184333.553435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "183"
@@ -854,7 +854,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "559293800.841046"
+            timestampString = "564184333.5534739"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "186"
@@ -870,7 +870,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "559293800.841087"
+            timestampString = "564184333.55351"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "185"
@@ -886,7 +886,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "559293800.841131"
+            timestampString = "564184333.553545"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "190"
@@ -902,7 +902,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameLogicManager.swift"
-            timestampString = "559293800.84117"
+            timestampString = "564184333.553578"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "187"
@@ -918,7 +918,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/TetramonioView.swift"
-            timestampString = "564102807.6411999"
+            timestampString = "564186112.935412"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "84"
@@ -934,7 +934,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/TetramonioView.swift"
-            timestampString = "564102807.641253"
+            timestampString = "564186112.9354661"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "93"
@@ -950,7 +950,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/TetramonioView.swift"
-            timestampString = "564102807.641299"
+            timestampString = "564186112.9355119"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "63"
@@ -966,7 +966,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/TetramonioView.swift"
-            timestampString = "564102807.641368"
+            timestampString = "564186112.935555"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "48"
@@ -998,7 +998,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/TetramonioView.swift"
-            timestampString = "564102807.641472"
+            timestampString = "564186112.935613"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "32"
@@ -1014,11 +1014,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameViewController.swift"
-            timestampString = "564102807.641524"
+            timestampString = "564186112.9356591"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "touchesBegan(_:with:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1030,7 +1030,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameViewController.swift"
-            timestampString = "564102807.641884"
+            timestampString = "564186112.9359879"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "94"
@@ -1046,11 +1046,234 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Blocks/GameViewController.swift"
-            timestampString = "564102807.642202"
+            timestampString = "564186112.936304"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "95"
             endingLineNumber = "95"
+            landmarkName = "didTapTetramonio1(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Blocks/GameViewController.swift"
+            timestampString = "564186112.936614"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "didTapTetramonio1(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Blocks.GameViewController.(didTapTetramonio1 in _4E6BC776D844212C1C8BAC81F738DE68)(__C.UIPanGestureRecognizer) -&gt; ()"
+                  moduleName = "Blocks"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/volodya/Desktop/PersonalProjects/MyProjects/IOS/Blocks/Blocks/GameViewController.swift"
+                  timestampString = "564183429.2894731"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "3794">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 () -&gt; () in Blocks.GameViewController.(didTapTetramonio1 in _4E6BC776D844212C1C8BAC81F738DE68)(__C.UIPanGestureRecognizer) -&gt; ()"
+                  moduleName = "Blocks"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/volodya/Desktop/PersonalProjects/MyProjects/IOS/Blocks/Blocks/GameViewController.swift"
+                  timestampString = "564183429.292797"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "37">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Blocks/GameViewController.swift"
+            timestampString = "564186112.936926"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "didTapTetramonio1(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Blocks/GameViewController.swift"
+            timestampString = "564186112.937227"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "didTapTetramonio1(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Blocks/GameViewController.swift"
+            timestampString = "564186112.937574"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "didTapTetramonio1(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Blocks/GameViewController.swift"
+            timestampString = "564186112.937975"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
+            landmarkName = "didTapTetramonio1(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Blocks.GameViewController.(didTapTetramonio1 in _4E6BC776D844212C1C8BAC81F738DE68)(__C.UIPanGestureRecognizer) -&gt; ()"
+                  moduleName = "Blocks"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/volodya/Desktop/PersonalProjects/MyProjects/IOS/Blocks/Blocks/GameViewController.swift"
+                  timestampString = "564185552.500962"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "4095">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (inout Swift.Array&lt;Blocks.FieldCell&gt;, Blocks.FieldCell) -&gt; () in Blocks.GameViewController.(didTapTetramonio1 in _4E6BC776D844212C1C8BAC81F738DE68)(__C.UIPanGestureRecognizer) -&gt; ()"
+                  moduleName = "Blocks"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/volodya/Desktop/PersonalProjects/MyProjects/IOS/Blocks/Blocks/GameViewController.swift"
+                  timestampString = "564185552.5031739"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "426">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 (Blocks.FieldCell) -&gt; () in Blocks.GameViewController.(didTapTetramonio1 in _4E6BC776D844212C1C8BAC81F738DE68)(__C.UIPanGestureRecognizer) -&gt; ()"
+                  moduleName = "Blocks"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/volodya/Desktop/PersonalProjects/MyProjects/IOS/Blocks/Blocks/GameViewController.swift"
+                  timestampString = "564185552.505273"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "129"
+                  endingLineNumber = "129"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Blocks/GameViewController.swift"
+            timestampString = "564186112.938278"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "didTapTetramonio1(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Blocks.GameViewController.(didTapTetramonio1 in _4E6BC776D844212C1C8BAC81F738DE68)(__C.UIPanGestureRecognizer) -&gt; ()"
+                  moduleName = "Blocks"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/volodya/Desktop/PersonalProjects/MyProjects/IOS/Blocks/Blocks/GameViewController.swift"
+                  timestampString = "564186113.058869"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "130"
+                  endingLineNumber = "130"
+                  offsetFromSymbolStart = "3999">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 (Blocks.FieldCell) -&gt; () in Blocks.GameViewController.(didTapTetramonio1 in _4E6BC776D844212C1C8BAC81F738DE68)(__C.UIPanGestureRecognizer) -&gt; ()"
+                  moduleName = "Blocks"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/volodya/Desktop/PersonalProjects/MyProjects/IOS/Blocks/Blocks/GameViewController.swift"
+                  timestampString = "564186113.061865"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "131"
+                  endingLineNumber = "131"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Blocks/GameViewController.swift"
+            timestampString = "564186112.938588"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
             landmarkName = "didTapTetramonio1(_:)"
             landmarkType = "7">
          </BreakpointContent>
