@@ -44,3 +44,13 @@ extension CellData {
         return self.state == .placed
     }
 }
+
+// MARK: - Equtable
+
+extension CellData: Equatable {
+	static func == (lhs: CellData, rhs: CellData) -> Bool {
+		return lhs.xPosition == rhs.xPosition
+			&& rhs.yPosition == rhs.yPosition
+			&& rhs.state == rhs.state
+	}
+}

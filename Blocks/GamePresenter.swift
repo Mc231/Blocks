@@ -11,7 +11,7 @@ import Foundation
 protocol GamePresenterInput: GameViewOutput, GameInteractorOutput {}
 
 class GamePresenter: GamePresenterInput {
-
+	
     weak var view: GameViewInput?
     var interractor: GameInteractorInput?
 
@@ -26,6 +26,10 @@ class GamePresenter: GamePresenterInput {
     func handleTouchedCell(with data: CellData) {
         interractor?.handleTouchedCellWithData(data)
     }
+	
+	func handleDraggedCell(with data: [CellData]) {
+		interractor?.handleDraggedCell(with: data)
+	}
 
     func gameOver(currentScore: Int32) {
         view?.showGameOverAlert(currentScore: currentScore)

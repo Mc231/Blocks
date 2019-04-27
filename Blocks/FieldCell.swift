@@ -19,7 +19,6 @@ class FieldCell: UICollectionViewCell {
                 backgroundColor = UIColor.CellBackgrounds.placed
             case .selected:
                 backgroundColor = UIColor.CellBackgrounds.selected
-			// TODO : -think about refactoring this
 			case .clear:
 				backgroundColor = UIColor.clear
             }

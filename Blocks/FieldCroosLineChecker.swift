@@ -14,7 +14,7 @@ enum CroosLineType {
 }
 
 protocol FieldCrossLineChecker {
-    func checkForCroosLine(type: CroosLineType, at field: [CellData], completion: ([CellData]) -> Void)
+    func checkForCroosLine(type: CroosLineType, at field: [CellData], completion: ([CellData], [CellData]) -> Void)
 }
 
 // MARK: - Default implementation
@@ -60,7 +60,7 @@ extension FieldCrossLineChecker {
     }
 
     // Fix this
-    func checkForCroosLine(type: CroosLineType, at field: [CellData], completion: ([CellData]) -> Void) {
+    func checkForCroosLine(type: CroosLineType, at field: [CellData], completion: ([CellData], [CellData]) -> Void) {
         var field = field
 
         let allPlacedCells = field.filter({$0.state == .placed})
@@ -69,34 +69,19 @@ extension FieldCrossLineChecker {
         if placedCells.isEmpty {
             return
         }
+		
+		var result: [CellData] = []
 
         let cellsData = getRows(of: type, from: placedCells)
-
-        for row in cellsData {
-            for cell in row {
-                guard let cellIndex = field.index(where: {$0.xPosition == cell.xPosition}) else {
-                    fatalError("Index could not be nil")
-                }
-
-                field[cellIndex].chageState(newState: .empty)
-
-                if type == .horizontal {
-
-                    var upperCellIndex = cellIndex - Constatns.Field.numberOfCellsInRow
-                    var  previousIndex = 0
-                    while upperCellIndex > 0 {
-                        if field[upperCellIndex].isCellPlaced {
-                            field[upperCellIndex].chageState(newState: .empty)
-                            if previousIndex != 0 {
-                                field[previousIndex].chageState(newState: .placed)
-                            }
-                        }
-                        previousIndex = upperCellIndex
-                        upperCellIndex -= 8
-                    }
-                }
-            }
-        }
-        completion(field)
+		for row in cellsData {
+			for cell in row {
+				guard let cellIndex = field.firstIndex(where: {$0.xPosition == cell.xPosition}) else {
+					                    fatalError("Index could not be nil")
+					                }
+				field[cellIndex].chageState(newState: .empty)
+				result.append(field[cellIndex])
+			}
+		}
+		completion(field, result)
     }
 }

@@ -20,19 +20,6 @@ class TetramonioView: UIView {
 
 	// MARK: - Variables
 	
-	// TODO: - Refactore this and next variable
-	var isDragging: Bool = false {
-		didSet{
-			for index in dataSource.indices {
-				let cellData = dataSource[index]
-				if cellData.state != .selected {
-					dataSource[index].chageState(newState: isDragging ? .clear : .empty)
-				}
-			}
-			collectionView.reloadData()
-		}
-	}
-	
 	var selectedCells: [FieldCell] {
 		return collectionView
 			.subviews
@@ -84,7 +71,7 @@ class TetramonioView: UIView {
     public func update(with indexes: [Int]) {
 
         for index in dataSource.indices {
-			dataSource[index].chageState(newState: .empty)
+			dataSource[index].chageState(newState: .clear)
         }
 
         indexes.forEach { (index) in

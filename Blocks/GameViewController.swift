@@ -15,6 +15,7 @@ protocol GameViewOutput {
     func startGame()
     func restartGame()
     func handleTouchedCell(with data: CellData)
+	func handleDraggedCell(with data: [CellData])
 }
 
 protocol GameViewInput: class {
@@ -95,7 +96,6 @@ class GameViewController: UIViewController {
 		if sender.state == .began {
 			// Save the view's original position.
 			field.layer.zPosition = -1
-			piece.isDragging = true
 			self.initialCenter = piece.center
 			self.initialWidth = piece.frame.width
 			let coof = (field.frame.width / 2) / initialWidth
@@ -114,7 +114,7 @@ class GameViewController: UIViewController {
 			let magic = field
 				.subviews
 				.filter({$0 is FieldCell})
-				.flatMap({$0 as? FieldCell})
+				.compactMap({$0 as? FieldCell})
 				.reduce(into: [FieldCell]()) { (result, fieldCell) in
 					piece.selectedCells.forEach({ (tetramonioCell) in
 						let fieldRect = fieldCell.convert(fieldCell.bounds, to: self.view)
@@ -126,15 +126,13 @@ class GameViewController: UIViewController {
 							//}
 						}
 					})
-				}
-				magic.forEach { (cell) in
-						self.presenter?.handleTouchedCell(with: cell.cellData)
-			}
+				}.map({$0.cellData})
+			// TODO: - Force unwrap
+			presenter?.handleDraggedCell(with: magic as! [CellData])
 			
 			// On cancellation, return the piece to its original location.
 			UIView.animate(withDuration: 0.3) {
 				self.field.layer.zPosition = 1
-				piece.isDragging = false
 				piece.center = self.initialCenter
 				let coof = self.initialWidth / piece.bounds.width
 				piece.transform = CGAffineTransform(scaleX: coof, y: coof)
@@ -225,9 +223,19 @@ extension GameViewController: GameViewInput {
     }
 
     func display(field withData: [CellData]) {
-        fieldData = withData
-        field.reloadData()
-    }
+		if fieldData.isEmpty {
+			fieldData = withData
+			field.reloadData()
+		}else{
+			let indexesToReload: [IndexPath] = withData.reduce(into: [IndexPath]()) { (result, data) in
+				if let index = fieldData.firstIndex(of: data) {
+					fieldData[index] = data
+					result.append(IndexPath(row: index, section: 0))
+				}
+			}
+			field.reloadItems(at: indexesToReload)
+    	}
+	}
 
     func display(tetramonios: [Tetramonio]) {
 

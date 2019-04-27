@@ -13,6 +13,7 @@ protocol GameInteractorInput: class {
     func startGame()
     func restartGame()
     func handleTouchedCellWithData(_ cellData: CellData)
+	func handleDraggedCell(with data: [CellData])
 }
 
 protocol GameInteractorOutput: class {
@@ -34,7 +35,7 @@ class GameInteractor {
 // MARK: - GameInteractorInput
 
 extension GameInteractor: GameInteractorInput {
-
+	
     func startGame() {
         gameLogic?.startGame(completion: { [weak self] (tetramonios, cellData, currentScore, bestScore) in
 
@@ -60,6 +61,10 @@ extension GameInteractor: GameInteractorInput {
     func handleTouchedCellWithData(_ cellData: CellData) {
         gameLogic?.updateField(with: cellData)
     }
+	
+	func handleDraggedCell(with data: [CellData]) {
+		gameLogic?.updateField(with: data)
+	}
 }
 
 // MARK: - GameLogicOutputDelegate 

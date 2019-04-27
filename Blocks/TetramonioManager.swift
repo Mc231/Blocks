@@ -86,7 +86,7 @@ class TetramonioManager: TetramonioProtocol {
         }
 
 		return indexes.reduce(into: [Tetramonio](), { (result, value) in
-			guard let tetramonioIndex = tetramonios.index(where: {$0.type.rawValue == value}) else {
+			guard let tetramonioIndex = tetramonios.firstIndex(where: {$0.type.rawValue == value}) else {
 				fatalError("Impossible tetramonio")
 			}
 			let tetamonio = tetramonios[tetramonioIndex]
