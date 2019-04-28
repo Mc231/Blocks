@@ -8,13 +8,8 @@
 
 import Foundation
 
-enum CroosLineType {
-    case horizontal
-    case vertical
-}
-
 protocol FieldCrossLineChecker {
-    func checkForCroosLine(type: CroosLineType, at field: [CellData], completion: ([CellData], [CellData]) -> Void)
+    func checkForCroosLine(at field: [CellData], completion: ([CellData], [CellData]) -> Void)
 }
 
 // MARK: - Default implementation
@@ -23,30 +18,29 @@ extension FieldCrossLineChecker {
 
     // MARK: - Private methods
 
-    private func getRows(of type: CroosLineType, from placedCells: [CellData]) -> [[CellData]] {
-        var cellsData = [[CellData]]()
+	private func getRows(from placedCells: [CellData], isVertical: Bool) -> [CellData] {
+        var result = [CellData]()
         var cellCounter = 1
         var currentRow = [CellData]()
 
         for cell in 1..<placedCells.count {
             let firstCellData  = placedCells[cell-1]
             let secondCellData = placedCells[cell]
-            let condition = type == .vertical
+            let condition = isVertical
 				? secondCellData.yPosition == firstCellData.yPosition
 				: secondCellData.xPosition - firstCellData.xPosition == 1
 
             if condition {
-                // WARNING: - Add set here
-                if !currentRow.contains(where: { $0.xPosition == firstCellData.xPosition }) {
+                if !currentRow.contains(firstCellData) {
                     currentRow.append(firstCellData)
-                } else if !currentRow.contains(where: { $0.xPosition == secondCellData.xPosition }) {
+                } else if !currentRow.contains(secondCellData) {
                     currentRow.append(secondCellData)
                 }
                 cellCounter += 1
 
                 if cellCounter == Constatns.Field.numberOfCellsInRow {
                     currentRow.append(secondCellData)
-                    cellsData.append(currentRow)
+                    result.append(contentsOf: currentRow)
                     currentRow.removeAll()
                     cellCounter = 1
                 }
@@ -56,32 +50,33 @@ extension FieldCrossLineChecker {
             }
         }
 
-        return cellsData
+        return result
     }
 
-    // Fix this
-    func checkForCroosLine(type: CroosLineType, at field: [CellData], completion: ([CellData], [CellData]) -> Void) {
+    func checkForCroosLine(at field: [CellData], completion: ([CellData], [CellData]) -> Void) {
         var field = field
 
-        let allPlacedCells = field.filter({$0.state == .placed})
-        let placedCells = type == .vertical ? allPlacedCells.sorted(by: {$0.yPosition < $1.yPosition}) : allPlacedCells
-
-        if placedCells.isEmpty {
-            return
-        }
+        let horizontalCells = field.filter({$0.state == .placed})
+		let verticalCells = horizontalCells.sorted(by: {$0.yPosition < $1.yPosition})
 		
-		var result: [CellData] = []
-
-        let cellsData = getRows(of: type, from: placedCells)
-		for row in cellsData {
-			for cell in row {
-				guard let cellIndex = field.firstIndex(where: {$0.xPosition == cell.xPosition}) else {
-					                    fatalError("Index could not be nil")
-					                }
-				field[cellIndex].chageState(newState: .empty)
-				result.append(field[cellIndex])
-			}
+		let horizontalRows: [CellData] = !horizontalCells.isEmpty
+			? getRows(from: horizontalCells, isVertical: false) : []
+		
+		let verticalRows: [CellData] = !verticalCells.isEmpty
+			? getRows(from: verticalCells, isVertical: true) : []
+		
+		if horizontalRows.isEmpty && verticalRows.isEmpty {
+			return
 		}
+		
+		let result = Set(horizontalRows + verticalRows).reduce(into: [CellData]()) { (result, cell) in
+			guard let cellIndex = field.firstIndex(of: cell) else {
+				fatalError("Index could not be nil")
+			}
+			field[cellIndex].chageState(newState: .empty)
+			result.append(field[cellIndex])
+		}
+
 		completion(field, result)
     }
 }

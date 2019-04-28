@@ -23,19 +23,17 @@ class TetremonioDataProvider {
 
     // MARK: - Public methods
 
-    func getTetramonios() -> [Tetramonio] {
-        var result = [Tetramonio]()
+	var tetramonios: [Tetramonio] {
         guard let tetramonios: NSArray = dataProvider.getData() else {
             fatalError("Tetramonios is of wrong type")
         }
-
-        for tetramonio in tetramonios {
-            guard let teramonioData = tetramonio as? NSDictionary else {
-                fatalError("Failed to parse teramonio dictionary")
-            }
-            let parsedTeramonio = Tetramonio(dictionary: teramonioData)
-            result.append(parsedTeramonio)
-        }
-        return result
+		return tetramonios
+			.reduce(into: [Tetramonio](), { (result, tetramonio) in
+				guard let teramonioData = tetramonio as? NSDictionary else {
+					fatalError("Failed to parse teramonio dictionary")
+				}
+				let parsedTetramonio = Tetramonio(dictionary: teramonioData)
+				result.append(parsedTetramonio)
+		})
     }
 }

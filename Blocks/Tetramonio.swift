@@ -11,13 +11,21 @@ import Foundation
 /**
     This struct represent basic Tetramonios from clasic Teris
  */
-
 struct Tetramonio {
 	
     let type: Type
     let indexes: [Int16]
     let gameOverIndexes: [Int]
     let displayTetramonioIndexes: [Int]
+}
+
+// MARK: - Equtable
+
+extension Tetramonio: Equatable {
+	
+	static func == (lhs: Tetramonio, rhs: Tetramonio) -> Bool {
+		return lhs.type == rhs.type
+	}
 }
 
 extension Tetramonio {

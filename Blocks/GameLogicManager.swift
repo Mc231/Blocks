@@ -8,12 +8,13 @@
 
 import Foundation
 
+typealias StartGameConfig = ([Tetramonio], [CellData], GameScore)
+
 protocol GameLogicManagerInput {
     func generateTetramoniosFor(_ type: GenerationType) -> [Tetramonio]
     func updateField(with handledCell: CellData)
 	func updateField(with draggedCells: [CellData])
-    func startGame(completion: (_ tetramonios: [Tetramonio], _ field: [CellData], _ currentScore: Int32,
-		_ bestScore: Int32) -> Void)
+    func startGame(completion: (StartGameConfig) -> Swift.Void)
     func restartGame(callback: @escaping (Int32, Int32, [CellData]) -> Void)
 }
 
@@ -66,13 +67,15 @@ class GameLogicManager {
             let tetramonio = checkTetramonio(from: currentTetramonio, with: tetramonios)
 			updateFieldWithTetramonio(tetramonio)
 			
-            guard let tetramonioGenerateType = tetramonios.firstIndex(where: {$0.type == tetramonio?.type})
-                .flatMap({GenerationType(rawValue: $0)}) else {
-                    return
-            }
-
-            generateTetramoniosFor(tetramonioGenerateType)
-			storeTetramonioScore()
+			if tetramonio != nil {
+				guard let tetramonioGenerateType = tetramonios.firstIndex(of: tetramonio!)
+					.flatMap({GenerationType(rawValue: $0)}) else {
+						return
+				}
+				
+				generateTetramoniosFor(tetramonioGenerateType)
+				storeTetramonioScore()
+			}
         } else {
           markTetramonioAsPartlySelected()
         }
@@ -91,17 +94,12 @@ class GameLogicManager {
 	fileprivate func updateFieldWithTetramonio(_ tetramonio: Tetramonio?) {
 		var cellsToUpdate: [CellData] = []
 		currentTetramonio.forEach({ (cellData) in
-			guard let cellIndex = field.firstIndex(where: {$0.xPosition == cellData.xPosition}) else {
+			guard let cellIndex = field.firstIndex(of: cellData) else {
 				fatalError("Index could not be nil")
 			}
-			
-			if tetramonio != nil {
-				field[cellIndex].chageState(newState: .placed)
-				cellsToUpdate.append(field[cellIndex])
-			} else {
-				field[cellIndex].chageState(newState: .empty)
-				cellsToUpdate.append(field[cellIndex])
-			}
+			let state: CellData.State = tetramonio != nil ? .placed : .empty
+			field[cellIndex].chageState(newState: state)
+			cellsToUpdate.append(field[cellIndex])
 		})
 		
 		currentTetramonio.removeAll()
@@ -115,7 +113,7 @@ class GameLogicManager {
 		var cellsToUpdate: [CellData] = []
 		
 		currentTetramonio.forEach({ (cellData) in
-			guard let cellIndex = field.firstIndex(where: {$0.xPosition == cellData.xPosition}) else {
+			guard let cellIndex = field.firstIndex(of: cellData) else {
 				fatalError("Index could not be nil")
 			}
 			
@@ -131,19 +129,11 @@ class GameLogicManager {
 		}
 	}
 
-	// TODO: - Make one callback
     fileprivate func checkCroosLines() {
-        checkForCroosLine(type: .horizontal, at: field) { [weak self] (updatedField, updatedCells) in
-            guard let strongSelf = self else { return }
-            strongSelf.field = updatedField
-            strongSelf.interractor?.gameLogicManager(strongSelf, didUpdate: updatedCells)
-        }
-
-        checkForCroosLine(type: .vertical, at: field) { [weak self] (updatedField, updatedCells) in
-            guard let strongSelf = self else { return }
-            strongSelf.field = updatedField
-            strongSelf.interractor?.gameLogicManager(strongSelf, didUpdate: updatedCells)
-        }
+		checkForCroosLine(at: field) { [unowned self] (field, updatedRows) in
+			self.field = field
+			self.interractor?.gameLogicManager(self, didUpdate: updatedRows)
+		}
     }
 
     fileprivate func checkGameOver() {
@@ -155,16 +145,14 @@ class GameLogicManager {
         }
     }
 	
-	// TODO: - Refactore make all equatable
 	fileprivate func removeAllSelectedCells() {
 		currentTetramonio.removeAll()
-		let cells = field.filter({$0.state == .selected}).reduce(into: [CellData]()) { (result, cell) in
-			if let index = self.field.firstIndex(where: {$0.xPosition == cell.xPosition}) {
+		let cells = field.filter({$0.state == .selected}).reduce(into: [CellData]()) { [unowned self] (result, cell) in
+			if let index = field.firstIndex(of: cell) {
 				self.field[index].chageState(newState: .empty)
 				result.append(field[index])
 			}
 		}
-		
 		interractor?.gameLogicManager(self, didUpdate: cells)
 	}
 }
@@ -194,8 +182,7 @@ extension GameLogicManager: GameLogicManagerInput {
     }
 	
 	func updateField(with draggedCells: [CellData]) {
-		// TODO: - Seperate to constant
-		if draggedCells.count != 4 {
+		if draggedCells.count != Constatns.Tetramonio.numberOfCellsInTetramonio {
 			return
 		}
 		removeAllSelectedCells()
@@ -204,8 +191,9 @@ extension GameLogicManager: GameLogicManagerInput {
 		checkCroosLines()
 		checkGameOver()
 	}
+	
 
-    func startGame(completion: ([Tetramonio], [CellData], Int32, Int32) -> Void) {
+    func startGame(completion: (StartGameConfig) -> Swift.Void) {
 
         var tetramonios = [Tetramonio]()
         if let storedTetramonios = tetramonioCoreDataManager?.tetramoniosIndexes,
@@ -230,7 +218,7 @@ extension GameLogicManager: GameLogicManagerInput {
         }
 
         self.field = field
-        completion(tetramonios, field, score.0, score.1)
+		completion((tetramonios, field, score))
     }
 
     func restartGame(callback: @escaping (Int32, Int32, [CellData]) -> Void) {

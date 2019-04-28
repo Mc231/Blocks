@@ -46,7 +46,6 @@
 		FFFBBFEA1E4525050052D68B /* TetramonioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFE91E4525050052D68B /* TetramonioManager.swift */; };
 		FFFBBFF01E4526C50052D68B /* GameLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFEF1E4526C50052D68B /* GameLogicManager.swift */; };
 		FFFBBFF51E4527DB0052D68B /* CellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFF41E4527DB0052D68B /* CellData.swift */; };
-		FFFBBFF71E45283A0052D68B /* CellState.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFF61E45283A0052D68B /* CellState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,7 +103,6 @@
 		FFFBBFE91E4525050052D68B /* TetramonioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetramonioManager.swift; sourceTree = "<group>"; };
 		FFFBBFEF1E4526C50052D68B /* GameLogicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLogicManager.swift; sourceTree = "<group>"; };
 		FFFBBFF41E4527DB0052D68B /* CellData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellData.swift; sourceTree = "<group>"; };
-		FFFBBFF61E45283A0052D68B /* CellState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -370,7 +368,6 @@
 			children = (
 				FFFBBFF41E4527DB0052D68B /* CellData.swift */,
 				FFFBBFE11E4523A10052D68B /* Tetramonio.swift */,
-				FFFBBFF61E45283A0052D68B /* CellState.swift */,
 			);
 			name = Enteties;
 			sourceTree = "<group>";
@@ -533,7 +530,6 @@
 				FF2BA0BD1EE3F80500263D95 /* Cell+CoreDataProperties.swift in Sources */,
 				FF9748BA1EE8AA1E00213F10 /* LocalizationManager.swift in Sources */,
 				FF32D45F1EE9F6E200A15F9E /* AlertPresenter.swift in Sources */,
-				FFFBBFF71E45283A0052D68B /* CellState.swift in Sources */,
 				FF8A40F91F6E9BA000EB243E /* TetramonioView.swift in Sources */,
 				FF0472081E81D56D0054FE13 /* Extensions.swift in Sources */,
 				FF33CF811E8509E0007969C6 /* PlistDataProvider.swift in Sources */,

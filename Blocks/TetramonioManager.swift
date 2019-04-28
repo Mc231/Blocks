@@ -32,7 +32,7 @@ class TetramonioManager: TetramonioProtocol {
 
     init(tetramonioDataProvider: TetremonioDataProvider) {
         self.tetramonioDataProvider = tetramonioDataProvider
-        self.tetramonios = tetramonioDataProvider.getTetramonios()
+        self.tetramonios = tetramonioDataProvider.tetramonios
     }
 
     func generateTetramonios(_ generationType: GenerationType = .gameStart) -> [Tetramonio] {

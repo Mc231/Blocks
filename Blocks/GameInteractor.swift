@@ -37,14 +37,14 @@ class GameInteractor {
 extension GameInteractor: GameInteractorInput {
 	
     func startGame() {
-        gameLogic?.startGame(completion: { [weak self] (tetramonios, cellData, currentScore, bestScore) in
+        gameLogic?.startGame(completion: { [weak self] (tetramonios, cellData, score) in
 
             guard let strongSelf = self else {
                 return
             }
             strongSelf.presenter?.provideTetramonios(tetramonios)
             strongSelf.presenter?.provideField(cellData)
-            strongSelf.presenter?.provideScore(current: currentScore, best: bestScore)
+            strongSelf.presenter?.provideScore(current: score.0, best: score.1)
         })
     }
 
