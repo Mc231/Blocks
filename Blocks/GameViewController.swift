@@ -8,29 +8,11 @@
 
 import UIKit
 
-// MARK: - Check this
-
-protocol GameViewOutput {
-	var view: GameViewInput? { get set }
-    func startGame()
-    func restartGame()
-    func handleTouchedCell(with data: CellData)
-	func handleDraggedCell(with data: [CellData])
-}
-
-protocol GameViewInput: class {
-	var presenter: GameViewOutput? { get set }
-    func display(tetramonios: [Tetramonio])
-    func display(field withData: [CellData])
-	func displayScore(score: GameScore)
-    func showGameOverAlert(currentScore: Score)
-}
-
 class GameViewController: UIViewController {
 
     // MARK: - Constants
 
-    fileprivate let numberOfRows = 8
+    private let numberOfRows = 8
     private let cellWidthCoof: CGFloat = 0.1173
 
     // MARK: - Variables
@@ -51,17 +33,17 @@ class GameViewController: UIViewController {
 
     // MARK: - IBOutlets
 
-    @IBOutlet fileprivate weak var maxScoreLabel: UILabel!
-    @IBOutlet fileprivate weak var currentScoreLabel: UILabel!
-    @IBOutlet fileprivate weak var firstTetramonioView: TetramonioView!
-    @IBOutlet fileprivate weak var secondTetramonioView: TetramonioView!
-    @IBOutlet fileprivate weak var field: UICollectionView!
+    @IBOutlet private weak var maxScoreLabel: UILabel!
+    @IBOutlet private weak var currentScoreLabel: UILabel!
+    @IBOutlet private weak var firstTetramonioView: TetramonioView!
+    @IBOutlet private weak var secondTetramonioView: TetramonioView!
+    @IBOutlet private weak var field: UICollectionView!
 
     // MARK: - Inizialization
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        GameAssambler.configureGameModule(in: self)
+        GameAssambler.assamble(in: self)
     }
 
 	// MARK: - UIViewController

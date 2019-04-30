@@ -8,28 +8,12 @@
 
 import Foundation
 
-protocol GameInteractorInput: class {
-	var presenter: GameInteractorOutput? { get set }
-    func startGame()
-    func restartGame()
-    func handleTouchedCellWithData(_ cellData: CellData)
-	func handleDraggedCell(with data: [CellData])
-}
-
-protocol GameInteractorOutput: class {
-	var interractor: GameInteractorInput? { get set }
-    func provideTetramonios(_ tetramonios: [Tetramonio])
-    func provideField(_ field: [CellData])
-	func provideScore(gameScore: GameScore)
-    func gameOver(currentScore: Int32)
-}
-
 class GameInteractor {
 
     // MARK: - Properties
 
     weak var presenter: GameInteractorOutput?
-    var gameLogic: GameLogicManagerInput?
+    var gameLogic: GameLogicInput?
 }
 
 // MARK: - GameInteractorInput
@@ -69,22 +53,22 @@ extension GameInteractor: GameInteractorInput {
 
 // MARK: - GameLogicOutputDelegate 
 
-extension GameInteractor: GameLogicManagerOutput {
+extension GameInteractor: GameLogicOutput {
 
     func gameOver(currentScore: Score) {
         debugPrint("Game Over")
         presenter?.gameOver(currentScore: currentScore)
     }
 
-    func gameLogicManager(_ manager: GameLogicManagerInput, didChange score: GameScore) {
+    func gameLogicManager(_ manager: GameLogicInput, didChange score: GameScore) {
         presenter?.provideScore(gameScore: score)
     }
 
-    func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, didUpdate field: [CellData]) {
+    func gameLogicManager(_ gameLogicManager: GameLogicInput, didUpdate field: [CellData]) {
         presenter?.provideField(field)
     }
 
-    func gameLogicManager(_ manager: GameLogicManagerInput, didUpdate tetramonios: [Tetramonio]) {
+    func gameLogicManager(_ manager: GameLogicInput, didUpdate tetramonios: [Tetramonio]) {
         presenter?.provideTetramonios(tetramonios)
     }
 }

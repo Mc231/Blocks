@@ -39,7 +39,7 @@
     // MARK: - CoreData Stack
 	// TODO: - Make context private
 	
-    fileprivate lazy var managedObjectContext: NSManagedObjectContext = {
+    private lazy var managedObjectContext: NSManagedObjectContext = {
         let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator
         return managedObjectContext

@@ -8,39 +8,23 @@
 
 import Foundation
 
-
-protocol GameLogicManagerInput {
-    func generateTetramoniosFor(_ type: GenerationType) -> [Tetramonio]
-    func updateField(with handledCell: CellData)
-	func updateField(with draggedCells: [CellData])
-    func startGame(completion: (StartGameConfig) -> Swift.Void)
-    func restartGame(callback: @escaping (GameScore, [CellData]) -> Void)
-}
-
-protocol GameLogicManagerOutput: class {
-    func gameOver(currentScore: Score)
-    func gameLogicManager(_ manager: GameLogicManagerInput, didChange score: GameScore)
-    func gameLogicManager(_ manager: GameLogicManagerInput, didUpdate field: [CellData])
-    func gameLogicManager(_ manager: GameLogicManagerInput, didUpdate tetramonios: [Tetramonio])
-}
-
 /// This class represents base game logic
-class GameLogicManager {
+class GameLogic {
 
-    // MARK: - Fileprivate Properties
+    // MARK: - private Properties
 
-    fileprivate weak var interractor: GameLogicManagerOutput?
-    fileprivate var tetramoniosManager: TetramonioProtocol?
-    fileprivate var gameDbStore: GameDbStoreInput?
+    private weak var interractor: GameLogicOutput?
+    private var tetramoniosManager: TetramonioProtocol?
+    private var gameDbStore: GameDbStoreInput?
 
-    fileprivate var field = [CellData]() {
+    private var field = [CellData]() {
         didSet {
             gameDbStore?.storeField(field)
         }
     }
     // Tetramonio cells that user tap on field
-    fileprivate var currentTetramonio = [CellData]()
-    fileprivate var tetramonios = [Tetramonio]() {
+    private var currentTetramonio = [CellData]()
+    private var tetramonios = [Tetramonio]() {
         didSet {
             gameDbStore?.store(current: tetramonios)
         }
@@ -48,7 +32,7 @@ class GameLogicManager {
 
     // MARK: - Inizialization
 	// swiftlint:disable vertical_parameter_alignment
-    init(interractor: GameLogicManagerOutput?,
+    init(interractor: GameLogicOutput?,
 		 tetramoniosManager: TetramonioProtocol,
 		 tetramonioCoreDataManager: GameDbStoreInput) {
         self.interractor = interractor
@@ -56,9 +40,9 @@ class GameLogicManager {
         self.gameDbStore = tetramonioCoreDataManager
     }
 
-    // MARK: - Fileprivate methods
+    // MARK: - private methods
 
-    fileprivate func checkCurrentTetramonio() {
+    private func checkCurrentTetramonio() {
 		
 		let isFullTetramonio = currentTetramonio.count == Constatns.Tetramonio.numberOfCellsInTetramonio
 		
@@ -80,7 +64,7 @@ class GameLogicManager {
         }
     }
 	
-	fileprivate func storeTetramonioScore() {
+	private func storeTetramonioScore() {
 		gameDbStore?
 			.increaseAndStoreScore(Constatns.Score.scorePerTetramonio,
 								   completion: { [weak self] score in
@@ -90,7 +74,7 @@ class GameLogicManager {
 			})
 	}
 	
-	fileprivate func updateFieldWithTetramonio(_ tetramonio: Tetramonio?) {
+	private func updateFieldWithTetramonio(_ tetramonio: Tetramonio?) {
 		var cellsToUpdate: [CellData] = []
 		currentTetramonio.forEach({ (cellData) in
 			guard let cellIndex = field.firstIndex(of: cellData) else {
@@ -108,7 +92,7 @@ class GameLogicManager {
 		}
 	}
 	
-	fileprivate func markTetramonioAsPartlySelected() {
+	private func markTetramonioAsPartlySelected() {
 		var cellsToUpdate: [CellData] = []
 		
 		currentTetramonio.forEach({ (cellData) in
@@ -128,14 +112,14 @@ class GameLogicManager {
 		}
 	}
 
-    fileprivate func checkCroosLines() {
+    private func checkCroosLines() {
 		checkForCroosLine(at: field) { [unowned self] (field, updatedRows) in
-			self.gameDbStore?.storeUpdatedCells(updatedRows)
+			self.field = field
 			self.interractor?.gameLogicManager(self, didUpdate: updatedRows)
 		}
     }
 
-    fileprivate func checkGameOver() {
+    private func checkGameOver() {
         if checkGameOver(for: tetramonios, at: field, with: self) {
             guard let score = gameDbStore?.currentScore else {
                 fatalError("Manager can not be nil")
@@ -144,7 +128,7 @@ class GameLogicManager {
         }
     }
 	
-	fileprivate func removeAllSelectedCells() {
+	private func removeAllSelectedCells() {
 		currentTetramonio.removeAll()
 		let cells = field.filter({$0.state == .selected}).reduce(into: [CellData]()) { [unowned self] (result, cell) in
 			if let index = field.firstIndex(of: cell) {
@@ -158,7 +142,7 @@ class GameLogicManager {
 
 // MARK: - GameLogicInput
 
-extension GameLogicManager: GameLogicManagerInput {
+extension GameLogic: GameLogicInput {
 
     @discardableResult
     func generateTetramoniosFor(_ type: GenerationType) -> [Tetramonio] {
@@ -236,18 +220,18 @@ extension GameLogicManager: GameLogicManagerInput {
 
 // MARK: - TeramonioChecker
 
-extension GameLogicManager: TetramonioChecker {
+extension GameLogic: TetramonioChecker {
 
 }
 
 // MARK: - GameOverChecker
 
-extension GameLogicManager: GameOverChecker {
+extension GameLogic: GameOverChecker {
 
 }
 
 // MARK: - FieldCrossLineChecker
 
-extension GameLogicManager: FieldCrossLineChecker {
+extension GameLogic: FieldCrossLineChecker {
 
 }

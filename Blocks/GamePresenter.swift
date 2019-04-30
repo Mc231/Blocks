@@ -8,8 +8,6 @@
 
 import Foundation
 
-protocol GamePresenterInput: GameViewOutput, GameInteractorOutput {}
-
 class GamePresenter: GamePresenterInput {
 	
     weak var view: GameViewInput?

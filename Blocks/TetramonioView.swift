@@ -28,9 +28,9 @@ class TetramonioView: UIView {
 			.filter({$0.cellData.state == .selected})
 	}
 
-    fileprivate lazy var dataSource: [CellData] = [CellData]()
+    private lazy var dataSource: [CellData] = [CellData]()
 
-    fileprivate var cellSize: CGSize {
+    private var cellSize: CGSize {
         let width = (self.bounds.width - kCellsMargin) / kNumberOfCells
         let height = width
         return CGSize(width: width, height: height)

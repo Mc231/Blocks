@@ -16,7 +16,7 @@ class GameAssambler {
 
 	// MARK: - Class methods
 
-    class func configureGameModule(in view: GameViewController) {
+    class func assamble(in view: GameViewController) {
 
         let presenter = GamePresenter()
         presenter.view = view
@@ -28,7 +28,7 @@ class GameAssambler {
         let tetramonioManager = TetramonioManager(tetramonioDataProvider: tetramonioDataProvider)
         let coreDataManager = CoreDataManager(modelName: kDbName)
         let dbStore = GameDbStore(coreDataManager: coreDataManager)
-        let gameLogic = GameLogicManager(interractor: interractor,
+        let gameLogic = GameLogic(interractor: interractor,
 										 tetramoniosManager: tetramonioManager,
 										 tetramonioCoreDataManager: dbStore)
         view.presenter = presenter

@@ -37,13 +37,13 @@ class GameDbStore {
 
     // MARK: - Properties
 
-    fileprivate let coreDataManager: CoreDataManagerProtocol
+    private let coreDataManager: CoreDataManagerProtocol
 
-    lazy fileprivate var game: Game? = {
+    lazy private var game: Game? = {
         return self.coreDataManager.findFirstOrCreate(Game.self, predicate: nil)
     }()
 
-    fileprivate var storedCells: [Cell] {
+    private var storedCells: [Cell] {
         let xSortDesciptor = NSSortDescriptor(key: "xPosition", ascending: true)
         guard let fetchedCells
             = coreDataManager.fetch(Cell.self, predicate: nil, sortDescriptors: [xSortDesciptor]) else {
@@ -86,7 +86,7 @@ extension GameDbStore: GameDbStoreInput {
         coreDataManager.save(game)
     }
 	
-	// TODO: - Refactore
+	// TODO: - Refactore & implement this
 	func storeUpdatedCells(_ updatedCells: [CellData]) {
 		for updatedCell in updatedCells {
 			guard let storedCell = storedCells.first(where: {$0.xPosition == updatedCell.xPosition}) else {
@@ -185,8 +185,9 @@ extension GameDbStore: GameDbStoreInput {
 
 private extension GameDbStore {
 	
-	func storeCellData(_ cellData: CellData, to cell: Cell) {
-		let isSameCells = cellData.xPosition != cell.xPosition && cell.xPosition != cell.yPosition
+	func storeCellDataIfNeeded(_ cellData: CellData, to cell: Cell) {
+		let isSameCells = cellData.xPosition != cell.xPosition
+			&& cell.xPosition != cell.yPosition
 		assert(isSameCells, "Cells must be same")
 		let rawState = cellData.state.rawValue
 		if rawState != cell.state {
