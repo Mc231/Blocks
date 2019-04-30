@@ -20,7 +20,7 @@ protocol GameInteractorOutput: class {
 	var interractor: GameInteractorInput? { get set }
     func provideTetramonios(_ tetramonios: [Tetramonio])
     func provideField(_ field: [CellData])
-    func provideScore(current: Int32, best: Int32)
+	func provideScore(gameScore: GameScore)
     func gameOver(currentScore: Int32)
 }
 
@@ -44,16 +44,16 @@ extension GameInteractor: GameInteractorInput {
             }
             strongSelf.presenter?.provideTetramonios(tetramonios)
             strongSelf.presenter?.provideField(cellData)
-            strongSelf.presenter?.provideScore(current: score.0, best: score.1)
+            strongSelf.presenter?.provideScore(gameScore: score)
         })
     }
 
     func restartGame() {
-        gameLogic?.restartGame(callback: { [weak self] (score, bestScore, field) in
+        gameLogic?.restartGame(callback: { [weak self] (score, field) in
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.presenter?.provideScore(current: score, best: bestScore)
+            strongSelf.presenter?.provideScore(gameScore: score)
             strongSelf.presenter?.provideField(field)
         })
     }
@@ -71,13 +71,13 @@ extension GameInteractor: GameInteractorInput {
 
 extension GameInteractor: GameLogicManagerOutput {
 
-    func gameOver(currentScore: Int32) {
+    func gameOver(currentScore: Score) {
         debugPrint("Game Over")
         presenter?.gameOver(currentScore: currentScore)
     }
 
-    func gameLogicManager(_ manager: GameLogicManagerInput, didChange score: Int32, and bestScore: Int32) {
-        presenter?.provideScore(current: score, best: bestScore)
+    func gameLogicManager(_ manager: GameLogicManagerInput, didChange score: GameScore) {
+        presenter?.provideScore(gameScore: score)
     }
 
     func gameLogicManager(_ gameLogicManager: GameLogicManagerInput, didUpdate field: [CellData]) {

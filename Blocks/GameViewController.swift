@@ -22,8 +22,8 @@ protocol GameViewInput: class {
 	var presenter: GameViewOutput? { get set }
     func display(tetramonios: [Tetramonio])
     func display(field withData: [CellData])
-    func displayScore(current: Int32, best: Int32)
-    func showGameOverAlert(currentScore: Int32)
+	func displayScore(score: GameScore)
+    func showGameOverAlert(currentScore: Score)
 }
 
 class GameViewController: UIViewController {
@@ -208,7 +208,7 @@ extension GameViewController: UICollectionViewDataSource {
 
 extension GameViewController: GameViewInput {
 
-    func showGameOverAlert(currentScore: Int32) {
+    func showGameOverAlert(currentScore: Score) {
         let title = Localization.Game.GameOverAlert.title.localization
         let message = Localization.Game.GameOverAlert.message(currentScore).localization
         let restartActionTitle = Localization.Game.GameOverAlert.restartTitle.localization
@@ -248,9 +248,9 @@ extension GameViewController: GameViewInput {
         secondTetramonioView.update(with: secondTetramonioIndexes)
     }
 
-    func displayScore(current: Int32, best: Int32) {
-        currentScoreLabel.text = Localization.Game.Score.current(current).localization
-        maxScoreLabel.text = Localization.Game.Score.best(best).localization
+	func displayScore(score: GameScore) {
+        currentScoreLabel.text = Localization.Game.Score.current(score.current).localization
+        maxScoreLabel.text = Localization.Game.Score.best(score.best).localization
     }
 }
 

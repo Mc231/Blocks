@@ -27,10 +27,10 @@ class GameAssambler {
         let tetramonioDataProvider = TetremonioDataProvider()
         let tetramonioManager = TetramonioManager(tetramonioDataProvider: tetramonioDataProvider)
         let coreDataManager = CoreDataManager(modelName: kDbName)
-        let tetramonioCoreDataManager = TetreamonioCoreDataManager(coreDataManager: coreDataManager)
+        let dbStore = GameDbStore(coreDataManager: coreDataManager)
         let gameLogic = GameLogicManager(interractor: interractor,
 										 tetramoniosManager: tetramonioManager,
-										 tetramonioCoreDataManager: tetramonioCoreDataManager)
+										 tetramonioCoreDataManager: dbStore)
         view.presenter = presenter
         presenter.interractor = interractor
         interractor.gameLogic = gameLogic

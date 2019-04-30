@@ -36,7 +36,6 @@ class TetramonioView: UIView {
         return CGSize(width: width, height: height)
     }
 
-	// TODO: - Remove magic numbers
     private lazy var collectinViwLayout: UICollectionViewFlowLayout = {
        var layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = kLineSpacing

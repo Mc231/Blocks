@@ -43,7 +43,7 @@ class GamePresenter: GamePresenterInput {
         view?.display(field: field)
     }
 
-    func provideScore(current: Int32, best: Int32) {
-        view?.displayScore(current: current, best: best)
+	func provideScore(gameScore: GameScore) {
+		view?.displayScore(score: gameScore)
     }
 }

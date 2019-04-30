@@ -8,19 +8,18 @@
 
 import Foundation
 
-typealias StartGameConfig = ([Tetramonio], [CellData], GameScore)
 
 protocol GameLogicManagerInput {
     func generateTetramoniosFor(_ type: GenerationType) -> [Tetramonio]
     func updateField(with handledCell: CellData)
 	func updateField(with draggedCells: [CellData])
     func startGame(completion: (StartGameConfig) -> Swift.Void)
-    func restartGame(callback: @escaping (Int32, Int32, [CellData]) -> Void)
+    func restartGame(callback: @escaping (GameScore, [CellData]) -> Void)
 }
 
 protocol GameLogicManagerOutput: class {
-    func gameOver(currentScore: Int32)
-    func gameLogicManager(_ manager: GameLogicManagerInput, didChange score: Int32, and bestScore: Int32)
+    func gameOver(currentScore: Score)
+    func gameLogicManager(_ manager: GameLogicManagerInput, didChange score: GameScore)
     func gameLogicManager(_ manager: GameLogicManagerInput, didUpdate field: [CellData])
     func gameLogicManager(_ manager: GameLogicManagerInput, didUpdate tetramonios: [Tetramonio])
 }
@@ -32,18 +31,18 @@ class GameLogicManager {
 
     fileprivate weak var interractor: GameLogicManagerOutput?
     fileprivate var tetramoniosManager: TetramonioProtocol?
-    fileprivate var tetramonioCoreDataManager: TetreamonioCoreDataManagerInput?
+    fileprivate var gameDbStore: GameDbStoreInput?
 
     fileprivate var field = [CellData]() {
         didSet {
-            tetramonioCoreDataManager?.store(fieldCells: field)
+            gameDbStore?.storeField(field)
         }
     }
-    // Tetramonio cells that user tap
+    // Tetramonio cells that user tap on field
     fileprivate var currentTetramonio = [CellData]()
     fileprivate var tetramonios = [Tetramonio]() {
         didSet {
-            tetramonioCoreDataManager?.store(current: tetramonios)
+            gameDbStore?.store(current: tetramonios)
         }
     }
 
@@ -51,10 +50,10 @@ class GameLogicManager {
 	// swiftlint:disable vertical_parameter_alignment
     init(interractor: GameLogicManagerOutput?,
 		 tetramoniosManager: TetramonioProtocol,
-		 tetramonioCoreDataManager: TetreamonioCoreDataManagerInput) {
+		 tetramonioCoreDataManager: GameDbStoreInput) {
         self.interractor = interractor
         self.tetramoniosManager = tetramoniosManager
-        self.tetramonioCoreDataManager = tetramonioCoreDataManager
+        self.gameDbStore = tetramonioCoreDataManager
     }
 
     // MARK: - Fileprivate methods
@@ -82,12 +81,12 @@ class GameLogicManager {
     }
 	
 	fileprivate func storeTetramonioScore() {
-		tetramonioCoreDataManager?
-			.increaseAndStoreScore(Constatns.Score.scorePerTetramonio, completion: { [weak self] (score, bestScore) in
-				guard let strongSelf = self else {
-					return
-				}
-				strongSelf.interractor?.gameLogicManager(strongSelf, didChange: score, and: bestScore)
+		gameDbStore?
+			.increaseAndStoreScore(Constatns.Score.scorePerTetramonio,
+								   completion: { [weak self] score in
+									guard let strongSelf = self else { return }
+				
+									strongSelf.interractor?.gameLogicManager(strongSelf, didChange: score)
 			})
 	}
 	
@@ -131,14 +130,14 @@ class GameLogicManager {
 
     fileprivate func checkCroosLines() {
 		checkForCroosLine(at: field) { [unowned self] (field, updatedRows) in
-			self.field = field
+			self.gameDbStore?.storeUpdatedCells(updatedRows)
 			self.interractor?.gameLogicManager(self, didUpdate: updatedRows)
 		}
     }
 
     fileprivate func checkGameOver() {
         if checkGameOver(for: tetramonios, at: field, with: self) {
-            guard let score = tetramonioCoreDataManager?.currentScore else {
+            guard let score = gameDbStore?.currentScore else {
                 fatalError("Manager can not be nil")
             }
             interractor?.gameOver(currentScore: score)
@@ -196,7 +195,7 @@ extension GameLogicManager: GameLogicManagerInput {
     func startGame(completion: (StartGameConfig) -> Swift.Void) {
 
         var tetramonios = [Tetramonio]()
-        if let storedTetramonios = tetramonioCoreDataManager?.tetramoniosIndexes,
+        if let storedTetramonios = gameDbStore?.tetramoniosIndexes,
             !storedTetramonios.isEmpty,
             let unwraprdTetramonios = tetramoniosManager?.getTetramoniosFrom(storedTetramonios) {
             tetramonios = unwraprdTetramonios
@@ -206,8 +205,8 @@ extension GameLogicManager: GameLogicManagerInput {
             tetramonios = generateTetramoniosFor(.gameStart)
         }
 
-        guard let field = tetramonioCoreDataManager?.field,
-            let score = tetramonioCoreDataManager?.gameScore else {
+        guard let field = gameDbStore?.field,
+            let score = gameDbStore?.gameScore else {
                 fatalError("Score or field cell can not be nil can not be nil")
         }
 
@@ -221,15 +220,16 @@ extension GameLogicManager: GameLogicManagerInput {
 		completion((tetramonios, field, score))
     }
 
-    func restartGame(callback: @escaping (Int32, Int32, [CellData]) -> Void) {
+    func restartGame(callback: @escaping (GameScore, [CellData]) -> Void) {
         generateTetramoniosFor(.gameStart)
 		
-        tetramonioCoreDataManager?.restartGame(completion: { [weak self] (gameScore, field) in
+        gameDbStore?.restartGame(completion: { [weak self] (gameScore, field) in
             guard let strongSelf = self else {
                 return
             }
             strongSelf.field = field
-            callback(gameScore.0, gameScore.1, field)
+			let gameScore = (gameScore.current, gameScore.best)
+            callback(gameScore, field)
         })
     }
 }

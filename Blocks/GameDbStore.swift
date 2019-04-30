@@ -8,13 +8,10 @@
 
 import Foundation
 
-typealias Score = Int32
-typealias TetramonioIndex = Int16
-typealias GameScore = (Score, Score)
-
-protocol TetreamonioCoreDataManagerInput: class {
+protocol GameDbStoreInput: class {
     func store(current tetramonios: [Tetramonio])
-    func store(fieldCells: [CellData])
+	func storeField(_ field: [CellData])
+	func storeUpdatedCells(_ updatedCells: [CellData])
     func increaseAndStoreScore(_ score: Score, completion: @escaping (GameScore) -> Void)
     func restartGame(completion: (GameScore, [CellData]) -> Void)
     func createField() -> [CellData]
@@ -35,8 +32,8 @@ protocol TetreamonioCoreDataManagerInput: class {
     var tetramoniosIndexes: [TetramonioIndex] { get }
 }
 
-/// This class responsable for storing fetching tetramonio from CoreData
-class TetreamonioCoreDataManager {
+/// This class responsable for storing & fetching game state from Core Data
+class GameDbStore {
 
     // MARK: - Properties
 
@@ -61,9 +58,9 @@ class TetreamonioCoreDataManager {
     }
 }
 
-// MARK: - TetreamonioCoreDataManagerInput
+// MARK: - GameDbStoreInput
 
-extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
+extension GameDbStore: GameDbStoreInput {
 
     func store(current tetramonios: [Tetramonio]) {
         guard let firstTetramonio = tetramonios.first?.type.rawValue,
@@ -76,18 +73,32 @@ extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
         coreDataManager.save(game)
     }
 
-    func store(fieldCells: [CellData]) {
+    func storeField(_ field: [CellData]) {
         for (index, storedCell) in storedCells.enumerated() {
-            let fieldCell = fieldCells[index]
+            let fieldCell = field[index]
             if storedCell.state != fieldCell.state.rawValue {
                storedCell.state = fieldCell.state.rawValue
-               self.coreDataManager.save(storedCell)
+               coreDataManager.save(storedCell)
             }
         }
 
         // Ensure theat everything saved
         coreDataManager.save(game)
     }
+	
+	// TODO: - Refactore
+	func storeUpdatedCells(_ updatedCells: [CellData]) {
+		for updatedCell in updatedCells {
+			guard let storedCell = storedCells.first(where: {$0.xPosition == updatedCell.xPosition}) else {
+				fatalError("Cell can not be nil")
+			}
+			storedCell.state = updatedCell.state.rawValue
+			coreDataManager.save(storedCell)
+		}
+		
+		// Ensure theat everything saved
+		coreDataManager.save(game)
+	}
 
     func increaseAndStoreScore(_ score: Score, completion: @escaping (GameScore) -> Void) {
         let newScore = self.currentScore + score
@@ -168,4 +179,19 @@ extension TetreamonioCoreDataManager: TetreamonioCoreDataManagerInput {
         }
         return [firstTetramonio, lastTetramonio]
     }
+}
+
+// MARK: - Private methods
+
+private extension GameDbStore {
+	
+	func storeCellData(_ cellData: CellData, to cell: Cell) {
+		let isSameCells = cellData.xPosition != cell.xPosition && cell.xPosition != cell.yPosition
+		assert(isSameCells, "Cells must be same")
+		let rawState = cellData.state.rawValue
+		if rawState != cell.state {
+			cell.state = rawState
+			coreDataManager.save(cell)
+		}
+	}
 }
