@@ -42,10 +42,10 @@ extension GameOverChecker {
 
                     let possibleTetramonio = checker.checkTetramonio(from: possibleTetramonioArray, with: tetramonios)
 
-                    if !firstCell.isCellPlaced
-                        && !secondCell.isCellPlaced
-                        && !thirdCell.isCellPlaced
-                        && !fourthCell.isCellPlaced
+                    if !firstCell.isPlaced
+                        && !secondCell.isPlaced
+                        && !thirdCell.isPlaced
+                        && !fourthCell.isPlaced
                         && possibleTetramonio?.type.rawValue == tetramonio.type.rawValue {
                         return false
                     }

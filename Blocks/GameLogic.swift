@@ -101,7 +101,7 @@ class GameLogic {
 			}
 			
 			let cell = field[cellIndex]
-			if cell.state  == .empty {
+			if cell.isEmpty {
 				field[cellIndex].chageState(newState: .selected)
 				cellsToUpdate.append(field[cellIndex])
 			}
@@ -113,8 +113,9 @@ class GameLogic {
 	}
 
     private func checkCroosLines() {
-		checkForCroosLine(at: field) { [unowned self] (field, updatedRows) in
-			self.field = field
+		checkForCroosLine(at: &field) { [unowned self] (field, updatedRows) in
+			// TODO: - Add storing 
+			self.gameDbStore?.storeUpdatedCells(updatedRows)
 			self.interractor?.gameLogicManager(self, didUpdate: updatedRows)
 		}
     }
@@ -130,13 +131,21 @@ class GameLogic {
 	
 	private func removeAllSelectedCells() {
 		currentTetramonio.removeAll()
-		let cells = field.filter({$0.state == .selected}).reduce(into: [CellData]()) { [unowned self] (result, cell) in
+		let cells = field.filter({$0.isSelected}).reduce(into: [CellData]()) { [unowned self] (result, cell) in
 			if let index = field.firstIndex(of: cell) {
 				self.field[index].chageState(newState: .empty)
 				result.append(field[index])
 			}
 		}
+		gameDbStore?.storeUpdatedCells(cells)
 		interractor?.gameLogicManager(self, didUpdate: cells)
+	}
+	
+	private func processGameFlow(cellData: [CellData]) {
+		currentTetramonio.append(contentsOf: cellData)
+		checkCurrentTetramonio()
+		checkCroosLines()
+		checkGameOver()
 	}
 }
 
@@ -155,12 +164,9 @@ extension GameLogic: GameLogicInput {
         return tetramonios
     }
 
-    func updateField(with handledData: CellData) {
-        if !currentTetramonio.contains(where: {$0.xPosition == handledData.xPosition }) && handledData.state == .empty {
-            currentTetramonio.append(handledData)
-            checkCurrentTetramonio()
-            checkCroosLines()
-            checkGameOver()
+    func updateField(with updatedCell: CellData) {
+        if !currentTetramonio.contains(updatedCell) && updatedCell.isEmpty {
+			processGameFlow(cellData: [updatedCell])
         }
     }
 	
@@ -169,13 +175,9 @@ extension GameLogic: GameLogicInput {
 			return
 		}
 		removeAllSelectedCells()
-		currentTetramonio.append(contentsOf: draggedCells)
-		checkCurrentTetramonio()
-		checkCroosLines()
-		checkGameOver()
+		processGameFlow(cellData: draggedCells)
 	}
 	
-
     func startGame(completion: (StartGameConfig) -> Swift.Void) {
 
         var tetramonios = [Tetramonio]()
@@ -194,7 +196,7 @@ extension GameLogic: GameLogicInput {
                 fatalError("Score or field cell can not be nil can not be nil")
         }
 
-        let storedTetramonio = field.filter({$0.state == .selected})
+        let storedTetramonio = field.filter({$0.isSelected})
 
         if !storedTetramonio.isEmpty {
             currentTetramonio = storedTetramonio

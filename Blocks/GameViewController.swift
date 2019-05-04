@@ -109,7 +109,8 @@ class GameViewController: UIViewController {
 						}
 					})
 				}.map({$0.cellData})
-			// TODO: - Force unwrap
+			
+			// TODO: - Force unwrap and remove all duplicates
 			presenter?.handleDraggedCell(with: magic as! [CellData])
 			
 			// On cancellation, return the piece to its original location.

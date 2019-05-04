@@ -25,7 +25,7 @@ class TetramonioView: UIView {
 			.subviews
 			.filter({$0 is FieldCell})
 			.compactMap({$0 as? FieldCell})
-			.filter({$0.cellData.state == .selected})
+			.filter({$0.cellData.isSelected})
 	}
 
     private lazy var dataSource: [CellData] = [CellData]()

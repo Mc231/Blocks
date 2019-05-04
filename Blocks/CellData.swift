@@ -14,7 +14,7 @@ struct CellData {
 
     let xPosition: Int16
     let yPosition: Int16
-    var state: State
+    private(set) var state: State
 
     // MARK: - Mutating methods
 
@@ -49,9 +49,17 @@ extension CellData {
         state = storedState
     }
 
-    var isCellPlaced: Bool {
-        return self.state == .placed
+    var isPlaced: Bool {
+        return state == .placed
     }
+	
+	var isEmpty: Bool {
+		return state == .empty
+	}
+	
+	var isSelected: Bool {
+		return state == .selected
+	}
 }
 
 // MARK: - Equtable
