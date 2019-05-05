@@ -12,3 +12,4 @@ typealias Score = Int32
 typealias TetramonioIndex = Int16
 typealias GameScore = (current: Score, best: Score)
 typealias StartGameConfig = (tetramonios: [Tetramonio], field: [CellData], score: GameScore)
+typealias CrossLineCheckerCompletion = ([CellData]) -> Swift.Void

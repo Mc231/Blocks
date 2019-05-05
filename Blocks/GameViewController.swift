@@ -64,13 +64,13 @@ class GameViewController: UIViewController {
     @IBAction private func restartGame(sender: UIButton) {
         presenter?.restartGame()
     }
-	
+	// TODO: - Remove this
 	var initialCenter = CGPoint()
 	var initialWidth = CGFloat.leastNonzeroMagnitude
 	
 	// TODO: - Refactore this
 	@IBAction private func didTapTetramonio1(_ sender: UIPanGestureRecognizer) {
-		guard let piece = sender.view as? TetramonioView else {return}
+		guard let piece = sender.view as? TetramonioView else { return }
 
 		// Get the changes in the X and Y directions relative to
 		// the superview's coordinate space.
@@ -90,28 +90,27 @@ class GameViewController: UIViewController {
 			// Add the X and Y translation to the view's original position.
 			let newCenter = CGPoint(x: initialCenter.x + translation.x, y: initialCenter.y + translation.y)
 			piece.center = newCenter
-		}
-		else {
+		}else{
 			// TODO : - Refacore
 			let magic = field
 				.subviews
-				.filter({$0 is FieldCell})
 				.compactMap({$0 as? FieldCell})
-				.reduce(into: [FieldCell]()) { (result, fieldCell) in
+				.reduce(into: [CellData]()) { (result, fieldCell) in
 					piece.selectedCells.forEach({ (tetramonioCell) in
 						let fieldRect = fieldCell.convert(fieldCell.bounds, to: self.view)
 						let tetramonioRect = tetramonioCell.convert(tetramonioCell.bounds, to: self.view)
 						let intersectRect = fieldRect.intersection(tetramonioRect)
-						if fieldRect.intersects(tetramonioRect) && intersectRect.width >= 32 && intersectRect.height >= 32 {
-						//	if !result.contains(fieldCell) {
-								result.append(fieldCell)
-							//}
+						let intersectsTetramonioRect = fieldRect.intersects(tetramonioRect)
+						let intersectRectSzie = intersectRect.width >= 32 && intersectRect.height >= 32
+						if  intersectsTetramonioRect && intersectRectSzie,
+							let data = fieldCell.cellData {
+							if !result.contains(data) {
+								result.append(data)
+							}
 						}
 					})
-				}.map({$0.cellData})
-			
-			// TODO: - Force unwrap and remove all duplicates
-			presenter?.handleDraggedCell(with: magic as! [CellData])
+				}
+			presenter?.handleDraggedCell(with: magic)
 			
 			// On cancellation, return the piece to its original location.
 			UIView.animate(withDuration: 0.3) {

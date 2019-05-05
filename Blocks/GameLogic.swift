@@ -113,8 +113,7 @@ class GameLogic {
 	}
 
     private func checkCroosLines() {
-		checkForCroosLine(at: &field) { [unowned self] (field, updatedRows) in
-			// TODO: - Add storing 
+		checkForCroosLine(at: &field) { [unowned self] (updatedRows) in
 			self.gameDbStore?.storeUpdatedCells(updatedRows)
 			self.interractor?.gameLogicManager(self, didUpdate: updatedRows)
 		}

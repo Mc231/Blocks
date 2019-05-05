@@ -23,7 +23,6 @@ class TetramonioView: UIView {
 	var selectedCells: [FieldCell] {
 		return collectionView
 			.subviews
-			.filter({$0 is FieldCell})
 			.compactMap({$0 as? FieldCell})
 			.filter({$0.cellData.isSelected})
 	}

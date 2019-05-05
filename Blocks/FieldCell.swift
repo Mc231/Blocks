@@ -24,4 +24,11 @@ class FieldCell: UICollectionViewCell {
             }
         }
     }
+	
+	override func isEqual(_ object: Any?) -> Bool {
+		if let cell = object as? FieldCell {
+			return cell.cellData == cellData
+		}
+		return false
+	}
 }
