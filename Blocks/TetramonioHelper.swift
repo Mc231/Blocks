@@ -20,7 +20,7 @@ enum GenerationType: Int {
     case secondTetramonio = 1
 }
 
-class TetramonioManager: TetramonioProtocol {
+class TetramonioHelper: TetramonioProtocol {
 
     // MARK: - Properties
 

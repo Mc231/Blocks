@@ -25,7 +25,7 @@ class GameAssambler {
         interractor.presenter = presenter
 
         let tetramonioDataProvider = TetremonioLoader()
-        let tetramonioManager = TetramonioManager(tetramonioDataProvider: tetramonioDataProvider)
+        let tetramonioManager = TetramonioHelper(tetramonioDataProvider: tetramonioDataProvider)
         let coreDataManager = CoreDataManager(modelName: kDbName)
         let dbStore = GameDbStore(coreDataManager: coreDataManager)
         let gameFlow = GameFlow(interractor: interractor,

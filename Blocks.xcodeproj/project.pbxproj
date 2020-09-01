@@ -47,12 +47,14 @@
 		FFA8F9A11FF827530071276A /* Tetramonios.plist in Resources */ = {isa = PBXBuildFile; fileRef = FFA8F9A01FF827520071276A /* Tetramonios.plist */; };
 		FFB82A8A1E7D2F2A0043BD53 /* Blocks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFB82A881E7D2F2A0043BD53 /* Blocks.xcdatamodeld */; };
 		FFC4CDBB22A305FA0025A187 /* DraggedTetramonioChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC4CDBA22A305FA0025A187 /* DraggedTetramonioChecker.swift */; };
+		FFC8BC8224FEDD63000BB9D1 /* Int16+Radnom.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC8BC8124FEDD63000BB9D1 /* Int16+Radnom.swift */; };
+		FFC8BC8424FEDD95000BB9D1 /* UICollectionViewCell+Resuable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC8BC8324FEDD95000BB9D1 /* UICollectionViewCell+Resuable.swift */; };
 		FFE6D62D1E59A47A0060C1C8 /* FieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6D62C1E59A47A0060C1C8 /* FieldCell.swift */; };
 		FFFBBFBB1E4521700052D68B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFBA1E4521700052D68B /* AppDelegate.swift */; };
 		FFFBBFC01E4521700052D68B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFFBBFBE1E4521700052D68B /* Main.storyboard */; };
 		FFFBBFC21E4521700052D68B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFFBBFC11E4521700052D68B /* Assets.xcassets */; };
 		FFFBBFE21E4523A10052D68B /* Tetramonio.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFE11E4523A10052D68B /* Tetramonio.swift */; };
-		FFFBBFEA1E4525050052D68B /* TetramonioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFE91E4525050052D68B /* TetramonioManager.swift */; };
+		FFFBBFEA1E4525050052D68B /* TetramonioHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFE91E4525050052D68B /* TetramonioHelper.swift */; };
 		FFFBBFF01E4526C50052D68B /* GameFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFEF1E4526C50052D68B /* GameFlow.swift */; };
 		FFFBBFF51E4527DB0052D68B /* CellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFF41E4527DB0052D68B /* CellData.swift */; };
 /* End PBXBuildFile section */
@@ -112,6 +114,8 @@
 		FFA8F9A01FF827520071276A /* Tetramonios.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Tetramonios.plist; sourceTree = "<group>"; };
 		FFB82A891E7D2F2A0043BD53 /* Blocks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Blocks.xcdatamodel; sourceTree = "<group>"; };
 		FFC4CDBA22A305FA0025A187 /* DraggedTetramonioChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggedTetramonioChecker.swift; sourceTree = "<group>"; };
+		FFC8BC8124FEDD63000BB9D1 /* Int16+Radnom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int16+Radnom.swift"; sourceTree = "<group>"; };
+		FFC8BC8324FEDD95000BB9D1 /* UICollectionViewCell+Resuable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Resuable.swift"; sourceTree = "<group>"; };
 		FFE6D62C1E59A47A0060C1C8 /* FieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldCell.swift; sourceTree = "<group>"; };
 		FFFBBFB71E4521700052D68B /* Blocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFFBBFBA1E4521700052D68B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -119,7 +123,7 @@
 		FFFBBFC11E4521700052D68B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FFFBBFC61E4521700052D68B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFFBBFE11E4523A10052D68B /* Tetramonio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tetramonio.swift; sourceTree = "<group>"; };
-		FFFBBFE91E4525050052D68B /* TetramonioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetramonioManager.swift; sourceTree = "<group>"; };
+		FFFBBFE91E4525050052D68B /* TetramonioHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetramonioHelper.swift; sourceTree = "<group>"; };
 		FFFBBFEF1E4526C50052D68B /* GameFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameFlow.swift; sourceTree = "<group>"; };
 		FFFBBFF41E4527DB0052D68B /* CellData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,6 +150,8 @@
 			isa = PBXGroup;
 			children = (
 				FF0472071E81D56D0054FE13 /* Extensions.swift */,
+				FFC8BC8324FEDD95000BB9D1 /* UICollectionViewCell+Resuable.swift */,
+				FFC8BC8124FEDD63000BB9D1 /* Int16+Radnom.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -173,13 +179,13 @@
 			name = CoreData;
 			sourceTree = "<group>";
 		};
-		FF858C5B1EBA6C1C003EFEA3 /* CoreDataManager */ = {
+		FF858C5B1EBA6C1C003EFEA3 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
 				FF858C5C1EBA6C33003EFEA3 /* CoreDataManager.swift */,
 				FF73EBE91EE55A27003F069B /* GameDbStore.swift */,
 			);
-			name = CoreDataManager;
+			name = Storage;
 			sourceTree = "<group>";
 		};
 		FF8A40F71F6E9B5100EB243E /* Views */ = {
@@ -228,13 +234,13 @@
 			path = BlocksTests;
 			sourceTree = "<group>";
 		};
-		FFA44A2D1E452C4F000B4829 /* TetramoniosDataProvider */ = {
+		FFA44A2D1E452C4F000B4829 /* ResourceLoader */ = {
 			isa = PBXGroup;
 			children = (
 				FF33CF801E8509E0007969C6 /* BundleResourceLoader.swift */,
 				FFA44A2E1E452D20000B4829 /* TetramonioDataProvider.swift */,
 			);
-			name = TetramoniosDataProvider;
+			name = ResourceLoader;
 			sourceTree = "<group>";
 		};
 		FFA44A301E452E11000B4829 /* Resources */ = {
@@ -381,10 +387,10 @@
 			children = (
 				FF32D4661EEA19EB00A15F9E /* Checkers */,
 				FF9748B81EE8A9FA00213F10 /* Loalization */,
-				FF858C5B1EBA6C1C003EFEA3 /* CoreDataManager */,
-				FFA44A2D1E452C4F000B4829 /* TetramoniosDataProvider */,
+				FF858C5B1EBA6C1C003EFEA3 /* Storage */,
+				FFA44A2D1E452C4F000B4829 /* ResourceLoader */,
 				FFFBBFEE1E4526AF0052D68B /* GameLogic */,
-				FFFBBFED1E4526A20052D68B /* TetramonioManager */,
+				FFFBBFED1E4526A20052D68B /* TetramonioHelper */,
 				FF32D45E1EE9F6E200A15F9E /* AlertPresenter.swift */,
 			);
 			name = Managers;
@@ -399,12 +405,12 @@
 			name = Enteties;
 			sourceTree = "<group>";
 		};
-		FFFBBFED1E4526A20052D68B /* TetramonioManager */ = {
+		FFFBBFED1E4526A20052D68B /* TetramonioHelper */ = {
 			isa = PBXGroup;
 			children = (
-				FFFBBFE91E4525050052D68B /* TetramonioManager.swift */,
+				FFFBBFE91E4525050052D68B /* TetramonioHelper.swift */,
 			);
-			name = TetramonioManager;
+			name = TetramonioHelper;
 			sourceTree = "<group>";
 		};
 		FFFBBFEE1E4526AF0052D68B /* GameLogic */ = {
@@ -541,7 +547,8 @@
 				FF73EBED1EE564E6003F069B /* Game+CoreDataClass.swift in Sources */,
 				FF1B1CC21E55AC8B00D0E50D /* GamePresenter.swift in Sources */,
 				FF7401FA227838C000FEE070 /* GameFlowOutput.swift in Sources */,
-				FFFBBFEA1E4525050052D68B /* TetramonioManager.swift in Sources */,
+				FFC8BC8224FEDD63000BB9D1 /* Int16+Radnom.swift in Sources */,
+				FFFBBFEA1E4525050052D68B /* TetramonioHelper.swift in Sources */,
 				FF7401F8227838A500FEE070 /* GameFlowInput.swift in Sources */,
 				FFFBBFE21E4523A10052D68B /* Tetramonio.swift in Sources */,
 				FF74020422783A0800FEE070 /* GameInterractorOutput.swift in Sources */,
@@ -569,6 +576,7 @@
 				FF0472081E81D56D0054FE13 /* Extensions.swift in Sources */,
 				FF740202227839F200FEE070 /* GameInterractorInput.swift in Sources */,
 				FF33CF811E8509E0007969C6 /* BundleResourceLoader.swift in Sources */,
+				FFC8BC8424FEDD95000BB9D1 /* UICollectionViewCell+Resuable.swift in Sources */,
 				FFB82A8A1E7D2F2A0043BD53 /* Blocks.xcdatamodeld in Sources */,
 				FFA44A2F1E452D20000B4829 /* TetramonioDataProvider.swift in Sources */,
 				FFFBBFBB1E4521700052D68B /* AppDelegate.swift in Sources */,
