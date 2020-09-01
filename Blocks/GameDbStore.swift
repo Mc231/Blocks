@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol GameDbStoreInput: class {
+protocol GameStorage: class {
     func store(current tetramonios: [Tetramonio])
 	func storeField(_ field: [CellData])
 	func storeUpdatedCells(_ updatedCells: [CellData])
@@ -60,7 +60,7 @@ class GameDbStore {
 
 // MARK: - GameDbStoreInput
 
-extension GameDbStore: GameDbStoreInput {
+extension GameDbStore: GameStorage {
 
     func store(current tetramonios: [Tetramonio]) {
         guard let firstTetramonio = tetramonios.first?.id.rawValue,

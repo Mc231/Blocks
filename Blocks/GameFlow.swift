@@ -15,7 +15,7 @@ class GameFlow {
 
     private weak var interractor: GameFlowOutput?
     private var tetramoniosManager: TetramonioProtocol?
-    private var gameDbStore: GameDbStoreInput?
+    private var gameDbStore: GameStorage?
 
     private var field = [CellData]() {
         didSet {
@@ -34,7 +34,7 @@ class GameFlow {
 	// swiftlint:disable vertical_parameter_alignment
     init(interractor: GameFlowOutput?,
 		 tetramoniosManager: TetramonioProtocol,
-		 tetramonioCoreDataManager: GameDbStoreInput) {
+		 tetramonioCoreDataManager: GameStorage) {
         self.interractor = interractor
         self.tetramoniosManager = tetramoniosManager
         self.gameDbStore = tetramonioCoreDataManager
