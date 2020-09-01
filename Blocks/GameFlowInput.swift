@@ -1,5 +1,5 @@
 //
-//  GameLogicInput.swift
+//  GameFlowInput.swift
 //  Blocks
 //
 //  Created by Volodymyr Shyrochuk on 4/30/19.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol GameLogicInput {
+protocol GameFlowInput {
 	func generateTetramoniosFor(_ type: GenerationType) -> [Tetramonio]
 	func updateField(with handledCell: CellData)
 	func updateField(with draggedCells: [CellData])

@@ -1,5 +1,5 @@
 //
-//  GameLogicManager.swift
+//  GameFlowManager.swift
 //  Blocks
 //
 //  Created by Volodya on 2/3/17.
@@ -9,11 +9,11 @@
 import Foundation
 
 /// This class represents base game logic
-class GameLogic {
+class GameFlow {
 
     // MARK: - private Properties
 
-    private weak var interractor: GameLogicOutput?
+    private weak var interractor: GameFlowOutput?
     private var tetramoniosManager: TetramonioProtocol?
     private var gameDbStore: GameDbStoreInput?
 
@@ -32,7 +32,7 @@ class GameLogic {
 
     // MARK: - Inizialization
 	// swiftlint:disable vertical_parameter_alignment
-    init(interractor: GameLogicOutput?,
+    init(interractor: GameFlowOutput?,
 		 tetramoniosManager: TetramonioProtocol,
 		 tetramonioCoreDataManager: GameDbStoreInput) {
         self.interractor = interractor
@@ -70,7 +70,7 @@ class GameLogic {
 								   completion: { [weak self] score in
 									guard let strongSelf = self else { return }
 				
-									strongSelf.interractor?.gameLogicManager(strongSelf, didChange: score)
+									strongSelf.interractor?.GameFlowManager(strongSelf, didChange: score)
 			})
 	}
 	
@@ -88,7 +88,7 @@ class GameLogic {
 		currentTetramonio.removeAll()
 		
 		if !cellsToUpdate.isEmpty {
-			interractor?.gameLogicManager(self, didUpdate: cellsToUpdate)
+			interractor?.GameFlowManager(self, didUpdate: cellsToUpdate)
 		}
 	}
 	
@@ -108,14 +108,14 @@ class GameLogic {
 		})
 		
 		if !cellsToUpdate.isEmpty {
-			interractor?.gameLogicManager(self, didUpdate: cellsToUpdate)
+			interractor?.GameFlowManager(self, didUpdate: cellsToUpdate)
 		}
 	}
 
     private func checkCroosLines() {
 		checkForCroosLine(at: &field) { [unowned self] (updatedRows) in
 			self.gameDbStore?.storeUpdatedCells(updatedRows)
-			self.interractor?.gameLogicManager(self, didUpdate: updatedRows)
+			self.interractor?.GameFlowManager(self, didUpdate: updatedRows)
 		}
     }
 
@@ -137,7 +137,7 @@ class GameLogic {
 			}
 		}
 		gameDbStore?.storeUpdatedCells(cells)
-		interractor?.gameLogicManager(self, didUpdate: cells)
+		interractor?.GameFlowManager(self, didUpdate: cells)
 	}
 	
 	private func processGameFlow(cellData: [CellData]) {
@@ -148,9 +148,9 @@ class GameLogic {
 	}
 }
 
-// MARK: - GameLogicInput
+// MARK: - GameFlowInput
 
-extension GameLogic: GameLogicInput {
+extension GameFlow: GameFlowInput {
 
     @discardableResult
     func generateTetramoniosFor(_ type: GenerationType) -> [Tetramonio] {
@@ -158,7 +158,7 @@ extension GameLogic: GameLogicInput {
             fatalError("Generated tetramonios could not be nil")
         }
 
-        interractor?.gameLogicManager(self, didUpdate: tetramonios)
+        interractor?.GameFlowManager(self, didUpdate: tetramonios)
         self.tetramonios = tetramonios
         return tetramonios
     }
@@ -221,18 +221,18 @@ extension GameLogic: GameLogicInput {
 
 // MARK: - TeramonioChecker
 
-extension GameLogic: TetramonioChecker {
+extension GameFlow: TetramonioChecker {
 
 }
 
 // MARK: - GameOverChecker
 
-extension GameLogic: GameOverChecker {
+extension GameFlow: GameOverChecker {
 
 }
 
 // MARK: - FieldCrossLineChecker
 
-extension GameLogic: FieldCrossLineChecker {
+extension GameFlow: FieldCrossLineChecker {
 
 }

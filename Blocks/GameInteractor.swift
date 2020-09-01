@@ -13,7 +13,7 @@ class GameInteractor {
     // MARK: - Properties
 
     weak var presenter: GameInteractorOutput?
-    var gameLogic: GameLogicInput?
+    var GameFlow: GameFlowInput?
 }
 
 // MARK: - GameInteractorInput
@@ -21,7 +21,7 @@ class GameInteractor {
 extension GameInteractor: GameInteractorInput {
 	
     func startGame() {
-        gameLogic?.startGame(completion: { [weak self] (tetramonios, cellData, score) in
+        GameFlow?.startGame(completion: { [weak self] (tetramonios, cellData, score) in
 
             guard let strongSelf = self else {
                 return
@@ -33,7 +33,7 @@ extension GameInteractor: GameInteractorInput {
     }
 
     func restartGame() {
-        gameLogic?.restartGame(callback: { [weak self] (score, field) in
+        GameFlow?.restartGame(callback: { [weak self] (score, field) in
             guard let strongSelf = self else {
                 return
             }
@@ -43,32 +43,32 @@ extension GameInteractor: GameInteractorInput {
     }
 
     func handleTouchedCellWithData(_ cellData: CellData) {
-        gameLogic?.updateField(with: cellData)
+        GameFlow?.updateField(with: cellData)
     }
 	
 	func handleDraggedCell(with data: [CellData]) {
-		gameLogic?.updateField(with: data)
+		GameFlow?.updateField(with: data)
 	}
 }
 
-// MARK: - GameLogicOutputDelegate 
+// MARK: - GameFlowOutputDelegate 
 
-extension GameInteractor: GameLogicOutput {
+extension GameInteractor: GameFlowOutput {
 
     func gameOver(currentScore: Score) {
         debugPrint("Game Over")
         presenter?.gameOver(currentScore: currentScore)
     }
 
-    func gameLogicManager(_ manager: GameLogicInput, didChange score: GameScore) {
+    func GameFlowManager(_ manager: GameFlowInput, didChange score: GameScore) {
         presenter?.provideScore(gameScore: score)
     }
 
-    func gameLogicManager(_ gameLogicManager: GameLogicInput, didUpdate field: [CellData]) {
+    func GameFlowManager(_ GameFlowManager: GameFlowInput, didUpdate field: [CellData]) {
         presenter?.provideField(field)
     }
 
-    func gameLogicManager(_ manager: GameLogicInput, didUpdate tetramonios: [Tetramonio]) {
+    func GameFlowManager(_ manager: GameFlowInput, didUpdate tetramonios: [Tetramonio]) {
         presenter?.provideTetramonios(tetramonios)
     }
 }

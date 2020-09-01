@@ -1,5 +1,5 @@
 //
-//  GameLogicTests.swift
+//  GameFlowTests.swift
 //  Blocks
 //
 //  Created by Volodya on 3/24/17.
@@ -9,18 +9,18 @@
 import XCTest
 @testable import Blocks
 
-class GameLogicTests: XCTestCase {
+class GameFlowTests: XCTestCase {
 
-   // let gameLogic = GameLogicManager()
-    let tetramonios = TetremonioDataProvider().getTetramonios()
+   // let GameFlow = GameFlowManager()
+	let tetramonios = TetremonioDataLoader().tetramonios;
 //   // let checkTetramonioManager = CheckTetramonioManager()
 //    
 //    lazy var field: [CellData] = {
-//      //  let field = self.gameLogic.createField()
+//      //  let field = self.GameFlow.createField()
 //        return field
 //    }()
 //    
-    func testGameLogicCreateField() {
+    func testGameFlowCreateField() {
     //    XCTAssertEqual(field.count, 64)
     }
 
@@ -130,7 +130,7 @@ class GameLogicTests: XCTestCase {
 						 secondIndex: Int,
 						 thirdIndex: Int,
 						 fourthIndex: Int) -> Bool {
-//        gameLogic.updateTetramonios([tetramonios[id]])
+//        GameFlow.updateTetramonios([tetramonios[id]])
 //        checkTetramonioManager.updateTetramonios([tetramonios[id]])
 //        let currentTetramonio = [field[firstIndex], field[secondIndex], field[thirdIndex], field[fourthIndex]]
 //        return checkTetramonioManager.checkTetramonio(with: currentTetramonio)?.id == tetramonios[id].id
@@ -138,7 +138,7 @@ class GameLogicTests: XCTestCase {
     }
 
     func checkTetramonioGameOverIndexes(_ identifier: Int) -> Bool {
-//        gameLogic.updateTetramonios([tetramonios[id]])
+//        GameFlow.updateTetramonios([tetramonios[id]])
 //        checkTetramonioManager.updateTetramonios([tetramonios[id]])
 //        let gameOverIndexes = tetramonios[id].gameOverIndexes
 //        let firstCell  = field[28]

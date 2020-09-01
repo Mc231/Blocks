@@ -1,5 +1,5 @@
 //
-//  GameLogicManager.swift
+//  GameFlowManager.swift
 //  Blocks
 //
 //  Created by Volodya on 2/3/17.
@@ -25,14 +25,15 @@ class TetramonioManager: TetramonioProtocol {
     // MARK: - Properties
 
     private let tetramonios: [Tetramonio]
-    private let tetramonioDataProvider: TetremonioDataProvider
+    private let tetramonioDataProvider: TetremonioLoader
 	internal var currentTetramonios = [Tetramonio]()
 
     // MARK: - Inizialization
 
-    init(tetramonioDataProvider: TetremonioDataProvider) {
+    init(tetramonioDataProvider: TetremonioLoader) {
         self.tetramonioDataProvider = tetramonioDataProvider
-        self.tetramonios = tetramonioDataProvider.tetramonios
+		#warning("Fix this")
+		self.tetramonios = try! tetramonioDataProvider.load().get()
     }
 
     func generateTetramonios(_ generationType: GenerationType = .gameStart) -> [Tetramonio] {
@@ -58,15 +59,15 @@ class TetramonioManager: TetramonioProtocol {
 
             if generationType == .firtTetramonio {
 
-                while firstTetrmonio.type.rawValue == randomTetamonio
-					|| randomTetamonio == lastTetramonio.type.rawValue {
+                while firstTetrmonio.id.rawValue == randomTetamonio
+					|| randomTetamonio == lastTetramonio.id.rawValue {
                     randomTetamonio = Int16.randomNum(maxValue: numOfTetramonios)
                 }
                   result.append(tetramonios[Int(randomTetamonio)])
                   result.append(lastTetramonio)
             } else {
-                while lastTetramonio.type.rawValue == randomTetamonio
-					|| randomTetamonio == firstTetrmonio.type.rawValue {
+                while lastTetramonio.id.rawValue == randomTetamonio
+					|| randomTetamonio == firstTetrmonio.id.rawValue {
                     randomTetamonio = Int16.randomNum(maxValue: numOfTetramonios)
                 }
                     result.append(firstTetrmonio)
@@ -86,7 +87,7 @@ class TetramonioManager: TetramonioProtocol {
         }
 
 		return indexes.reduce(into: [Tetramonio](), { (result, value) in
-			guard let tetramonioIndex = tetramonios.firstIndex(where: {$0.type.rawValue == value}) else {
+			guard let tetramonioIndex = tetramonios.firstIndex(where: {$0.id.rawValue == value}) else {
 				fatalError("Impossible tetramonio")
 			}
 			let tetamonio = tetramonios[tetramonioIndex]

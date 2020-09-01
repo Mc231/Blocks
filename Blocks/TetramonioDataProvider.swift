@@ -8,32 +8,37 @@
 
 import Foundation
 
-/// This class provide data for all possible Tetramonios
-class TetremonioDataProvider {
+/// This class load data for all possible Tetramonios
+class TetremonioLoader {
+	
+	// MARK: - Constatns
+	
+	private static let fileName = "Tetramonios"
+	private static let fileTpe = "plist"
 
     // MARK: - Properties
 
-    private let dataProvider: DataProvider
+    private let resourceLoader: ResourceLoadable
+	private let plistDecoder: PropertyListDecoder
 
     // MARK: - Inizialization
 
-    init(dataProvider: DataProvider = PlistDataProvider(resource: "Tetramonios", type: "plist")) {
-        self.dataProvider = dataProvider
+	init(resourceLoader: ResourceLoadable = BundleResourceLoader(bundle: .main),
+		 plistDecoder: PropertyListDecoder = .init()) {
+        self.resourceLoader = resourceLoader
+		self.plistDecoder = plistDecoder
     }
 
     // MARK: - Public methods
-
-	var tetramonios: [Tetramonio] {
-        guard let tetramonios: NSArray = dataProvider.getData() else {
-            fatalError("Tetramonios is of wrong type")
-        }
-		return tetramonios
-			.reduce(into: [Tetramonio](), { (result, tetramonio) in
-				guard let teramonioData = tetramonio as? NSDictionary else {
-					fatalError("Failed to parse teramonio dictionary")
-				}
-				let parsedTetramonio = Tetramonio(dictionary: teramonioData)
-				result.append(parsedTetramonio)
-		})
-    }
+	
+	func load() -> Result<[Tetramonio], Error> {
+		do {
+			let data = try resourceLoader.load(resource: Self.fileName, type: Self.fileTpe).get()
+			let result = try plistDecoder.decode([Tetramonio].self, from: data)
+			return .success(result)
+		}catch{
+			print(error)
+			return .failure(error)
+		}
+	}
 }

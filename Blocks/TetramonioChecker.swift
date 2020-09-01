@@ -25,11 +25,11 @@ extension TetramonioChecker {
 
         for currentTetramonio in tetramonios {
 
-            let firstConstant = currentTetramonio.indexes[0]
-            let secondConstant = currentTetramonio.indexes[1]
-            let thirdConstant = currentTetramonio.indexes[2]
+            let firstConstant = currentTetramonio.tetramonioIndexes[0]
+            let secondConstant = currentTetramonio.tetramonioIndexes[1]
+            let thirdConstant = currentTetramonio.tetramonioIndexes[2]
 
-            if currentTetramonio.type == .iH || currentTetramonio.type == .iV {
+            if currentTetramonio.id == .iH || currentTetramonio.id == .iV {
                 if (secondCell == firstCell + firstConstant)
                     && (thirdCell == secondCell + secondConstant)
                     &&  (fourthCell == thirdCell + thirdConstant) {

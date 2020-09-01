@@ -17,6 +17,8 @@ class GameViewController: UIViewController {
 
     // MARK: - Variables
 
+	// TODO: - Refactore
+	var draggedChcker: DraggedTetramonioChecker!
     var presenter: GameViewOutput?
     var tetramonios = [Tetramonio]()
     var fieldData = [CellData]() {
@@ -44,6 +46,7 @@ class GameViewController: UIViewController {
     override func awakeFromNib() {
         super.awakeFromNib()
         GameAssambler.assamble(in: self)
+		//draggedChcker = DraggedTetramonioChecker(field: field, view: self.view)
     }
 
 	// MARK: - UIViewController
@@ -78,7 +81,7 @@ class GameViewController: UIViewController {
 		if sender.state == .began {
 			// Save the view's original position.
 			field.layer.zPosition = -1
-			self.initialCenter = piece.center
+			self.initialCenter = CGPoint(x: piece.center.x, y: piece.center.y - 80.0)
 			self.initialWidth = piece.frame.width
 			let coof = (field.frame.width / 2) / initialWidth
 			piece.transform = CGAffineTransform(scaleX: coof, y: coof)
@@ -92,7 +95,7 @@ class GameViewController: UIViewController {
 			piece.center = newCenter
 		}else{
 			// TODO : - Refacore
-			let magic = field
+			let matchedTetramoino = field
 				.subviews
 				.compactMap({$0 as? FieldCell})
 				.reduce(into: [CellData]()) { (result, fieldCell) in
@@ -110,7 +113,7 @@ class GameViewController: UIViewController {
 						}
 					})
 				}
-			presenter?.handleDraggedCell(with: magic)
+		
 			
 			// On cancellation, return the piece to its original location.
 			UIView.animate(withDuration: 0.3) {

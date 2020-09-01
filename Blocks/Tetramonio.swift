@@ -11,10 +11,10 @@ import Foundation
 /**
     This struct represent basic Tetramonios from clasic Teris
  */
-struct Tetramonio {
+struct Tetramonio: Codable {
 	
-    let type: Type
-    let indexes: [Int16]
+    let id: Type
+    let tetramonioIndexes: [Int16]
     let gameOverIndexes: [Int]
     let displayTetramonioIndexes: [Int]
 }
@@ -24,14 +24,14 @@ struct Tetramonio {
 extension Tetramonio: Equatable {
 	
 	static func == (lhs: Tetramonio, rhs: Tetramonio) -> Bool {
-		return lhs.type == rhs.type
+		return lhs.id == rhs.id
 	}
 }
 
 extension Tetramonio {
 	
-	/// This enum represent all tetramonio types
-	enum `Type`: Int16 {
+	/// Represents  all tetramonio types
+	enum `Type`: Int16, Codable {
 		case iH = 0
 		case iV = 1
 		case o  = 2
@@ -53,21 +53,4 @@ extension Tetramonio {
 		case t270 = 18
 		case none = -1
 	}
-
-    private enum TetramonioKeys: String {
-        case identifier = "id"
-        case tetramonioIndexes
-        case gameOverIndexes
-        case displayTetramonioIndexes
-    }
-
-    init(dictionary: NSDictionary) {
-        self.type
-			= Type(rawValue: dictionary.object(forKey: TetramonioKeys.identifier.rawValue)
-				as? Int16 ?? -1) ?? .none
-        self.indexes = dictionary.object(forKey: TetramonioKeys.tetramonioIndexes.rawValue) as? [Int16] ?? [Int16]()
-        self.gameOverIndexes = dictionary.object(forKey: TetramonioKeys.gameOverIndexes.rawValue) as? [Int] ?? [Int]()
-        self.displayTetramonioIndexes
-			= dictionary.object(forKey: TetramonioKeys.displayTetramonioIndexes.rawValue) as? [Int] ?? [Int]()
-    }
 }

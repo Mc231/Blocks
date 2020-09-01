@@ -63,8 +63,8 @@ class GameDbStore {
 extension GameDbStore: GameDbStoreInput {
 
     func store(current tetramonios: [Tetramonio]) {
-        guard let firstTetramonio = tetramonios.first?.type.rawValue,
-            let lastTetramono = tetramonios.last?.type.rawValue else {
+        guard let firstTetramonio = tetramonios.first?.id.rawValue,
+            let lastTetramono = tetramonios.last?.id.rawValue else {
                 fatalError("You nedd to pass 2 teramonios")
         }
 
@@ -179,20 +179,4 @@ extension GameDbStore: GameDbStoreInput {
         }
         return [firstTetramonio, lastTetramonio]
     }
-}
-
-// MARK: - Private methods
-
-private extension GameDbStore {
-	
-	func storeCellDataIfNeeded(_ cellData: CellData, to cell: Cell) {
-		let isSameCells = cellData.xPosition != cell.xPosition
-			&& cell.xPosition != cell.yPosition
-		assert(isSameCells, "Cells must be same")
-		let rawState = cellData.state.rawValue
-		if rawState != cell.state {
-			cell.state = rawState
-			coreDataManager.save(cell)
-		}
-	}
 }
