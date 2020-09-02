@@ -32,10 +32,6 @@ extension Array where Element == Tetramonio {
 	*/
 	mutating func replaceElement(for generationType: GenerationType,
 						  possibleTetramonios: [Tetramonio]) -> [Element] {
-		if isEmpty {
-			print("Array must not be empty")
-			return self
-		}
 		var tetramonios = possibleTetramonios
 		tetramonios.removeAll(where: {$0 == first || $0 == last})
 		let random = tetramonios.randomElement()
