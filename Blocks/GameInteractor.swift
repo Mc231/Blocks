@@ -13,7 +13,7 @@ class GameInteractor {
     // MARK: - Properties
 
     weak var presenter: GameInteractorOutput?
-    var GameFlow: GameFlowInput?
+    var gameFlow: GameFlowInput?
 }
 
 // MARK: - GameInteractorInput
@@ -21,33 +21,26 @@ class GameInteractor {
 extension GameInteractor: GameInteractorInput {
 	
     func startGame() {
-        GameFlow?.startGame(completion: { [weak self] (tetramonios, cellData, score) in
-
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.presenter?.provideTetramonios(tetramonios)
-            strongSelf.presenter?.provideField(cellData)
-            strongSelf.presenter?.provideScore(gameScore: score)
+        gameFlow?.startGame(completion: { [weak self] (tetramonios, cellData, score) in
+            self?.presenter?.provideTetramonios(tetramonios)
+            self?.presenter?.provideField(cellData)
+            self?.presenter?.provideScore(gameScore: score)
         })
     }
 
     func restartGame() {
-        GameFlow?.restartGame(callback: { [weak self] (score, field) in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.presenter?.provideScore(gameScore: score)
-            strongSelf.presenter?.provideField(field)
+        gameFlow?.restartGame(callback: { [weak self] (score, field) in
+            self?.presenter?.provideScore(gameScore: score)
+            self?.presenter?.provideField(field)
         })
     }
 
     func handleTouchedCellWithData(_ cellData: CellData) {
-        GameFlow?.updateField(with: cellData)
+        gameFlow?.updateField(with: cellData)
     }
 	
 	func handleDraggedCell(with data: [CellData]) {
-		GameFlow?.updateField(with: data)
+		gameFlow?.updateField(with: data)
 	}
 }
 

@@ -33,7 +33,7 @@ class GameAssambler {
 										 tetramonioCoreDataManager: dbStore)
         view.presenter = presenter
         presenter.interractor = interractor
-        interractor.GameFlow = gameFlow
+        interractor.gameFlow = gameFlow
 
     }
 }

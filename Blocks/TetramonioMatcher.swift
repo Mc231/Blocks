@@ -8,14 +8,14 @@
 
 import Foundation
 
-protocol TetramonioChecker {
-    func checkTetramonio(from cellData: [CellData], with tetramonios: [Tetramonio]) -> Tetramonio?
+protocol TetramonioMatcher {
+    func matchTetramonio(from cellData: [CellData], with tetramonios: [Tetramonio]) -> Tetramonio?
 }
 
 // MARK: - Default Implementation
 
-extension TetramonioChecker {
-    func checkTetramonio(from cellData: [CellData], with tetramonios: [Tetramonio]) -> Tetramonio? {
+extension TetramonioMatcher {
+    func matchTetramonio(from cellData: [CellData], with tetramonios: [Tetramonio]) -> Tetramonio? {
         let orderedCellData = cellData.sorted(by: {$0.xPosition < $1.xPosition})
 
         let firstCell  = orderedCellData[0].xPosition

@@ -16,7 +16,7 @@ protocol GameOverChecker {
 // MARK: - Default Implementation
 
 extension GameOverChecker {
-    func checkGameOver(for tetramonios: [Tetramonio], at field: [CellData], with checker: TetramonioChecker) -> Bool {
+    func checkGameOver(for tetramonios: [Tetramonio], at field: [CellData], with checker: TetramonioMatcher) -> Bool {
 
         for tetramonio in tetramonios {
             let firstGameOverIndex = tetramonio.gameOverIndexes[0]
@@ -40,7 +40,7 @@ extension GameOverChecker {
                     let fourthCell = field[thirdIndex]
                     let possibleTetramonioArray = [firstCell, secondCell, thirdCell, fourthCell]
 
-                    let possibleTetramonio = checker.checkTetramonio(from: possibleTetramonioArray, with: tetramonios)
+                    let possibleTetramonio = checker.matchTetramonio(from: possibleTetramonioArray, with: tetramonios)
 
                     if !firstCell.isPlaced
                         && !secondCell.isPlaced

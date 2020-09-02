@@ -47,7 +47,7 @@ class GameFlow {
 		let isFullTetramonio = currentTetramonio.count == Constatns.Tetramonio.numberOfCellsInTetramonio
 		
         if isFullTetramonio {
-            let tetramonio = checkTetramonio(from: currentTetramonio, with: tetramonios)
+            let tetramonio = matchTetramonio(from: currentTetramonio, with: tetramonios)
 			updateFieldWithTetramonio(tetramonio)
 			
 			if tetramonio != nil {
@@ -221,7 +221,7 @@ extension GameFlow: GameFlowInput {
 
 // MARK: - TeramonioChecker
 
-extension GameFlow: TetramonioChecker {
+extension GameFlow: TetramonioMatcher {
 
 }
 
