@@ -11,27 +11,27 @@ import XCTest
 
 class TetramoniosManagerTests: XCTestCase {
 
-    let manager = TetramonioHelper(tetramonioDataProvider: TetremonioDataLoader())
+    let manager = TetramonioHelper(tetramonioDataProvider: .init())
 
     func testTetramonioManagerGenerateTetramonios() {
         let tetramonios = manager.generateTetramonios()
         XCTAssertTrue(tetramonios.count == 2)
-        XCTAssertNotEqual(tetramonios.first?.type, tetramonios.last?.type)
+        XCTAssertNotEqual(tetramonios.first?.id, tetramonios.last?.id)
     }
 
     func testTetramonioManagerUpdateFirstTetramonio() {
         let tetramonios = manager.generateTetramonios()
         let updatedTetramonios = manager.generateTetramonios(.firtTetramonio)
         XCTAssertEqual(tetramonios.count, updatedTetramonios.count)
-        XCTAssertNotEqual(tetramonios.first?.type, updatedTetramonios.first?.type)
-        XCTAssertEqual(tetramonios.last?.type, updatedTetramonios.last?.type)
+        XCTAssertNotEqual(tetramonios.first?.id, updatedTetramonios.first?.id)
+        XCTAssertEqual(tetramonios.last?.id, updatedTetramonios.last?.id)
     }
 
     func testTetramonioManagerUpdateSecondTetramonio() {
         let tetramonios = manager.generateTetramonios()
         let updatedTetramonios = manager.generateTetramonios(.secondTetramonio)
         XCTAssertEqual(tetramonios.count, updatedTetramonios.count)
-        XCTAssertNotEqual(tetramonios.last?.type, updatedTetramonios.last?.type)
-        XCTAssertEqual(tetramonios.first?.type, updatedTetramonios.first?.type)
+        XCTAssertNotEqual(tetramonios.last?.id, updatedTetramonios.last?.id)
+        XCTAssertEqual(tetramonios.first?.id, updatedTetramonios.first?.id)
     }
 }

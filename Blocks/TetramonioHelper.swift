@@ -33,7 +33,7 @@ class TetramonioHelper: TetramonioProtocol {
     init(tetramonioDataProvider: TetremonioLoader) {
         self.tetramonioDataProvider = tetramonioDataProvider
 		#warning("Fix this")
-		self.tetramonios = try! tetramonioDataProvider.load().get()
+		self.tetramonios = try! tetramonioDataProvider.load()
     }
 
     func generateTetramonios(_ generationType: GenerationType = .gameStart) -> [Tetramonio] {

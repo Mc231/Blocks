@@ -12,7 +12,7 @@ import XCTest
 class GameFlowTests: XCTestCase {
 
    // let GameFlow = GameFlowManager()
-	let tetramonios = TetremonioDataLoader().tetramonios;
+    let tetramonios = try! TetremonioLoader().load()
 //   // let checkTetramonioManager = CheckTetramonioManager()
 //    
 //    lazy var field: [CellData] = {

@@ -31,14 +31,8 @@ class TetremonioLoader {
 
     // MARK: - Public methods
 	
-	func load() -> Result<[Tetramonio], Error> {
-		do {
-			let data = try resourceLoader.load(resource: Self.fileName, type: Self.fileTpe).get()
-			let result = try plistDecoder.decode([Tetramonio].self, from: data)
-			return .success(result)
-		}catch{
-			print(error)
-			return .failure(error)
-		}
+    func load() throws -> [Tetramonio] {
+        let data = try resourceLoader.load(resource: Self.fileName, type: Self.fileTpe)
+        return try plistDecoder.decode([Tetramonio].self, from: data)
 	}
 }
