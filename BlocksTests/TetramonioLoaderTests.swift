@@ -26,13 +26,13 @@ private extension TetramonioLoaderTests {
 
 class TetramonioLoaderTests: XCTestCase {
     
-    private var sut: TetremonioLoader!
+    private var sut: TetramonioLoader!
     private var mockResourceLoader = MockResourceLoader()
     private let plistDecoder = PropertyListDecoder()
     
     override func setUp() {
         super.setUp()
-        sut = TetremonioLoader(resourceLoader: mockResourceLoader, plistDecoder: plistDecoder)
+        sut = TetramonioLoader(resourceLoader: mockResourceLoader, plistDecoder: plistDecoder)
     }
     
     override func tearDown() {

@@ -9,7 +9,7 @@
 import Foundation
 
 protocol GameOverChecker {
-    associatedtype AsociatedChecker = TetramonioChecker
+    associatedtype AsociatedChecker = TetramonioMatcher
     func checkGameOver(for tetramonios: [Tetramonio], at field: [CellData], with checker: AsociatedChecker) -> Bool
 }
 

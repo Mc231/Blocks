@@ -8,8 +8,12 @@
 
 import Foundation
 
+protocol TetramonioLoadable {
+	func load() throws -> [Tetramonio]
+}
+
 /// This class load data for all possible Tetramonios
-class TetremonioLoader {
+class TetramonioLoader: TetramonioLoadable {
 	
 	// MARK: - Constatns
 	

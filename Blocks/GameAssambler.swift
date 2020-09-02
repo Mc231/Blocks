@@ -24,13 +24,14 @@ class GameAssambler {
         let interractor = GameInteractor()
         interractor.presenter = presenter
 
-        let tetramonioDataProvider = TetremonioLoader()
-        let tetramonioManager = TetramonioHelper(tetramonioDataProvider: tetramonioDataProvider)
+        let tetramonioLoader = TetramonioLoader()
+		// TODO: - Remove force unwrup
+        let tetramonioGenerator = try! TetramonioGenerator(loader: tetramonioLoader)
         let coreDataManager = CoreDataManager(modelName: kDbName)
         let dbStore = GameDbStore(coreDataManager: coreDataManager)
         let gameFlow = GameFlow(interractor: interractor,
-										 tetramoniosManager: tetramonioManager,
-										 tetramonioCoreDataManager: dbStore)
+								tetramonioGenerator: tetramonioGenerator,
+								tetramonioCoreDataManager: dbStore)
         view.presenter = presenter
         presenter.interractor = interractor
         interractor.gameFlow = gameFlow

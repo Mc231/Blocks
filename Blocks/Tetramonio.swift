@@ -11,7 +11,7 @@ import Foundation
 /**
     This struct represent basic Tetramonios from clasic Teris
  */
-struct Tetramonio: Codable {
+struct Tetramonio: Codable, Hashable {
 	
     let id: Type
     let tetramonioIndexes: [Int16]
@@ -31,7 +31,7 @@ extension Tetramonio: Equatable {
 extension Tetramonio {
 	
 	/// Represents  all tetramonio types
-	enum `Type`: Int16, Codable {
+	enum `Type`: Int16, Codable, CaseIterable {
 		case iH = 0
 		case iV = 1
 		case o  = 2

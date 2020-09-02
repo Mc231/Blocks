@@ -14,7 +14,7 @@ class GameFlow {
     // MARK: - private Properties
 
     private weak var interractor: GameFlowOutput?
-    private var tetramoniosManager: TetramonioProtocol?
+    private var tetramonioGenerator: TetramonioGeneratable?
     private var gameDbStore: GameStorage?
 
     private var field = [CellData]() {
@@ -33,10 +33,10 @@ class GameFlow {
     // MARK: - Inizialization
 	// swiftlint:disable vertical_parameter_alignment
     init(interractor: GameFlowOutput?,
-		 tetramoniosManager: TetramonioProtocol,
+		 tetramonioGenerator: TetramonioGeneratable,
 		 tetramonioCoreDataManager: GameStorage) {
         self.interractor = interractor
-        self.tetramoniosManager = tetramoniosManager
+        self.tetramonioGenerator = tetramonioGenerator
         self.gameDbStore = tetramonioCoreDataManager
     }
 
@@ -154,7 +154,7 @@ extension GameFlow: GameFlowInput {
 
     @discardableResult
     func generateTetramoniosFor(_ type: GenerationType) -> [Tetramonio] {
-        guard let tetramonios = tetramoniosManager?.generateTetramonios(type) else {
+        guard let tetramonios = tetramonioGenerator?.generateTetramonios(type) else {
             fatalError("Generated tetramonios could not be nil")
         }
 
@@ -180,11 +180,11 @@ extension GameFlow: GameFlowInput {
     func startGame(completion: (StartGameConfig) -> Swift.Void) {
 
         var tetramonios = [Tetramonio]()
-        if let storedTetramonios = gameDbStore?.tetramoniosIndexes,
-            !storedTetramonios.isEmpty,
-            let unwraprdTetramonios = tetramoniosManager?.getTetramoniosFrom(storedTetramonios) {
+        if let storedIds = gameDbStore?.tetramoniosIndexes,
+            !storedIds .isEmpty,
+            let unwraprdTetramonios = tetramonioGenerator?.getTetramoniosFromIds(storedIds) {
             tetramonios = unwraprdTetramonios
-            tetramoniosManager?.currentTetramonios = tetramonios
+            tetramonioGenerator?.currentTetramonios = tetramonios
             self.tetramonios = tetramonios
         } else {
             tetramonios = generateTetramoniosFor(.gameStart)
