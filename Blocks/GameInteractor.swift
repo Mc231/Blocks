@@ -53,15 +53,15 @@ extension GameInteractor: GameFlowOutput {
         presenter?.gameOver(currentScore: currentScore)
     }
 
-    func GameFlowManager(_ manager: GameFlowInput, didChange score: GameScore) {
+    func gameFlow(_ manager: GameFlowInput, didChange score: GameScore) {
         presenter?.provideScore(gameScore: score)
     }
 
-    func GameFlowManager(_ GameFlowManager: GameFlowInput, didUpdate field: [CellData]) {
+    func gameFlow(_ GameFlowManager: GameFlowInput, didUpdate field: [CellData]) {
         presenter?.provideField(field)
     }
 
-    func GameFlowManager(_ manager: GameFlowInput, didUpdate tetramonios: [Tetramonio]) {
+    func gameFlow(_ manager: GameFlowInput, didUpdate tetramonios: [Tetramonio]) {
         presenter?.provideTetramonios(tetramonios)
     }
 }

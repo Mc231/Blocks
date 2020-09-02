@@ -70,7 +70,7 @@ class GameFlow {
 								   completion: { [weak self] score in
 									guard let strongSelf = self else { return }
 				
-									strongSelf.interractor?.GameFlowManager(strongSelf, didChange: score)
+									strongSelf.interractor?.gameFlow(strongSelf, didChange: score)
 			})
 	}
 	
@@ -88,7 +88,7 @@ class GameFlow {
 		currentTetramonio.removeAll()
 		
 		if !cellsToUpdate.isEmpty {
-			interractor?.GameFlowManager(self, didUpdate: cellsToUpdate)
+			interractor?.gameFlow(self, didUpdate: cellsToUpdate)
 		}
 	}
 	
@@ -108,14 +108,14 @@ class GameFlow {
 		})
 		
 		if !cellsToUpdate.isEmpty {
-			interractor?.GameFlowManager(self, didUpdate: cellsToUpdate)
+			interractor?.gameFlow(self, didUpdate: cellsToUpdate)
 		}
 	}
 
     private func checkCroosLines() {
 		checkForCroosLine(at: &field) { [unowned self] (updatedRows) in
 			self.gameDbStore?.storeUpdatedCells(updatedRows)
-			self.interractor?.GameFlowManager(self, didUpdate: updatedRows)
+			self.interractor?.gameFlow(self, didUpdate: updatedRows)
 		}
     }
 
@@ -137,7 +137,7 @@ class GameFlow {
 			}
 		}
 		gameDbStore?.storeUpdatedCells(cells)
-		interractor?.GameFlowManager(self, didUpdate: cells)
+		interractor?.gameFlow(self, didUpdate: cells)
 	}
 	
 	private func processGameFlow(cellData: [CellData]) {
@@ -158,7 +158,7 @@ extension GameFlow: GameFlowInput {
             fatalError("Generated tetramonios could not be nil")
         }
 
-        interractor?.GameFlowManager(self, didUpdate: tetramonios)
+        interractor?.gameFlow(self, didUpdate: tetramonios)
         self.tetramonios = tetramonios
         return tetramonios
     }
@@ -219,7 +219,7 @@ extension GameFlow: GameFlowInput {
     }
 }
 
-// MARK: - TeramonioChecker
+// MARK: - TetramonioMatcher
 
 extension GameFlow: TetramonioMatcher {
 

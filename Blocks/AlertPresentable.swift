@@ -9,8 +9,8 @@
 import UIKit
 
 /// This protocol describes presentation of game alerts
-protocol AlertPresenter {
-    func showAlert(title: String,
+protocol AlertPresentable {
+    func present(title: String,
                    message: String,
                    okActionTitle: String,
                    cancelActionTitle: String,
@@ -19,8 +19,8 @@ protocol AlertPresenter {
 
 // MARK: - Default implementation
 
-extension AlertPresenter where Self: UIViewController {
-    func showAlert(title: String,
+extension AlertPresentable where Self: UIViewController {
+    func present(title: String,
                    message: String,
                    okActionTitle: String,
                    cancelActionTitle: String,

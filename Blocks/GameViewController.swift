@@ -198,7 +198,7 @@ extension GameViewController: GameViewInput {
         let message = Localization.Game.GameOverAlert.message(currentScore).localization
         let restartActionTitle = Localization.Game.GameOverAlert.restartTitle.localization
         let cancelActionTitle = Localization.Game.GameOverAlert.cancelTitle.localization
-        showAlert(title: title,
+        present(title: title,
 				  message: message, okActionTitle: restartActionTitle, cancelActionTitle: cancelActionTitle) { [weak self] in
             guard let strongSelf = self else {
                 return
@@ -241,4 +241,4 @@ extension GameViewController: GameViewInput {
 
 // MARK: - AlertShowable
 
-extension GameViewController: AlertPresenter { }
+extension GameViewController: AlertPresentable { }
