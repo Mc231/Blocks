@@ -33,6 +33,7 @@ class BundleResourceLoaderTests: XCTestCase {
         // When
         XCTAssertThrowsError(try sut.load(resource: resource, type: type),
                              "Throw Invalid path") { (error) in
+                                // Then
                                 XCTAssertEqual(error as? ResourceLoadingError, .invalidPath)
         }
     }
