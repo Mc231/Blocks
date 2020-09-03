@@ -9,7 +9,7 @@
 import Foundation
 
 protocol GameFlowInput {
-	func generateTetramoniosFor(_ type: GenerationType) -> [Tetramonio]
+	func generateTetramoniosOf(_ type: GenerationType) -> [Tetramonio]
 	func updateField(with handledCell: CellData)
 	func updateField(with draggedCells: [CellData])
 	func startGame(completion: (StartGameConfig) -> Swift.Void)

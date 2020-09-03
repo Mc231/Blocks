@@ -12,8 +12,10 @@ class GameViewController: UIViewController {
 
     // MARK: - Constants
 
-    private let numberOfRows = 8
-    private let cellWidthCoof: CGFloat = 0.1173
+    private static let numberOfRows = 8
+    private static let cellWidthCoof: CGFloat = 0.1173
+    private static let gameOverTitle = Localization.Game.GameOverAlert.title.localization
+    private static let restartTitle = Localization.Game.GameOverAlert.restartTitle.localization
 
     // MARK: - Variables
 
@@ -28,7 +30,7 @@ class GameViewController: UIViewController {
     }
 
     var cellSize: CGSize {
-        let width = Int(UIScreen.main.bounds.size.width - UIScreen.main.bounds.width * cellWidthCoof) / numberOfRows
+        let width = Int(UIScreen.main.bounds.size.width - UIScreen.main.bounds.width * Self.cellWidthCoof) / Self.numberOfRows
         let height = width
         return CGSize(width: width, height: height)
     }
@@ -194,17 +196,13 @@ extension GameViewController: UICollectionViewDataSource {
 extension GameViewController: GameViewInput {
 
     func showGameOverAlert(currentScore: Score) {
-        let title = Localization.Game.GameOverAlert.title.localization
         let message = Localization.Game.GameOverAlert.message(currentScore).localization
-        let restartActionTitle = Localization.Game.GameOverAlert.restartTitle.localization
-        let cancelActionTitle = Localization.Game.GameOverAlert.cancelTitle.localization
-        present(title: title,
-				  message: message, okActionTitle: restartActionTitle, cancelActionTitle: cancelActionTitle) { [weak self] in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.presenter?.restartGame()
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: Self.restartTitle, style: .destructive) { [weak self] (_) in
+            self?.presenter?.restartGame()
         }
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
 
     func display(field withData: [CellData]) {
@@ -238,7 +236,3 @@ extension GameViewController: GameViewInput {
         maxScoreLabel.text = Localization.Game.Score.best(score.best).localization
     }
 }
-
-// MARK: - AlertShowable
-
-extension GameViewController: AlertPresentable { }

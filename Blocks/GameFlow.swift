@@ -56,7 +56,7 @@ class GameFlow {
 						return
 				}
 				
-				generateTetramoniosFor(tetramonioGenerateType)
+				generateTetramoniosOf(tetramonioGenerateType)
 				storeTetramonioScore()
 			}
         } else {
@@ -153,8 +153,8 @@ class GameFlow {
 extension GameFlow: GameFlowInput {
 
     @discardableResult
-    func generateTetramoniosFor(_ type: GenerationType) -> [Tetramonio] {
-        guard let tetramonios = tetramonioGenerator?.generateTetramonios(type) else {
+    func generateTetramoniosOf(_ type: GenerationType) -> [Tetramonio] {
+        guard let tetramonios = tetramonioGenerator?.generateTetramonios(of: type) else {
             fatalError("Generated tetramonios could not be nil")
         }
 
@@ -187,7 +187,7 @@ extension GameFlow: GameFlowInput {
             tetramonioGenerator?.currentTetramonios = tetramonios
             self.tetramonios = tetramonios
         } else {
-            tetramonios = generateTetramoniosFor(.gameStart)
+            tetramonios = generateTetramoniosOf(.gameStart)
         }
 
         guard let field = gameDbStore?.field,
@@ -206,7 +206,7 @@ extension GameFlow: GameFlowInput {
     }
 
     func restartGame(callback: @escaping (GameScore, [CellData]) -> Void) {
-        generateTetramoniosFor(.gameStart)
+        generateTetramoniosOf(.gameStart)
 		
         gameDbStore?.restartGame(completion: { [weak self] (gameScore, field) in
             guard let strongSelf = self else {

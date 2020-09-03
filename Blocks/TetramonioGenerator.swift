@@ -11,7 +11,7 @@ import Foundation
 protocol TetramonioGeneratable {
 	/// Represents tetramonios that user can place on the field
     var currentTetramonios: [Tetramonio] {get set}
-    func generateTetramonios(_ generationType: GenerationType) -> [Tetramonio]
+    func generateTetramonios(of generationType: GenerationType) -> [Tetramonio]
     func getTetramoniosFromIds(_ ids: [Int16]) -> [Tetramonio]
 }
 
@@ -40,7 +40,7 @@ class TetramonioGenerator: TetramonioGeneratable {
 		self.allTetramonios = try loader.load()
     }
 
-    func generateTetramonios(_ generationType: GenerationType) -> [Tetramonio] {
+    func generateTetramonios(of generationType: GenerationType) -> [Tetramonio] {
         var result = [Tetramonio]()
         if generationType == .gameStart {
 			result = allTetramonios.randomElements(elementsCount: Self.randomElementsCount)

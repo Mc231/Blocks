@@ -35,7 +35,6 @@ enum Localization {
             case title
             case message(Int32)
             case restartTitle
-            case cancelTitle
 
             var localization: String {
                 switch self {
@@ -46,8 +45,6 @@ enum Localization {
 															comment: "Your score title"), currentScore)
                 case .restartTitle:
                     return NSLocalizedString("Restart", comment: "Restart title")
-                case .cancelTitle:
-                    return NSLocalizedString("Cancel", comment: "Cancel title")
                 }
             }
         }

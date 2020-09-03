@@ -51,7 +51,7 @@ class TetramonioGeneratorTests: XCTestCase {
 		// Given
 		let generationType: GenerationType = .gameStart
 		// When
-		let result = sut.generateTetramonios(generationType)
+        let result = sut.generateTetramonios(of: generationType)
 		// Then
         XCTAssertTrue(result.count == 2)
         XCTAssertNotEqual(result.first, result.last)
@@ -59,10 +59,10 @@ class TetramonioGeneratorTests: XCTestCase {
 	
     func testGenerateTetramoniosForFirstTetramonio() {
 		// Given
-		let tetramonios = sut.generateTetramonios(.gameStart)
+        let tetramonios = sut.generateTetramonios(of: .gameStart)
 		let generationType: GenerationType = .firtTetramonio
 		// When
-		let result = sut.generateTetramonios(generationType)
+        let result = sut.generateTetramonios(of: generationType)
 		// Then
         XCTAssertTrue(result.count == 2)
         XCTAssertNotEqual(tetramonios, result)
@@ -70,10 +70,10 @@ class TetramonioGeneratorTests: XCTestCase {
 
     func testGenerateTetramoniosForLastTetramonio() {
 		// Given
-		let tetramonios = sut.generateTetramonios(.gameStart)
+        let tetramonios = sut.generateTetramonios(of: .gameStart)
 		let generationType: GenerationType = .secondTetramonio
 		// When
-		let result = sut.generateTetramonios(generationType)
+        let result = sut.generateTetramonios(of: generationType)
 		// Then
         XCTAssertTrue(result.count == 2)
         XCTAssertNotEqual(tetramonios, result)
