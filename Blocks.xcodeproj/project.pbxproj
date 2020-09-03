@@ -18,7 +18,7 @@
 		FF32D46A1EEA220100A15F9E /* Constatns.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF32D4691EEA220100A15F9E /* Constatns.swift */; };
 		FF33CF811E8509E0007969C6 /* BundleResourceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF33CF801E8509E0007969C6 /* BundleResourceLoader.swift */; };
 		FF340C061E56432500EE82E1 /* GameAssambler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF340C051E56432500EE82E1 /* GameAssambler.swift */; };
-		FF6931062500EFBD00F3DF1B /* AlertPresentableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6931052500EFBD00F3DF1B /* AlertPresentableTests.swift */; };
+		FF6DC9C0250178E1009833F3 /* GamePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6DC9BF250178E1009833F3 /* GamePresenterTests.swift */; };
 		FF73EBEA1EE55A27003F069B /* GameDbStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF73EBE91EE55A27003F069B /* GameDbStore.swift */; };
 		FF73EBED1EE564E6003F069B /* Game+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF73EBEB1EE564E6003F069B /* Game+CoreDataClass.swift */; };
 		FF73EBEE1EE564E6003F069B /* Game+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF73EBEC1EE564E6003F069B /* Game+CoreDataProperties.swift */; };
@@ -86,7 +86,7 @@
 		FF33CF801E8509E0007969C6 /* BundleResourceLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleResourceLoader.swift; sourceTree = "<group>"; };
 		FF340C051E56432500EE82E1 /* GameAssambler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameAssambler.swift; sourceTree = "<group>"; };
 		FF5412D822A6478E0099E360 /* Blocks.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Blocks.entitlements; sourceTree = "<group>"; };
-		FF6931052500EFBD00F3DF1B /* AlertPresentableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresentableTests.swift; sourceTree = "<group>"; };
+		FF6DC9BF250178E1009833F3 /* GamePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePresenterTests.swift; sourceTree = "<group>"; };
 		FF73EBE91EE55A27003F069B /* GameDbStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameDbStore.swift; sourceTree = "<group>"; };
 		FF73EBEB1EE564E6003F069B /* Game+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Game+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FF73EBEC1EE564E6003F069B /* Game+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Game+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -233,7 +233,7 @@
 				FF90440924FF7AE40090C4D2 /* Tetramonios.plist */,
 				FF76B0BE1E847FA4001969FA /* GameLogicTests.swift */,
 				FFA0655E1EC3ABB400B8907D /* CoredDataManagerTest.swift */,
-				FF6931052500EFBD00F3DF1B /* AlertPresentableTests.swift */,
+				FF6DC9BF250178E1009833F3 /* GamePresenterTests.swift */,
 				FF76B0BA1E847EC0001969FA /* TetramonioGeneratorTests.swift */,
 				FF76B0BC1E847F52001969FA /* TetramonioLoaderTests.swift */,
 				FF8EC61B1E85B0CA0064FFCB /* BundleResourceLoaderTests.swift */,
@@ -543,9 +543,9 @@
 			files = (
 				FF8EC61C1E85B0CA0064FFCB /* BundleResourceLoaderTests.swift in Sources */,
 				FF76B0BD1E847F52001969FA /* TetramonioLoaderTests.swift in Sources */,
-				FF6931062500EFBD00F3DF1B /* AlertPresentableTests.swift in Sources */,
 				FFA0655F1EC3ABB400B8907D /* CoredDataManagerTest.swift in Sources */,
 				FF76B0BF1E847FA4001969FA /* GameLogicTests.swift in Sources */,
+				FF6DC9C0250178E1009833F3 /* GamePresenterTests.swift in Sources */,
 				FF76B0BB1E847EC0001969FA /* TetramonioGeneratorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
