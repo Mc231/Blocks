@@ -11,6 +11,6 @@ import Foundation
 protocol GameFlowOutput: class {
 	func gameOver(currentScore: Score)
 	func gameFlow(_ manager: GameFlowInput, didChange score: GameScore)
-	func gameFlow(_ manager: GameFlowInput, didUpdate field: [CellData])
+	func gameFlow(_ manager: GameFlowInput, didUpdate field: [FieldCell])
 	func gameFlow(_ manager: GameFlowInput, didUpdate tetramonios: [Tetramonio])
 }

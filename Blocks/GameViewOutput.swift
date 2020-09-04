@@ -12,6 +12,6 @@ protocol GameViewOutput {
 	var view: GameViewInput? { get set }
 	func startGame()
 	func restartGame()
-	func handleTouchedCell(with data: CellData)
-	func handleDraggedCell(with data: [CellData])
+	func handleTouchedCell(with data: FieldCell)
+	func handleDraggedCell(with data: [FieldCell])
 }

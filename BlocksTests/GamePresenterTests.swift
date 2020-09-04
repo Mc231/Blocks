@@ -15,7 +15,7 @@ extension GamePresenterTests {
 		
 		var presenter: GameViewOutput?
 		var displayedTetramonios: [Tetramonio] = []
-		var displayedCellData: [CellData] = []
+		var displayedCellData: [FieldCell] = []
 		var displayedGameScore: GameScore!
 		var scoreToShowInAlert: Score!
 		
@@ -23,7 +23,7 @@ extension GamePresenterTests {
 			displayedTetramonios = tetramonios
 		}
 		
-		func display(field withData: [CellData]) {
+		func display(field withData: [FieldCell]) {
 			displayedCellData = withData
 		}
 		
@@ -42,8 +42,8 @@ extension GamePresenterTests {
 		
 		var startGameCalled = false
 		var restartGameCalled = false
-		var handledCellData: CellData!
-		var handledDraggedCell: [CellData] = []
+		var handledCellData: FieldCell!
+		var handledDraggedCell: [FieldCell] = []
 		
 		func startGame() {
 			startGameCalled.toggle()
@@ -53,11 +53,11 @@ extension GamePresenterTests {
 			restartGameCalled.toggle()
 		}
 		
-		func handleTouchedCellWithData(_ cellData: CellData) {
+		func handleTouchedCellWithData(_ cellData: FieldCell) {
 			handledCellData = cellData
 		}
 		
-		func handleDraggedCell(with data: [CellData]) {
+		func handleDraggedCell(with data: [FieldCell]) {
 			handledDraggedCell = data
 		}
 	}
@@ -102,7 +102,7 @@ class GamePresenterTests: XCTestCase {
     func testHandleTouchedCell() {
 		// Given
 		XCTAssertNil(interactor.handledCellData)
-		let cellData = CellData(state: .placed)
+		let cellData = FieldCell(state: .placed)
 		// When
 		sut.handleTouchedCell(with: cellData)
 		// Then
@@ -112,7 +112,7 @@ class GamePresenterTests: XCTestCase {
 	func testHandleDraggedCell() {
 		// Given
 		XCTAssertTrue(interactor.handledDraggedCell.isEmpty)
-		let cellData = [CellData(state: .placed)]
+		let cellData = [FieldCell(state: .placed)]
 		// When
 		sut.handleDraggedCell(with: cellData)
 		// Then
@@ -124,7 +124,7 @@ class GamePresenterTests: XCTestCase {
 		XCTAssertNil(view.scoreToShowInAlert)
 		let score: Int32 = 16
 		// When
-		sut.gameOver(currentScore: score)
+		sut.gameOver(score: score)
 		// Then
         XCTAssertEqual(view.scoreToShowInAlert, score)
     }
@@ -150,8 +150,8 @@ class GamePresenterTests: XCTestCase {
     func testProvideField() {
 		// Given
 		XCTAssertTrue(view.displayedCellData.isEmpty)
-		let expectedField: [CellData] = [
-			CellData(state: .empty)]
+		let expectedField: [FieldCell] = [
+			FieldCell(state: .empty)]
 		// When
 		sut.provideField(expectedField)
 		// Then
@@ -163,7 +163,7 @@ class GamePresenterTests: XCTestCase {
 		XCTAssertNil(view.displayedGameScore)
 		let score = GameScore(current: 32, best: 32)
 		// When
-		sut.provideScore(gameScore: score)
+		sut.provideScore(score: score)
 		// Then
 		XCTAssertEqual(view.displayedGameScore.current, score.current)
 		XCTAssertEqual(view.displayedGameScore.best, score.best)

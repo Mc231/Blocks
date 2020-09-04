@@ -10,8 +10,8 @@ import Foundation
 
 protocol GameFlowInput {
 	func generateTetramoniosOf(_ type: GenerationType) -> [Tetramonio]
-	func updateField(with handledCell: CellData)
-	func updateField(with draggedCells: [CellData])
+	func updateField(with handledCell: FieldCell)
+	func updateField(with draggedCells: [FieldCell])
 	func startGame(completion: (StartGameConfig) -> Swift.Void)
-	func restartGame(callback: @escaping (GameScore, [CellData]) -> Void)
+	func restartGame(callback: @escaping (GameScore, [FieldCell]) -> Void)
 }

@@ -23,7 +23,7 @@ class GameViewController: UIViewController {
 	var draggedChcker: DraggedTetramonioChecker!
     var presenter: GameViewOutput?
     var tetramonios = [Tetramonio]()
-    var fieldData = [CellData]() {
+    var fieldData = [FieldCell]() {
         didSet {
             field.reloadData()
         }
@@ -56,7 +56,7 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.startGame()
-        field.register(FieldCell.nib, forCellWithReuseIdentifier: FieldCell.identifier)
+        field.register(FieldCollectionViewCell.nib, forCellWithReuseIdentifier: FieldCollectionViewCell.identifier)
     }
 
     override func viewWillLayoutSubviews() {
@@ -99,8 +99,8 @@ class GameViewController: UIViewController {
 			// TODO : - Refacore
 			let matchedTetramoino = field
 				.subviews
-				.compactMap({$0 as? FieldCell})
-				.reduce(into: [CellData]()) { (result, fieldCell) in
+				.compactMap({$0 as? FieldCollectionViewCell})
+				.reduce(into: [FieldCell]()) { (result, fieldCell) in
 					piece.selectedCells.forEach({ (tetramonioCell) in
 						let fieldRect = fieldCell.convert(fieldCell.bounds, to: self.view)
 						let tetramonioRect = tetramonioCell.convert(tetramonioCell.bounds, to: self.view)
@@ -154,8 +154,8 @@ class GameViewController: UIViewController {
 
         field
             .subviews
-            .filter({$0 is FieldCell && $0.frame.contains(touchPoint)})
-			.compactMap({$0 as? FieldCell})
+            .filter({$0 is FieldCollectionViewCell && $0.frame.contains(touchPoint)})
+			.compactMap({$0 as? FieldCollectionViewCell})
             .forEach({presenter?.handleTouchedCell(with: $0.cellData)})
     }
 }
@@ -182,7 +182,7 @@ extension GameViewController: UICollectionViewDataSource {
 		-> UICollectionViewCell {
 
         guard let cell =
-			collectionView.dequeueReusableCell(withReuseIdentifier: FieldCell.identifier, for: indexPath) as? FieldCell else {
+			collectionView.dequeueReusableCell(withReuseIdentifier: FieldCollectionViewCell.identifier, for: indexPath) as? FieldCollectionViewCell else {
             fatalError("Could not deque cell")
         }
 
@@ -205,7 +205,7 @@ extension GameViewController: GameViewInput {
         present(alert, animated: true, completion: nil)
     }
 
-    func display(field withData: [CellData]) {
+    func display(field withData: [FieldCell]) {
 		if fieldData.isEmpty {
 			fieldData = withData
 			field.reloadData()

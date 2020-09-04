@@ -20,14 +20,14 @@ class TetramonioView: UIView {
 
 	// MARK: - Variables
 	
-	var selectedCells: [FieldCell] {
+	var selectedCells: [FieldCollectionViewCell] {
 		return collectionView
 			.subviews
-			.compactMap({$0 as? FieldCell})
+			.compactMap({$0 as? FieldCollectionViewCell})
 			.filter({$0.cellData.isSelected})
 	}
 
-    private lazy var dataSource: [CellData] = [CellData]()
+    private lazy var dataSource: [FieldCell] = [FieldCell]()
 
     private var cellSize: CGSize {
         let width = (self.bounds.width - kCellsMargin) / kNumberOfCells
@@ -81,8 +81,8 @@ class TetramonioView: UIView {
     // MARK: - Private functions
 
     private func configureCollectionView() {
-        collectionView.register(FieldCell.nib, forCellWithReuseIdentifier: FieldCell.identifier)
-		(0...kNumberOfCellsInField).forEach({_ in dataSource.append(CellData(state: .empty))})
+        collectionView.register(FieldCollectionViewCell.nib, forCellWithReuseIdentifier: FieldCollectionViewCell.identifier)
+		(0...kNumberOfCellsInField).forEach({_ in dataSource.append(FieldCell(state: .empty))})
         addSubview(collectionView)
     }
 }
@@ -99,7 +99,7 @@ extension TetramonioView: UICollectionViewDataSource {
 		-> UICollectionViewCell {
 
         guard let cell
-			= collectionView.dequeueReusableCell(withReuseIdentifier: FieldCell.identifier, for: indexPath) as? FieldCell else {
+			= collectionView.dequeueReusableCell(withReuseIdentifier: FieldCollectionViewCell.identifier, for: indexPath) as? FieldCollectionViewCell else {
             fatalError("Could not deque cell")
         }
 		

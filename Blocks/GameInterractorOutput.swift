@@ -11,7 +11,7 @@ import Foundation
 protocol GameInteractorOutput: class {
 	var interractor: GameInteractorInput? { get set }
 	func provideTetramonios(_ tetramonios: [Tetramonio])
-	func provideField(_ field: [CellData])
-	func provideScore(gameScore: GameScore)
-	func gameOver(currentScore: Int32)
+	func provideField(_ field: [FieldCell])
+	func provideScore(score: GameScore)
+	func gameOver(score: Int32)
 }

@@ -11,7 +11,7 @@ import Foundation
 protocol GameViewInput: class {
 	var presenter: GameViewOutput? { get set }
 	func display(tetramonios: [Tetramonio])
-	func display(field withData: [CellData])
+	func display(field withData: [FieldCell])
 	func displayScore(score: GameScore)
 	func showGameOverAlert(currentScore: Score)
 }

@@ -9,13 +9,13 @@
 import Foundation
 
 protocol TetramonioMatcher {
-    func matchTetramonio(from cellData: [CellData], with tetramonios: [Tetramonio]) -> Tetramonio?
+    func matchTetramonio(from cellData: [FieldCell], with tetramonios: [Tetramonio]) -> Tetramonio?
 }
 
 // MARK: - Default Implementation
 
 extension TetramonioMatcher {
-    func matchTetramonio(from cellData: [CellData], with tetramonios: [Tetramonio]) -> Tetramonio? {
+    func matchTetramonio(from cellData: [FieldCell], with tetramonios: [Tetramonio]) -> Tetramonio? {
         let orderedCellData = cellData.sorted(by: {$0.xPosition < $1.xPosition})
 
         let firstCell  = orderedCellData[0].xPosition

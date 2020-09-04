@@ -1,34 +1,61 @@
 //
-//  FieldCell.swift
+//  CellInfo.swift
 //  Blocks
 //
-//  Created by Volodya on 2/19/17.
+//  Created by Volodya on 2/3/17.
 //  Copyright © 2017 QuasarClaster. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class FieldCell: UICollectionViewCell {
+struct FieldCell: Hashable {
+    
+    enum State: Int16, Hashable {
+        case empty = 0
+        case selected = 1
+        case placed = 2
+        case clear = 3
+    }
 
-    var cellData: CellData! {
-        didSet {
-            switch cellData.state {
-            case .empty:
-                backgroundColor = UIColor.CellBackgrounds.empty
-            case .placed:
-                backgroundColor = UIColor.CellBackgrounds.placed
-            case .selected:
-                backgroundColor = UIColor.CellBackgrounds.selected
-			case .clear:
-				backgroundColor = UIColor.clear
-            }
+    // MARK: - Properties
+
+    let xPosition: Int16
+    let yPosition: Int16
+    private(set) var state: State
+
+    // MARK: - Mutating methods
+
+    mutating func chageState(newState: State) {
+        self.state = newState
+    }
+}
+
+extension FieldCell {
+
+    init(state: State) {
+        xPosition = 0
+        yPosition = 0
+        self.state = state
+    }
+
+    init (from cell: Cell) {
+        xPosition = cell.xPosition
+        yPosition = cell.yPosition
+        guard let storedState = State(rawValue: cell.state) else {
+            fatalError("Impossible cell state")
         }
+        state = storedState
+    }
+
+    var isPlaced: Bool {
+        return state == .placed
     }
 	
-	override func isEqual(_ object: Any?) -> Bool {
-		if let cell = object as? FieldCell {
-			return cell.cellData == cellData
-		}
-		return false
+	var isEmpty: Bool {
+		return state == .empty
+	}
+	
+	var isSelected: Bool {
+		return state == .selected
 	}
 }

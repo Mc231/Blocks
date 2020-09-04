@@ -10,13 +10,13 @@ import Foundation
 
 protocol GameOverChecker {
     associatedtype AsociatedChecker = TetramonioMatcher
-    func checkGameOver(for tetramonios: [Tetramonio], at field: [CellData], with checker: AsociatedChecker) -> Bool
+    func checkGameOver(for tetramonios: [Tetramonio], at field: [FieldCell], with checker: AsociatedChecker) -> Bool
 }
 
 // MARK: - Default Implementation
 
 extension GameOverChecker {
-    func checkGameOver(for tetramonios: [Tetramonio], at field: [CellData], with checker: TetramonioMatcher) -> Bool {
+    func checkGameOver(for tetramonios: [Tetramonio], at field: [FieldCell], with checker: TetramonioMatcher) -> Bool {
 
         for tetramonio in tetramonios {
             let firstGameOverIndex = tetramonio.gameOverIndexes[0]

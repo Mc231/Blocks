@@ -17,13 +17,13 @@ class GameFlow {
     private var tetramonioGenerator: TetramonioGeneratable?
     private var gameDbStore: GameStorage?
 
-    private var field = [CellData]() {
+    private var field = [FieldCell]() {
         didSet {
             gameDbStore?.storeField(field)
         }
     }
     // Tetramonio cells that user tap on field
-    private var currentTetramonio = [CellData]()
+    private var currentTetramonio = [FieldCell]()
     private var tetramonios = [Tetramonio]() {
         didSet {
             gameDbStore?.store(current: tetramonios)
@@ -75,12 +75,12 @@ class GameFlow {
 	}
 	
 	private func updateFieldWithTetramonio(_ tetramonio: Tetramonio?) {
-		var cellsToUpdate: [CellData] = []
+		var cellsToUpdate: [FieldCell] = []
 		currentTetramonio.forEach({ (cellData) in
 			guard let cellIndex = field.firstIndex(of: cellData) else {
 				fatalError("Index could not be nil")
 			}
-			let state: CellData.State = tetramonio != nil ? .placed : .empty
+			let state: FieldCell.State = tetramonio != nil ? .placed : .empty
 			field[cellIndex].chageState(newState: state)
 			cellsToUpdate.append(field[cellIndex])
 		})
@@ -93,7 +93,7 @@ class GameFlow {
 	}
 	
 	private func markTetramonioAsPartlySelected() {
-		var cellsToUpdate: [CellData] = []
+		var cellsToUpdate: [FieldCell] = []
 		
 		currentTetramonio.forEach({ (cellData) in
 			guard let cellIndex = field.firstIndex(of: cellData) else {
@@ -130,7 +130,7 @@ class GameFlow {
 	
 	private func removeAllSelectedCells() {
 		currentTetramonio.removeAll()
-		let cells = field.filter({$0.isSelected}).reduce(into: [CellData]()) { [unowned self] (result, cell) in
+		let cells = field.filter({$0.isSelected}).reduce(into: [FieldCell]()) { [unowned self] (result, cell) in
 			if let index = field.firstIndex(of: cell) {
 				self.field[index].chageState(newState: .empty)
 				result.append(field[index])
@@ -140,7 +140,7 @@ class GameFlow {
 		interractor?.gameFlow(self, didUpdate: cells)
 	}
 	
-	private func processGameFlow(cellData: [CellData]) {
+	private func processGameFlow(cellData: [FieldCell]) {
 		currentTetramonio.append(contentsOf: cellData)
 		checkCurrentTetramonio()
 		checkCroosLines()
@@ -163,13 +163,13 @@ extension GameFlow: GameFlowInput {
         return tetramonios
     }
 
-    func updateField(with updatedCell: CellData) {
+    func updateField(with updatedCell: FieldCell) {
         if !currentTetramonio.contains(updatedCell) && updatedCell.isEmpty {
 			processGameFlow(cellData: [updatedCell])
         }
     }
 	
-	func updateField(with draggedCells: [CellData]) {
+	func updateField(with draggedCells: [FieldCell]) {
 		if draggedCells.count != Constatns.Tetramonio.numberOfCellsInTetramonio {
 			return
 		}
@@ -205,7 +205,7 @@ extension GameFlow: GameFlowInput {
 		completion((tetramonios, field, score))
     }
 
-    func restartGame(callback: @escaping (GameScore, [CellData]) -> Void) {
+    func restartGame(callback: @escaping (GameScore, [FieldCell]) -> Void) {
         generateTetramoniosOf(.gameStart)
 		
         gameDbStore?.restartGame(completion: { [weak self] (gameScore, field) in

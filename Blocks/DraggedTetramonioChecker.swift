@@ -27,7 +27,7 @@ class DraggedTetramonioChecker {
 	private var initialWidth = CGFloat.leastNonzeroMagnitude
 	
 	func handleDraggedTetramonio(from gesture: UIPanGestureRecognizer,
-								 completion: @escaping ([CellData]) -> Swift.Void) {
+								 completion: @escaping ([FieldCell]) -> Swift.Void) {
 		
 		guard let piece = gesture.view as? TetramonioView else { return }
 		
@@ -52,8 +52,8 @@ class DraggedTetramonioChecker {
 		}else{
 			let matchedTetramoino = field
 				.subviews
-				.compactMap({$0 as? FieldCell})
-				.reduce(into: [CellData]()) { (result, fieldCell) in
+				.compactMap({$0 as? FieldCollectionViewCell})
+				.reduce(into: [FieldCell]()) { (result, fieldCell) in
 					piece.selectedCells.forEach({ (tetramonioCell) in
 						let fieldRect = fieldCell.convert(fieldCell.bounds, to: self.view)
 						let tetramonioRect = tetramonioCell.convert(tetramonioCell.bounds, to: self.view)

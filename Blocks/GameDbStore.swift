@@ -10,11 +10,11 @@ import Foundation
 
 protocol GameStorage: class {
     func store(current tetramonios: [Tetramonio])
-	func storeField(_ field: [CellData])
-	func storeUpdatedCells(_ updatedCells: [CellData])
+	func storeField(_ field: [FieldCell])
+	func storeUpdatedCells(_ updatedCells: [FieldCell])
     func increaseAndStoreScore(_ score: Score, completion: @escaping (GameScore) -> Void)
-    func restartGame(completion: (GameScore, [CellData]) -> Void)
-    func createField() -> [CellData]
+    func restartGame(completion: (GameScore, [FieldCell]) -> Void)
+    func createField() -> [FieldCell]
 	
 	/// Game Score
 	var gameScore: GameScore { get }
@@ -26,7 +26,7 @@ protocol GameStorage: class {
     var bestScore: Score { get }
 
     /// Current field
-    var field: [CellData] { get }
+    var field: [FieldCell] { get }
 
     /// Current tetramonios
     var tetramoniosIndexes: [TetramonioIndex] { get }
@@ -73,7 +73,7 @@ extension GameDbStore: GameStorage {
         coreDataManager.save(game)
     }
 
-    func storeField(_ field: [CellData]) {
+    func storeField(_ field: [FieldCell]) {
         for (index, storedCell) in storedCells.enumerated() {
             let fieldCell = field[index]
             if storedCell.state != fieldCell.state.rawValue {
@@ -87,7 +87,7 @@ extension GameDbStore: GameStorage {
     }
 	
 	// TODO: - Refactore & implement this
-	func storeUpdatedCells(_ updatedCells: [CellData]) {
+	func storeUpdatedCells(_ updatedCells: [FieldCell]) {
 		for updatedCell in updatedCells {
 			guard let storedCell = storedCells.first(where: {$0.xPosition == updatedCell.xPosition}) else {
 				fatalError("Cell can not be nil")
@@ -114,21 +114,21 @@ extension GameDbStore: GameStorage {
         completion(score)
     }
 
-    func restartGame(completion: (GameScore, [CellData]) -> Void) {
+    func restartGame(completion: (GameScore, [FieldCell]) -> Void) {
         storedCells.forEach { (cell) in
             cell.state = 0
             coreDataManager.save(cell)
         }
         game?.score = 0
         coreDataManager.save(game)
-        let field = storedCells.map({CellData(from: $0)})
+        let field = storedCells.map({FieldCell(from: $0)})
         guard let game = game else {
             fatalError("Game instance can not be nil")
         }
         completion((game.score, game.bestScore), field)
     }
 
-    func createField() -> [CellData] {
+    func createField() -> [FieldCell] {
 
         var x: Int16 = 0
         var y: Int16 = 0
@@ -153,7 +153,7 @@ extension GameDbStore: GameStorage {
 
         coreDataManager.save(game)
 
-		return storedCells.compactMap({CellData(from: $0)})
+		return storedCells.compactMap({FieldCell(from: $0)})
     }
 	
 	var gameScore: GameScore {
@@ -168,8 +168,8 @@ extension GameDbStore: GameStorage {
         return game?.bestScore ?? 0
     }
 
-    var field: [CellData] {
-        return storedCells.isEmpty ? createField() : storedCells.map({CellData(from: $0)})
+    var field: [FieldCell] {
+        return storedCells.isEmpty ? createField() : storedCells.map({FieldCell(from: $0)})
     }
 
     var tetramoniosIndexes: [TetramonioIndex] {

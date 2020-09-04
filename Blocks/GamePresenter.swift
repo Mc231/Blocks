@@ -21,27 +21,27 @@ class GamePresenter: GamePresenterInput {
         interractor?.restartGame()
     }
 
-    func handleTouchedCell(with data: CellData) {
+    func handleTouchedCell(with data: FieldCell) {
         interractor?.handleTouchedCellWithData(data)
     }
 	
-	func handleDraggedCell(with data: [CellData]) {
+	func handleDraggedCell(with data: [FieldCell]) {
 		interractor?.handleDraggedCell(with: data)
 	}
 
-    func gameOver(currentScore: Int32) {
-        view?.showGameOverAlert(currentScore: currentScore)
+    func gameOver(score: Int32) {
+        view?.showGameOverAlert(currentScore: score)
     }
 
     func provideTetramonios(_ tetramonios: [Tetramonio]) {
         view?.display(tetramonios: tetramonios)
     }
 
-    func provideField(_ field: [CellData]) {
+    func provideField(_ field: [FieldCell]) {
         view?.display(field: field)
     }
 
-	func provideScore(gameScore: GameScore) {
-		view?.displayScore(score: gameScore)
+	func provideScore(score: GameScore) {
+		view?.displayScore(score: score)
     }
 }

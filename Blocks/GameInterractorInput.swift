@@ -12,6 +12,6 @@ protocol GameInteractorInput: class {
 	var presenter: GameInteractorOutput? { get set }
 	func startGame()
 	func restartGame()
-	func handleTouchedCellWithData(_ cellData: CellData)
-	func handleDraggedCell(with data: [CellData])
+	func handleTouchedCellWithData(_ cellData: FieldCell)
+	func handleDraggedCell(with data: [FieldCell])
 }

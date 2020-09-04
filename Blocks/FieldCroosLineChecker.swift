@@ -9,7 +9,7 @@
 import Foundation
 
 protocol FieldCrossLineChecker {
-    func checkForCroosLine(at field: inout [CellData], completion: CrossLineCheckerCompletion)
+    func checkForCroosLine(at field: inout [FieldCell], completion: CrossLineCheckerCompletion)
 }
 
 // MARK: - Default implementation
@@ -18,10 +18,10 @@ extension FieldCrossLineChecker {
 
     // MARK: - Private methods
 
-	private func getRows(from placedCells: [CellData], isVertical: Bool) -> [CellData] {
-        var result = [CellData]()
+	private func getRows(from placedCells: [FieldCell], isVertical: Bool) -> [FieldCell] {
+        var result = [FieldCell]()
         var cellCounter = 1
-        var currentRow = [CellData]()
+        var currentRow = [FieldCell]()
 
         for cell in 1..<placedCells.count {
             let firstCellData  = placedCells[cell-1]
@@ -53,22 +53,22 @@ extension FieldCrossLineChecker {
         return result
     }
 
-    func checkForCroosLine(at field: inout [CellData], completion: CrossLineCheckerCompletion) {
+    func checkForCroosLine(at field: inout [FieldCell], completion: CrossLineCheckerCompletion) {
 
         let horizontalCells = field.filter({$0.state == .placed})
 		let verticalCells = horizontalCells.sorted(by: {$0.yPosition < $1.yPosition})
 		
-		let horizontalRows: [CellData] = !horizontalCells.isEmpty
+		let horizontalRows: [FieldCell] = !horizontalCells.isEmpty
 			? getRows(from: horizontalCells, isVertical: false) : []
 		
-		let verticalRows: [CellData] = !verticalCells.isEmpty
+		let verticalRows: [FieldCell] = !verticalCells.isEmpty
 			? getRows(from: verticalCells, isVertical: true) : []
 		
 		if horizontalRows.isEmpty && verticalRows.isEmpty {
 			return
 		}
 		
-		let result = Set(horizontalRows + verticalRows).reduce(into: [CellData]()) { (result, cell) in
+		let result = Set(horizontalRows + verticalRows).reduce(into: [FieldCell]()) { (result, cell) in
 			guard let cellIndex = field.firstIndex(of: cell) else {
 				fatalError("Index could not be nil")
 			}
