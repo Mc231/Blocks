@@ -110,7 +110,7 @@ extension GameDbStore: GameStorage {
         game?.score = newScore
 
         coreDataManager.save(game)
-		let score = (newScore, bestScore)
+        let score = GameScore(current: newScore, best: bestScore)
         completion(score)
     }
 
@@ -125,7 +125,8 @@ extension GameDbStore: GameStorage {
         guard let game = game else {
             fatalError("Game instance can not be nil")
         }
-        completion((game.score, game.bestScore), field)
+        let score = GameScore(current: game.score, best: game.bestScore)
+        completion(score, field)
     }
 
     func createField() -> [FieldCell] {
@@ -157,7 +158,7 @@ extension GameDbStore: GameStorage {
     }
 	
 	var gameScore: GameScore {
-		return (currentScore, bestScore)
+        return GameScore(current: currentScore, best: bestScore)
 	}
 
     var currentScore: Score {

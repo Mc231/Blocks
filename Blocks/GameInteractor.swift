@@ -21,10 +21,10 @@ class GameInteractor {
 extension GameInteractor: GameInteractorInput {
 	
     func startGame() {
-        gameFlow?.startGame(completion: { [weak self] (tetramonios, cellData, score) in
-            self?.presenter?.provideTetramonios(tetramonios)
-            self?.presenter?.provideField(cellData)
-            self?.presenter?.provideScore(score: score)
+        gameFlow?.startGame(completion: { [weak self] (config) in
+            self?.presenter?.provideTetramonios(config.tetramonios)
+            self?.presenter?.provideField(config.fieldCells)
+            self?.presenter?.provideScore(score: config.score)
         })
     }
 

@@ -17,9 +17,9 @@ class GameFlow {
     private var tetramonioGenerator: TetramonioGeneratable?
     private var gameDbStore: GameStorage?
 
-    private var field = [FieldCell]() {
+    private var fieldCells = [FieldCell]() {
         didSet {
-            gameDbStore?.storeField(field)
+            gameDbStore?.storeField(fieldCells)
         }
     }
     // Tetramonio cells that user tap on field
@@ -77,12 +77,12 @@ class GameFlow {
 	private func updateFieldWithTetramonio(_ tetramonio: Tetramonio?) {
 		var cellsToUpdate: [FieldCell] = []
 		currentTetramonio.forEach({ (cellData) in
-			guard let cellIndex = field.firstIndex(of: cellData) else {
+			guard let cellIndex = fieldCells.firstIndex(of: cellData) else {
 				fatalError("Index could not be nil")
 			}
 			let state: FieldCell.State = tetramonio != nil ? .placed : .empty
-			field[cellIndex].chageState(newState: state)
-			cellsToUpdate.append(field[cellIndex])
+			fieldCells[cellIndex].chageState(newState: state)
+			cellsToUpdate.append(fieldCells[cellIndex])
 		})
 		
 		currentTetramonio.removeAll()
@@ -96,14 +96,14 @@ class GameFlow {
 		var cellsToUpdate: [FieldCell] = []
 		
 		currentTetramonio.forEach({ (cellData) in
-			guard let cellIndex = field.firstIndex(of: cellData) else {
+			guard let cellIndex = fieldCells.firstIndex(of: cellData) else {
 				fatalError("Index could not be nil")
 			}
 			
-			let cell = field[cellIndex]
+			let cell = fieldCells[cellIndex]
 			if cell.isEmpty {
-				field[cellIndex].chageState(newState: .selected)
-				cellsToUpdate.append(field[cellIndex])
+				fieldCells[cellIndex].chageState(newState: .selected)
+				cellsToUpdate.append(fieldCells[cellIndex])
 			}
 		})
 		
@@ -113,14 +113,14 @@ class GameFlow {
 	}
 
     private func checkCroosLines() {
-		checkForCroosLine(at: &field) { [unowned self] (updatedRows) in
+		checkForCroosLine(at: &fieldCells) { [unowned self] (updatedRows) in
 			self.gameDbStore?.storeUpdatedCells(updatedRows)
 			self.interractor?.gameFlow(self, didUpdate: updatedRows)
 		}
     }
 
     private func checkGameOver() {
-        if checkGameOver(for: tetramonios, at: field, with: self) {
+        if checkGameOver(for: tetramonios, at: fieldCells, with: self) {
             guard let score = gameDbStore?.currentScore else {
                 fatalError("Manager can not be nil")
             }
@@ -130,10 +130,10 @@ class GameFlow {
 	
 	private func removeAllSelectedCells() {
 		currentTetramonio.removeAll()
-		let cells = field.filter({$0.isSelected}).reduce(into: [FieldCell]()) { [unowned self] (result, cell) in
-			if let index = field.firstIndex(of: cell) {
-				self.field[index].chageState(newState: .empty)
-				result.append(field[index])
+		let cells = fieldCells.filter({$0.isSelected}).reduce(into: [FieldCell]()) { [unowned self] (result, cell) in
+			if let index = fieldCells.firstIndex(of: cell) {
+				self.fieldCells[index].chageState(newState: .empty)
+				result.append(fieldCells[index])
 			}
 		}
 		gameDbStore?.storeUpdatedCells(cells)
@@ -201,8 +201,9 @@ extension GameFlow: GameFlowInput {
             currentTetramonio = storedTetramonio
         }
 
-        self.field = field
-		completion((tetramonios, field, score))
+        self.fieldCells = field
+        let config = StartGameConfig(tetramonios: tetramonios, fieldCells: field, score: score)
+		completion(config)
     }
 
     func restartGame(callback: @escaping (GameScore, [FieldCell]) -> Void) {
@@ -212,8 +213,8 @@ extension GameFlow: GameFlowInput {
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.field = field
-			let gameScore = (gameScore.current, gameScore.best)
+            strongSelf.fieldCells = field
+            let gameScore = GameScore(current: gameScore.current, best: gameScore.best)
             callback(gameScore, field)
         })
     }
