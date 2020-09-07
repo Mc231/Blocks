@@ -35,11 +35,11 @@ extension GameInteractor: GameInteractorInput {
         })
     }
 
-    func handleTouchedCellWithData(_ cellData: FieldCell) {
+    func handleTouchedCell(_ cellData: FieldCell) {
         gameFlow?.updateField(with: cellData)
     }
 	
-	func handleDraggedCell(with data: [FieldCell]) {
+	func handleDraggedCells(with data: [FieldCell]) {
 		gameFlow?.updateField(with: data)
 	}
 }
@@ -49,7 +49,6 @@ extension GameInteractor: GameInteractorInput {
 extension GameInteractor: GameFlowOutput {
 
     func gameOver(currentScore: Score) {
-        debugPrint("Game Over")
         presenter?.gameOver(score: currentScore)
     }
 

@@ -22,11 +22,11 @@ class GamePresenter: GamePresenterInput {
     }
 
     func handleTouchedCell(with data: FieldCell) {
-        interractor?.handleTouchedCellWithData(data)
+        interractor?.handleTouchedCell(data)
     }
 	
 	func handleDraggedCell(with data: [FieldCell]) {
-		interractor?.handleDraggedCell(with: data)
+		interractor?.handleDraggedCells(with: data)
 	}
 
     func gameOver(score: Int32) {

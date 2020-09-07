@@ -40,7 +40,7 @@
 		FF82111225002ECD00D0C3CB /* Array+Teramonio.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF82111125002ECD00D0C3CB /* Array+Teramonio.swift */; };
 		FF858C5D1EBA6C33003EFEA3 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF858C5C1EBA6C33003EFEA3 /* CoreDataManager.swift */; };
 		FF8A40F91F6E9BA000EB243E /* TetramonioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A40F81F6E9BA000EB243E /* TetramonioView.swift */; };
-		FF8A40FE1F6EA4F900EB243E /* FieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF8A40FC1F6EA4F900EB243E /* FieldCell.xib */; };
+		FF8A40FE1F6EA4F900EB243E /* FieldCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF8A40FC1F6EA4F900EB243E /* FieldCollectionViewCell.xib */; };
 		FF8EC61C1E85B0CA0064FFCB /* BundleResourceLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8EC61B1E85B0CA0064FFCB /* BundleResourceLoaderTests.swift */; };
 		FF9043FE24FF6D270090C4D2 /* ResourceLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9043FD24FF6D270090C4D2 /* ResourceLoadable.swift */; };
 		FF90440824FF77B20090C4D2 /* ResourceLoadingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF90440724FF77B20090C4D2 /* ResourceLoadingError.swift */; };
@@ -111,7 +111,7 @@
 		FF82111125002ECD00D0C3CB /* Array+Teramonio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Teramonio.swift"; sourceTree = "<group>"; };
 		FF858C5C1EBA6C33003EFEA3 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		FF8A40F81F6E9BA000EB243E /* TetramonioView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetramonioView.swift; sourceTree = "<group>"; };
-		FF8A40FC1F6EA4F900EB243E /* FieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FieldCell.xib; sourceTree = "<group>"; };
+		FF8A40FC1F6EA4F900EB243E /* FieldCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FieldCollectionViewCell.xib; sourceTree = "<group>"; };
 		FF8EC61B1E85B0CA0064FFCB /* BundleResourceLoaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleResourceLoaderTests.swift; sourceTree = "<group>"; };
 		FF9043FD24FF6D270090C4D2 /* ResourceLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceLoadable.swift; sourceTree = "<group>"; };
 		FF90440724FF77B20090C4D2 /* ResourceLoadingError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceLoadingError.swift; sourceTree = "<group>"; };
@@ -212,7 +212,7 @@
 		FF8A40FA1F6EA4CE00EB243E /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
-				FF8A40FC1F6EA4F900EB243E /* FieldCell.xib */,
+				FF8A40FC1F6EA4F900EB243E /* FieldCollectionViewCell.xib */,
 			);
 			name = Xibs;
 			sourceTree = "<group>";
@@ -539,7 +539,7 @@
 				FF289FF21EE8AF4100AD397C /* Localizable.strings in Resources */,
 				FFA8F9A11FF827530071276A /* Tetramonios.plist in Resources */,
 				FFFBBFC01E4521700052D68B /* Main.storyboard in Resources */,
-				FF8A40FE1F6EA4F900EB243E /* FieldCell.xib in Resources */,
+				FF8A40FE1F6EA4F900EB243E /* FieldCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

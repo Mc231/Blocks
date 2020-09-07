@@ -53,11 +53,11 @@ extension GamePresenterTests {
 			restartGameCalled.toggle()
 		}
 		
-		func handleTouchedCellWithData(_ cellData: FieldCell) {
+		func handleTouchedCell(_ cellData: FieldCell) {
 			handledCellData = cellData
 		}
 		
-		func handleDraggedCell(with data: [FieldCell]) {
+		func handleDraggedCells(with data: [FieldCell]) {
 			handledDraggedCell = data
 		}
 	}
