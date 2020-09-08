@@ -28,6 +28,13 @@ struct FieldCell: Hashable {
     mutating func chageState(newState: State) {
         self.state = newState
     }
+	
+	static func == (lhs: FieldCell, rhs: FieldCell) -> Bool {
+		return lhs.xPosition == rhs.xPosition
+			&& rhs.yPosition == rhs.yPosition
+			&& rhs.state == rhs.state
+	}
+
 }
 
 extension FieldCell {
