@@ -32,6 +32,7 @@ protocol GameStorage: class {
     var tetramoniosIndexes: [TetramonioIndex] { get }
 }
 
+#warning("Refactor naming")
 /// This class responsable for storing & fetching game state from Core Data
 class GameDbStore {
 

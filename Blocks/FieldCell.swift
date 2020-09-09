@@ -34,7 +34,6 @@ struct FieldCell: Hashable {
 			&& rhs.yPosition == rhs.yPosition
 			&& rhs.state == rhs.state
 	}
-
 }
 
 extension FieldCell {

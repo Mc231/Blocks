@@ -23,23 +23,23 @@ extension TetramonioMatcher {
         let thirdCell  = orderedCellData[2].xPosition
         let fourthCell = orderedCellData[3].xPosition
 
-        for currentTetramonio in tetramonios {
+        for tetramonio in tetramonios {
 
-            let firstConstant = currentTetramonio.tetramonioIndexes[0]
-            let secondConstant = currentTetramonio.tetramonioIndexes[1]
-            let thirdConstant = currentTetramonio.tetramonioIndexes[2]
+            let firstConstant = tetramonio.tetramonioIndexes[0]
+            let secondConstant = tetramonio.tetramonioIndexes[1]
+            let thirdConstant = tetramonio.tetramonioIndexes[2]
 
-            if currentTetramonio.id == .iH || currentTetramonio.id == .iV {
+            if tetramonio.id == .iH || tetramonio.id == .iV {
                 if (secondCell == firstCell + firstConstant)
                     && (thirdCell == secondCell + secondConstant)
                     &&  (fourthCell == thirdCell + thirdConstant) {
-                    return currentTetramonio
+                    return tetramonio
                 }
             } else {
                 if (secondCell == firstCell + firstConstant)
                     && (thirdCell == firstCell + secondConstant)
                     &&  (fourthCell == firstCell + thirdConstant) {
-                    return currentTetramonio
+                    return tetramonio
                 }
             }
         }

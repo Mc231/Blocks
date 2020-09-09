@@ -13,31 +13,31 @@ class GameFlow {
 
     // MARK: - private Properties
 
-    private weak var interractor: GameFlowOutput?
-    private var tetramonioGenerator: TetramonioGeneratable?
-    private var gameDbStore: GameStorage?
+    private weak var interactor: GameFlowOutput?
+    private(set) var tetramonioGenerator: TetramonioGeneratable
+    private(set) var storage: GameStorage
 
-    private var fieldCells = [FieldCell]() {
+    private(set) var fieldCells = [FieldCell]() {
         didSet {
-            gameDbStore?.storeField(fieldCells)
+			storage.storeField(fieldCells)
         }
     }
     // Tetramonio cells that user tap on field
-    private var currentTetramonio = [FieldCell]()
-    private var tetramonios = [Tetramonio]() {
+    private(set) var currentTetramonio = [FieldCell]()
+    private(set) var tetramonios = [Tetramonio]() {
         didSet {
-            gameDbStore?.store(current: tetramonios)
+			storage.store(current: tetramonios)
         }
     }
 
     // MARK: - Inizialization
 	// swiftlint:disable vertical_parameter_alignment
-    init(interractor: GameFlowOutput?,
+    init(interactor: GameFlowOutput?,
 		 tetramonioGenerator: TetramonioGeneratable,
-		 tetramonioCoreDataManager: GameStorage) {
-        self.interractor = interractor
+		 storage: GameStorage) {
+        self.interactor = interactor
         self.tetramonioGenerator = tetramonioGenerator
-        self.gameDbStore = tetramonioCoreDataManager
+        self.storage = storage
     }
 
     // MARK: - private methods
@@ -65,12 +65,12 @@ class GameFlow {
     }
 	
 	private func storeTetramonioScore() {
-		gameDbStore?
+		storage
 			.increaseAndStoreScore(Constatns.Score.scorePerTetramonio,
 								   completion: { [weak self] score in
 									guard let strongSelf = self else { return }
 				
-									strongSelf.interractor?.gameFlow(strongSelf, didChange: score)
+									strongSelf.interactor?.gameFlow(strongSelf, didChange: score)
 			})
 	}
 	
@@ -88,7 +88,7 @@ class GameFlow {
 		currentTetramonio.removeAll()
 		
 		if !cellsToUpdate.isEmpty {
-			interractor?.gameFlow(self, didUpdate: cellsToUpdate)
+			interactor?.gameFlow(self, didUpdate: cellsToUpdate)
 		}
 	}
 	
@@ -108,23 +108,22 @@ class GameFlow {
 		})
 		
 		if !cellsToUpdate.isEmpty {
-			interractor?.gameFlow(self, didUpdate: cellsToUpdate)
+			interactor?.gameFlow(self, didUpdate: cellsToUpdate)
 		}
 	}
 
     private func checkCroosLines() {
 		checkForCroosLine(at: &fieldCells) { [unowned self] (updatedRows) in
-			self.gameDbStore?.storeUpdatedCells(updatedRows)
-			self.interractor?.gameFlow(self, didUpdate: updatedRows)
+			self.storage.storeUpdatedCells(updatedRows)
+			self.interactor?.gameFlow(self, didUpdate: updatedRows)
 		}
     }
 
     private func checkGameOver() {
-        if checkGameOver(for: tetramonios, at: fieldCells, with: self) {
-            guard let score = gameDbStore?.currentScore else {
-                fatalError("Manager can not be nil")
-            }
-            interractor?.gameOver(currentScore: score)
+		let isGameOver = checkGameOver(for: tetramonios, at: fieldCells, with: self)
+        if isGameOver {
+			let score = storage.currentScore
+            interactor?.gameOver(currentScore: score)
         }
     }
 	
@@ -136,8 +135,8 @@ class GameFlow {
 				result.append(fieldCells[index])
 			}
 		}
-		gameDbStore?.storeUpdatedCells(cells)
-		interractor?.gameFlow(self, didUpdate: cells)
+		storage.storeUpdatedCells(cells)
+		interactor?.gameFlow(self, didUpdate: cells)
 	}
 	
 	private func processGameFlow(cellData: [FieldCell]) {
@@ -154,11 +153,8 @@ extension GameFlow: GameFlowInput {
 
     @discardableResult
     func generateTetramoniosOf(_ type: GenerationType) -> [Tetramonio] {
-        guard let tetramonios = tetramonioGenerator?.generateTetramonios(of: type) else {
-            fatalError("Generated tetramonios could not be nil")
-        }
-
-        interractor?.gameFlow(self, didUpdate: tetramonios)
+		let tetramonios = tetramonioGenerator.generateTetramonios(of: type)
+        interactor?.gameFlow(self, didUpdate: tetramonios)
         self.tetramonios = tetramonios
         return tetramonios
     }
@@ -178,29 +174,23 @@ extension GameFlow: GameFlowInput {
 	}
 	
     func startGame(completion: (StartGameConfig) -> Swift.Void) {
-
         var tetramonios = [Tetramonio]()
-        if let storedIds = gameDbStore?.tetramoniosIndexes,
-            !storedIds .isEmpty,
-            let unwraprdTetramonios = tetramonioGenerator?.getTetramoniosFromIds(storedIds) {
-            tetramonios = unwraprdTetramonios
-            tetramonioGenerator?.currentTetramonios = tetramonios
+		let storedIds = storage.tetramoniosIndexes
+		if !storedIds.isEmpty {
+			let generatedTetramonios = tetramonioGenerator.getTetramoniosFromIds(storedIds)
+            tetramonios = generatedTetramonios
+			tetramonioGenerator.currentTetramonios = tetramonios
             self.tetramonios = tetramonios
-        } else {
+        }else{
             tetramonios = generateTetramoniosOf(.gameStart)
         }
 
-        guard let field = gameDbStore?.field,
-            let score = gameDbStore?.gameScore else {
-                fatalError("Score or field cell can not be nil can not be nil")
-        }
-
+		let field = storage.field
+		let score = storage.gameScore
         let storedTetramonio = field.filter({$0.isSelected})
-
         if !storedTetramonio.isEmpty {
             currentTetramonio = storedTetramonio
         }
-
         self.fieldCells = field
         let config = StartGameConfig(tetramonios: tetramonios, fieldCells: field, score: score)
 		completion(config)
@@ -208,12 +198,8 @@ extension GameFlow: GameFlowInput {
 
     func restartGame(callback: @escaping (GameScore, [FieldCell]) -> Void) {
         generateTetramoniosOf(.gameStart)
-		
-        gameDbStore?.restartGame(completion: { [weak self] (gameScore, field) in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.fieldCells = field
+		storage.restartGame(completion: { [weak self] (gameScore, field) in
+            self?.fieldCells = field
             let gameScore = GameScore(current: gameScore.current, best: gameScore.best)
             callback(gameScore, field)
         })

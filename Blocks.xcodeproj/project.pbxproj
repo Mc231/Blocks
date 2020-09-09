@@ -35,7 +35,7 @@
 		FF74020422783A0800FEE070 /* GameInterractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF74020322783A0800FEE070 /* GameInterractorOutput.swift */; };
 		FF76B0BB1E847EC0001969FA /* TetramonioGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF76B0BA1E847EC0001969FA /* TetramonioGeneratorTests.swift */; };
 		FF76B0BD1E847F52001969FA /* TetramonioLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF76B0BC1E847F52001969FA /* TetramonioLoaderTests.swift */; };
-		FF76B0BF1E847FA4001969FA /* GameLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF76B0BE1E847FA4001969FA /* GameLogicTests.swift */; };
+		FF76B0BF1E847FA4001969FA /* GameFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF76B0BE1E847FA4001969FA /* GameFlowTests.swift */; };
 		FF82110E2500224300D0C3CB /* Array+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF82110D2500224300D0C3CB /* Array+Additions.swift */; };
 		FF82111225002ECD00D0C3CB /* Array+Teramonio.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF82111125002ECD00D0C3CB /* Array+Teramonio.swift */; };
 		FF858C5D1EBA6C33003EFEA3 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF858C5C1EBA6C33003EFEA3 /* CoreDataManager.swift */; };
@@ -106,7 +106,7 @@
 		FF74020322783A0800FEE070 /* GameInterractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInterractorOutput.swift; sourceTree = "<group>"; };
 		FF76B0BA1E847EC0001969FA /* TetramonioGeneratorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetramonioGeneratorTests.swift; sourceTree = "<group>"; };
 		FF76B0BC1E847F52001969FA /* TetramonioLoaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetramonioLoaderTests.swift; sourceTree = "<group>"; };
-		FF76B0BE1E847FA4001969FA /* GameLogicTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLogicTests.swift; sourceTree = "<group>"; };
+		FF76B0BE1E847FA4001969FA /* GameFlowTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameFlowTests.swift; sourceTree = "<group>"; };
 		FF82110D2500224300D0C3CB /* Array+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Additions.swift"; sourceTree = "<group>"; };
 		FF82111125002ECD00D0C3CB /* Array+Teramonio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Teramonio.swift"; sourceTree = "<group>"; };
 		FF858C5C1EBA6C33003EFEA3 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -237,7 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				FF90440924FF7AE40090C4D2 /* Tetramonios.plist */,
-				FF76B0BE1E847FA4001969FA /* GameLogicTests.swift */,
+				FF76B0BE1E847FA4001969FA /* GameFlowTests.swift */,
 				FFA0655E1EC3ABB400B8907D /* CoredDataManagerTest.swift */,
 				FF6DC9BF250178E1009833F3 /* GamePresenterTests.swift */,
 				FF69313B250216EF00F3DF1B /* GameInteractorTests.swift */,
@@ -554,7 +554,7 @@
 				FF69313C250216EF00F3DF1B /* GameInteractorTests.swift in Sources */,
 				FF76B0BD1E847F52001969FA /* TetramonioLoaderTests.swift in Sources */,
 				FFA0655F1EC3ABB400B8907D /* CoredDataManagerTest.swift in Sources */,
-				FF76B0BF1E847FA4001969FA /* GameLogicTests.swift in Sources */,
+				FF76B0BF1E847FA4001969FA /* GameFlowTests.swift in Sources */,
 				FF6DC9C0250178E1009833F3 /* GamePresenterTests.swift in Sources */,
 				FF76B0BB1E847EC0001969FA /* TetramonioGeneratorTests.swift in Sources */,
 			);
