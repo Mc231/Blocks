@@ -28,7 +28,7 @@ class GameAssambler {
 		// TODO: - Remove force unwrup
         let tetramonioGenerator = try! TetramonioGenerator(loader: tetramonioLoader)
         let coreDataManager = CoreDataManager(modelName: kDbName)
-        let dbStorage = GameDbStore(coreDataManager: coreDataManager)
+        let dbStorage = GameCoreDataStorage(coreDataManager: coreDataManager)
         let gameFlow = GameFlow(interactor: interactor,
 								tetramonioGenerator: tetramonioGenerator,
 								storage: dbStorage)

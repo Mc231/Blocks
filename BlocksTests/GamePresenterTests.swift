@@ -133,14 +133,9 @@ class GamePresenterTests: XCTestCase {
 		// Given
 		XCTAssertTrue(view.displayedTetramonios.isEmpty)
 		let expectedTetramonios: [Tetramonio] = [
-			Tetramonio(id: .iH,
-					   tetramonioIndexes: [],
-					   gameOverIndexes: [],
-					   displayTetramonioIndexes: []),
-			Tetramonio(id: .iV,
-					   tetramonioIndexes: [],
-					   gameOverIndexes: [],
-					   displayTetramonioIndexes: [])]
+			.emptyOfType(type: .iH),
+			.emptyOfType(type: .iV)
+		]
 		// When
 		sut.provideTetramonios(expectedTetramonios)
 		// Then

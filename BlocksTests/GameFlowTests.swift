@@ -70,8 +70,9 @@ private extension GameFlowTests {
 		var updatedCells: [FieldCell] = []
 		var increasedScore: GameScore!
 		
-		func store(current tetramonios: [Tetramonio]) {
+		func store(current tetramonios: [Tetramonio]) -> Bool {
 			storedTetramonios = tetramonios
+			return true
 		}
 		
 		func storeField(_ field: [FieldCell]) {

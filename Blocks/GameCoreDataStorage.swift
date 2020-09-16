@@ -8,34 +8,14 @@
 
 import Foundation
 
-protocol GameStorage: class {
-    func store(current tetramonios: [Tetramonio])
-	func storeField(_ field: [FieldCell])
-	func storeUpdatedCells(_ updatedCells: [FieldCell])
-    func increaseAndStoreScore(_ score: Score, completion: @escaping (GameScore) -> Void)
-    func restartGame(completion: (GameScore, [FieldCell]) -> Void)
-    func createField() -> [FieldCell]
-	
-	/// Game Score
-	var gameScore: GameScore { get }
-
-    /// Current game score
-    var currentScore: Score { get }
-
-    /// Best game score
-    var bestScore: Score { get }
-
-    /// Current field
-    var field: [FieldCell] { get }
-
-    /// Current tetramonios
-    var tetramoniosIndexes: [TetramonioIndex] { get }
-}
-
 #warning("Refactor naming")
 /// This class responsable for storing & fetching game state from Core Data
-class GameDbStore {
+class GameCoreDataStorage: GameStorage {
 
+	// MARK: - Constatns
+	
+	private static let numOfGeneratedTetramonios = 2
+	
     // MARK: - Properties
 
     private let coreDataManager: CoreDataManagerProtocol
@@ -52,26 +32,48 @@ class GameDbStore {
         }
         return fetchedCells
     }
+	
+	var gameScore: GameScore {
+        return GameScore(current: currentScore, best: bestScore)
+	}
+
+    var currentScore: Score {
+        return game?.score ?? 0
+    }
+
+    var bestScore: Score {
+        return game?.bestScore ?? 0
+    }
+
+    var field: [FieldCell] {
+        return storedCells.isEmpty ? createField() : storedCells.map({FieldCell(from: $0)})
+    }
+
+    var tetramoniosIndexes: [TetramonioIndex] {
+        guard let firstTetramonio =  game?.firstTetramonio,
+            let lastTetramonio = game?.secondTetramonio, firstTetramonio != lastTetramonio else {
+                return [Int16]()
+        }
+        return [firstTetramonio, lastTetramonio]
+    }
 
     // MARK: - Inizialization
+	
     init(coreDataManager: CoreDataManagerProtocol) {
         self.coreDataManager = coreDataManager
     }
-}
+	
+	@discardableResult
+    func store(current tetramonios: [Tetramonio]) -> Bool {
+		if tetramonios.count != Self.numOfGeneratedTetramonios {
+			print("Attempt to store invalid number of tetramonios")
+			return false
+		}
 
-// MARK: - GameDbStoreInput
-
-extension GameDbStore: GameStorage {
-
-    func store(current tetramonios: [Tetramonio]) {
-        guard let firstTetramonio = tetramonios.first?.id.rawValue,
-            let lastTetramono = tetramonios.last?.id.rawValue else {
-                fatalError("You nedd to pass 2 teramonios")
-        }
-
-        game?.firstTetramonio = firstTetramonio
-        game?.secondTetramonio = lastTetramono
+        game?.firstTetramonio = tetramonios.first!.id.rawValue
+        game?.secondTetramonio = tetramonios.last!.id.rawValue
         coreDataManager.save(game)
+		return true
     }
 
     func storeField(_ field: [FieldCell]) {
@@ -156,29 +158,5 @@ extension GameDbStore: GameStorage {
         coreDataManager.save(game)
 
 		return storedCells.compactMap({FieldCell(from: $0)})
-    }
-	
-	var gameScore: GameScore {
-        return GameScore(current: currentScore, best: bestScore)
-	}
-
-    var currentScore: Score {
-        return game?.score ?? 0
-    }
-
-    var bestScore: Score {
-        return game?.bestScore ?? 0
-    }
-
-    var field: [FieldCell] {
-        return storedCells.isEmpty ? createField() : storedCells.map({FieldCell(from: $0)})
-    }
-
-    var tetramoniosIndexes: [TetramonioIndex] {
-        guard let firstTetramonio =  game?.firstTetramonio,
-            let lastTetramonio = game?.secondTetramonio, firstTetramonio != lastTetramonio else {
-                return [Int16]()
-        }
-        return [firstTetramonio, lastTetramonio]
     }
 }
