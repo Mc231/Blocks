@@ -21,13 +21,13 @@ class GameCoreDataStorage: GameStorage {
     private let coreDataManager: CoreDataManagerProtocol
 
     lazy private var game: Game? = {
-        return self.coreDataManager.findFirstOrCreate(Game.self, predicate: nil)
+        return try! self.coreDataManager.findFirstOrCreate(Game.self, predicate: nil)
     }()
 
     private var storedCells: [Cell] {
         let xSortDesciptor = NSSortDescriptor(key: "xPosition", ascending: true)
         guard let fetchedCells
-            = coreDataManager.fetch(Cell.self, predicate: nil, sortDescriptors: [xSortDesciptor]) else {
+            = try? coreDataManager.fetch(Cell.self, predicate: nil, sortDescriptors: [xSortDesciptor]) else {
             return [Cell]()
         }
         return fetchedCells
