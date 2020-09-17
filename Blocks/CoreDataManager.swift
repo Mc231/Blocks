@@ -19,7 +19,6 @@
  }
 
 protocol CoreDataManagerDelegate: class {
-    func coreDataManager(_ manager: CoreDataManager, didLoadPresistentContainerWithResult result: Result<NSPersistentStoreDescription, Error>)
     func coreDataManager(_ manager: CoreDataManager, didProduceError error: Error)
 }
 
@@ -42,19 +41,12 @@ protocol CoreDataManagerDelegate: class {
     
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: modelName)
-        container.loadPersistentStores(completionHandler: handlePersistanceStoreLoad(description:error:))
+        container.loadPersistentStores { (description, error) in
+            print(description)
+            print(error)
+        }
         return container
     }()
-    
-    private func handlePersistanceStoreLoad(description: NSPersistentStoreDescription, error: Error?) {
-        var result: Result<NSPersistentStoreDescription, Error>!
-        if let error = error {
-            result = .failure(error)
-        }else{
-            result = .success(description)
-        }
-        delegate?.coreDataManager(self, didLoadPresistentContainerWithResult: result)
-    }
  }
 
  // MARK: - CoreDataManagerProtocol
