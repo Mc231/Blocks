@@ -15,31 +15,44 @@ import CoreData
 private extension GameCoreDataStorageTests {
 	
 	class CoreDataManageMock: CoreDataManagerProtocol {
+        
+        var storedObjects: [NSManagedObject] = []
 		
-		var objectToCreate: NSManagedObject?
 		var saveSuccess = false
-		var findFirsOrCreateObject: NSManagedObject?
-		var fetchResult: [NSManagedObject]?
 		var deleteSuccess = false
 		
 		func create<T>(_ object: T.Type) -> T? where T : NSManagedObject {
-			return objectToCreate as? T
+            if object == Game.self {
+                return Game(context: .init(concurrencyType: .mainQueueConcurrencyType)) as? T
+            }
+            if object == Cell.self {
+                return Cell(context: .init(concurrencyType: .mainQueueConcurrencyType)) as? T
+            }
+            return nil
 		}
 		
 		func save<T>(_ object: T?) where T : NSManagedObject {
-			saveSuccess.toggle()
+            if let object = object {
+                storedObjects.append(object)
+                saveSuccess.toggle()
+            }
 		}
 		
 		func findFirstOrCreate<T>(_ object: T.Type, predicate: NSPredicate?) -> T? where T : NSManagedObject {
-			return objectToCreate as? T
+			return create(object)
 		}
 		
 		func fetch<T>(_ object: T.Type, predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?) -> [T]? where T : NSManagedObject {
-			return fetchResult as? [T]
+            return storedObjects.filter { (storedObject) -> Bool in
+                return type(of: storedObject) == object
+            } as? [T]
 		}
 		
 		func delete<T>(_ object: T) where T : NSManagedObject {
-			deleteSuccess.toggle()
+            if let index = storedObjects.firstIndex(of: object) {
+                storedObjects.remove(at: index)
+                deleteSuccess.toggle()
+            }
 		}
 	}
 }
@@ -82,5 +95,13 @@ class GameCoreDataStorageTests: XCTestCase {
 		XCTAssertTrue(coreDataManagerMock.saveSuccess)
 		XCTAssertTrue(result)
     }
-
+    
+    func testCreateField() {
+        // Given
+        let expectedNumberOfCells = Constatns.Field.numberOfCellsOnField
+        // When
+        let field = sut.createField()
+        // Then
+        XCTAssertEqual(field.count, expectedNumberOfCells)
+    }
 }

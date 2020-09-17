@@ -133,7 +133,6 @@ class GameCoreDataStorage: GameStorage {
     }
 
     func createField() -> [FieldCell] {
-
         var x: Int16 = 0
         var y: Int16 = 0
         (0..<Constatns.Field.numberOfCellsOnField)
@@ -144,19 +143,14 @@ class GameCoreDataStorage: GameStorage {
                     x += 2
                 }
                 y = x % 10
-
-                guard let cell = coreDataManager.create(Cell.self) else {
-                    fatalError("Failed to create cell")
-                }
-                cell.xPosition = x
-                cell.yPosition = y
-                cell.state = 0
-                game?.addToCells(cell)
+                let cell = coreDataManager.create(Cell.self)
+                cell?.xPosition = x
+                cell?.yPosition = y
+                cell?.state = FieldCell.State.empty.rawValue
+                game?.addToCells(cell!)
                 coreDataManager.save(cell)
         }
-
         coreDataManager.save(game)
-
 		return storedCells.compactMap({FieldCell(from: $0)})
     }
 }
