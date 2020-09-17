@@ -21,11 +21,6 @@
  /// This class manage working of app with core data
  class CoreDataManager {
 
-    // MARK: - Constatns
-
-    private let kBlocksDataModelExtension = "momd"
-    private let kSqliteExtensionWithDot = ".sqlite"
-
     // MARK: - Proeprties
 
     private let modelName: String
@@ -37,49 +32,15 @@
     }
 
     // MARK: - CoreData Stack
-	// TODO: - Make context private
-	
-    private lazy var managedObjectContext: NSManagedObjectContext = {
-        let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator
-        return managedObjectContext
-    }()
-
-    private lazy var managedObjectModel: NSManagedObjectModel = {
-        guard let modelURL
-			= Bundle.main.url(forResource: self.modelName, withExtension: self.kBlocksDataModelExtension) else {
-            fatalError("Unable to find Data model")
+    
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: modelName)
+        container.loadPersistentStores { (description, error) in
+            if let error = error {
+                fatalError("Unable to load persistent stores: \(error)")
+            }
         }
-
-        guard let managedObjectModel = NSManagedObjectModel(contentsOf: modelURL) else {
-            fatalError("Unable to load data model")
-        }
-
-        return managedObjectModel
-    }()
-
-    private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
-        let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-
-        let fileManager = FileManager.default
-        let storeName = self.modelName + self.kSqliteExtensionWithDot
-
-        guard let documentDirectoryURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            fatalError("Failed to find document directory")
-        }
-
-        let persistentStoreURL = documentDirectoryURL.appendingPathComponent(storeName)
-
-        do {
-            try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType,
-                                                              configurationName: nil,
-                                                              at: persistentStoreURL)
-        } catch {
-            fatalError("Failed to load persistent store")
-        }
-
-        return persistentStoreCoordinator
-
+        return container
     }()
  }
 
@@ -89,16 +50,16 @@
 
     func create<T: NSManagedObject>(_ object: T.Type) -> T? {
         guard let entityDescription
-			= NSEntityDescription.entity(forEntityName: object.entityName, in: managedObjectContext) else {
+                = NSEntityDescription.entity(forEntityName: object.entityName, in: persistentContainer.viewContext) else {
             debugPrint("Failed to create nsmangedobject context")
             return nil
         }
-        let object = NSManagedObject(entity: entityDescription, insertInto: managedObjectContext) as? T
+        let object = NSManagedObject(entity: entityDescription, insertInto: persistentContainer.viewContext) as? T
         return object
     }
 
     func save<T: NSManagedObject>(_ object: T?) {
-        managedObjectContext.perform {
+        persistentContainer.viewContext.perform {
             do {
                 try object?.managedObjectContext?.save()
             } catch let error {
@@ -124,7 +85,7 @@
         request.predicate = predicate
         request.sortDescriptors = sortDescriptors
         do {
-           let objects = try managedObjectContext.fetch(request) as [T]
+           let objects = try persistentContainer.viewContext.fetch(request) as [T]
             return objects
         } catch {
                 debugPrint("\(self) \(error)")
@@ -133,7 +94,7 @@
     }
 
     func delete<T: NSManagedObject>(_ object: T) {
-        managedObjectContext.delete(object)
+        persistentContainer.viewContext.delete(object)
     }
  }
 
