@@ -44,7 +44,6 @@ class CoreDataManagerTests: XCTestCase {
         // Given
         let promise = expectation(description: "Wait for init error")
         let modelName = "asd"
-        let sut = CoreDataManager(modelName: modelName, delegate: delegate)
         delegate.loadResultCompletion = { result in
             // Then
             if case .failure(let error) = result {
@@ -52,9 +51,11 @@ class CoreDataManagerTests: XCTestCase {
                 promise.fulfill()
             }
          }
+        let sut = CoreDataManager(modelName: modelName, delegate: delegate)
+
         // When
         let _ = sut.persistentContainer
-        wait(for: [promise], timeout: 3.0)
+        wait(for: [promise], timeout: 5.0)
     }
 
 }
