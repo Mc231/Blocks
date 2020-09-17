@@ -21,16 +21,12 @@ class GameCoreDataStorage: GameStorage {
     private let coreDataManager: CoreDataManagerProtocol
 
     lazy private var game: Game? = {
-        return try! self.coreDataManager.findFirstOrCreate(Game.self, predicate: nil)
+        return self.coreDataManager.findFirstOrCreate(Game.self, predicate: nil)
     }()
 
     private var storedCells: [Cell] {
         let xSortDesciptor = NSSortDescriptor(key: "xPosition", ascending: true)
-        guard let fetchedCells
-            = try? coreDataManager.fetch(Cell.self, predicate: nil, sortDescriptors: [xSortDesciptor]) else {
-            return [Cell]()
-        }
-        return fetchedCells
+        return coreDataManager.fetch(Cell.self, predicate: nil, sortDescriptors: [xSortDesciptor])
     }
 	
 	var gameScore: GameScore {
@@ -38,11 +34,11 @@ class GameCoreDataStorage: GameStorage {
 	}
 
     var currentScore: Score {
-        return game?.score ?? 0
+        return game!.score
     }
 
     var bestScore: Score {
-        return game?.bestScore ?? 0
+        return game!.bestScore
     }
 
     var field: [FieldCell] {
@@ -89,16 +85,12 @@ class GameCoreDataStorage: GameStorage {
         coreDataManager.save(game)
     }
 	
-	// TODO: - Refactore & implement this
 	func storeUpdatedCells(_ updatedCells: [FieldCell]) {
 		for updatedCell in updatedCells {
-			guard let storedCell = storedCells.first(where: {$0.xPosition == updatedCell.xPosition}) else {
-				fatalError("Cell can not be nil")
-			}
-			storedCell.state = updatedCell.state.rawValue
+			let storedCell = storedCells.first(where: {$0.xPosition == updatedCell.xPosition})
+			storedCell?.state = updatedCell.state.rawValue
 			coreDataManager.save(storedCell)
 		}
-		
 		// Ensure theat everything saved
 		coreDataManager.save(game)
 	}
@@ -111,7 +103,6 @@ class GameCoreDataStorage: GameStorage {
             game?.bestScore = bestScore
         }
         game?.score = newScore
-
         coreDataManager.save(game)
         let score = GameScore(current: newScore, best: bestScore)
         completion(score)
@@ -125,10 +116,7 @@ class GameCoreDataStorage: GameStorage {
         game?.score = 0
         coreDataManager.save(game)
         let field = storedCells.map({FieldCell(from: $0)})
-        guard let game = game else {
-            fatalError("Game instance can not be nil")
-        }
-        let score = GameScore(current: game.score, best: game.bestScore)
+        let score = GameScore(current: currentScore, best: bestScore)
         completion(score, field)
     }
 

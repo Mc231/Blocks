@@ -73,6 +73,20 @@ class GameCoreDataStorageTests: XCTestCase {
 		sut = nil
 		super.tearDown()
 	}
+	
+	func testTetramonioIndexes() {
+		// When
+		let indexes = sut.tetramoniosIndexes
+		// Then
+		XCTAssertTrue(indexes.isEmpty)
+	}
+	
+	func testFieldCreatedWhenAccessFieldProperty() {
+		// When
+		let field = sut.field
+		// Then
+		XCTAssertFalse(field.isEmpty)
+	}
 
     func testStoreInvalidNumberOfTetramoniosReturnFalse() {
 		// Given
@@ -95,6 +109,59 @@ class GameCoreDataStorageTests: XCTestCase {
 		XCTAssertTrue(coreDataManagerMock.saveSuccess)
 		XCTAssertTrue(result)
     }
+	
+	func testStoreField() {
+		// Given
+		XCTAssertFalse(coreDataManagerMock.saveSuccess)
+		var field = sut.createField()
+		field[0].chageState(newState: .clear)
+		// When
+		sut.storeField(field)
+		// Then
+		XCTAssertTrue(coreDataManagerMock.saveSuccess)
+	}
+	
+	func testStoreUpdatedCells() {
+		XCTAssertFalse(coreDataManagerMock.saveSuccess)
+		var field = sut.createField()
+		field[0].chageState(newState: .clear)
+		let cellsToUpdate = [field[0]]
+		// When
+		sut.storeUpdatedCells(cellsToUpdate)
+		// Then
+		XCTAssertTrue(coreDataManagerMock.saveSuccess)
+	}
+	
+	func testIncreaseAndStoreNewHeighScore() {
+		// Given
+		let score: Score = 32
+		let promise = expectation(description: "Waiting for score increase")
+		XCTAssertFalse(coreDataManagerMock.saveSuccess)
+		// When
+		sut.increaseAndStoreScore(score) { (storedScore) in
+			XCTAssertEqual(storedScore.best, score)
+			XCTAssertTrue(self.coreDataManagerMock.saveSuccess)
+			promise.fulfill()
+		}
+		// Then
+		wait(for: [promise], timeout: 1.0)
+	}
+	
+	func testRestartGame() {
+		// Given
+		let promise = expectation(description: "Waiting for game restart")
+		XCTAssertFalse(coreDataManagerMock.saveSuccess)
+		_ = sut.createField()
+		// When
+		sut.restartGame { (score, field) in
+			XCTAssertEqual(score.current, self.sut.currentScore)
+			XCTAssertEqual(score.best, self.sut.bestScore)
+			XCTAssertTrue(!field.contains(where: {$0.state == .placed}))
+			promise.fulfill()
+		}
+		// Then
+		wait(for: [promise], timeout: 1.0)
+	}
     
     func testCreateField() {
         // Given
