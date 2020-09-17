@@ -9,14 +9,6 @@
  import Foundation
  import CoreData
 
- protocol CoreDataManagerProtocol {
-    func create<T: NSManagedObject>(_ object: T.Type) -> T?
-    func save<T: NSManagedObject>(_ object: T?)
-    func findFirstOrCreate<T: NSManagedObject>(_ object: T.Type, predicate: NSPredicate?)  -> T?
-    func fetch<T: NSManagedObject>(_ object: T.Type, predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?)
-		-> [T]
-    func delete<T: NSManagedObject>(_ object: T)
- }
 
 protocol CoreDataManagerDelegate: class {
     func coreDataManager(_ manager: CoreDataManager, didProduceError error: Error)
@@ -43,7 +35,7 @@ protocol CoreDataManagerDelegate: class {
         let container = NSPersistentContainer(name: modelName)
         container.loadPersistentStores { (description, error) in
             print(description)
-            print(error)
+            print(error as Any)
         }
         return container
     }()

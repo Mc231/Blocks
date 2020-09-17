@@ -12,42 +12,97 @@
 //
 //private extension CoreDataManagerTests {
 //
-//    class CoreDataManagerDelegateMock: CoreDataManagerDelegate {
+//	class CoreDataManagerDelegateMock: CoreDataManagerDelegate {
 //
-//        var producedErrorCompletion: ((Error) -> Swift.Void)!
-//        var loadResultCompletion: ((Result<NSPersistentStoreDescription, Error>) -> Swift.Void)!
+//		var producedErrorCompletion: ((Error) -> Swift.Void)!
+//		var loadResultCompletion: ((Result<NSPersistentStoreDescription, Error>) -> Swift.Void)!
 //
-//        func coreDataManager(_ manager: CoreDataManager, didLoadPresistentContainerWithResult result: Result<NSPersistentStoreDescription, Error>) {
-//            loadResultCompletion(result)
-//        }
+//		func coreDataManager(_ manager: CoreDataManager, didLoadPresistentContainerWithResult result: Result<NSPersistentStoreDescription, Error>) {
+//			loadResultCompletion(result)
+//		}
 //
-//        func coreDataManager(_ manager: CoreDataManager, didProduceError error: Error) {
-//            producedErrorCompletion(error)
-//        }
-//    }
+//		func coreDataManager(_ manager: CoreDataManager, didProduceError error: Error) {
+//			producedErrorCompletion(error)
+//		}
+//	}
 //}
 //
 //class CoreDataManagerTests: XCTestCase {
 //
-//    private var delegate = CoreDataManagerDelegateMock()
+//	private var delegate = CoreDataManagerDelegateMock()
+//	private var sut: CoreDataManager!
+//	
+//	override func setUp() {
+//		super.setUp()
+//		sut = CoreDataManager(modelName: "", delegate: delegate)
+//	}
+//	
+//	override func tearDown() {
+//		sut = nil
+//		super.tearDown()
+//	}
 //
-//
-//    func testInitManagerWithError() {
-//        // Given
-//        let promise = expectation(description: "Wait for init error")
-//        let modelName = "asd"
-//        delegate.loadResultCompletion = { result in
-//            // Then
-//            if case .failure(let error) = result {
-//                XCTAssertNotNil(error)
-//                promise.fulfill()
-//            }
-//         }
-//        let sut = CoreDataManager(modelName: modelName, delegate: delegate)
-//
-//        // When
-//        sut.persistentContainer.newBackgroundContext()
-//        wait(for: [promise], timeout: 5.0)
-//    }
+//	func testCreate() {
+//		// Given
+//		let modelType = Game.self
+//		// When
+//		let object = sut.create(modelType)
+//		// Then
+//		XCTAssertNotNil(object)
+//	}
+//	
+//	func testSaveSuccess() {
+//		// Given
+//		let game = Game()
+//		// When & Then
+//		sut.save(game)
+//	}
+//	
+//	func testFindFirstOrCrateCreateObject() {
+//		// Given
+//		let type = Game.self
+//		// When
+//		let object = sut.findFirstOrCreate(type, predicate: nil)
+//		// Then
+//		XCTAssertNotNil(object)
+//	}
+//	
+//	func testFindFirstOrCrateFetchObject() {
+//		// Given
+//		let type = Game.self
+//		let object1 = sut.create(type)
+//		// When
+//		let object2 = sut.findFirstOrCreate(type, predicate: nil)
+//		// Then
+//		XCTAssertEqual(object1, object2)
+//	}
+//	
+//	func testFetchObjectsReturnEmptyArray() {
+//		// Given
+//		let type = Game.self
+//		// When
+//		let result = sut.fetch(type)
+//		// Then
+//		XCTAssertTrue(result.isEmpty)
+//	}
+//	
+//	func testFetchObjectsReturnNonEmptyArray() {
+//		// Given
+//		let type = Game.self
+//		let object = sut.create(type)
+//		// When
+//		let result = sut.fetch(type)
+//		// Then
+//		XCTAssertFalse(result.isEmpty)
+//		XCTAssertTrue(result.contains(object!))
+//	}
+//	
+//	func testDelete() {
+//		// Given
+//		let object = Game()
+//		// When % Then
+//		sut.delete(object)
+//	}
 //
 //}
+//
