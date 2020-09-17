@@ -29,16 +29,8 @@ private extension CoreDataManagerTests {
 
 class CoreDataManagerTests: XCTestCase {
     
-    private var delegate: CoreDataManagerDelegateMock!
+    private var delegate = CoreDataManagerDelegateMock()
     
-
-    override func setUpWithError() throws {
-        delegate = CoreDataManagerDelegateMock()
-    }
-
-    override func tearDownWithError() throws {
-        delegate = nil
-    }
 
     func testInitManagerWithError() {
         // Given
@@ -54,7 +46,7 @@ class CoreDataManagerTests: XCTestCase {
         let sut = CoreDataManager(modelName: modelName, delegate: delegate)
 
         // When
-        let _ = sut.persistentContainer
+        sut.persistentContainer.newBackgroundContext()
         wait(for: [promise], timeout: 5.0)
     }
 
