@@ -24,7 +24,6 @@ extension TetramonioMatcher {
         let fourthCell = orderedCellData[3].xPosition
 
         for tetramonio in tetramonios {
-
             let firstConstant = tetramonio.tetramonioIndexes[0]
             let secondConstant = tetramonio.tetramonioIndexes[1]
             let thirdConstant = tetramonio.tetramonioIndexes[2]

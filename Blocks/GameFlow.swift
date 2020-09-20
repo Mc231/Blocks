@@ -39,42 +39,38 @@ class GameFlow {
         self.tetramonioGenerator = tetramonioGenerator
         self.storage = storage
     }
+}
 
-    // MARK: - private methods
+// MARK: - Private methods
 
-    private func checkCurrentTetramonio() {
-		
+private extension GameFlow {
+	
+	func processGameFlow(cellData: [FieldCell]) {
+		currentTetramonio.append(contentsOf: cellData)
+		checkCurrentTetramonio()
+		checkCroosLines()
+		checkGameOver()
+	}
+	
+	func checkCurrentTetramonio() {
 		let isFullTetramonio = currentTetramonio.count == Constatns.Tetramonio.numberOfCellsInTetramonio
-		
-        if isFullTetramonio {
-            let tetramonio = matchTetramonio(from: currentTetramonio, with: tetramonios)
+		if isFullTetramonio {
+			let tetramonio = matchTetramonio(from: currentTetramonio, with: tetramonios)
 			updateFieldWithTetramonio(tetramonio)
-			
 			if tetramonio != nil {
 				guard let tetramonioGenerateType = tetramonios.firstIndex(of: tetramonio!)
 					.flatMap({GenerationType(rawValue: $0)}) else {
 						return
 				}
-				
 				generateTetramoniosOf(tetramonioGenerateType)
 				storeTetramonioScore()
 			}
-        } else {
-          markTetramonioAsPartlySelected()
-        }
-    }
-	
-	private func storeTetramonioScore() {
-		storage
-			.increaseAndStoreScore(Constatns.Score.scorePerTetramonio,
-								   completion: { [weak self] score in
-									guard let strongSelf = self else { return }
-				
-									strongSelf.interactor?.gameFlow(strongSelf, didChange: score)
-			})
+		}else{
+			markTetramonioAsPartlySelected()
+		}
 	}
-	
-	private func updateFieldWithTetramonio(_ tetramonio: Tetramonio?) {
+
+	func updateFieldWithTetramonio(_ tetramonio: Tetramonio?) {
 		var cellsToUpdate: [FieldCell] = []
 		currentTetramonio.forEach({ (cellData) in
 			guard let cellIndex = fieldCells.firstIndex(of: cellData) else {
@@ -91,8 +87,8 @@ class GameFlow {
 			interactor?.gameFlow(self, didUpdate: cellsToUpdate)
 		}
 	}
-	
-	private func markTetramonioAsPartlySelected() {
+
+	func markTetramonioAsPartlySelected() {
 		var cellsToUpdate: [FieldCell] = []
 		
 		currentTetramonio.forEach({ (cellData) in
@@ -112,22 +108,31 @@ class GameFlow {
 		}
 	}
 
-    private func checkCroosLines() {
+	func checkCroosLines() {
 		checkForCroosLine(at: &fieldCells) { [unowned self] (updatedRows) in
 			self.storage.storeUpdatedCells(updatedRows)
 			self.interactor?.gameFlow(self, didUpdate: updatedRows)
 		}
-    }
-
-    private func checkGameOver() {
-		let isGameOver = checkGameOver(for: tetramonios, at: fieldCells, with: self)
-        if isGameOver {
-			let score = storage.currentScore
-            interactor?.gameOver(currentScore: score)
-        }
-    }
+	}
 	
-	private func removeAllSelectedCells() {
+	func storeTetramonioScore() {
+		storage
+			.increaseAndStoreScore(Constatns.Score.scorePerTetramonio,
+								   completion: { [weak self] score in
+									guard let strongSelf = self else { return }
+									strongSelf.interactor?.gameFlow(strongSelf, didChange: score)
+			})
+	}
+
+	func checkGameOver() {
+		let isGameOver = checkGameOver(for: tetramonios, at: fieldCells, with: self)
+		if isGameOver {
+			let score = storage.currentScore
+			interactor?.gameOver(currentScore: score)
+		}
+	}
+
+	func removeAllSelectedCells() {
 		currentTetramonio.removeAll()
 		let cells = fieldCells.filter({$0.isSelected}).reduce(into: [FieldCell]()) { [unowned self] (result, cell) in
 			if let index = fieldCells.firstIndex(of: cell) {
@@ -137,13 +142,6 @@ class GameFlow {
 		}
 		storage.storeUpdatedCells(cells)
 		interactor?.gameFlow(self, didUpdate: cells)
-	}
-	
-	private func processGameFlow(cellData: [FieldCell]) {
-		currentTetramonio.append(contentsOf: cellData)
-		checkCurrentTetramonio()
-		checkCroosLines()
-		checkGameOver()
 	}
 }
 
@@ -187,7 +185,7 @@ extension GameFlow: GameFlowInput {
 
 		let field = storage.field
 		let score = storage.gameScore
-		// When we draw tetramonio on field then make current tetramonio wit it
+		// When we draw tetramonio on field then make current tetramonio with it
         let selctedCellsOnField = field.filter({$0.isSelected})
         if !selctedCellsOnField.isEmpty {
             currentTetramonio = selctedCellsOnField
