@@ -46,9 +46,11 @@ private extension GameFlowTests {
 	
 	class MockTetramonioGenerator: TetramonioGeneratable {
 		
+		var generationType: GenerationType!
 		var currentTetramonios: [Tetramonio] = []
 		
 		func generateTetramonios(of generationType: GenerationType) -> [Tetramonio] {
+			self.generationType = generationType
 			return currentTetramonios
 		}
 		
@@ -125,6 +127,59 @@ class GameFlowTests: XCTestCase {
 		sut.generateTetramoniosOf(.gameStart)
 		// Then
 		XCTAssertEqual(tetramonios, sut.tetramonios)
+	}
+	
+	func testStartGameWhenStoredTetramonioIdsAreEmpty() {
+		// Given
+		let promise = expectation(description: "Wait for start")
+		let expectedGenerationType: GenerationType = .gameStart
+		XCTAssertNil(tetramonioGenerator.generationType)
+		// When
+		sut.startGame { (config) in
+			// Then
+			XCTAssertEqual(self.tetramonioGenerator.generationType, expectedGenerationType)
+			XCTAssertEqual(self.tetramonioGenerator.currentTetramonios, config.tetramonios)
+			XCTAssertEqual(self.storage.field, config.fieldCells)
+			XCTAssertEqual(self.storage.gameScore, config.score)
+			promise.fulfill()
+			
+		}
+		wait(for: [promise], timeout: 1.0)
+	}
+	
+	func testStartGameWhenStoredTetramonioIdsAreNotEmpty() {
+		// Given
+		let promise = expectation(description: "Wait for start")
+		// TODO: - Replace this with tetramonio indexes
+		storage.tetramoniosIndexes = [2, 3]
+		storage.field = [.init(state: .selected)]
+		XCTAssertNil(tetramonioGenerator.generationType)
+		// When
+		sut.startGame { (config) in
+			// Then
+			XCTAssertEqual(self.tetramonioGenerator.currentTetramonios, config.tetramonios)
+			XCTAssertEqual(self.storage.field, config.fieldCells)
+			XCTAssertEqual(self.storage.gameScore, config.score)
+			promise.fulfill()
+			
+		}
+		wait(for: [promise], timeout: 1.0)
+	}
+	
+	func testRestartGame() {
+		// Given
+		let promise = expectation(description: "Wait for restart")
+		let expectedGenerationType: GenerationType = .gameStart
+		XCTAssertNil(tetramonioGenerator.generationType)
+		// When
+		sut.restartGame { (score, field) in
+			// Then
+			XCTAssertEqual(self.tetramonioGenerator.generationType, expectedGenerationType)
+			XCTAssertTrue(field.isEmpty)
+			promise.fulfill()
+			
+		}
+		wait(for: [promise], timeout: 1.0)
 	}
 	
 	func testUpdateField() {

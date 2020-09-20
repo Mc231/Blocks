@@ -187,9 +187,10 @@ extension GameFlow: GameFlowInput {
 
 		let field = storage.field
 		let score = storage.gameScore
-        let storedTetramonio = field.filter({$0.isSelected})
-        if !storedTetramonio.isEmpty {
-            currentTetramonio = storedTetramonio
+		// When we draw tetramonio on field then make current tetramonio wit it
+        let selctedCellsOnField = field.filter({$0.isSelected})
+        if !selctedCellsOnField.isEmpty {
+            currentTetramonio = selctedCellsOnField
         }
         self.fieldCells = field
         let config = StartGameConfig(tetramonios: tetramonios, fieldCells: field, score: score)
