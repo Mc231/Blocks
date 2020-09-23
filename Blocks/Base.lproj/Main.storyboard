@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Qo-fH-zdy">
-    <device id="retina4_0" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Qo-fH-zdy">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,18 +11,18 @@
         <!--Game View Controller-->
         <scene sceneID="WOS-Lq-sx7">
             <objects>
-                <viewController id="9Qo-fH-zdy" customClass="GameViewController" customModule="Blocks" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9Qo-fH-zdy" customClass="GameViewController" customModule="Blocks" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wIt-uZ-FIp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r2w-TX-RBP">
-                                <rect key="frame" x="16" y="28" width="288" height="64"/>
+                                <rect key="frame" x="16" y="8" width="288" height="64"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XKk-pk-EU1">
                                         <rect key="frame" x="0.0" y="0.0" width="144" height="64"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iu3-Oa-QM6">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iu3-Oa-QM6">
                                                 <rect key="frame" x="0.0" y="0.0" width="140" height="30"/>
                                                 <color key="backgroundColor" red="0.92786151170730591" green="0.91928261518478394" blue="0.84698832035064697" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -67,7 +65,7 @@
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXe-nU-jZe">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXe-nU-jZe">
                                                 <rect key="frame" x="0.0" y="0.0" width="144" height="30"/>
                                                 <color key="backgroundColor" red="0.92941176470588238" green="0.91764705882352937" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Restart">
@@ -104,7 +102,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ol0-AI-6XO">
-                                <rect key="frame" x="16" y="96" width="288" height="288"/>
+                                <rect key="frame" x="16" y="76" width="288" height="288"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Ol0-AI-6XO" secondAttribute="height" multiplier="1:1" id="Dmj-is-cIM"/>
@@ -122,7 +120,7 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xDw-qa-J8q" customClass="TetramonioView" customModule="Blocks" customModuleProvider="target">
-                                <rect key="frame" x="16" y="392" width="144" height="144"/>
+                                <rect key="frame" x="16" y="372" width="144" height="144"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -133,7 +131,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G0Y-q4-7UD" customClass="TetramonioView" customModule="Blocks" customModuleProvider="target">
-                                <rect key="frame" x="160" y="392" width="144" height="144"/>
+                                <rect key="frame" x="160" y="372" width="144" height="144"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -141,6 +139,7 @@
                                 </connections>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="U1L-6Q-KQ6"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="G0Y-q4-7UD" firstAttribute="top" secondItem="Ol0-AI-6XO" secondAttribute="bottom" constant="8" id="2d5-2Y-0Xf"/>
@@ -158,7 +157,6 @@
                             <constraint firstItem="G0Y-q4-7UD" firstAttribute="height" secondItem="xDw-qa-J8q" secondAttribute="height" id="mg9-Zd-HAO"/>
                             <constraint firstItem="r2w-TX-RBP" firstAttribute="leading" secondItem="wIt-uZ-FIp" secondAttribute="leadingMargin" id="yG6-Ss-odi"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="U1L-6Q-KQ6"/>
                     </view>
                     <navigationItem key="navigationItem" id="tr3-Fy-el4">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="4ii-hw-9cf"/>

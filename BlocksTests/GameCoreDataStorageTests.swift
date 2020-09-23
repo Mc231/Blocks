@@ -17,16 +17,18 @@ private extension GameCoreDataStorageTests {
 	class CoreDataManageMock: CoreDataManagerProtocol {
         
         var storedObjects: [NSManagedObject] = []
+		private var context: NSManagedObjectContext = .init(concurrencyType: .mainQueueConcurrencyType)
 		
 		var saveSuccess = false
 		var deleteSuccess = false
 		
 		func create<T>(_ object: T.Type) -> T? where T : NSManagedObject {
             if object == Game.self {
-                return Game(context: .init(concurrencyType: .mainQueueConcurrencyType)) as? T
+				NSEntityDescription.insertNewObject(forEntityName: Game.entity(), into: context)
+                return Game(context: context) as? T
             }
             if object == Cell.self {
-                return Cell(context: .init(concurrencyType: .mainQueueConcurrencyType)) as? T
+                return Cell(context: context) as? T
             }
             return nil
 		}
@@ -61,9 +63,11 @@ class GameCoreDataStorageTests: XCTestCase {
 	
 	private var coreDataManagerMock: CoreDataManageMock!
 	private var sut: GameCoreDataStorage!
+	private var coreDataManager = CoreDataManager(modelName: "Blocks")
 	
 	override func setUp() {
 		super.setUp()
+		_ = coreDataManager.persistentContainer
 		coreDataManagerMock = CoreDataManageMock()
 		sut = GameCoreDataStorage(coreDataManager: coreDataManagerMock)
 	}

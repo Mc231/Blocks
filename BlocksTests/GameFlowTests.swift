@@ -94,7 +94,7 @@ private extension GameFlowTests {
 		}
 		
 		func createField() -> [FieldCell] {
-			return field
+			return FieldCell.mockedField
 		}
 	}
 }
@@ -182,21 +182,34 @@ class GameFlowTests: XCTestCase {
 		wait(for: [promise], timeout: 1.0)
 	}
 	
-	func testUpdateField() {
-//		// Given
-//		XCTAssertTrue(tetramonioGenerator.currentTetramonios.isEmpty)
-//		let tetramonios: [Tetramonio] = [.emptyOfType(.iH), .emptyOfType(.j180)]
-//		let cell = FieldCell(state: .empty)
-//		XCTAssertFalse(sut.currentTetramonio.contains(cell))
-//		// When
-//		tetramonioGenerator.currentTetramonios = tetramonios
-//		sut.generateTetramoniosOf(.gameStart)
-//		sut.startGame { (Configure) in
-//			
-//		}
-//		sut.updateField(with: cell)
-//		// Then
-//		XCTAssertTrue(sut.currentTetramonio.contains(cell))
+	func testUpdateFieldWith3DraggedCells() {
+		// Given
+		let cells: [FieldCell] = [.init(xPosition: 0, yPosition: 0, state: .selected),
+								  .init(xPosition: 1, yPosition: 1, state: .selected),
+								  .init(xPosition: 2, yPosition: 2, state: .selected)
+		]
+		// When
+		sut.updateField(with: cells)
+		// Then
+		XCTAssertTrue(sut.currentTetramonio.isEmpty)
+	}
+	
+	func testUpdateFieldWith4DraggedCells() {
+		// Given
+		let cells: [FieldCell] = [.init(xPosition: 1, yPosition: 1, state: .empty),
+								  .init(xPosition: 2, yPosition: 2, state: .empty),
+								  .init(xPosition: 3, yPosition: 3, state: .empty),
+								  .init(xPosition: 4, yPosition: 4, state: .empty)
+		]
+		storage.field = storage.createField()
+		sut.startGame { (config) in
+			// Asd
+		}
+		// When
+		sut.updateField(with: cells)
+		// Then
+		XCTAssertTrue(sut.fieldCells.filter({$0.state == .selected}).isEmpty)
+		XCTAssertTrue(sut.currentTetramonio.isEmpty)
 	}
 
 //   // let GameFlow = GameFlowManager()

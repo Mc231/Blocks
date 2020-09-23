@@ -73,9 +73,7 @@ private extension GameFlow {
 	func updateFieldWithTetramonio(_ tetramonio: Tetramonio?) {
 		var cellsToUpdate: [FieldCell] = []
 		currentTetramonio.forEach({ (cellData) in
-			guard let cellIndex = fieldCells.firstIndex(of: cellData) else {
-				fatalError("Index could not be nil")
-			}
+			let cellIndex = fieldCells.firstIndex(of: cellData)!
 			let state: FieldCell.State = tetramonio != nil ? .placed : .empty
 			fieldCells[cellIndex].chageState(newState: state)
 			cellsToUpdate.append(fieldCells[cellIndex])
@@ -92,10 +90,7 @@ private extension GameFlow {
 		var cellsToUpdate: [FieldCell] = []
 		
 		currentTetramonio.forEach({ (cellData) in
-			guard let cellIndex = fieldCells.firstIndex(of: cellData) else {
-				fatalError("Index could not be nil")
-			}
-			
+			let cellIndex = fieldCells.firstIndex(of: cellData)!
 			let cell = fieldCells[cellIndex]
 			if cell.isEmpty {
 				fieldCells[cellIndex].chageState(newState: .selected)
