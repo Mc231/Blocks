@@ -8,7 +8,6 @@
 
 import Foundation
 
-#warning("Refactor naming")
 /// This class responsable for storing & fetching game state from Core Data
 class GameCoreDataStorage: GameStorage {
 

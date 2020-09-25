@@ -9,36 +9,33 @@
  import Foundation
  import CoreData
 
-
-protocol CoreDataManagerDelegate: class {
-    func coreDataManager(_ manager: CoreDataManager, didProduceError error: Error)
-}
-
  /// This class manage working of app with core data
  class CoreDataManager {
     
     // MARK: - Proeprties
 
     private let modelName: String
-    private weak var delegate: CoreDataManagerDelegate?
+	
+	// MARK: - CoreData Stack
+	
+	lazy var persistentContainer: NSPersistentContainer = {
+		let container = NSPersistentContainer(name: modelName)
+		container.loadPersistentStores { (description, error) in
+			print(description)
+			print(error as Any)
+		}
+		return container
+	}()
+	
+	private lazy var context = {
+		return persistentContainer.viewContext
+	}()
 
     // MARK: - Inizialization
 
-    init(modelName: String, delegate: CoreDataManagerDelegate? = nil) {
+    init(modelName: String) {
         self.modelName = modelName
-        self.delegate = delegate
     }
-
-    // MARK: - CoreData Stack
-    
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: modelName)
-        container.loadPersistentStores { (description, error) in
-            print(description)
-            print(error as Any)
-        }
-        return container
-    }()
  }
 
  // MARK: - CoreDataManagerProtocol
@@ -47,18 +44,13 @@ protocol CoreDataManagerDelegate: class {
 
     func create<T: NSManagedObject>(_ object: T.Type) -> T? {
         let object = NSEntityDescription.insertNewObject(forEntityName: object.entityName,
-                                                         into: persistentContainer.viewContext)
+                                                         into: context)
         return object as? T
     }
 
     func save<T: NSManagedObject>(_ object: T?) {
-        persistentContainer.viewContext.perform {
-            do {
-                try object?.managedObjectContext?.save()
-            }catch{
-                print(error)
-                self.delegate?.coreDataManager(self, didProduceError: error)
-            }
+        context.perform {
+			try? object?.managedObjectContext?.save()
         }
     }
 
@@ -74,18 +66,12 @@ protocol CoreDataManagerDelegate: class {
         let request = NSFetchRequest<T>(entityName: object.entityName)
         request.predicate = predicate
         request.sortDescriptors = sortDescriptors
-        do {
-            let objects = try persistentContainer.viewContext.fetch(request) as [T]
-            return objects
-        }catch{
-            print(error)
-            delegate?.coreDataManager(self, didProduceError: error)
-        }
-        return []
+		let objects = try! context.fetch(request) as [T]
+		return objects
     }
 
     func delete<T: NSManagedObject>(_ object: T) {
-        persistentContainer.viewContext.delete(object)
+        context.delete(object)
     }
  }
 

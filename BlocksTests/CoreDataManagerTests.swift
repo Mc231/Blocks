@@ -10,31 +10,13 @@ import XCTest
 import CoreData
 @testable import Blocks
 
-private extension CoreDataManagerTests {
-
-	class CoreDataManagerDelegateMock: CoreDataManagerDelegate {
-
-		var producedErrorCompletion: ((Error) -> Swift.Void)!
-		var loadResultCompletion: ((Result<NSPersistentStoreDescription, Error>) -> Swift.Void)!
-
-		func coreDataManager(_ manager: CoreDataManager, didLoadPresistentContainerWithResult result: Result<NSPersistentStoreDescription, Error>) {
-			loadResultCompletion(result)
-		}
-
-		func coreDataManager(_ manager: CoreDataManager, didProduceError error: Error) {
-			producedErrorCompletion(error)
-		}
-	}
-}
-
 class CoreDataManagerTests: XCTestCase {
 
-	private var delegate = CoreDataManagerDelegateMock()
 	private var sut: CoreDataManager!
 	
 	override func setUp() {
 		super.setUp()
-		sut = CoreDataManager(modelName: "", delegate: delegate)
+		sut = CoreDataManager(modelName: "")
 	}
 	
 	override func tearDown() {

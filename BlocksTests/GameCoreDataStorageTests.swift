@@ -17,14 +17,17 @@ private extension GameCoreDataStorageTests {
 	class CoreDataManageMock: CoreDataManagerProtocol {
         
         var storedObjects: [NSManagedObject] = []
-		private var context: NSManagedObjectContext = .init(concurrencyType: .mainQueueConcurrencyType)
+		private var context: NSManagedObjectContext
+		
+		init(context: NSManagedObjectContext) {
+			self.context = context
+		}
 		
 		var saveSuccess = false
 		var deleteSuccess = false
 		
 		func create<T>(_ object: T.Type) -> T? where T : NSManagedObject {
             if object == Game.self {
-				NSEntityDescription.insertNewObject(forEntityName: Game.entity(), into: context)
                 return Game(context: context) as? T
             }
             if object == Cell.self {
@@ -61,28 +64,58 @@ private extension GameCoreDataStorageTests {
 
 class GameCoreDataStorageTests: XCTestCase {
 	
+	private var context: NSManagedObjectContext!
 	private var coreDataManagerMock: CoreDataManageMock!
 	private var sut: GameCoreDataStorage!
-	private var coreDataManager = CoreDataManager(modelName: "Blocks")
 	
 	override func setUp() {
 		super.setUp()
-		_ = coreDataManager.persistentContainer
-		coreDataManagerMock = CoreDataManageMock()
+		context = NSManagedObjectContext.contextForTests
+		coreDataManagerMock = CoreDataManageMock(context: context)
 		sut = GameCoreDataStorage(coreDataManager: coreDataManagerMock)
 	}
 	
 	override func tearDown() {
+		context = nil
 		coreDataManagerMock = nil
 		sut = nil
 		super.tearDown()
 	}
 	
-	func testTetramonioIndexes() {
+	func testGameScore() {
+		// Given
+		let expectedScore = GameScore(current: 0, best: 0)
+		// When
+		let result = sut.gameScore
+		// Then
+		XCTAssertEqual(expectedScore, result)
+	}
+	
+	func testGetFieldWhenStoredCellsIsNotEmpty() {
+		// Given
+		let expectedResult = sut.createField()
+		// When
+		let result = sut.field
+		// Then
+		XCTAssertEqual(expectedResult, result)
+	}
+	
+	func testTetramonioIndexesIsEmptyForNotStoredGame() {
 		// When
 		let indexes = sut.tetramoniosIndexes
 		// Then
 		XCTAssertTrue(indexes.isEmpty)
+	}
+	
+	func testTetramonioIndexesIsNotEmptyForNotStoredGame() {
+		// Given
+		let tetramonios: [Tetramonio] = [.emptyOfType(type: .iV), .emptyOfType(type: .j)]
+		sut.store(current: tetramonios)
+		let expectedIndexes: [Int16] = tetramonios.map({$0.id.rawValue})
+		// When
+		let indexes = sut.tetramoniosIndexes
+		// Then
+		XCTAssertEqual(indexes, expectedIndexes)
 	}
 	
 	func testFieldCreatedWhenAccessFieldProperty() {
