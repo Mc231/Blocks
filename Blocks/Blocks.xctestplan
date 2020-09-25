@@ -1,0 +1,28 @@
+{
+  "configurations" : [
+    {
+      "id" : "4718D920-D173-4F19-A3F4-CCCAD89CA257",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Blocks.xcodeproj",
+      "identifier" : "FFFBBFB61E4521700052D68B",
+      "name" : "Blocks"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Blocks.xcodeproj",
+        "identifier" : "FF9B68591E4D1678006376CA",
+        "name" : "BlocksTests"
+      }
+    }
+  ],
+  "version" : 1
+}
