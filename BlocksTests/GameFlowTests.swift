@@ -131,39 +131,30 @@ class GameFlowTests: XCTestCase {
 	
 	func testStartGameWhenStoredTetramonioIdsAreEmpty() {
 		// Given
-		let promise = expectation(description: "Wait for start")
 		let expectedGenerationType: GenerationType = .gameStart
 		XCTAssertNil(tetramonioGenerator.generationType)
 		// When
-		sut.startGame { (config) in
-			// Then
-			XCTAssertEqual(self.tetramonioGenerator.generationType, expectedGenerationType)
-			XCTAssertEqual(self.tetramonioGenerator.currentTetramonios, config.tetramonios)
-			XCTAssertEqual(self.storage.field, config.fieldCells)
-			XCTAssertEqual(self.storage.gameScore, config.score)
-			promise.fulfill()
-			
-		}
-		wait(for: [promise], timeout: 1.0)
+		let config = sut.startGame()
+		// Then
+		XCTAssertEqual(tetramonioGenerator.generationType, expectedGenerationType)
+		XCTAssertEqual(tetramonioGenerator.currentTetramonios, config.tetramonios)
+		XCTAssertEqual(storage.field, config.fieldCells)
+		XCTAssertEqual(storage.gameScore, config.score)
 	}
 	
 	func testStartGameWhenStoredTetramonioIdsAreNotEmpty() {
 		// Given
-		let promise = expectation(description: "Wait for start")
-		// TODO: - Replace this with tetramonio indexes
-		storage.tetramoniosIndexes = [2, 3]
+		let indexes = [Tetramonio.emptyOfType(.iH), Tetramonio.emptyOfType(.j)]
+			.map({$0.id.rawValue})
+		storage.tetramoniosIndexes = indexes
 		storage.field = [.init(state: .selected)]
 		XCTAssertNil(tetramonioGenerator.generationType)
 		// When
-		sut.startGame { (config) in
-			// Then
-			XCTAssertEqual(self.tetramonioGenerator.currentTetramonios, config.tetramonios)
-			XCTAssertEqual(self.storage.field, config.fieldCells)
-			XCTAssertEqual(self.storage.gameScore, config.score)
-			promise.fulfill()
-			
-		}
-		wait(for: [promise], timeout: 1.0)
+		let config = sut.startGame()
+		// Then
+		XCTAssertEqual(tetramonioGenerator.currentTetramonios, config.tetramonios)
+		XCTAssertEqual(storage.field, config.fieldCells)
+		XCTAssertEqual(storage.gameScore, config.score)
 	}
 	
 	func testRestartGame() {
@@ -180,6 +171,18 @@ class GameFlowTests: XCTestCase {
 			
 		}
 		wait(for: [promise], timeout: 1.0)
+	}
+	
+	func testUpdateFieldWithCell() {
+		// Given
+		let expectedCell = FieldCell(xPosition: 1, yPosition: 1, state: .empty)
+		XCTAssertTrue(sut.currentTetramonio.isEmpty)
+		storage.field = FieldCell.mockedField
+		_ = sut.startGame()
+		// When
+		sut.updateField(with: expectedCell)
+		// Then
+		XCTAssertTrue(sut.currentTetramonio.contains(expectedCell))
 	}
 	
 	func testUpdateFieldWith3DraggedCells() {
@@ -202,9 +205,7 @@ class GameFlowTests: XCTestCase {
 								  .init(xPosition: 4, yPosition: 4, state: .empty)
 		]
 		storage.field = storage.createField()
-		sut.startGame { (config) in
-			// Asd
-		}
+		_ = sut.startGame()
 		// When
 		sut.updateField(with: cells)
 		// Then

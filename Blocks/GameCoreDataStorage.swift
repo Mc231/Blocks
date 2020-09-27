@@ -94,7 +94,7 @@ class GameCoreDataStorage: GameStorage {
 		coreDataManager.save(game)
 	}
 
-    func increaseAndStoreScore(_ score: Score, completion: @escaping (GameScore) -> Void) {
+    func increaseAndStoreScore(by score: Score) -> GameScore {
         let newScore = self.currentScore + score
         var bestScore = self.bestScore
         if bestScore < newScore {
@@ -104,10 +104,10 @@ class GameCoreDataStorage: GameStorage {
         game?.score = newScore
         coreDataManager.save(game)
         let score = GameScore(current: newScore, best: bestScore)
-        completion(score)
+        return score
     }
 
-    func restartGame(completion: (GameScore, [FieldCell]) -> Void) {
+    func restartGame() -> RestartGameConfig {
         storedCells.forEach { (cell) in
             cell.state = 0
             coreDataManager.save(cell)
@@ -116,7 +116,8 @@ class GameCoreDataStorage: GameStorage {
         coreDataManager.save(game)
         let field = storedCells.map({FieldCell(from: $0)})
         let score = GameScore(current: currentScore, best: bestScore)
-        completion(score, field)
+		let config = RestartGameConfig(field: field, score: score)
+        return config
     }
 
     func createField() -> [FieldCell] {

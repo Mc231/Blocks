@@ -56,8 +56,8 @@ private extension GameInteractorTests {
             self.draggedCells = draggedCells
         }
         
-        func startGame(completion: (StartGameConfig) -> Void) {
-            completion(startGameConfig)
+        func startGame() -> StartGameConfig {
+            return startGameConfig
         }
         
 		func restartGame(callback: @escaping (GameScore, [FieldCell]) -> Void) {
@@ -86,22 +86,19 @@ class GameInteractorTests: XCTestCase {
 
     func testStartGame() {
         // Given
-        let promise = expectation(description: "Waiting for game start")
-		let startGameConfig = StartGameConfig(tetramonios: [], fieldCells: [], score: .init(current: 1, best: 1))
-		gameFlow.startGameConfig = startGameConfig
+		let expectedConfig = StartGameConfig(tetramonios: [], fieldCells: [], score: .init(current: 1, best: 1))
+		gameFlow.startGameConfig = expectedConfig
         XCTAssertTrue(presenter.providedTetramonios.isEmpty)
         XCTAssertTrue(presenter.providedFieldCells.isEmpty)
         XCTAssertNil(presenter.providedScore)
         // When
         sut.startGame()
-        gameFlow.startGame { (config) in
-			XCTAssertEqual(self.presenter.providedTetramonios, config.tetramonios)
-			XCTAssertEqual(self.presenter.providedFieldCells, config.fieldCells)
-			XCTAssertEqual(self.presenter.providedScore, config.score)
-			promise.fulfill()
-        }
-        // Then
-        wait(for: [promise], timeout: 1.0)
+		let config = gameFlow.startGame()
+		// Then
+		XCTAssertEqual(expectedConfig, config)
+		XCTAssertEqual(presenter.providedTetramonios, config.tetramonios)
+		XCTAssertEqual(presenter.providedFieldCells, config.fieldCells)
+		XCTAssertEqual(presenter.providedScore, config.score)
     }
     
     func testRestartGame() {

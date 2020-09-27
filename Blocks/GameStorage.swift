@@ -12,8 +12,8 @@ protocol GameStorage: class {
     func store(current tetramonios: [Tetramonio]) -> Bool
 	func storeField(_ field: [FieldCell])
 	func storeUpdatedCells(_ updatedCells: [FieldCell])
-    func increaseAndStoreScore(_ score: Score, completion: @escaping (GameScore) -> Void)
-    func restartGame(completion: (GameScore, [FieldCell]) -> Void)
+    func increaseAndStoreScore(by score: Score) -> GameScore
+    func restartGame() -> RestartGameConfig
     func createField() -> [FieldCell]
 	
 	/// Game Score

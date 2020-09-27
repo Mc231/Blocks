@@ -111,12 +111,8 @@ private extension GameFlow {
 	}
 	
 	func storeTetramonioScore() {
-		storage
-			.increaseAndStoreScore(Constatns.Score.scorePerTetramonio,
-								   completion: { [weak self] score in
-									guard let strongSelf = self else { return }
-									strongSelf.interactor?.gameFlow(strongSelf, didChange: score)
-			})
+		let score = storage.increaseAndStoreScore(by: Constatns.Score.scorePerTetramonio)
+		interactor?.gameFlow(self, didChange: score)
 	}
 
 	func checkGameOver() {
@@ -166,7 +162,7 @@ extension GameFlow: GameFlowInput {
 		processGameFlow(cellData: draggedCells)
 	}
 	
-    func startGame(completion: (StartGameConfig) -> Swift.Void) {
+    func startGame() -> StartGameConfig {
         var tetramonios = [Tetramonio]()
 		let storedIds = storage.tetramoniosIndexes
 		if !storedIds.isEmpty {
@@ -187,16 +183,14 @@ extension GameFlow: GameFlowInput {
         }
         self.fieldCells = field
         let config = StartGameConfig(tetramonios: tetramonios, fieldCells: field, score: score)
-		completion(config)
+		return config
     }
 
     func restartGame(callback: @escaping (GameScore, [FieldCell]) -> Void) {
         generateTetramoniosOf(.gameStart)
-		storage.restartGame(completion: { [weak self] (gameScore, field) in
-            self?.fieldCells = field
-            let gameScore = GameScore(current: gameScore.current, best: gameScore.best)
-            callback(gameScore, field)
-        })
+		let restartConfig = storage.restartGame()
+		self.fieldCells = restartConfig.field
+		callback(restartConfig.score, restartConfig.field)
     }
 }
 
