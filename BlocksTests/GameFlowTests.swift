@@ -260,19 +260,18 @@ class GameFlowTests: XCTestCase {
 	
 	func testCheckCrossLine() {
 		// Given
-		let cells: [FieldCell] = [.init(xPosition: 5, yPosition: 5, state: .selected),
-								  .init(xPosition: 4, yPosition: 6, state: .selected),
-								  .init(xPosition: 2, yPosition: 7, state: .selected),
-								  .init(xPosition: 3, yPosition: 8, state: .selected),
+		let updatedCellsCount = 8
+		let expectedCell: FieldCell = .init(xPosition: 1, yPosition: 1, state: .empty)
+		tetramonioGenerator.currentTetramonios = [.init(id: .iH, tetramonioIndexes: [1,1,1], gameOverIndexes: [1,2,3], displayTetramonioIndexes: []),
+												  .init(id: .iV, tetramonioIndexes: [10,10,10], gameOverIndexes: [8,16,24], displayTetramonioIndexes: [])
 		]
 		XCTAssertTrue(interactor.updatedField.isEmpty)
 		XCTAssertTrue(storage.updatedCells.isEmpty)
 		// When
 		var field = FieldCell.mockedField
-		field[0].chageState(newState: .placed)
-		field[1].chageState(newState: .placed)
-		field[2].chageState(newState: .placed)
-		field[3].chageState(newState: .placed)
+		field[1].chageState(newState: .selected)
+		field[2].chageState(newState: .selected)
+		field[3].chageState(newState: .selected)
 		field[4].chageState(newState: .placed)
 		field[5].chageState(newState: .placed)
 		field[6].chageState(newState: .placed)
@@ -280,9 +279,8 @@ class GameFlowTests: XCTestCase {
 		storage.field = field
 		_ = sut.startGame()
 		// When
-		sut.updateField(with: cells)
+		sut.updateField(with: expectedCell)
 		// Then
-		XCTAssertEqual(interactor.updatedField.count, cells.count)
-		
+		XCTAssertEqual(interactor.updatedField.count, updatedCellsCount)
 	}
 }
