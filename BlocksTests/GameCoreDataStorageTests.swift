@@ -171,33 +171,25 @@ class GameCoreDataStorageTests: XCTestCase {
 	
 	func testIncreaseAndStoreNewHeighScore() {
 		// Given
-		let score: Score = 32
-		let promise = expectation(description: "Waiting for score increase")
+		let expectedScore: Score = 32
 		XCTAssertFalse(coreDataManagerMock.saveSuccess)
 		// When
-		sut.increaseAndStoreScore(score) { (storedScore) in
-			XCTAssertEqual(storedScore.best, score)
-			XCTAssertTrue(self.coreDataManagerMock.saveSuccess)
-			promise.fulfill()
-		}
+        let score = sut.increaseAndStoreScore(by: expectedScore)
 		// Then
-		wait(for: [promise], timeout: 1.0)
+        XCTAssertEqual(score.best, expectedScore)
+        XCTAssertTrue(coreDataManagerMock.saveSuccess)
 	}
 	
 	func testRestartGame() {
 		// Given
-		let promise = expectation(description: "Waiting for game restart")
 		XCTAssertFalse(coreDataManagerMock.saveSuccess)
 		_ = sut.createField()
 		// When
-		sut.restartGame { (score, field) in
-			XCTAssertEqual(score.current, self.sut.currentScore)
-			XCTAssertEqual(score.best, self.sut.bestScore)
-			XCTAssertTrue(!field.contains(where: {$0.state == .placed}))
-			promise.fulfill()
-		}
+        let restartConfig = sut.restartGame()
 		// Then
-		wait(for: [promise], timeout: 1.0)
+        XCTAssertEqual(restartConfig.score.current, sut.currentScore)
+        XCTAssertEqual(restartConfig.score.best, sut.bestScore)
+        XCTAssertTrue(!restartConfig.field.contains(where: {$0.state == .placed}))
 	}
     
     func testCreateField() {

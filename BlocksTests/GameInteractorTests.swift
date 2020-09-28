@@ -42,7 +42,8 @@ private extension GameInteractorTests {
         var touchedCell: FieldCell!
         var draggedCells: [FieldCell] = []
         var startGameConfig: StartGameConfig!
-		var restartGameConfig: (score: GameScore, fieldCells: [FieldCell])!
+		var restartGameConfig: RestartGameConfig!
+        
         func generateTetramoniosOf(_ type: GenerationType) -> [Tetramonio] {
             generationType = type
             return generatedTeramoniosToReturn
@@ -60,8 +61,8 @@ private extension GameInteractorTests {
             return startGameConfig
         }
         
-		func restartGame(callback: @escaping (GameScore, [FieldCell]) -> Void) {
-			callback(restartGameConfig.score, restartGameConfig.fieldCells)
+		func restartGame() -> RestartGameConfig {
+			return restartGameConfig
         }
     }
 }
@@ -103,20 +104,15 @@ class GameInteractorTests: XCTestCase {
     
     func testRestartGame() {
         // Given
-        let promise = expectation(description: "Waiting for game restart")
-		let restartGameConfig = (score: GameScore(current: 1, best: 1	), fieldCells: [FieldCell]())
-		gameFlow.restartGameConfig = restartGameConfig
+        let expectedConfig = RestartGameConfig(field: [], score: .init(current: 1, best: 1))
+		gameFlow.restartGameConfig = expectedConfig
         XCTAssertTrue(presenter.providedFieldCells.isEmpty)
         XCTAssertNil(presenter.providedScore)
         // When
         sut.restartGame()
-        gameFlow.restartGame { (score, fieldCells) in
-			XCTAssertEqual(self.presenter.providedFieldCells, fieldCells)
-			XCTAssertEqual(self.presenter.providedScore, score)
-			promise.fulfill()
-        }
         // Then
-        wait(for: [promise], timeout: 1.0)
+        XCTAssertEqual(presenter.providedFieldCells, expectedConfig.field)
+        XCTAssertEqual(presenter.providedScore, expectedConfig.score)
     }
 	
     func testHandleTouchedCell() {

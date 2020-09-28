@@ -186,11 +186,11 @@ extension GameFlow: GameFlowInput {
 		return config
     }
 
-    func restartGame(callback: @escaping (GameScore, [FieldCell]) -> Void) {
+    func restartGame() -> RestartGameConfig {
         generateTetramoniosOf(.gameStart)
 		let restartConfig = storage.restartGame()
 		self.fieldCells = restartConfig.field
-		callback(restartConfig.score, restartConfig.field)
+		return restartConfig
     }
 }
 

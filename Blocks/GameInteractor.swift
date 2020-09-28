@@ -29,10 +29,10 @@ extension GameInteractor: GameInteractorInput {
     }
 
     func restartGame() {
-        gameFlow?.restartGame(callback: { [weak self] (score, field) in
-            self?.presenter?.provideScore(score: score)
-            self?.presenter?.provideField(field)
-        })
+        // TODO: - Check this forece unwrap
+        let restartGameConfig = gameFlow!.restartGame()
+        presenter?.provideScore(score: restartGameConfig.score)
+        presenter?.provideField(restartGameConfig.field)
     }
 
     func handleTouchedCell(_ cellData: FieldCell) {

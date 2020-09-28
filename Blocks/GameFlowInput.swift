@@ -13,5 +13,5 @@ protocol GameFlowInput {
 	func updateField(with handledCell: FieldCell)
 	func updateField(with draggedCells: [FieldCell])
 	func startGame() -> StartGameConfig
-	func restartGame(callback: @escaping (GameScore, [FieldCell]) -> Void)
+	func restartGame() -> RestartGameConfig
 }

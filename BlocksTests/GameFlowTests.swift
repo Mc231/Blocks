@@ -61,10 +61,11 @@ private extension GameFlowTests {
 	
 	class MockStorage: GameStorage {
 		
-		var gameScore: GameScore = .init(current: 0, best: 1)
 		var currentScore: Score = 1
+        var gameScore: GameScore = .init(current: 1, best: 1)
+        var field: [FieldCell] = []
 		var bestScore: Score = 10
-		var field: [FieldCell] = []
+        var restartGameConfig: RestartGameConfig = .init(field: [], score: .init(current: 1, best: 1))
 		var tetramoniosIndexes: [TetramonioIndex] = []
 		
 		var storedTetramonios: [Tetramonio] = []
@@ -85,12 +86,12 @@ private extension GameFlowTests {
 			self.updatedCells = updatedCells
 		}
 		
-		func increaseAndStoreScore(_ score: Score, completion: @escaping (GameScore) -> Void) {
-			completion(increasedScore)
+        func increaseAndStoreScore(by score: Score) -> GameScore {
+            return gameScore
 		}
 		
-		func restartGame(completion: (GameScore, [FieldCell]) -> Void) {
-			completion(gameScore, field)
+		func restartGame() -> RestartGameConfig {
+            return restartGameConfig
 		}
 		
 		func createField() -> [FieldCell] {
@@ -159,18 +160,13 @@ class GameFlowTests: XCTestCase {
 	
 	func testRestartGame() {
 		// Given
-		let promise = expectation(description: "Wait for restart")
 		let expectedGenerationType: GenerationType = .gameStart
 		XCTAssertNil(tetramonioGenerator.generationType)
 		// When
-		sut.restartGame { (score, field) in
-			// Then
-			XCTAssertEqual(self.tetramonioGenerator.generationType, expectedGenerationType)
-			XCTAssertTrue(field.isEmpty)
-			promise.fulfill()
-			
-		}
-		wait(for: [promise], timeout: 1.0)
+		let restartGameConfig = sut.restartGame()
+        // Then
+        XCTAssertEqual(tetramonioGenerator.generationType, expectedGenerationType)
+        XCTAssertTrue(restartGameConfig.field.isEmpty)
 	}
 	
 	func testUpdateFieldWithCell() {
