@@ -10,4 +10,4 @@ import Foundation
 
 typealias Score = Int32
 typealias TetramonioIndex = Int16
-typealias CrossLineCheckerCompletion = ([FieldCell]) -> Swift.Void
+typealias UpdatedCells = [FieldCell]

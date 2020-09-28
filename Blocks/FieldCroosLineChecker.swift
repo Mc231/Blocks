@@ -9,7 +9,7 @@
 import Foundation
 
 protocol FieldCrossLineChecker {
-    func checkForCroosLine(at field: inout [FieldCell], completion: CrossLineCheckerCompletion)
+    func checkForCroosLine(at field: inout [FieldCell]) -> UpdatedCells
 }
 
 // MARK: - Default implementation
@@ -53,7 +53,7 @@ extension FieldCrossLineChecker {
         return result
     }
 
-    func checkForCroosLine(at field: inout [FieldCell], completion: CrossLineCheckerCompletion) {
+    func checkForCroosLine(at field: inout [FieldCell]) -> UpdatedCells {
 
         let horizontalCells = field.filter({$0.state == .placed})
 		let verticalCells = horizontalCells.sorted(by: {$0.yPosition < $1.yPosition})
@@ -65,7 +65,7 @@ extension FieldCrossLineChecker {
 			? getRows(from: verticalCells, isVertical: true) : []
 		
 		if horizontalRows.isEmpty && verticalRows.isEmpty {
-			return
+			return []
 		}
 		
 		let result = Set(horizontalRows + verticalRows).reduce(into: [FieldCell]()) { (result, cell) in
@@ -75,6 +75,6 @@ extension FieldCrossLineChecker {
 			}
 		}
 
-		completion(result)
+		return result
     }
 }

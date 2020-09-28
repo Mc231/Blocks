@@ -195,7 +195,7 @@ class GameFlowTests: XCTestCase {
 	
 	func testUpdateFieldWith4DraggedCells() {
 		// Given
-		let cells: [FieldCell] = [.init(xPosition: 1, yPosition: 1, state: .empty),
+		let cells: [FieldCell] = [.init(xPosition: 2, yPosition: 1, state: .empty),
 								  .init(xPosition: 2, yPosition: 2, state: .empty),
 								  .init(xPosition: 3, yPosition: 3, state: .empty),
 								  .init(xPosition: 4, yPosition: 4, state: .empty)
@@ -208,6 +208,53 @@ class GameFlowTests: XCTestCase {
 		XCTAssertTrue(sut.fieldCells.filter({$0.state == .selected}).isEmpty)
 		XCTAssertTrue(sut.currentTetramonio.isEmpty)
 	}
+    
+    func testUpdateFieldRemoveAllSelectedCells() {
+        // Given
+        let cells: [FieldCell] = [.init(xPosition: 2, yPosition: 1, state: .empty),
+                                  .init(xPosition: 2, yPosition: 2, state: .empty),
+                                  .init(xPosition: 3, yPosition: 3, state: .empty),
+                                  .init(xPosition: 4, yPosition: 4, state: .empty)
+        ]
+        XCTAssertTrue(storage.field.isEmpty)
+        XCTAssertTrue(interactor.updatedField.isEmpty)
+        var field = FieldCell.mockedField
+        field[0].chageState(newState: .selected)
+        storage.field = field
+        _ = sut.startGame()
+        storage.storeUpdatedCells(cells)
+        // When
+        sut.updateField(with: cells)
+        // Then
+        XCTAssertTrue(sut.fieldCells.filter({$0.state == .selected}).isEmpty)
+        XCTAssertFalse(interactor.updatedField.isEmpty)
+        XCTAssertTrue(sut.currentTetramonio.isEmpty)
+    }
+    
+    func testPlaceTetramonioUpdateStorageAndGenerateNewTetramonio() {
+        // Given
+        let cells: [FieldCell] = [.init(xPosition: 1, yPosition: 1, state: .selected),
+                                  .init(xPosition: 2, yPosition: 2, state: .selected),
+                                  .init(xPosition: 3, yPosition: 3, state: .selected),
+                                  .init(xPosition: 4, yPosition: 4, state: .selected)
+        ]
+        XCTAssertTrue(storage.field.isEmpty)
+        XCTAssertTrue(interactor.updatedField.isEmpty)
+        tetramonioGenerator.currentTetramonios = [.init(id: .iH, tetramonioIndexes: [1,1,1], gameOverIndexes: [], displayTetramonioIndexes: []),
+                                                  .init(id: .iV, tetramonioIndexes: [10,10,10], gameOverIndexes: [], displayTetramonioIndexes: [])
+        ]
+        var field = FieldCell.mockedField
+        field[0].chageState(newState: .selected)
+        storage.field = field
+        _ = sut.startGame()
+        storage.storeUpdatedCells(cells)
+        // When
+        sut.updateField(with: cells)
+        // Then
+        XCTAssertTrue(sut.fieldCells.filter({$0.state == .selected}).isEmpty)
+        XCTAssertFalse(interactor.updatedField.isEmpty)
+        XCTAssertTrue(sut.currentTetramonio.isEmpty)
+    }
 
 //   // let GameFlow = GameFlowManager()
 //    let tetramonios = try! TetramonioLoader().load()

@@ -57,13 +57,11 @@ private extension GameFlow {
 		if isFullTetramonio {
 			let tetramonio = matchTetramonio(from: currentTetramonio, with: tetramonios)
 			updateFieldWithTetramonio(tetramonio)
-			if tetramonio != nil {
-				guard let tetramonioGenerateType = tetramonios.firstIndex(of: tetramonio!)
-					.flatMap({GenerationType(rawValue: $0)}) else {
-						return
-				}
-				generateTetramoniosOf(tetramonioGenerateType)
-				storeTetramonioScore()
+			if tetramonio != nil,
+               let tetramonioGenerateType = tetramonios.firstIndex(of: tetramonio!)
+                .flatMap({GenerationType(rawValue: $0)}) {
+                generateTetramoniosOf(tetramonioGenerateType)
+                storeScore()
 			}
 		}else{
 			markTetramonioAsPartlySelected()
@@ -104,13 +102,14 @@ private extension GameFlow {
 	}
 
 	func checkCroosLines() {
-		checkForCroosLine(at: &fieldCells) { [unowned self] (updatedRows) in
-			self.storage.storeUpdatedCells(updatedRows)
-			self.interactor?.gameFlow(self, didUpdate: updatedRows)
-		}
+        let updatedCells = checkForCroosLine(at: &fieldCells)
+        if !updatedCells.isEmpty {
+            storage.storeUpdatedCells(updatedCells)
+            interactor?.gameFlow(self, didUpdate: updatedCells)
+        }
 	}
 	
-	func storeTetramonioScore() {
+	func storeScore() {
 		let score = storage.increaseAndStoreScore(by: Constatns.Score.scorePerTetramonio)
 		interactor?.gameFlow(self, didChange: score)
 	}
