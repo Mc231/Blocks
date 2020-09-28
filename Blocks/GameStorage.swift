@@ -9,6 +9,7 @@
 import Foundation
 
 protocol GameStorage: class {
+	@discardableResult
     func store(current tetramonios: [Tetramonio]) -> Bool
 	func storeField(_ field: [FieldCell])
 	func storeUpdatedCells(_ updatedCells: [FieldCell])
