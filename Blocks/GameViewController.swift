@@ -221,14 +221,8 @@ extension GameViewController: GameViewInput {
 	}
 
     func display(tetramonios: [Tetramonio]) {
-
-        guard let firstTetramonioIndexes = tetramonios.first?.displayTetramonioIndexes,
-              let secondTetramonioIndexes = tetramonios.last?.displayTetramonioIndexes else {
-                fatalError("Imposible Tetramonio indexes")
-        }
-
-        firstTetramonioView.update(with: firstTetramonioIndexes)
-        secondTetramonioView.update(with: secondTetramonioIndexes)
+        firstTetramonioView.update(with: tetramonios.first!.displayTetramonioIndexes)
+        secondTetramonioView.update(with: tetramonios.last!.displayTetramonioIndexes)
     }
 
 	func displayScore(score: GameScore) {

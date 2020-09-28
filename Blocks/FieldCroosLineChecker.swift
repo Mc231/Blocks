@@ -69,11 +69,10 @@ extension FieldCrossLineChecker {
 		}
 		
 		let result = Set(horizontalRows + verticalRows).reduce(into: [FieldCell]()) { (result, cell) in
-			guard let cellIndex = field.firstIndex(of: cell) else {
-				fatalError("Index could not be nil")
+			if let cellIndex = field.firstIndex(of: cell) {
+                field[cellIndex].chageState(newState: .empty)
+                result.append(field[cellIndex])
 			}
-			field[cellIndex].chageState(newState: .empty)
-			result.append(field[cellIndex])
 		}
 
 		completion(result)

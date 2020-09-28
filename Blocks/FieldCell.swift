@@ -47,10 +47,9 @@ extension FieldCell {
     init (from cell: Cell) {
         xPosition = cell.xPosition
         yPosition = cell.yPosition
-        guard let storedState = State(rawValue: cell.state) else {
-            fatalError("Impossible cell state")
-        }
-        state = storedState
+        let storedState = State(rawValue: cell.state)
+        // TODO: - Check force unwrap
+        state = storedState!
     }
 
     var isPlaced: Bool {
