@@ -20,7 +20,7 @@ class GameViewController: UIViewController {
     // MARK: - Variables
 
 	// TODO: - Refactore
-	var draggedChcker: DraggedTetramonioChecker!
+	//var draggedChcker: DraggedTetramonioChecker!
     var presenter: GameViewOutput?
     var tetramonios = [Tetramonio]()
     var fieldData = [FieldCell]() {
@@ -226,7 +226,7 @@ extension GameViewController: GameViewInput {
     }
 
 	func displayScore(score: GameScore) {
-        currentScoreLabel.text = Localization.Score.current(score.current).localized
+        currentScoreLabel.text = Localization.Score.score(score.current).localized
         maxScoreLabel.text = Localization.Score.best(score.best).localized
     }
 }

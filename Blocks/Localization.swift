@@ -8,29 +8,16 @@
 
 import Foundation
 
-/// Localization protocol
-protocol Localizable {
-    var localized: String {get}
-}
-
-extension Localizable {
-    func localized(key: String,
-                   comment: String = "",
-                   bundle: Bundle = .main) -> String {
-        return NSLocalizedString(key, bundle: bundle, comment: comment)
-    }
-}
-
 /// This enum represents localized strings used in app
 enum Localization {
     // swiftlint:disable nesting
     enum Score: Localizable {
+        case score(Int32)
         case best(Int32)
-        case current(Int32)
-
+        
         var localized: String {
             switch self {
-            case .current(let currentScore):
+            case .score(let currentScore):
                 let key = localized(key: "Score:_d")
                 return String(format: key, currentScore)
             case .best(let bestScore):
