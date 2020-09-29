@@ -21,3 +21,7 @@ class FieldCollectionViewCell: UICollectionViewCell {
         return (object as? FieldCollectionViewCell)?.cellData == cellData
 	}
 }
+
+// MARK: - NibReusable
+
+extension FieldCollectionViewCell: NibReusable { }
