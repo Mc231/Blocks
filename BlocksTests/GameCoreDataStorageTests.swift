@@ -50,7 +50,7 @@ private extension GameCoreDataStorageTests {
 		func fetch<T>(_ object: T.Type, predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?) -> [T] where T : NSManagedObject {
             return storedObjects.filter { (storedObject) -> Bool in
                 return type(of: storedObject) == object
-            } as [T]
+            } as! [T]
 		}
 		
 		func delete<T>(_ object: T) where T : NSManagedObject {

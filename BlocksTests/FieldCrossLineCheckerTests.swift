@@ -48,19 +48,4 @@ class FieldCrossLineCheckerTests: XCTestCase {
         // Then
         XCTAssertEqual(result.count, expectedUpdatedCells)
     }
-    
-    
-    #warning("Add this test")
-//    func testChecForVerticalLineAndPlacedCellsReturnsEmptyArray() {
-//        // Given
-//        var field: [FieldCell] = FieldCell.mockedField
-//        let indexes = [0, 8, 12, 24, 32, 40, 48, 56, 63]
-//        indexes.forEach({field[$0].chageState(newState: .placed)})
-//
-//        //let expectedResult = in
-//        // When
-//        let result = sut.checkForCroosLine(at: &field)
-//        // Then
-//      //  XCTAssertEqual(result.count, expectedUpdatedCells)
-//    }
 }

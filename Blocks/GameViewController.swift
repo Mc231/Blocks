@@ -96,34 +96,34 @@ class GameViewController: UIViewController {
 			let newCenter = CGPoint(x: initialCenter.x + translation.x, y: initialCenter.y + translation.y)
 			piece.center = newCenter
 		}else{
-			// TODO : - Refacore
-			let matchedTetramoino = field
-				.subviews
-				.compactMap({$0 as? FieldCollectionViewCell})
-				.reduce(into: [FieldCell]()) { (result, fieldCell) in
-					piece.selectedCells.forEach({ (tetramonioCell) in
-						let fieldRect = fieldCell.convert(fieldCell.bounds, to: self.view)
-						let tetramonioRect = tetramonioCell.convert(tetramonioCell.bounds, to: self.view)
-						let intersectRect = fieldRect.intersection(tetramonioRect)
-						let intersectsTetramonioRect = fieldRect.intersects(tetramonioRect)
-						let intersectRectSzie = intersectRect.width >= 32 && intersectRect.height >= 32
-						if  intersectsTetramonioRect && intersectRectSzie,
-							let data = fieldCell.cellData {
-							if !result.contains(data) {
-								result.append(data)
-							}
-						}
-					})
-				}
-		
-			
-			// On cancellation, return the piece to its original location.
-			UIView.animate(withDuration: 0.3) {
-				self.field.layer.zPosition = 1
-				piece.center = self.initialCenter
-				let coof = self.initialWidth / piece.bounds.width
-				piece.transform = CGAffineTransform(scaleX: coof, y: coof)
-			}
+			// TODO : - Refacore and implement this
+//			let matchedTetramoino = field
+//				.subviews
+//				.compactMap({$0 as? FieldCollectionViewCell})
+//				.reduce(into: [FieldCell]()) { (result, fieldCell) in
+//					piece.selectedCells.forEach({ (tetramonioCell) in
+//						let fieldRect = fieldCell.convert(fieldCell.bounds, to: self.view)
+//						let tetramonioRect = tetramonioCell.convert(tetramonioCell.bounds, to: self.view)
+//						let intersectRect = fieldRect.intersection(tetramonioRect)
+//						let intersectsTetramonioRect = fieldRect.intersects(tetramonioRect)
+//						let intersectRectSzie = intersectRect.width >= 32 && intersectRect.height >= 32
+//						if  intersectsTetramonioRect && intersectRectSzie,
+//							let data = fieldCell.cellData {
+//							if !result.contains(data) {
+//								result.append(data)
+//							}
+//						}
+//					})
+//				}
+//		
+//			
+//			// On cancellation, return the piece to its original location.
+//			UIView.animate(withDuration: 0.3) {
+//				self.field.layer.zPosition = 1
+//				piece.center = self.initialCenter
+//				let coof = self.initialWidth / piece.bounds.width
+//				piece.transform = CGAffineTransform(scaleX: coof, y: coof)
+//			}
 		}
 	}
 	
