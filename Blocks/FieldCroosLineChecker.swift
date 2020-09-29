@@ -57,11 +57,8 @@ extension FieldCrossLineChecker {
             if condition {
                 if !currentRow.contains(firstCellData) {
                     currentRow.append(firstCellData)
-                } else if !currentRow.contains(secondCellData) {
-                    currentRow.append(secondCellData)
                 }
                 cellCounter += 1
-
                 if cellCounter == Constatns.Field.numberOfCellsInRow {
                     currentRow.append(secondCellData)
                     result.append(contentsOf: currentRow)
