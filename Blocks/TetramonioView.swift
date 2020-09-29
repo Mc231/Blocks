@@ -102,8 +102,8 @@ extension TetramonioView: UICollectionViewDataSource {
 			= collectionView.dequeueReusableCell(withReuseIdentifier: FieldCollectionViewCell.identifier, for: indexPath) as? FieldCollectionViewCell else {
             fatalError("Could not deque cell")
         }
-		
-        cell.cellData = dataSource[indexPath.row]
+		let cellData = dataSource[indexPath.row]
+        cell.apply(cellData: cellData)
         return cell
     }
 }

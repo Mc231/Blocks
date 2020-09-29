@@ -67,6 +67,7 @@
 		FFCD96E425238326009CEA30 /* LocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCD96E325238326009CEA30 /* LocalizationTests.swift */; };
 		FFCD96E825238359009CEA30 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCD96E725238359009CEA30 /* Localizable.swift */; };
 		FFCD96F225238B6D009CEA30 /* FieldCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCD96F125238B6D009CEA30 /* FieldCellTests.swift */; };
+		FFCD96F625238D92009CEA30 /* FieldCollectionViewCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCD96F525238D92009CEA30 /* FieldCollectionViewCellTests.swift */; };
 		FFE6D62D1E59A47A0060C1C8 /* FieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6D62C1E59A47A0060C1C8 /* FieldCollectionViewCell.swift */; };
 		FFFBBFBB1E4521700052D68B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFBA1E4521700052D68B /* AppDelegate.swift */; };
 		FFFBBFC01E4521700052D68B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFFBBFBE1E4521700052D68B /* Main.storyboard */; };
@@ -153,6 +154,7 @@
 		FFCD96E325238326009CEA30 /* LocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationTests.swift; sourceTree = "<group>"; };
 		FFCD96E725238359009CEA30 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
 		FFCD96F125238B6D009CEA30 /* FieldCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldCellTests.swift; sourceTree = "<group>"; };
+		FFCD96F525238D92009CEA30 /* FieldCollectionViewCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldCollectionViewCellTests.swift; sourceTree = "<group>"; };
 		FFE6D62C1E59A47A0060C1C8 /* FieldCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldCollectionViewCell.swift; sourceTree = "<group>"; };
 		FFFBBFB71E4521700052D68B /* Blocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFFBBFBA1E4521700052D68B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				FFB3330025129C0A00776A83 /* Extensions */,
 				FF90440924FF7AE40090C4D2 /* Tetramonios.plist */,
 				FF76B0BE1E847FA4001969FA /* GameFlowTests.swift */,
+				FFCD96F525238D92009CEA30 /* FieldCollectionViewCellTests.swift */,
 				FF89FD5925137969003807E8 /* CoreDataManagerTests.swift */,
 				FF6DC9BF250178E1009833F3 /* GamePresenterTests.swift */,
 				FFB332FE2512980A00776A83 /* GameCoreDataStorageTests.swift */,
@@ -602,6 +605,7 @@
 				FFB3330225129C1C00776A83 /* Tetramonio+Additions.swift in Sources */,
 				FFCD96BB25235ECF009CEA30 /* TetramonioMatcherTests.swift in Sources */,
 				FFCD96F225238B6D009CEA30 /* FieldCellTests.swift in Sources */,
+				FFCD96F625238D92009CEA30 /* FieldCollectionViewCellTests.swift in Sources */,
 				FFCD96CD25237155009CEA30 /* GameViewControllerTests.swift in Sources */,
 				FF69313C250216EF00F3DF1B /* GameInteractorTests.swift in Sources */,
 				FFCD96B725234F16009CEA30 /* FieldCrossLineCheckerTests.swift in Sources */,

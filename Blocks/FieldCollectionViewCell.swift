@@ -10,17 +10,14 @@ import UIKit
 
 class FieldCollectionViewCell: UICollectionViewCell {
 
-    var cellData: FieldCell!
+    private(set) var cellData: FieldCell!
     
-    func applay(cellData: FieldCell) {
+    func apply(cellData: FieldCell) {
         self.cellData = cellData
         backgroundColor = cellData.state.backgroundColor
     }
 	
 	override func isEqual(_ object: Any?) -> Bool {
-		if let cell = object as? FieldCollectionViewCell {
-			return cell.cellData == cellData
-		}
-		return false
+        return (object as? FieldCollectionViewCell)?.cellData == cellData
 	}
 }

@@ -57,7 +57,7 @@ extension FieldCell {
         self.state = state
     }
 
-    init (from cell: Cell) {
+    init(from cell: Cell) {
         xPosition = cell.xPosition
         yPosition = cell.yPosition
         let storedState = State(rawValue: cell.state)
