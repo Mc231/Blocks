@@ -14,8 +14,8 @@ class GameViewController: UIViewController {
 
     private static let numberOfRows = 8
     private static let cellWidthCoof: CGFloat = 0.1173
-    private static let gameOverTitle = Localization.Game.GameOverAlert.title.localization
-    private static let restartTitle = Localization.Game.GameOverAlert.restartTitle.localization
+    private static let gameOverTitle = Localization.GameOverAlert.title.localized
+    private static let restartTitle = Localization.GameOverAlert.restartTitle.localized
 
     // MARK: - Variables
 
@@ -196,7 +196,7 @@ extension GameViewController: UICollectionViewDataSource {
 extension GameViewController: GameViewInput {
 
     func showGameOverAlert(currentScore: Score) {
-        let message = Localization.Game.GameOverAlert.message(currentScore).localization
+        let message = Localization.GameOverAlert.message(currentScore).localized
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: Self.restartTitle, style: .destructive) { [weak self] (_) in
             self?.presenter?.restartGame()
@@ -226,7 +226,7 @@ extension GameViewController: GameViewInput {
     }
 
 	func displayScore(score: GameScore) {
-        currentScoreLabel.text = Localization.Game.Score.current(score.current).localization
-        maxScoreLabel.text = Localization.Game.Score.best(score.best).localization
+        currentScoreLabel.text = Localization.Score.current(score.current).localized
+        maxScoreLabel.text = Localization.Score.best(score.best).localized
     }
 }
