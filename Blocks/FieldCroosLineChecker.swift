@@ -16,43 +16,6 @@ protocol FieldCrossLineChecker {
 
 extension FieldCrossLineChecker {
 
-    // MARK: - Private methods
-
-	private func getRows(from placedCells: [FieldCell], isVertical: Bool) -> [FieldCell] {
-        var result = [FieldCell]()
-        var cellCounter = 1
-        var currentRow = [FieldCell]()
-
-        for cell in 1..<placedCells.count {
-            let firstCellData  = placedCells[cell-1]
-            let secondCellData = placedCells[cell]
-            let condition = isVertical
-				? secondCellData.yPosition == firstCellData.yPosition
-				: secondCellData.xPosition - firstCellData.xPosition == 1
-
-            if condition {
-                if !currentRow.contains(firstCellData) {
-                    currentRow.append(firstCellData)
-                } else if !currentRow.contains(secondCellData) {
-                    currentRow.append(secondCellData)
-                }
-                cellCounter += 1
-
-                if cellCounter == Constatns.Field.numberOfCellsInRow {
-                    currentRow.append(secondCellData)
-                    result.append(contentsOf: currentRow)
-                    currentRow.removeAll()
-                    cellCounter = 1
-                }
-            } else {
-                currentRow.removeAll()
-                cellCounter = 1
-            }
-        }
-
-        return result
-    }
-
     func checkForCroosLine(at field: inout [FieldCell]) -> UpdatedCells {
 
         let horizontalCells = field.filter({$0.state == .placed})
@@ -74,7 +37,42 @@ extension FieldCrossLineChecker {
                 result.append(field[cellIndex])
 			}
 		}
-
 		return result
+    }
+    
+    // MARK: - Private methods
+
+    private func getRows(from placedCells: [FieldCell], isVertical: Bool) -> [FieldCell] {
+        var result = [FieldCell]()
+        var cellCounter = 1
+        var currentRow = [FieldCell]()
+
+        for cell in 1..<placedCells.count {
+            let firstCellData  = placedCells[cell-1]
+            let secondCellData = placedCells[cell]
+            let condition = isVertical
+                ? secondCellData.yPosition == firstCellData.yPosition
+                : secondCellData.xPosition - firstCellData.xPosition == 1
+
+            if condition {
+                if !currentRow.contains(firstCellData) {
+                    currentRow.append(firstCellData)
+                } else if !currentRow.contains(secondCellData) {
+                    currentRow.append(secondCellData)
+                }
+                cellCounter += 1
+
+                if cellCounter == Constatns.Field.numberOfCellsInRow {
+                    currentRow.append(secondCellData)
+                    result.append(contentsOf: currentRow)
+                    currentRow.removeAll()
+                    cellCounter = 1
+                }
+            } else {
+                currentRow.removeAll()
+                cellCounter = 1
+            }
+        }
+        return result
     }
 }

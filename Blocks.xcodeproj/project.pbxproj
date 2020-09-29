@@ -62,6 +62,8 @@
 		FFB82A8A1E7D2F2A0043BD53 /* Blocks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFB82A881E7D2F2A0043BD53 /* Blocks.xcdatamodeld */; };
 		FFC4CDBB22A305FA0025A187 /* DraggedTetramonioChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC4CDBA22A305FA0025A187 /* DraggedTetramonioChecker.swift */; };
 		FFC8BC8424FEDD95000BB9D1 /* UICollectionViewCell+Resuable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC8BC8324FEDD95000BB9D1 /* UICollectionViewCell+Resuable.swift */; };
+		FFCD96B725234F16009CEA30 /* FieldCrossLineCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCD96B625234F16009CEA30 /* FieldCrossLineCheckerTests.swift */; };
+		FFCD96BB25235ECF009CEA30 /* TetramonioMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCD96BA25235ECF009CEA30 /* TetramonioMatcherTests.swift */; };
 		FFE6D62D1E59A47A0060C1C8 /* FieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6D62C1E59A47A0060C1C8 /* FieldCollectionViewCell.swift */; };
 		FFFBBFBB1E4521700052D68B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFBA1E4521700052D68B /* AppDelegate.swift */; };
 		FFFBBFC01E4521700052D68B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFFBBFBE1E4521700052D68B /* Main.storyboard */; };
@@ -143,6 +145,8 @@
 		FFB82A891E7D2F2A0043BD53 /* Blocks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Blocks.xcdatamodel; sourceTree = "<group>"; };
 		FFC4CDBA22A305FA0025A187 /* DraggedTetramonioChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggedTetramonioChecker.swift; sourceTree = "<group>"; };
 		FFC8BC8324FEDD95000BB9D1 /* UICollectionViewCell+Resuable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Resuable.swift"; sourceTree = "<group>"; };
+		FFCD96B625234F16009CEA30 /* FieldCrossLineCheckerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldCrossLineCheckerTests.swift; sourceTree = "<group>"; };
+		FFCD96BA25235ECF009CEA30 /* TetramonioMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetramonioMatcherTests.swift; sourceTree = "<group>"; };
 		FFE6D62C1E59A47A0060C1C8 /* FieldCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldCollectionViewCell.swift; sourceTree = "<group>"; };
 		FFFBBFB71E4521700052D68B /* Blocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFFBBFBA1E4521700052D68B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -263,6 +267,8 @@
 				FF76B0BA1E847EC0001969FA /* TetramonioGeneratorTests.swift */,
 				FF76B0BC1E847F52001969FA /* TetramonioLoaderTests.swift */,
 				FF8EC61B1E85B0CA0064FFCB /* BundleResourceLoaderTests.swift */,
+				FFCD96BA25235ECF009CEA30 /* TetramonioMatcherTests.swift */,
+				FFCD96B625234F16009CEA30 /* FieldCrossLineCheckerTests.swift */,
 				FF9B685E1E4D1678006376CA /* Info.plist */,
 			);
 			path = BlocksTests;
@@ -585,7 +591,9 @@
 				FF89FD5A25137969003807E8 /* CoreDataManagerTests.swift in Sources */,
 				FFA5ECB1251BC03B00B0F752 /* FieldCell+Additions.swift in Sources */,
 				FFB3330225129C1C00776A83 /* Tetramonio+Additions.swift in Sources */,
+				FFCD96BB25235ECF009CEA30 /* TetramonioMatcherTests.swift in Sources */,
 				FF69313C250216EF00F3DF1B /* GameInteractorTests.swift in Sources */,
+				FFCD96B725234F16009CEA30 /* FieldCrossLineCheckerTests.swift in Sources */,
 				FF76B0BD1E847F52001969FA /* TetramonioLoaderTests.swift in Sources */,
 				FF76B0BF1E847FA4001969FA /* GameFlowTests.swift in Sources */,
 				FF6DC9C0250178E1009833F3 /* GamePresenterTests.swift in Sources */,

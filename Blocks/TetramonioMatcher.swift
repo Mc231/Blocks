@@ -42,7 +42,6 @@ extension TetramonioMatcher {
                 }
             }
         }
-
         return nil
     }
 }
