@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FF0472081E81D56D0054FE13 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0472071E81D56D0054FE13 /* Extensions.swift */; };
 		FF1B1CC21E55AC8B00D0E50D /* GamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1B1CC11E55AC8B00D0E50D /* GamePresenter.swift */; };
 		FF289FF21EE8AF4100AD397C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FF289FF41EE8AF4100AD397C /* Localizable.strings */; };
 		FF2BA0BC1EE3F80500263D95 /* Cell+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2BA0BA1EE3F80500263D95 /* Cell+CoreDataClass.swift */; };
@@ -88,7 +87,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		FF0472071E81D56D0054FE13 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FF1B1CC11E55AC8B00D0E50D /* GamePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePresenter.swift; sourceTree = "<group>"; };
 		FF289FF31EE8AF4100AD397C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FF289FF51EE8AF4500AD397C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -186,7 +184,6 @@
 		FF0472091E81D5770054FE13 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				FF0472071E81D56D0054FE13 /* Extensions.swift */,
 				FFC8BC8324FEDD95000BB9D1 /* UICollectionViewCell+Resuable.swift */,
 				FF82110D2500224300D0C3CB /* Array+Additions.swift */,
 				FF82111125002ECD00D0C3CB /* Array+Teramonio.swift */,
@@ -653,7 +650,6 @@
 				FF7401FC2278394000FEE070 /* GameViewOutput.swift in Sources */,
 				FF9748BA1EE8AA1E00213F10 /* Localization.swift in Sources */,
 				FF8A40F91F6E9BA000EB243E /* TetramonioView.swift in Sources */,
-				FF0472081E81D56D0054FE13 /* Extensions.swift in Sources */,
 				FF740202227839F200FEE070 /* GameInterractorInput.swift in Sources */,
 				FFB332FD2512973200776A83 /* GameStorage.swift in Sources */,
 				FF33CF811E8509E0007969C6 /* BundleResourceLoader.swift in Sources */,

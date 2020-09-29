@@ -10,19 +10,11 @@ import UIKit
 
 class FieldCollectionViewCell: UICollectionViewCell {
 
-    var cellData: FieldCell! {
-        didSet {
-            switch cellData.state {
-            case .empty:
-                backgroundColor = UIColor.CellBackgrounds.empty
-            case .placed:
-                backgroundColor = UIColor.CellBackgrounds.placed
-            case .selected:
-                backgroundColor = UIColor.CellBackgrounds.selected
-			case .clear:
-				backgroundColor = UIColor.clear
-            }
-        }
+    var cellData: FieldCell!
+    
+    func applay(cellData: FieldCell) {
+        self.cellData = cellData
+        backgroundColor = cellData.state.backgroundColor
     }
 	
 	override func isEqual(_ object: Any?) -> Bool {
