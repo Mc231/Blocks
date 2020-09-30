@@ -8,11 +8,15 @@
 
 import Foundation
 
-class GamePresenter: GamePresenterInput {
-	
+class GamePresenter {
     weak var view: GameViewInput?
     var interractor: GameInteractorInput?
+}
 
+// MARK: - GameViewOutput
+
+extension GamePresenter: GameViewOutput {
+    
     func startGame() {
         interractor?.startGame()
     }
@@ -24,11 +28,16 @@ class GamePresenter: GamePresenterInput {
     func handleTouchedCell(with data: FieldCell) {
         interractor?.handleTouchedCell(data)
     }
-	
-	func handleDraggedCell(with data: [FieldCell]) {
-		interractor?.handleDraggedCells(with: data)
-	}
+    
+    func handleDraggedCell(with data: [FieldCell]) {
+        interractor?.handleDraggedCells(with: data)
+    }
+}
 
+// MARK: - GameInteractorOutput
+
+extension GamePresenter: GameInteractorOutput {
+    
     func gameOver(score: Int32) {
         view?.showGameOverAlert(currentScore: score)
     }
@@ -41,7 +50,7 @@ class GamePresenter: GamePresenterInput {
         view?.display(field: field)
     }
 
-	func provideScore(score: GameScore) {
-		view?.displayScore(score: score)
+    func provideScore(score: GameScore) {
+        view?.displayScore(score: score)
     }
 }

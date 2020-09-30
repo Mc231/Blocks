@@ -10,6 +10,7 @@ import Foundation
 
 protocol GameInteractorInput: class {
 	var presenter: GameInteractorOutput? { get set }
+    var gameFlow: GameFlowInput? { get set }
 	func startGame()
 	func restartGame()
 	func handleTouchedCell(_ cellData: FieldCell)

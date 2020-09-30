@@ -34,6 +34,12 @@ class GameViewController: UIViewController {
         let height = width
         return CGSize(width: width, height: height)
     }
+    
+    #warning("Init all views from code")
+    static func load() -> GameViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        return storyboard.instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
+    }
 
     // MARK: - IBOutlets
 
@@ -43,13 +49,6 @@ class GameViewController: UIViewController {
     @IBOutlet private weak var secondTetramonioView: TetramonioView!
     @IBOutlet private weak var field: UICollectionView!
 
-    // MARK: - Inizialization
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        GameAssambler.assamble(in: self)
-		//draggedChcker = DraggedTetramonioChecker(field: field, view: self.view)
-    }
 
 	// MARK: - UIViewController
 

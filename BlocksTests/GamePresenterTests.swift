@@ -38,6 +38,7 @@ extension GamePresenterTests {
 	
 	class MockInteractor: GameInteractorInput {
 		
+        var gameFlow: GameFlowInput?
 		var presenter: GameInteractorOutput?
 		
 		var startGameCalled = false
