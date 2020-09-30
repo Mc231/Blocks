@@ -27,8 +27,8 @@ class GameAssembler: GameAssemblerProtocol {
     }
     
     init(view: GameViewInput = GameViewController.load(),
-         presenter: GamePresenter = GamePresenter(),
-         interactor: GameInteractor = GameInteractor(),
+         presenter: GameInteractorOutput & GameViewOutput = GamePresenter(),
+         interactor: GameFlowOutput & GameInteractorInput = GameInteractor(),
          modelName: String = "Blocks") throws {
         self.view = view
         self.presenter = presenter

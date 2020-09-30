@@ -71,6 +71,7 @@
 		FFCD970925239960009CEA30 /* MockNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFCD970825239960009CEA30 /* MockNib.xib */; };
 		FFCD970F252399A8009CEA30 /* NibReusableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCD970E252399A8009CEA30 /* NibReusableTests.swift */; };
 		FFCD971D2524579F009CEA30 /* GameAssemblerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCD971C2524579F009CEA30 /* GameAssemblerProtocol.swift */; };
+		FFCD972125245A12009CEA30 /* GameAssemblerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCD972025245A12009CEA30 /* GameAssemblerTests.swift */; };
 		FFE6D62D1E59A47A0060C1C8 /* FieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6D62C1E59A47A0060C1C8 /* FieldCollectionViewCell.swift */; };
 		FFFBBFBB1E4521700052D68B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFBA1E4521700052D68B /* AppDelegate.swift */; };
 		FFFBBFC01E4521700052D68B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFFBBFBE1E4521700052D68B /* Main.storyboard */; };
@@ -161,6 +162,7 @@
 		FFCD970825239960009CEA30 /* MockNib.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MockNib.xib; sourceTree = "<group>"; };
 		FFCD970E252399A8009CEA30 /* NibReusableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibReusableTests.swift; sourceTree = "<group>"; };
 		FFCD971C2524579F009CEA30 /* GameAssemblerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAssemblerProtocol.swift; sourceTree = "<group>"; };
+		FFCD972025245A12009CEA30 /* GameAssemblerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAssemblerTests.swift; sourceTree = "<group>"; };
 		FFE6D62C1E59A47A0060C1C8 /* FieldCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldCollectionViewCell.swift; sourceTree = "<group>"; };
 		FFFBBFB71E4521700052D68B /* Blocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFFBBFBA1E4521700052D68B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				FFCD96F525238D92009CEA30 /* FieldCollectionViewCellTests.swift */,
 				FF89FD5925137969003807E8 /* CoreDataManagerTests.swift */,
 				FF6DC9BF250178E1009833F3 /* GamePresenterTests.swift */,
+				FFCD972025245A12009CEA30 /* GameAssemblerTests.swift */,
 				FFB332FE2512980A00776A83 /* GameCoreDataStorageTests.swift */,
 				FF69313B250216EF00F3DF1B /* GameInteractorTests.swift */,
 				FFCD970E252399A8009CEA30 /* NibReusableTests.swift */,
@@ -628,6 +631,7 @@
 				FF8EC61C1E85B0CA0064FFCB /* BundleResourceLoaderTests.swift in Sources */,
 				FF89FD5A25137969003807E8 /* CoreDataManagerTests.swift in Sources */,
 				FFA5ECB1251BC03B00B0F752 /* FieldCell+Additions.swift in Sources */,
+				FFCD972125245A12009CEA30 /* GameAssemblerTests.swift in Sources */,
 				FFB3330225129C1C00776A83 /* Tetramonio+Additions.swift in Sources */,
 				FFCD96BB25235ECF009CEA30 /* TetramonioMatcherTests.swift in Sources */,
 				FFCD96F225238B6D009CEA30 /* FieldCellTests.swift in Sources */,
