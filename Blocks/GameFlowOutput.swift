@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol GameFlowOutput: class {
+protocol GameFlowOutput: AnyObject {
 	func gameOver(currentScore: Score)
 	func gameFlow(_ manager: GameFlowInput, didChange score: GameScore)
 	func gameFlow(_ manager: GameFlowInput, didUpdate field: [FieldCell])

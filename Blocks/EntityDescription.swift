@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol EntityDescription: class {
+protocol EntityDescription: AnyObject {
     static var entityName: String {get}
 }
 
