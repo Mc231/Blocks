@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ResourceLoadable: class {
+protocol ResourceLoadable: AnyObject {
     /**
      Loads resource
      - parameter resource: Name of resource

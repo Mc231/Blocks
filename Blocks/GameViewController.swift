@@ -12,31 +12,23 @@ class GameViewController: UIViewController {
 
     // MARK: - Constants
 
-    private static let numberOfRows = 8
-    private static let cellWidthCoof: CGFloat = 0.1173
     private static let gameOverTitle = Localization.GameOverAlert.title.localized
     private static let restartTitle = Localization.GameOverAlert.restartTitle.localized
 
     // MARK: - Variables
 
-	// TODO: - Refactore
-	//var draggedChcker: DraggedTetramonioChecker!
     var presenter: GameViewOutput?
-    var tetramonios = [Tetramonio]()
-    var fieldData = [FieldCell]() {
+	
+	private var firstTetramonioDraggedChcker: DraggedTetramonioChecker!
+	private var secondTetramonioDraggedChcker: DraggedTetramonioChecker!
+    private var tetramonios = [Tetramonio]()
+    private var fieldData = [FieldCell]() {
         didSet {
             field.reloadData()
         }
     }
 
-    var cellSize: CGSize {
-        let width = Int(UIScreen.main.bounds.size.width - UIScreen.main.bounds.width * Self.cellWidthCoof) / Self.numberOfRows
-        let height = width
-        return CGSize(width: width, height: height)
-    }
-    
-    #warning("Init all views from code")
-    static func load() -> GameViewController {
+	static var instance: GameViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         return storyboard.instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
     }
@@ -54,6 +46,8 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		firstTetramonioDraggedChcker = DraggedTetramonioChecker(field: field, view: firstTetramonioView)
+		secondTetramonioDraggedChcker = DraggedTetramonioChecker(field: field, view: secondTetramonioView)
         presenter?.startGame()
         field.register(FieldCollectionViewCell.nib, forCellWithReuseIdentifier: FieldCollectionViewCell.identifier)
     }
@@ -68,66 +62,13 @@ class GameViewController: UIViewController {
     @IBAction private func restartGame(sender: UIButton) {
         presenter?.restartGame()
     }
-	// TODO: - Remove this
-	var initialCenter = CGPoint()
-	var initialWidth = CGFloat.leastNonzeroMagnitude
-	
-	// TODO: - Refactore this
-	@IBAction private func didTapTetramonio1(_ sender: UIPanGestureRecognizer) {
-		guard let piece = sender.view as? TetramonioView else { return }
 
-		// Get the changes in the X and Y directions relative to
-		// the superview's coordinate space.
-		let translation = sender.translation(in: piece.superview)
-		if sender.state == .began {
-			// Save the view's original position.
-			field.layer.zPosition = -1
-			self.initialCenter = CGPoint(x: piece.center.x, y: piece.center.y - 80.0)
-			self.initialWidth = piece.frame.width
-			let coof = (field.frame.width / 2) / initialWidth
-			piece.transform = CGAffineTransform(scaleX: coof, y: coof)
-		}else if sender.state == .changed {
-		//	print("Changed")
-		}
-		// Update the position for the .began, .changed, and .ended states
-		if sender.state != .ended {
-			// Add the X and Y translation to the view's original position.
-			let newCenter = CGPoint(x: initialCenter.x + translation.x, y: initialCenter.y + translation.y)
-			piece.center = newCenter
-		}else{
-			// TODO : - Refacore and implement this
-//			let matchedTetramoino = field
-//				.subviews
-//				.compactMap({$0 as? FieldCollectionViewCell})
-//				.reduce(into: [FieldCell]()) { (result, fieldCell) in
-//					piece.selectedCells.forEach({ (tetramonioCell) in
-//						let fieldRect = fieldCell.convert(fieldCell.bounds, to: self.view)
-//						let tetramonioRect = tetramonioCell.convert(tetramonioCell.bounds, to: self.view)
-//						let intersectRect = fieldRect.intersection(tetramonioRect)
-//						let intersectsTetramonioRect = fieldRect.intersects(tetramonioRect)
-//						let intersectRectSzie = intersectRect.width >= 32 && intersectRect.height >= 32
-//						if  intersectsTetramonioRect && intersectRectSzie,
-//							let data = fieldCell.cellData {
-//							if !result.contains(data) {
-//								result.append(data)
-//							}
-//						}
-//					})
-//				}
-//		
-//			
-//			// On cancellation, return the piece to its original location.
-//			UIView.animate(withDuration: 0.3) {
-//				self.field.layer.zPosition = 1
-//				piece.center = self.initialCenter
-//				let coof = self.initialWidth / piece.bounds.width
-//				piece.transform = CGAffineTransform(scaleX: coof, y: coof)
-//			}
-		}
+	@IBAction private func didDragTetramonio1(_ sender: UIPanGestureRecognizer) {
+		handleDraggedTetramonio(checker: firstTetramonioDraggedChcker, sender: sender)
 	}
 	
-	@IBAction private func didTapTetramonio2(_ sender: UIPanGestureRecognizer) {
-		didTapTetramonio1(sender)
+	@IBAction private func didDragTetramonio2(_ sender: UIPanGestureRecognizer) {
+		handleDraggedTetramonio(checker: secondTetramonioDraggedChcker, sender: sender)
 	}
 	
     // MARK: - Touches methods
@@ -143,6 +84,14 @@ class GameViewController: UIViewController {
     }
 
     // MARK: - Private methods
+	
+	private func handleDraggedTetramonio(checker: DraggedTetramonioChecker, sender: UIPanGestureRecognizer) {
+		checker.handleDraggedTetramonio(from: sender) { [weak self] cells in
+			if !cells.isEmpty {
+				self?.presenter?.handleDraggedCell(with: cells)
+			}
+		}
+	}
 
     private func handleTouchForEvent(_ event: UIEvent?) {
 
@@ -166,7 +115,7 @@ extension GameViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return cellSize
+		return Constatns.Sizes.calculateFieldCellSize()
     }
 }
 

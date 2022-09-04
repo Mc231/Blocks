@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol GameInteractorInput: class {
+protocol GameInteractorInput: AnyObject {
 	var presenter: GameInteractorOutput? { get set }
     var gameFlow: GameFlowInput? { get set }
 	func startGame()

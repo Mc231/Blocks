@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol GameInteractorOutput: class {
+protocol GameInteractorOutput: AnyObject {
 	var interractor: GameInteractorInput? { get set }
 	func provideTetramonios(_ tetramonios: [Tetramonio])
 	func provideField(_ field: [FieldCell])

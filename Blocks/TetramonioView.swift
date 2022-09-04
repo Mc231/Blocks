@@ -16,7 +16,8 @@ class TetramonioView: UIView {
 	private let kCellsMargin: CGFloat = 2
 	private let kNumberOfCells: CGFloat = 4
 	private let kLineSpacing: CGFloat = 0.5
-	private let kInterimSpacing: CGFloat = 0.5
+	private let kInterimSpacing: CGFloat = 2
+	private let kSideMargin = 16
 
 	// MARK: - Variables
 	
@@ -30,21 +31,24 @@ class TetramonioView: UIView {
     private lazy var dataSource: [FieldCell] = [FieldCell]()
 
     private var cellSize: CGSize {
-        let width = (self.bounds.width - kCellsMargin) / kNumberOfCells
+        let width = ((UIScreen.main.bounds.width / 2) - 18 - 4) / kNumberOfCells // Side margin 18 and cell spacing 4
         let height = width
         return CGSize(width: width, height: height)
     }
 
     private lazy var collectinViwLayout: UICollectionViewFlowLayout = {
        var layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = kLineSpacing
-        layout.minimumInteritemSpacing = kInterimSpacing
+		layout.minimumLineSpacing = kInterimSpacing
+		layout.minimumInteritemSpacing = .zero
         layout.itemSize = self.cellSize
         return layout
     }()
 
     private lazy var collectionView: UICollectionView = {
-        var collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: self.collectinViwLayout)
+		let size = (Int(UIScreen.main.bounds.width) / 2) - kSideMargin
+		let size = CGSize(width: size, height: size)
+		let frame = CGRect(origin: .zero, size: size)
+		var collectionView = UICollectionView(frame: frame, collectionViewLayout: self.collectinViwLayout)
         collectionView.backgroundColor = UIColor.clear
 		collectionView.isScrollEnabled = false
         collectionView.dataSource = self

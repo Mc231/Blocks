@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol GameStorage: class {
+protocol GameStorage: AnyObject {
 	@discardableResult
     func store(current tetramonios: [Tetramonio]) -> Bool
 	func storeField(_ field: [FieldCell])

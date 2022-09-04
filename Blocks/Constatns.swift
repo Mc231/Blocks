@@ -6,7 +6,7 @@
 //  Copyright © 2017 QuasarClaster. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// This struct represents basic game constatns
 struct Constatns {
@@ -23,4 +23,15 @@ struct Constatns {
     struct Score {
         static let scorePerTetramonio: Int32 = 4
     }
+	
+	struct Sizes {
+		
+		static let fieldCellWidthCoof: CGFloat = 0.1173
+		
+		static func calculateFieldCellSize(screen: UIScreen = .main) -> CGSize {
+			let size = Int((screen.bounds.size.width - screen.bounds.width * fieldCellWidthCoof) / CGFloat(Constatns.Field.numberOfCellsInRow))
+			return CGSize(width: size, height: size)
+		}
+	}
 }
+

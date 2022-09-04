@@ -61,7 +61,6 @@ class GameCoreDataStorage: GameStorage {
 	@discardableResult
     func store(current tetramonios: [Tetramonio]) -> Bool {
 		if tetramonios.count != Self.numOfGeneratedTetramonios {
-			print("Attempt to store invalid number of tetramonios")
 			return false
 		}
 

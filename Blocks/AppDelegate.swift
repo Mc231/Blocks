@@ -13,11 +13,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-//  	    window = UIWindow(frame: UIScreen.main.bounds)
-//		let module = try! GameAssembler()
-//        try! module.assemble()
-//        window?.rootViewController = module.view as? GameViewController
-//		window?.makeKeyAndVisible()
+  	    window = UIWindow(frame: UIScreen.main.bounds)
+		let module = try! GameAssembler()
+        try! module.assemble()
+        window?.rootViewController = module.view as? GameViewController
+		window?.makeKeyAndVisible()
 		return true
 	}
 }

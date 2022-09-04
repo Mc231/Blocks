@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol GameViewInput: class {
+protocol GameViewInput: AnyObject {
 	var presenter: GameViewOutput? { get set }
 	func display(tetramonios: [Tetramonio])
 	func display(field withData: [FieldCell])
