@@ -102,7 +102,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ol0-AI-6XO">
-                                <rect key="frame" x="16" y="78" width="288" height="288"/>
+                                <rect key="frame" x="16" y="74" width="288" height="288"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Ol0-AI-6XO" secondAttribute="height" multiplier="1:1" id="Dmj-is-cIM"/>
@@ -120,7 +120,7 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xDw-qa-J8q" customClass="TetramonioView" customModule="Blocks" customModuleProvider="target">
-                                <rect key="frame" x="16" y="374" width="142" height="142"/>
+                                <rect key="frame" x="16" y="370" width="142" height="142"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -131,7 +131,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G0Y-q4-7UD" customClass="TetramonioView" customModule="Blocks" customModuleProvider="target">
-                                <rect key="frame" x="162" y="374" width="142" height="142"/>
+                                <rect key="frame" x="162" y="370" width="142" height="142"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -145,7 +145,7 @@
                             <constraint firstItem="G0Y-q4-7UD" firstAttribute="top" secondItem="Ol0-AI-6XO" secondAttribute="bottom" constant="8" id="2d5-2Y-0Xf"/>
                             <constraint firstItem="Ol0-AI-6XO" firstAttribute="trailing" secondItem="wIt-uZ-FIp" secondAttribute="trailingMargin" id="45E-jK-gVj"/>
                             <constraint firstItem="G0Y-q4-7UD" firstAttribute="width" secondItem="xDw-qa-J8q" secondAttribute="width" id="6BU-7m-vUP"/>
-                            <constraint firstItem="Ol0-AI-6XO" firstAttribute="top" secondItem="r2w-TX-RBP" secondAttribute="bottom" constant="8" id="7l1-M7-LfH"/>
+                            <constraint firstItem="Ol0-AI-6XO" firstAttribute="top" secondItem="r2w-TX-RBP" secondAttribute="bottom" constant="4" id="7l1-M7-LfH"/>
                             <constraint firstItem="r2w-TX-RBP" firstAttribute="top" secondItem="U1L-6Q-KQ6" secondAttribute="top" constant="8" id="EdJ-PY-0zp"/>
                             <constraint firstItem="xDw-qa-J8q" firstAttribute="top" secondItem="Ol0-AI-6XO" secondAttribute="bottom" constant="8" id="JXU-tQ-9T9"/>
                             <constraint firstItem="G0Y-q4-7UD" firstAttribute="trailing" secondItem="Ol0-AI-6XO" secondAttribute="trailing" id="X4B-Vy-NRR"/>

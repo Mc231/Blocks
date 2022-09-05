@@ -26,10 +26,8 @@ struct Constatns {
 	
 	struct Sizes {
 		
-		static let fieldCellWidthCoof: CGFloat = 0.1173
-		
-		static func calculateFieldCellSize(screen: UIScreen = .main) -> CGSize {
-			let size = Int((screen.bounds.size.width - screen.bounds.width * fieldCellWidthCoof) / CGFloat(Constatns.Field.numberOfCellsInRow))
+		static func calculateFieldCellSize(frame: CGRect) -> CGSize {
+			let size = (frame.size.width - 16)  / CGFloat(Constatns.Field.numberOfCellsInRow)
 			return CGSize(width: size, height: size)
 		}
 	}

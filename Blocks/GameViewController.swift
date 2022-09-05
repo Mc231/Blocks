@@ -115,7 +115,7 @@ extension GameViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
 						sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return Constatns.Sizes.calculateFieldCellSize()
+		return Constatns.Sizes.calculateFieldCellSize(frame: collectionView.frame)
     }
 }
 
