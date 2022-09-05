@@ -568,12 +568,14 @@
 				TargetAttributes = {
 					FF9B68591E4D1678006376CA = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = M3FHKUJ7Z3;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 						TestTargetID = FFFBBFB61E4521700052D68B;
 					};
 					FFFBBFB61E4521700052D68B = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = M3FHKUJ7Z3;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
@@ -738,9 +740,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = M3FHKUJ7Z3;
 				INFOPLIST_FILE = BlocksTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.quasarius.BlocksTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.volodymyrs.blockstests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Blocks.app/Blocks";
@@ -751,9 +754,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = M3FHKUJ7Z3;
 				INFOPLIST_FILE = BlocksTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.quasarius.BlocksTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.volodymyrs.blockstests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Blocks.app/Blocks";
@@ -882,11 +886,15 @@
 				CODE_SIGN_ENTITLEMENTS = Blocks/Blocks.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = M3FHKUJ7Z3;
 				INFOPLIST_FILE = Blocks/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TetroBlocks;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.quasarius.Blocks;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.volodymyrs.blocks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTS_UIKITFORMAC = YES;
@@ -902,11 +910,15 @@
 				CODE_SIGN_ENTITLEMENTS = Blocks/Blocks.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = M3FHKUJ7Z3;
 				INFOPLIST_FILE = Blocks/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TetroBlocks;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.quasarius.Blocks;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.volodymyrs.blocks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTS_UIKITFORMAC = YES;
