@@ -9,6 +9,8 @@
 import UIKit
 
 class FieldCollectionViewCell: UICollectionViewCell {
+    
+    static let identifier = String(describing: FieldCollectionViewCell.self)
 
     private(set) var cellData: FieldCell!
     
@@ -21,7 +23,3 @@ class FieldCollectionViewCell: UICollectionViewCell {
         return (object as? FieldCollectionViewCell)?.cellData == cellData
 	}
 }
-
-// MARK: - NibReusable
-
-extension FieldCollectionViewCell: NibReusable { }

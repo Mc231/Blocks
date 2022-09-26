@@ -45,8 +45,8 @@ class TetramonioView: UIView {
     }()
 
     private lazy var collectionView: UICollectionView = {
-		let size = (Int(UIScreen.main.bounds.width) / 2) - kSideMargin
-		let size = CGSize(width: size, height: size)
+		let side = (Int(UIScreen.main.bounds.width) / 2) - kSideMargin
+		let size = CGSize(width: side, height: side)
 		let frame = CGRect(origin: .zero, size: size)
 		var collectionView = UICollectionView(frame: frame, collectionViewLayout: self.collectinViwLayout)
         collectionView.backgroundColor = UIColor.clear
@@ -85,7 +85,7 @@ class TetramonioView: UIView {
     // MARK: - Private functions
 
     private func configureCollectionView() {
-        collectionView.register(FieldCollectionViewCell.nib, forCellWithReuseIdentifier: FieldCollectionViewCell.identifier)
+        collectionView.register(FieldCollectionViewCell.self, forCellWithReuseIdentifier: FieldCollectionViewCell.identifier)
 		(0...kNumberOfCellsInField).forEach({_ in dataSource.append(FieldCell(state: .empty))})
         addSubview(collectionView)
     }
