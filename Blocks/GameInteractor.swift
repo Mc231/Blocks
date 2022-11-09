@@ -19,6 +19,10 @@ class GameInteractor {
 // MARK: - GameInteractorInput
 
 extension GameInteractor: GameInteractorInput {
+    
+    func invalidateSelectedCells() {
+        gameFlow?.invalidateSelectedCells()
+    }
 	
     func startGame() {
 		// TODO: - Check this forece unwrap

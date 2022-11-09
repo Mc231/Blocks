@@ -86,10 +86,9 @@ class GameViewController: UIViewController {
     // MARK: - Private methods
 	
 	private func handleDraggedTetramonio(checker: DraggedTetramonioChecker, sender: UIPanGestureRecognizer) {
+        presenter?.invalidateSelectedCells()
 		checker.handleDraggedTetramonio(from: sender) { [weak self] cells in
-			if !cells.isEmpty {
-				self?.presenter?.handleDraggedCell(with: cells)
-			}
+            self?.presenter?.handleDraggedCell(with: cells)
 		}
 	}
 

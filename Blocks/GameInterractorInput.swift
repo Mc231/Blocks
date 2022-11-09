@@ -15,4 +15,5 @@ protocol GameInteractorInput: AnyObject {
 	func restartGame()
 	func handleTouchedCell(_ cellData: FieldCell)
 	func handleDraggedCells(with data: [FieldCell])
+    func invalidateSelectedCells()
 }

@@ -32,6 +32,10 @@ extension GamePresenter: GameViewOutput {
     func handleDraggedCell(with data: [FieldCell]) {
         interractor?.handleDraggedCells(with: data)
     }
+    
+    func invalidateSelectedCells() {
+        interractor?.invalidateSelectedCells()
+    }
 }
 
 // MARK: - GameInteractorOutput
