@@ -13,7 +13,7 @@ class GameViewController: UIViewController {
     // MARK: - Constants
 
     private static let gameOverTitle = Localization.GameOverAlert.title.localized
-    private static let restartTitle = Localization.GameOverAlert.restartTitle.localized
+    private static let restartTitle = Localization.General.restart.localized
 
     // MARK: - Variables
 
@@ -35,43 +35,94 @@ class GameViewController: UIViewController {
 
     // MARK: - IBOutlets
 
-    @IBOutlet private weak var maxScoreLabel: UILabel!
-    @IBOutlet private weak var currentScoreLabel: UILabel!
-    @IBOutlet private weak var firstTetramonioView: TetramonioView!
-    @IBOutlet private weak var secondTetramonioView: TetramonioView!
-    @IBOutlet private weak var field: UICollectionView!
+    
+    private lazy var headerView: HeaderView = {
+        let headerView = HeaderView()
+        headerView.delegate = self
+        return headerView
+    }()
+    
+    private lazy var firstTetramonioView: TetramonioView = {
+        let tetramonioView = TetramonioView()
+        tetramonioView.isUserInteractionEnabled = true
+        let recognizer = UIPanGestureRecognizer(target: self, action: #selector(didDragTetramonio2(_:)))
+        return tetramonioView
+    }()
+    
+    private lazy var secondTetramonioView: TetramonioView = {
+        let tetramonioView = TetramonioView()
+        let recognizer = UIPanGestureRecognizer(target: self, action: #selector(didDragTetramonio2(_:)))
+        tetramonioView.addGestureRecognizer(recognizer)
+        return tetramonioView
+    }()
+    
+    
+    private lazy var field: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 2.0
+        layout.minimumInteritemSpacing = 2.0
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        return collectionView
+    }()
 
 
 	// MARK: - UIViewController
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
 		firstTetramonioDraggedChcker = DraggedTetramonioChecker(field: field, view: firstTetramonioView)
 		secondTetramonioDraggedChcker = DraggedTetramonioChecker(field: field, view: secondTetramonioView)
         presenter?.startGame()
         field.register(FieldCollectionViewCell.self, forCellWithReuseIdentifier: FieldCollectionViewCell.identifier)
+      
     }
+    
+    private func setupView() {
+        view.isUserInteractionEnabled = false
+        //view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        view.addSubview(field)
+        view.addSubview(headerView)
+  
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16.0).isActive = true
+        headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16.0).isActive = true
+        headerView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 16.0).isActive = true
+        
+        field.translatesAutoresizingMaskIntoConstraints = false
+        field.leadingAnchor.constraint(equalTo: headerView.leadingAnchor).isActive = true
+        field.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 2.0).isActive = true
+        field.trailingAnchor.constraint(equalTo: headerView.trailingAnchor).isActive = true
+        field.heightAnchor.constraint(equalTo: headerView.widthAnchor, multiplier: 1.0).isActive = true
+        
+        let stackView = UIStackView(arrangedSubviews: [firstTetramonioView, secondTetramonioView])
 
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        field.collectionViewLayout.invalidateLayout()
+        stackView.axis = .horizontal
+        stackView.spacing = 4.0
+        stackView.distribution = .fillEqually
+        stackView.alignment = .fill
+        view.addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.topAnchor.constraint(equalTo: field.bottomAnchor, constant: 2.0).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: field.leadingAnchor).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: field.trailingAnchor).isActive = true
     }
 
     // MARK: - IBActions
 
-    @IBAction private func restartGame(sender: UIButton) {
-        presenter?.restartGame()
-    }
-
-	@IBAction private func didDragTetramonio1(_ sender: UIPanGestureRecognizer) {
+	@objc private func didDragTetramonio1(_ sender: UIPanGestureRecognizer) {
 		handleDraggedTetramonio(checker: firstTetramonioDraggedChcker, sender: sender)
 	}
 	
-	@IBAction private func didDragTetramonio2(_ sender: UIPanGestureRecognizer) {
+	@objc private func didDragTetramonio2(_ sender: UIPanGestureRecognizer) {
 		handleDraggedTetramonio(checker: secondTetramonioDraggedChcker, sender: sender)
 	}
 	
     // MARK: - Touches methods
+    
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
@@ -115,6 +166,17 @@ extension GameViewController: UICollectionViewDelegateFlowLayout {
 						layout collectionViewLayout: UICollectionViewLayout,
 						sizeForItemAt indexPath: IndexPath) -> CGSize {
 		return Constatns.Sizes.calculateFieldCellSize(frame: collectionView.frame)
+    }
+}
+
+// MARK: - HeaderViewDelegate
+
+extension GameViewController: HeaderViewDelegate {
+    
+    func didTapMenue() { }
+    
+    func didTapRestart() {
+        presenter?.restartGame()
     }
 }
 
@@ -173,7 +235,6 @@ extension GameViewController: GameViewInput {
     }
 
 	func displayScore(score: GameScore) {
-        currentScoreLabel.text = Localization.Score.score(score.current).localized
-        maxScoreLabel.text = Localization.Score.best(score.best).localized
+        headerView.update(score: score)
     }
 }

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9FDEEF8F291EC84500AB37B3 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDEEF8E291EC84500AB37B3 /* HeaderView.swift */; };
+		9FDEEF922921630200AB37B3 /* LabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDEEF912921630200AB37B3 /* LabelStyle.swift */; };
+		9FDEEF942921637300AB37B3 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDEEF932921637300AB37B3 /* ButtonStyle.swift */; };
+		9FDEEF96292163C900AB37B3 /* UILabel+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDEEF95292163C900AB37B3 /* UILabel+Additions.swift */; };
+		9FDEEF982921642700AB37B3 /* UIButton+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDEEF972921642700AB37B3 /* UIButton+Additions.swift */; };
 		FF1B1CC21E55AC8B00D0E50D /* GamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1B1CC11E55AC8B00D0E50D /* GamePresenter.swift */; };
 		FF289FF21EE8AF4100AD397C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FF289FF41EE8AF4100AD397C /* Localizable.strings */; };
 		FF2BA0BC1EE3F80500263D95 /* Cell+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2BA0BA1EE3F80500263D95 /* Cell+CoreDataClass.swift */; };
@@ -89,6 +94,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9FDEEF8E291EC84500AB37B3 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		9FDEEF912921630200AB37B3 /* LabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyle.swift; sourceTree = "<group>"; };
+		9FDEEF932921637300AB37B3 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
+		9FDEEF95292163C900AB37B3 /* UILabel+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Additions.swift"; sourceTree = "<group>"; };
+		9FDEEF972921642700AB37B3 /* UIButton+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Additions.swift"; sourceTree = "<group>"; };
 		FF1B1CC11E55AC8B00D0E50D /* GamePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePresenter.swift; sourceTree = "<group>"; };
 		FF289FF31EE8AF4100AD397C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FF289FF51EE8AF4500AD397C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -185,10 +195,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9FDEEF90292162B800AB37B3 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				9FDEEF912921630200AB37B3 /* LabelStyle.swift */,
+				9FDEEF932921637300AB37B3 /* ButtonStyle.swift */,
+			);
+			name = Styles;
+			sourceTree = "<group>";
+		};
 		FF0472091E81D5770054FE13 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				FF82110D2500224300D0C3CB /* Array+Additions.swift */,
+				9FDEEF95292163C900AB37B3 /* UILabel+Additions.swift */,
+				9FDEEF972921642700AB37B3 /* UIButton+Additions.swift */,
 				FF82111125002ECD00D0C3CB /* Array+Teramonio.swift */,
 			);
 			name = Extensions;
@@ -232,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				FF8A40F81F6E9BA000EB243E /* TetramonioView.swift */,
+				9FDEEF8E291EC84500AB37B3 /* HeaderView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -377,6 +399,7 @@
 		FFFBBFCD1E45218D0052D68B /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				9FDEEF90292162B800AB37B3 /* Styles */,
 				FF8A40F71F6E9B5100EB243E /* Views */,
 				FF0472091E81D5770054FE13 /* Extensions */,
 				FFFBBFBA1E4521700052D68B /* AppDelegate.swift */,
@@ -627,12 +650,16 @@
 			files = (
 				FF6931D825060FEA00F3DF1B /* StartGameConfig.swift in Sources */,
 				FF82111225002ECD00D0C3CB /* Array+Teramonio.swift in Sources */,
+				9FDEEF96292163C900AB37B3 /* UILabel+Additions.swift in Sources */,
+				9FDEEF982921642700AB37B3 /* UIButton+Additions.swift in Sources */,
 				FF73EBED1EE564E6003F069B /* Game+CoreDataClass.swift in Sources */,
 				FF9043FE24FF6D270090C4D2 /* ResourceLoadable.swift in Sources */,
 				FF1B1CC21E55AC8B00D0E50D /* GamePresenter.swift in Sources */,
+				9FDEEF922921630200AB37B3 /* LabelStyle.swift in Sources */,
 				FF7401FA227838C000FEE070 /* GameFlowOutput.swift in Sources */,
 				FFFBBFEA1E4525050052D68B /* TetramonioGenerator.swift in Sources */,
 				FF82110E2500224300D0C3CB /* Array+Additions.swift in Sources */,
+				9FDEEF942921637300AB37B3 /* ButtonStyle.swift in Sources */,
 				FF7401F8227838A500FEE070 /* GameFlowInput.swift in Sources */,
 				FFFBBFE21E4523A10052D68B /* Tetramonio.swift in Sources */,
 				FF74020422783A0800FEE070 /* GameInterractorOutput.swift in Sources */,
@@ -646,6 +673,7 @@
 				FF340C061E56432500EE82E1 /* GameAssembler.swift in Sources */,
 				FF453F322513EF4F006F514E /* CoreDataManagerProtocol.swift in Sources */,
 				FF7401FE2278394D00FEE070 /* GameViewInput.swift in Sources */,
+				9FDEEF8F291EC84500AB37B3 /* HeaderView.swift in Sources */,
 				FF73EBEA1EE55A27003F069B /* GameCoreDataStorage.swift in Sources */,
 				FF9B68651E4D1797006376CA /* GameViewController.swift in Sources */,
 				FF32D4651EEA11D700A15F9E /* GameOverChecker.swift in Sources */,

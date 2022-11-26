@@ -6,6 +6,12 @@
  Copyright © 2017 QuasarClaster. All rights reserved.
  */
 
+/*
+ General
+ */
+
+"Menu" = "Menu";
+"Restart" = "Restart";
 
 /*
  Score
@@ -19,5 +25,5 @@
  */
 
 "Game_Over" = "Game Over";
-"Your_Score_is_d" = "Your socre is %1$d";
+"Your_Score_is_d" = "Your score is %1$d";
 "Restart" = "Restart";
