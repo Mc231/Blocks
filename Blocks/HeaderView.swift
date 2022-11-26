@@ -94,11 +94,12 @@ class HeaderView: UIView {
         addSubview(container)
         
         container.translatesAutoresizingMaskIntoConstraints = false
-        
-        container.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        container.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        container.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        container.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            container.topAnchor.constraint(equalTo: topAnchor),
+            container.leadingAnchor.constraint(equalTo: leadingAnchor),
+            container.trailingAnchor.constraint(equalTo: trailingAnchor),
+            container.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
     }
     
     @objc private func didTapMenu() {

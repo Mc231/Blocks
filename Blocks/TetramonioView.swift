@@ -52,7 +52,6 @@ class TetramonioView: UIView {
         collectionView.backgroundColor = UIColor.clear
 		collectionView.isScrollEnabled = false
         collectionView.dataSource = self
-
         return collectionView
     }()
 

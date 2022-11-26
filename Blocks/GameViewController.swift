@@ -28,14 +28,6 @@ class GameViewController: UIViewController {
         }
     }
 
-	static var instance: GameViewController {
-        let storyboard = UIStoryboard(name: "Main", bundle: .main)
-        return storyboard.instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
-    }
-
-    // MARK: - IBOutlets
-
-    
     private lazy var headerView: HeaderView = {
         let headerView = HeaderView()
         headerView.delegate = self
@@ -43,25 +35,26 @@ class GameViewController: UIViewController {
     }()
     
     private lazy var firstTetramonioView: TetramonioView = {
-        let tetramonioView = TetramonioView()
-        tetramonioView.isUserInteractionEnabled = true
-        let recognizer = UIPanGestureRecognizer(target: self, action: #selector(didDragTetramonio2(_:)))
-        return tetramonioView
+        return createTetramonioView(selector: #selector(didDragTetramonio1(_:)))
     }()
     
     private lazy var secondTetramonioView: TetramonioView = {
-        let tetramonioView = TetramonioView()
-        let recognizer = UIPanGestureRecognizer(target: self, action: #selector(didDragTetramonio2(_:)))
-        tetramonioView.addGestureRecognizer(recognizer)
-        return tetramonioView
+        return createTetramonioView(selector: #selector(didDragTetramonio2(_:)))
     }()
     
+    private func createTetramonioView(selector: Selector) -> TetramonioView {
+        let tetramonioView = TetramonioView()
+        let recognizer = UIPanGestureRecognizer(target: self, action: selector)
+        tetramonioView.addGestureRecognizer(recognizer)
+        return tetramonioView
+    }
     
     private lazy var field: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 2.0
         layout.minimumInteritemSpacing = 2.0
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.isUserInteractionEnabled = false
         collectionView.dataSource = self
         collectionView.delegate = self
         return collectionView
@@ -69,7 +62,6 @@ class GameViewController: UIViewController {
 
 
 	// MARK: - UIViewController
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,33 +74,48 @@ class GameViewController: UIViewController {
     }
     
     private func setupView() {
-        view.isUserInteractionEnabled = false
-        //view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        view.addSubview(field)
+        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         view.addSubview(headerView)
-  
+        view.addSubview(field)
+        setupHeader()
+        setupField()
+        setupTetramonioStack()
+    }
+    
+    private func setupHeader() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
-        headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16.0).isActive = true
-        headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16.0).isActive = true
-        headerView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 16.0).isActive = true
-        
-        field.translatesAutoresizingMaskIntoConstraints = false
-        field.leadingAnchor.constraint(equalTo: headerView.leadingAnchor).isActive = true
-        field.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 2.0).isActive = true
-        field.trailingAnchor.constraint(equalTo: headerView.trailingAnchor).isActive = true
-        field.heightAnchor.constraint(equalTo: headerView.widthAnchor, multiplier: 1.0).isActive = true
-        
-        let stackView = UIStackView(arrangedSubviews: [firstTetramonioView, secondTetramonioView])
+        NSLayoutConstraint.activate([
+            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16.0),
+            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16.0),
+            headerView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 16.0)
+        ])
 
+    }
+    
+    private func setupField() {
+        field.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            field.leadingAnchor.constraint(equalTo: headerView.leadingAnchor),
+            field.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 2.0),
+            field.trailingAnchor.constraint(equalTo: headerView.trailingAnchor),
+            field.heightAnchor.constraint(equalTo: headerView.widthAnchor, multiplier: 1.0)
+        ])
+    }
+    
+    private func setupTetramonioStack() {
+        let stackView = UIStackView(arrangedSubviews: [firstTetramonioView, secondTetramonioView])
         stackView.axis = .horizontal
         stackView.spacing = 4.0
         stackView.distribution = .fillEqually
         stackView.alignment = .fill
         view.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.topAnchor.constraint(equalTo: field.bottomAnchor, constant: 2.0).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: field.leadingAnchor).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: field.trailingAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: field.bottomAnchor, constant: 2.0),
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            stackView.leadingAnchor.constraint(equalTo: field.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: field.trailingAnchor)
+        ])
     }
 
     // MARK: - IBActions
@@ -144,17 +151,13 @@ class GameViewController: UIViewController {
 	}
 
     private func handleTouchForEvent(_ event: UIEvent?) {
-
-        guard let touchPoint = event?.allTouches?.first?.location(in: field) else {
-            debugPrint("Touch point is outside of the field \(#line)")
-            return
+        if let touchPoint = event?.allTouches?.first?.location(in: field) {
+            field
+                .subviews
+                .filter({$0 is FieldCollectionViewCell && $0.frame.contains(touchPoint)})
+                .compactMap({$0 as? FieldCollectionViewCell})
+                .forEach({presenter?.handleTouchedCell(with: $0.cellData)})
         }
-
-        field
-            .subviews
-            .filter({$0 is FieldCollectionViewCell && $0.frame.contains(touchPoint)})
-			.compactMap({$0 as? FieldCollectionViewCell})
-            .forEach({presenter?.handleTouchedCell(with: $0.cellData)})
     }
 }
 
@@ -164,7 +167,7 @@ extension GameViewController: UICollectionViewDelegateFlowLayout {
 	// swiftlint:disable vertical_parameter_alignment
     func collectionView(_ collectionView: UICollectionView,
 						layout collectionViewLayout: UICollectionViewLayout,
-						sizeForItemAt indexPath: IndexPath) -> CGSize {
+						sizeForItemAt indexPath: IndexPath)  -> CGSize {
 		return Constatns.Sizes.calculateFieldCellSize(frame: collectionView.frame)
     }
 }
@@ -230,8 +233,14 @@ extension GameViewController: GameViewInput {
 	}
 
     func display(tetramonios: [Tetramonio]) {
-        firstTetramonioView.update(with: tetramonios.first!.displayTetramonioIndexes)
-        secondTetramonioView.update(with: tetramonios.last!.displayTetramonioIndexes)
+        displayTeramonios(indexes: tetramonios.first?.displayTetramonioIndexes, tetramonioView: firstTetramonioView)
+        displayTeramonios(indexes: tetramonios.last?.displayTetramonioIndexes, tetramonioView: secondTetramonioView)
+    }
+    
+    private func displayTeramonios(indexes: [Int]?, tetramonioView: TetramonioView) {
+        if let indexes = indexes {
+            tetramonioView.update(with: indexes)
+        }
     }
 
 	func displayScore(score: GameScore) {

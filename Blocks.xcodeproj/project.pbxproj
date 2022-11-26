@@ -75,7 +75,6 @@
 		FFCD972125245A12009CEA30 /* GameAssemblerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCD972025245A12009CEA30 /* GameAssemblerTests.swift */; };
 		FFE6D62D1E59A47A0060C1C8 /* FieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6D62C1E59A47A0060C1C8 /* FieldCollectionViewCell.swift */; };
 		FFFBBFBB1E4521700052D68B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFBA1E4521700052D68B /* AppDelegate.swift */; };
-		FFFBBFC01E4521700052D68B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFFBBFBE1E4521700052D68B /* Main.storyboard */; };
 		FFFBBFC21E4521700052D68B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFFBBFC11E4521700052D68B /* Assets.xcassets */; };
 		FFFBBFE21E4523A10052D68B /* Tetramonio.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFE11E4523A10052D68B /* Tetramonio.swift */; };
 		FFFBBFEA1E4525050052D68B /* TetramonioGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFE91E4525050052D68B /* TetramonioGenerator.swift */; };
@@ -168,7 +167,6 @@
 		FFE6D62C1E59A47A0060C1C8 /* FieldCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldCollectionViewCell.swift; sourceTree = "<group>"; };
 		FFFBBFB71E4521700052D68B /* Blocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFFBBFBA1E4521700052D68B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FFFBBFBF1E4521700052D68B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FFFBBFC11E4521700052D68B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FFFBBFC61E4521700052D68B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFFBBFE11E4523A10052D68B /* Tetramonio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tetramonio.swift; sourceTree = "<group>"; };
@@ -315,7 +313,6 @@
 		FFA44A301E452E11000B4829 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				FFFBBFBE1E4521700052D68B /* Main.storyboard */,
 				FF9748BB1EE8ADB300213F10 /* Localization */,
 				FFA44A321E452E5F000B4829 /* SupportingFiles */,
 				FFA44A311E452E54000B4829 /* Images */,
@@ -612,7 +609,6 @@
 				FFFBBFC21E4521700052D68B /* Assets.xcassets in Resources */,
 				FF289FF21EE8AF4100AD397C /* Localizable.strings in Resources */,
 				FFA8F9A11FF827530071276A /* Tetramonios.plist in Resources */,
-				FFFBBFC01E4521700052D68B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -719,14 +715,6 @@
 				FF289FF51EE8AF4500AD397C /* en */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		FFFBBFBE1E4521700052D68B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FFFBBFBF1E4521700052D68B /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

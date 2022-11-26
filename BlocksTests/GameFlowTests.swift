@@ -225,7 +225,7 @@ class GameFlowTests: XCTestCase {
         _ = sut.startGame()
         storage.storeUpdatedCells(cells)
         // When
-        sut.updateField(with: cells)
+        sut.invalidateSelectedCells()
         // Then
         XCTAssertTrue(sut.fieldCells.filter({$0.state == .selected}).isEmpty)
         XCTAssertFalse(interactor.updatedField.isEmpty)
