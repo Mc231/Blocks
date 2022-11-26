@@ -93,6 +93,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9FA126152932B69F00A0CC35 /* Blocks.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Blocks.xctestplan; sourceTree = "<group>"; };
 		9FDEEF8E291EC84500AB37B3 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		9FDEEF912921630200AB37B3 /* LabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyle.swift; sourceTree = "<group>"; };
 		9FDEEF932921637300AB37B3 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
@@ -147,7 +148,6 @@
 		FFA44A2E1E452D20000B4829 /* TetramonioLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetramonioLoader.swift; sourceTree = "<group>"; };
 		FFA5ECB0251BC03B00B0F752 /* FieldCell+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FieldCell+Additions.swift"; sourceTree = "<group>"; };
 		FFA5ECBD251D8E1300B0F752 /* NSManagedObjectContext+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Additions.swift"; sourceTree = "<group>"; };
-		FFA5ECC1251D9AAB00B0F752 /* Blocks.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Blocks.xctestplan; sourceTree = "<group>"; };
 		FFA8F9A01FF827520071276A /* Tetramonios.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Tetramonios.plist; sourceTree = "<group>"; };
 		FFB332FC2512973200776A83 /* GameStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStorage.swift; sourceTree = "<group>"; };
 		FFB332FE2512980A00776A83 /* GameCoreDataStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCoreDataStorageTests.swift; sourceTree = "<group>"; };
@@ -358,6 +358,7 @@
 		FFFBBFAE1E4521700052D68B = {
 			isa = PBXGroup;
 			children = (
+				9FA126152932B69F00A0CC35 /* Blocks.xctestplan */,
 				FFFBBFB91E4521700052D68B /* Blocks */,
 				FF9B685B1E4D1678006376CA /* BlocksTests */,
 				FFFBBFB81E4521700052D68B /* Products */,
@@ -376,7 +377,6 @@
 		FFFBBFB91E4521700052D68B /* Blocks */ = {
 			isa = PBXGroup;
 			children = (
-				FFA5ECC1251D9AAB00B0F752 /* Blocks.xctestplan */,
 				FF5412D822A6478E0099E360 /* Blocks.entitlements */,
 				FFFBBFCC1E4521840052D68B /* Classes */,
 				FFA44A301E452E11000B4829 /* Resources */,

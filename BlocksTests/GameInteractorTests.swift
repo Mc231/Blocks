@@ -178,4 +178,13 @@ class GameInteractorTests: XCTestCase {
 		// Then
 		XCTAssertEqual(presenter.providedTetramonios, expectedTetramonios)
     }
+    
+    func testinvalidateSelectedCells() {
+        // Given
+        XCTAssertFalse(gameFlow.invalidateSelectedCellsCalled)
+        // When
+        sut.invalidateSelectedCells()
+        // Then
+        XCTAssertTrue(gameFlow.invalidateSelectedCellsCalled)
+    }
 }

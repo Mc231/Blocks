@@ -169,4 +169,13 @@ class GamePresenterTests: XCTestCase {
 		XCTAssertEqual(view.displayedGameScore.current, score.current)
 		XCTAssertEqual(view.displayedGameScore.best, score.best)
     }
+    
+    func testinvalidateSelectedCells() {
+        // Given
+        XCTAssertFalse(interactor.invalidateSelectedCellsCalled)
+        // When
+        sut.invalidateSelectedCells()
+        // Then
+        XCTAssertTrue(interactor.invalidateSelectedCellsCalled)
+    }
 }

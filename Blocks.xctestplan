@@ -1,7 +1,7 @@
 {
   "configurations" : [
     {
-      "id" : "4718D920-D173-4F19-A3F4-CCCAD89CA257",
+      "id" : "B775F3C3-36CC-47B9-9A2B-9E8970366E08",
       "name" : "Configuration 1",
       "options" : {
 
@@ -9,11 +9,7 @@
     }
   ],
   "defaultOptions" : {
-    "targetForVariableExpansion" : {
-      "containerPath" : "container:Blocks.xcodeproj",
-      "identifier" : "FFFBBFB61E4521700052D68B",
-      "name" : "Blocks"
-    }
+
   },
   "testTargets" : [
     {
