@@ -25,18 +25,18 @@ extension GameInteractor: GameInteractorInput {
     }
 	
     func startGame() {
-		// TODO: - Check this forece unwrap
-		let config = gameFlow!.startGame()
-		presenter?.provideTetramonios(config.tetramonios)
-		presenter?.provideField(config.fieldCells)
-		presenter?.provideScore(score: config.score)
+        if let config = gameFlow?.startGame() {
+            presenter?.provideTetramonios(config.tetramonios)
+            presenter?.provideField(config.fieldCells)
+            presenter?.provideScore(score: config.score)
+        }
     }
 
     func restartGame() {
-        // TODO: - Check this forece unwrap
-        let restartGameConfig = gameFlow!.restartGame()
-        presenter?.provideScore(score: restartGameConfig.score)
-        presenter?.provideField(restartGameConfig.field)
+        if let restartGameConfig = gameFlow?.restartGame() {
+            presenter?.provideScore(score: restartGameConfig.score)
+            presenter?.provideField(restartGameConfig.field)
+        }
     }
 
     func handleTouchedCell(_ cellData: FieldCell) {

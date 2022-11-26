@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9FA126172932BC7A00A0CC35 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA126162932BC7A00A0CC35 /* UIColor+Additions.swift */; };
 		9FDEEF8F291EC84500AB37B3 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDEEF8E291EC84500AB37B3 /* HeaderView.swift */; };
 		9FDEEF922921630200AB37B3 /* LabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDEEF912921630200AB37B3 /* LabelStyle.swift */; };
 		9FDEEF942921637300AB37B3 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDEEF932921637300AB37B3 /* ButtonStyle.swift */; };
@@ -94,6 +95,7 @@
 
 /* Begin PBXFileReference section */
 		9FA126152932B69F00A0CC35 /* Blocks.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Blocks.xctestplan; sourceTree = "<group>"; };
+		9FA126162932BC7A00A0CC35 /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		9FDEEF8E291EC84500AB37B3 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		9FDEEF912921630200AB37B3 /* LabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyle.swift; sourceTree = "<group>"; };
 		9FDEEF932921637300AB37B3 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 			children = (
 				FF82110D2500224300D0C3CB /* Array+Additions.swift */,
 				9FDEEF95292163C900AB37B3 /* UILabel+Additions.swift */,
+				9FA126162932BC7A00A0CC35 /* UIColor+Additions.swift */,
 				9FDEEF972921642700AB37B3 /* UIButton+Additions.swift */,
 				FF82111125002ECD00D0C3CB /* Array+Teramonio.swift */,
 			);
@@ -694,6 +697,7 @@
 				FF7401F6227833B900FEE070 /* Typealiases.swift in Sources */,
 				FF32D46A1EEA220100A15F9E /* Constatns.swift in Sources */,
 				FFC4CDBB22A305FA0025A187 /* DraggedTetramonioChecker.swift in Sources */,
+				9FA126172932BC7A00A0CC35 /* UIColor+Additions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

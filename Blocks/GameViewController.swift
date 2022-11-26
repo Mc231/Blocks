@@ -27,6 +27,8 @@ class GameViewController: UIViewController {
             field.reloadData()
         }
     }
+    
+    // MARK: - Views
 
     private lazy var headerView: HeaderView = {
         let headerView = HeaderView()
@@ -49,14 +51,19 @@ class GameViewController: UIViewController {
         return tetramonioView
     }
     
-    private lazy var field: UICollectionView = {
+    private lazy var fieldLayout: UICollectionViewLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 2.0
         layout.minimumInteritemSpacing = 2.0
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        return layout
+    }()
+    
+    private lazy var field: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: fieldLayout)
         collectionView.isUserInteractionEnabled = false
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.register(FieldCollectionViewCell.self, forCellWithReuseIdentifier: FieldCollectionViewCell.identifier)
         return collectionView
     }()
 
@@ -66,15 +73,29 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-		firstTetramonioDraggedChcker = DraggedTetramonioChecker(field: field, view: firstTetramonioView)
-		secondTetramonioDraggedChcker = DraggedTetramonioChecker(field: field, view: secondTetramonioView)
+        setupTetramonioCheckers()
         presenter?.startGame()
-        field.register(FieldCollectionViewCell.self, forCellWithReuseIdentifier: FieldCollectionViewCell.identifier)
-      
     }
+	
+    // MARK: - Touches methods
     
-    private func setupView() {
-        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        handleTouchForEvent(event)
+    }
+
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        handleTouchForEvent(event)
+    }
+}
+
+// MARK: - General Setup
+
+private extension GameViewController {
+    
+    func setupView() {
+        view.backgroundColor = .defaultBackground
         view.addSubview(headerView)
         view.addSubview(field)
         setupHeader()
@@ -82,7 +103,17 @@ class GameViewController: UIViewController {
         setupTetramonioStack()
     }
     
-    private func setupHeader() {
+    func setupTetramonioCheckers() {
+        firstTetramonioDraggedChcker = DraggedTetramonioChecker(field: field, view: firstTetramonioView)
+        secondTetramonioDraggedChcker = DraggedTetramonioChecker(field: field, view: secondTetramonioView)
+    }
+}
+
+// MARK: - Views Setup
+
+private extension GameViewController {
+    
+    func setupHeader() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16.0),
@@ -92,7 +123,7 @@ class GameViewController: UIViewController {
 
     }
     
-    private func setupField() {
+    func setupField() {
         field.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             field.leadingAnchor.constraint(equalTo: headerView.leadingAnchor),
@@ -102,7 +133,7 @@ class GameViewController: UIViewController {
         ])
     }
     
-    private func setupTetramonioStack() {
+    func setupTetramonioStack() {
         let stackView = UIStackView(arrangedSubviews: [firstTetramonioView, secondTetramonioView])
         stackView.axis = .horizontal
         stackView.spacing = 4.0
@@ -117,40 +148,28 @@ class GameViewController: UIViewController {
             stackView.trailingAnchor.constraint(equalTo: field.trailingAnchor)
         ])
     }
+}
 
-    // MARK: - IBActions
+// MARK: - Touches Processing
 
-	@objc private func didDragTetramonio1(_ sender: UIPanGestureRecognizer) {
-		handleDraggedTetramonio(checker: firstTetramonioDraggedChcker, sender: sender)
-	}
-	
-	@objc private func didDragTetramonio2(_ sender: UIPanGestureRecognizer) {
-		handleDraggedTetramonio(checker: secondTetramonioDraggedChcker, sender: sender)
-	}
-	
-    // MARK: - Touches methods
+private extension GameViewController {
     
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        handleTouchForEvent(event)
+    @objc func didDragTetramonio1(_ sender: UIPanGestureRecognizer) {
+        handleDraggedTetramonio(checker: firstTetramonioDraggedChcker, sender: sender)
     }
-
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesMoved(touches, with: event)
-        handleTouchForEvent(event)
+    
+    @objc func didDragTetramonio2(_ sender: UIPanGestureRecognizer) {
+        handleDraggedTetramonio(checker: secondTetramonioDraggedChcker, sender: sender)
     }
-
-    // MARK: - Private methods
-	
-	private func handleDraggedTetramonio(checker: DraggedTetramonioChecker, sender: UIPanGestureRecognizer) {
+    
+    func handleDraggedTetramonio(checker: DraggedTetramonioChecker, sender: UIPanGestureRecognizer) {
         presenter?.invalidateSelectedCells()
-		checker.handleDraggedTetramonio(from: sender) { [weak self] cells in
+        checker.handleDraggedTetramonio(from: sender) { [weak self] cells in
             self?.presenter?.handleDraggedCell(with: cells)
-		}
-	}
+        }
+    }
 
-    private func handleTouchForEvent(_ event: UIEvent?) {
+    func handleTouchForEvent(_ event: UIEvent?) {
         if let touchPoint = event?.allTouches?.first?.location(in: field) {
             field
                 .subviews

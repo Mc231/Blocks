@@ -21,17 +21,17 @@ enum LabelStyle {
         }
     }
     
-    var textColor: UIColor {
+    var textColor: UIColor? {
         switch self {
         case .scoreLabel:
-            return #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            return .pillText
         }
     }
     
-    var backgroundColor: UIColor {
+    var backgroundColor: UIColor? {
         switch self {
         case .scoreLabel:
-            return #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            return .pillBackground
         }
     }
     
