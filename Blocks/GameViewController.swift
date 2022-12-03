@@ -195,8 +195,6 @@ extension GameViewController: UICollectionViewDelegateFlowLayout {
 
 extension GameViewController: HeaderViewDelegate {
     
-    func didTapMenue() { }
-    
     func didTapRestart() {
         presenter?.restartGame()
     }

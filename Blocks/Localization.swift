@@ -13,13 +13,10 @@ enum Localization {
     
     // swiftlint:disable nesting
     enum General: Localizable {
-        case menu
         case restart
         
         var localized: String {
             switch self {
-            case .menu:
-                return localized(key: "Menu")
             case .restart:
                 return localized(key: "Restart")
             }

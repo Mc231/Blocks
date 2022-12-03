@@ -9,7 +9,6 @@
 import UIKit
 
 protocol HeaderViewDelegate: AnyObject {
-    func didTapMenue()
     func didTapRestart()
 }
 
@@ -18,16 +17,11 @@ class HeaderView: UIView {
     // MARK: - Constants
     
     private static let buttonStates: [UIControl.State] = [.normal, .highlighted]
-    private static let menuText = Localization.General.menu.localized
     private static let restartText = Localization.General.restart.localized
     private static let buttonHeight: CGFloat = 44.0
     private static let stackViewSpacing: CGFloat = 2.0
     
     weak var delegate: HeaderViewDelegate?
-
-    private lazy var menuButton: UIButton = {
-        return createButton(title: Self.menuText, action: #selector(didTapMenu))
-    }()
     
     private lazy var restartButton: UIButton = {
         return createButton(title: Self.restartText, action: #selector(didTapRestart))
@@ -67,27 +61,23 @@ class HeaderView: UIView {
     }
     
     private func setupViews() {
-        let leftStackView = UIStackView(arrangedSubviews: [menuButton, scoreLabel])
-        let rightStackView = UIStackView(arrangedSubviews: [restartButton, bestLabel])
-        [leftStackView, rightStackView].forEach { stackView in
-            stackView.axis = .vertical
-            stackView.spacing = Self.stackViewSpacing
-        }
+        let bottomStackView = UIStackView(arrangedSubviews: [scoreLabel, bestLabel])
+        bottomStackView.axis = .horizontal
+        bottomStackView.spacing = Self.stackViewSpacing
+        createAndAddContainer(restartButton: restartButton, bottomStackView: bottomStackView)
         
-        addContainer(leftStackView: leftStackView, rightStackView: rightStackView)
-        
-        [menuButton, restartButton].forEach { button in
+        [restartButton].forEach { button in
             button.heightAnchor.constraint(equalToConstant: Self.buttonHeight).isActive = true
         }
         
         [scoreLabel, bestLabel].forEach { label in
-            label.heightAnchor.constraint(equalTo: menuButton.heightAnchor).isActive = true
+            label.heightAnchor.constraint(equalTo: restartButton.heightAnchor).isActive = true
         }
     }
     
-    private func addContainer(leftStackView: UIStackView, rightStackView: UIStackView) {
-        let container = UIStackView(arrangedSubviews: [leftStackView, rightStackView])
-        container.axis = .horizontal
+    private func createAndAddContainer(restartButton: UIButton, bottomStackView: UIStackView) {
+        let container = UIStackView(arrangedSubviews: [restartButton, bottomStackView])
+        container.axis = .vertical
         container.alignment = .fill
         container.distribution = .fillEqually
         container.spacing = Self.stackViewSpacing
@@ -100,10 +90,6 @@ class HeaderView: UIView {
             container.trailingAnchor.constraint(equalTo: trailingAnchor),
             container.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
-    }
-    
-    @objc private func didTapMenu() {
-        delegate?.didTapMenue()
     }
     
     @objc private func didTapRestart() {
