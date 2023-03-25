@@ -121,18 +121,6 @@ private extension GameFlow {
 			interactor?.gameOver(currentScore: score)
 		}
 	}
-
-	func removeAllSelectedCells() {
-		currentTetramonio.removeAll()
-		let cells = fieldCells.filter({$0.isSelected}).reduce(into: [FieldCell]()) { [unowned self] (result, cell) in
-			if let index = fieldCells.firstIndex(of: cell) {
-				self.fieldCells[index].chageState(newState: .empty)
-				result.append(fieldCells[index])
-			}
-		}
-		storage.storeUpdatedCells(cells)
-		interactor?.gameFlow(self, didUpdate: cells)
-	}
 }
 
 // MARK: - GameFlowInput
@@ -157,7 +145,6 @@ extension GameFlow: GameFlowInput {
 		if draggedCells.count != Constatns.Tetramonio.numberOfCellsInTetramonio {
 			return
 		}
-		removeAllSelectedCells()
 		processGameFlow(cellData: draggedCells)
 	}
 	
@@ -191,22 +178,28 @@ extension GameFlow: GameFlowInput {
 		self.fieldCells = restartConfig.field
 		return restartConfig
     }
+    
+    func invalidateSelectedCells() {
+        currentTetramonio.removeAll()
+        let cells = fieldCells.filter({$0.isSelected}).reduce(into: [FieldCell]()) { [unowned self] (result, cell) in
+            if let index = fieldCells.firstIndex(of: cell) {
+                self.fieldCells[index].chageState(newState: .empty)
+                result.append(fieldCells[index])
+            }
+        }
+        storage.storeUpdatedCells(cells)
+        interactor?.gameFlow(self, didUpdate: cells)
+    }
 }
 
 // MARK: - TetramonioMatcher
 
-extension GameFlow: TetramonioMatcher {
-
-}
+extension GameFlow: TetramonioMatcher { }
 
 // MARK: - GameOverChecker
 
-extension GameFlow: GameOverChecker {
-
-}
+extension GameFlow: GameOverChecker { }
 
 // MARK: - FieldCrossLineChecker
 
-extension GameFlow: FieldCrossLineChecker {
-
-}
+extension GameFlow: FieldCrossLineChecker { }

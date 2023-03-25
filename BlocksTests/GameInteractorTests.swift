@@ -36,13 +36,13 @@ private extension GameInteractorTests {
     }
     
     class MockGameFlow: GameFlowInput {
-        
         var generationType: GenerationType!
         var generatedTeramoniosToReturn: [Tetramonio] = []
         var touchedCell: FieldCell!
         var draggedCells: [FieldCell] = []
         var startGameConfig: StartGameConfig!
 		var restartGameConfig: RestartGameConfig!
+        var invalidateSelectedCellsCalled = false
         
         func generateTetramoniosOf(_ type: GenerationType) -> [Tetramonio] {
             generationType = type
@@ -63,6 +63,10 @@ private extension GameInteractorTests {
         
 		func restartGame() -> RestartGameConfig {
 			return restartGameConfig
+        }
+        
+        func invalidateSelectedCells() {
+            invalidateSelectedCellsCalled.toggle()
         }
     }
 }
@@ -173,5 +177,14 @@ class GameInteractorTests: XCTestCase {
 		sut.gameFlow(gameFlow, didUpdate: expectedTetramonios)
 		// Then
 		XCTAssertEqual(presenter.providedTetramonios, expectedTetramonios)
+    }
+    
+    func testinvalidateSelectedCells() {
+        // Given
+        XCTAssertFalse(gameFlow.invalidateSelectedCellsCalled)
+        // When
+        sut.invalidateSelectedCells()
+        // Then
+        XCTAssertTrue(gameFlow.invalidateSelectedCellsCalled)
     }
 }

@@ -36,8 +36,8 @@ extension GamePresenterTests {
 		}
 	}
 	
-	class MockInteractor: GameInteractorInput {
-		
+    class MockInteractor: GameInteractorInput {
+ 
         var gameFlow: GameFlowInput?
 		var presenter: GameInteractorOutput?
 		
@@ -45,6 +45,7 @@ extension GamePresenterTests {
 		var restartGameCalled = false
 		var handledCellData: FieldCell!
 		var handledDraggedCell: [FieldCell] = []
+        var invalidateSelectedCellsCalled = false
 		
 		func startGame() {
 			startGameCalled.toggle()
@@ -61,6 +62,10 @@ extension GamePresenterTests {
 		func handleDraggedCells(with data: [FieldCell]) {
 			handledDraggedCell = data
 		}
+        
+        func invalidateSelectedCells() {
+            invalidateSelectedCellsCalled.toggle()
+        }
 	}
 }
 
@@ -163,5 +168,14 @@ class GamePresenterTests: XCTestCase {
 		// Then
 		XCTAssertEqual(view.displayedGameScore.current, score.current)
 		XCTAssertEqual(view.displayedGameScore.best, score.best)
+    }
+    
+    func testinvalidateSelectedCells() {
+        // Given
+        XCTAssertFalse(interactor.invalidateSelectedCellsCalled)
+        // When
+        sut.invalidateSelectedCells()
+        // Then
+        XCTAssertTrue(interactor.invalidateSelectedCellsCalled)
     }
 }

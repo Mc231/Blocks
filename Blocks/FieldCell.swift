@@ -16,14 +16,14 @@ struct FieldCell: Hashable {
         case placed = 2
         case clear = 3
         
-        var backgroundColor: UIColor {
+        var backgroundColor: UIColor? {
             switch self {
             case .empty:
-                return #colorLiteral(red: 0.9294117647, green: 0.9176470588, blue: 0.8470588235, alpha: 1)
+                return .emptyCellBackground
             case .selected:
-                return #colorLiteral(red: 0.5490196078, green: 0.6078431373, blue: 0.1647058824, alpha: 1)
+                return .selectedCellBackground
             case .placed:
-                return #colorLiteral(red: 0.9921568627, green: 0.5803921569, blue: 0.2196078431, alpha: 1)
+                return .placedCellBackground
             case .clear:
                 return .clear
             }

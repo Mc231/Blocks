@@ -10,6 +10,19 @@ import Foundation
 
 /// This enum represents localized strings used in app
 enum Localization {
+    
+    // swiftlint:disable nesting
+    enum General: Localizable {
+        case restart
+        
+        var localized: String {
+            switch self {
+            case .restart:
+                return localized(key: "Restart")
+            }
+        }
+    }
+    
     // swiftlint:disable nesting
     enum Score: Localizable {
         case score(Int32)
@@ -30,7 +43,6 @@ enum Localization {
     enum GameOverAlert: Localizable {
         case title
         case message(Int32)
-        case restartTitle
 
         var localized: String {
             switch self {
@@ -39,8 +51,6 @@ enum Localization {
             case .message(let currentScore):
                 let key = localized(key: "Your_Score_is_d")
                 return String(format: key, currentScore)
-            case .restartTitle:
-                return localized(key: "Restart")
             }
         }
     }

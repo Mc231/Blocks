@@ -14,4 +14,5 @@ protocol GameFlowInput {
 	func updateField(with draggedCells: [FieldCell])
 	func startGame() -> StartGameConfig
 	func restartGame() -> RestartGameConfig
+    func invalidateSelectedCells()
 }

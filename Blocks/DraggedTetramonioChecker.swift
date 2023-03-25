@@ -62,7 +62,9 @@ class DraggedTetramonioChecker {
 						}
 					})
 			}
-			completion(matchedCells)
+            if matchedCells.allSatisfy(\.isEmpty) {
+                completion(matchedCells)
+            }
 			
 			// On cancellation, return the piece to its original location.
 			UIView.animate(withDuration: animationDuration) { [weak self] in

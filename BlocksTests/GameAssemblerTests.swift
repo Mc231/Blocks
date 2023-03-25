@@ -30,6 +30,7 @@ fileprivate class StubPresenter: GameViewOutput, GameInteractorOutput {
     func provideField(_ field: [FieldCell]) { }
     func provideScore(score: GameScore) { }
     func gameOver(score: Int32) { }
+    func invalidateSelectedCells() { }
 }
 
 fileprivate class StubInteractor: GameInteractorInput, GameFlowOutput {
@@ -43,6 +44,7 @@ fileprivate class StubInteractor: GameInteractorInput, GameFlowOutput {
     func gameFlow(_ manager: GameFlowInput, didChange score: GameScore) { }
     func gameFlow(_ manager: GameFlowInput, didUpdate field: [FieldCell]) { }
     func gameFlow(_ manager: GameFlowInput, didUpdate tetramonios: [Tetramonio]) { }
+    func invalidateSelectedCells() { }
 }
 
 class GameAssemblerTests: XCTestCase {

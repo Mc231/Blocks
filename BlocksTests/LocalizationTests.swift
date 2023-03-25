@@ -27,13 +27,13 @@ class LocalizationTests: XCTestCase {
     func testGameOverAlertStrings() {
         // Given
         let score: Int32 = 12
-        let expectedResult = ["Game Over", "Your socre is \(score)", "Restart"]
+        let expectedResult = ["Game Over", "Your score is \(score)", "Restart"]
         // When
         let result = [
-            Localization.GameOverAlert.title,
-            Localization.GameOverAlert.message(score),
-            Localization.GameOverAlert.restartTitle
-        ].map({$0.localized})
+            Localization.GameOverAlert.title.localized,
+            Localization.GameOverAlert.message(score).localized,
+            Localization.General.restart.localized
+        ]
         // Then
         XCTAssertEqual(expectedResult, result)
     }

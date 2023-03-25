@@ -13,7 +13,7 @@ class FieldCellTests: XCTestCase {
 
     func testFieldCellStateEmptyBackground() {
         // Given
-        let expectedColor = #colorLiteral(red: 0.9294117647, green: 0.9176470588, blue: 0.8470588235, alpha: 1)
+        let expectedColor = UIColor.emptyCellBackground
         // When
         let cell = FieldCell(state: .empty)
         // Then
@@ -22,7 +22,7 @@ class FieldCellTests: XCTestCase {
     
     func testFieldCellStatePlacedBackground() {
         // Given
-        let expectedColor = #colorLiteral(red: 0.9921568627, green: 0.5803921569, blue: 0.2196078431, alpha: 1)
+        let expectedColor = UIColor.placedCellBackground
         // When
         let cell = FieldCell(state: .placed)
         // Then
@@ -31,7 +31,7 @@ class FieldCellTests: XCTestCase {
     
     func testFieldCellStateSelectedBackground() {
         // Given
-        let expectedColor = #colorLiteral(red: 0.5490196078, green: 0.6078431373, blue: 0.1647058824, alpha: 1)
+        let expectedColor = UIColor.selectedCellBackground
         // When
         let cell = FieldCell(state: .selected)
         // Then
