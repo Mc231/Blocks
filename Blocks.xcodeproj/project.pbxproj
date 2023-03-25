@@ -132,6 +132,7 @@
 		FF76B0BA1E847EC0001969FA /* TetramonioGeneratorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetramonioGeneratorTests.swift; sourceTree = "<group>"; };
 		FF76B0BC1E847F52001969FA /* TetramonioLoaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetramonioLoaderTests.swift; sourceTree = "<group>"; };
 		FF76B0BE1E847FA4001969FA /* GameFlowTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameFlowTests.swift; sourceTree = "<group>"; };
+		FF79438E29CF95C90025D234 /* Blocks 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Blocks 2.xcdatamodel"; sourceTree = "<group>"; };
 		FF82110D2500224300D0C3CB /* Array+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Additions.swift"; sourceTree = "<group>"; };
 		FF82111125002ECD00D0C3CB /* Array+Teramonio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Teramonio.swift"; sourceTree = "<group>"; };
 		FF858C5C1EBA6C33003EFEA3 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -957,6 +958,7 @@
 		FFB82A881E7D2F2A0043BD53 /* Blocks.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				FF79438E29CF95C90025D234 /* Blocks 2.xcdatamodel */,
 				FFB82A891E7D2F2A0043BD53 /* Blocks.xcdatamodel */,
 			);
 			currentVersion = FFB82A891E7D2F2A0043BD53 /* Blocks.xcdatamodel */;
