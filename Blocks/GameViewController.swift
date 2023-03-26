@@ -64,6 +64,7 @@ class GameViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(FieldCollectionViewCell.self, forCellWithReuseIdentifier: FieldCollectionViewCell.identifier)
+        collectionView.accessibilityIdentifier = "field"
         return collectionView
     }()
 

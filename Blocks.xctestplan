@@ -19,6 +19,13 @@
         "identifier" : "FF9B68591E4D1678006376CA",
         "name" : "BlocksTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Blocks.xcodeproj",
+        "identifier" : "9FA12630293B9A5200A0CC35",
+        "name" : "BlocksUITests"
+      }
     }
   ],
   "version" : 1

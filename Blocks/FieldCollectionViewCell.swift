@@ -17,6 +17,8 @@ class FieldCollectionViewCell: UICollectionViewCell {
     func apply(cellData: FieldCell) {
         self.cellData = cellData
         backgroundColor = cellData.state.backgroundColor
+        isAccessibilityElement = true
+        accessibilityIdentifier = "\(cellData.xPosition):\(cellData.yPosition)"
     }
 	
 	override func isEqual(_ object: Any?) -> Bool {
