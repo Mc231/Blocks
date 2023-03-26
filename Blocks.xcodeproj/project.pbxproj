@@ -79,6 +79,8 @@
 		FFE0BADF29D04A3E002C457B /* CoreDataStatisticLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0BADE29D04A3E002C457B /* CoreDataStatisticLogger.swift */; };
 		FFE0BAE629D05DDE002C457B /* Statistic+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0BAE429D05DDE002C457B /* Statistic+CoreDataClass.swift */; };
 		FFE0BAE729D05DDE002C457B /* Statistic+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0BAE529D05DDE002C457B /* Statistic+CoreDataProperties.swift */; };
+		FFE0BAE929D06861002C457B /* CoreDataStatistLoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0BAE829D06861002C457B /* CoreDataStatistLoggerTests.swift */; };
+		FFE0BAEC29D068D1002C457B /* CoreDataManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0BAEB29D068D1002C457B /* CoreDataManagerMock.swift */; };
 		FFE6D62D1E59A47A0060C1C8 /* FieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6D62C1E59A47A0060C1C8 /* FieldCollectionViewCell.swift */; };
 		FFFBBFBB1E4521700052D68B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFBA1E4521700052D68B /* AppDelegate.swift */; };
 		FFFBBFC21E4521700052D68B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFFBBFC11E4521700052D68B /* Assets.xcassets */; };
@@ -177,6 +179,8 @@
 		FFE0BADE29D04A3E002C457B /* CoreDataStatisticLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStatisticLogger.swift; sourceTree = "<group>"; };
 		FFE0BAE429D05DDE002C457B /* Statistic+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Statistic+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FFE0BAE529D05DDE002C457B /* Statistic+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Statistic+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FFE0BAE829D06861002C457B /* CoreDataStatistLoggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStatistLoggerTests.swift; sourceTree = "<group>"; };
+		FFE0BAEB29D068D1002C457B /* CoreDataManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerMock.swift; sourceTree = "<group>"; };
 		FFE6D62C1E59A47A0060C1C8 /* FieldCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldCollectionViewCell.swift; sourceTree = "<group>"; };
 		FFFBBFB71E4521700052D68B /* Blocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFFBBFBA1E4521700052D68B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -297,6 +301,7 @@
 		FF9B685B1E4D1678006376CA /* BlocksTests */ = {
 			isa = PBXGroup;
 			children = (
+				FFE0BAEA29D068BB002C457B /* Mock */,
 				FFCD970725239949009CEA30 /* Resources */,
 				FFB3330025129C0A00776A83 /* Extensions */,
 				FF90440924FF7AE40090C4D2 /* Tetramonios.plist */,
@@ -306,6 +311,7 @@
 				FF6DC9BF250178E1009833F3 /* GamePresenterTests.swift */,
 				FFCD972025245A12009CEA30 /* GameAssemblerTests.swift */,
 				FFB332FE2512980A00776A83 /* GameCoreDataStorageTests.swift */,
+				FFE0BAE829D06861002C457B /* CoreDataStatistLoggerTests.swift */,
 				FF69313B250216EF00F3DF1B /* GameInteractorTests.swift */,
 				FF76B0BA1E847EC0001969FA /* TetramonioGeneratorTests.swift */,
 				FF76B0BC1E847F52001969FA /* TetramonioLoaderTests.swift */,
@@ -392,6 +398,14 @@
 				FFE0BADE29D04A3E002C457B /* CoreDataStatisticLogger.swift */,
 			);
 			name = Statistic;
+			sourceTree = "<group>";
+		};
+		FFE0BAEA29D068BB002C457B /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				FFE0BAEB29D068D1002C457B /* CoreDataManagerMock.swift */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 		FFFBBFAE1E4521700052D68B = {
@@ -662,6 +676,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFE0BAE929D06861002C457B /* CoreDataStatistLoggerTests.swift in Sources */,
 				FFA5ECBE251D8E1300B0F752 /* NSManagedObjectContext+Additions.swift in Sources */,
 				FF8EC61C1E85B0CA0064FFCB /* BundleResourceLoaderTests.swift in Sources */,
 				FF89FD5A25137969003807E8 /* CoreDataManagerTests.swift in Sources */,
@@ -677,6 +692,7 @@
 				FF76B0BD1E847F52001969FA /* TetramonioLoaderTests.swift in Sources */,
 				FF76B0BF1E847FA4001969FA /* GameFlowTests.swift in Sources */,
 				FFCD96E425238326009CEA30 /* LocalizationTests.swift in Sources */,
+				FFE0BAEC29D068D1002C457B /* CoreDataManagerMock.swift in Sources */,
 				FF6DC9C0250178E1009833F3 /* GamePresenterTests.swift in Sources */,
 				FFB332FF2512980A00776A83 /* GameCoreDataStorageTests.swift in Sources */,
 				FF76B0BB1E847EC0001969FA /* TetramonioGeneratorTests.swift in Sources */,

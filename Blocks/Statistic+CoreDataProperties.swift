@@ -13,10 +13,6 @@ import CoreData
 
 extension Statistic {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Statistic> {
-        return NSFetchRequest<Statistic>(entityName: "Statistic")
-    }
-
     @NSManaged public var allTimeTotalScore: Int64
     @NSManaged public var bestScore: Int64
     @NSManaged public var gamesRestarted: Int64
