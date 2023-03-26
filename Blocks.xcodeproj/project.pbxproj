@@ -74,6 +74,11 @@
 		FFCD970925239960009CEA30 /* MockNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFCD970825239960009CEA30 /* MockNib.xib */; };
 		FFCD971D2524579F009CEA30 /* GameAssemblerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCD971C2524579F009CEA30 /* GameAssemblerProtocol.swift */; };
 		FFCD972125245A12009CEA30 /* GameAssemblerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCD972025245A12009CEA30 /* GameAssemblerTests.swift */; };
+		FFE0BADB29D0466A002C457B /* StatisticEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0BADA29D0466A002C457B /* StatisticEvent.swift */; };
+		FFE0BADD29D04914002C457B /* StatisticLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0BADC29D04914002C457B /* StatisticLogger.swift */; };
+		FFE0BADF29D04A3E002C457B /* CoreDataStatisticLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0BADE29D04A3E002C457B /* CoreDataStatisticLogger.swift */; };
+		FFE0BAE229D04B10002C457B /* Statistic+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0BAE029D04B10002C457B /* Statistic+CoreDataClass.swift */; };
+		FFE0BAE329D04B10002C457B /* Statistic+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0BAE129D04B10002C457B /* Statistic+CoreDataProperties.swift */; };
 		FFE6D62D1E59A47A0060C1C8 /* FieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6D62C1E59A47A0060C1C8 /* FieldCollectionViewCell.swift */; };
 		FFFBBFBB1E4521700052D68B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFBA1E4521700052D68B /* AppDelegate.swift */; };
 		FFFBBFC21E4521700052D68B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFFBBFC11E4521700052D68B /* Assets.xcassets */; };
@@ -167,6 +172,11 @@
 		FFCD970825239960009CEA30 /* MockNib.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MockNib.xib; sourceTree = "<group>"; };
 		FFCD971C2524579F009CEA30 /* GameAssemblerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAssemblerProtocol.swift; sourceTree = "<group>"; };
 		FFCD972025245A12009CEA30 /* GameAssemblerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAssemblerTests.swift; sourceTree = "<group>"; };
+		FFE0BADA29D0466A002C457B /* StatisticEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticEvent.swift; sourceTree = "<group>"; };
+		FFE0BADC29D04914002C457B /* StatisticLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticLogger.swift; sourceTree = "<group>"; };
+		FFE0BADE29D04A3E002C457B /* CoreDataStatisticLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStatisticLogger.swift; sourceTree = "<group>"; };
+		FFE0BAE029D04B10002C457B /* Statistic+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Statistic+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FFE0BAE129D04B10002C457B /* Statistic+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Statistic+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FFE6D62C1E59A47A0060C1C8 /* FieldCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldCollectionViewCell.swift; sourceTree = "<group>"; };
 		FFFBBFB71E4521700052D68B /* Blocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFFBBFBA1E4521700052D68B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -228,9 +238,18 @@
 			name = Checkers;
 			sourceTree = "<group>";
 		};
+		FF79438F29CF98180025D234 /* Statistic */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Statistic;
+			sourceTree = "<group>";
+		};
 		FF8407C41ED6ADE7004E5068 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				FFE0BAE029D04B10002C457B /* Statistic+CoreDataClass.swift */,
+				FFE0BAE129D04B10002C457B /* Statistic+CoreDataProperties.swift */,
 				FF73EBEB1EE564E6003F069B /* Game+CoreDataClass.swift */,
 				FF73EBEC1EE564E6003F069B /* Game+CoreDataProperties.swift */,
 				FF2BA0BA1EE3F80500263D95 /* Cell+CoreDataClass.swift */,
@@ -243,8 +262,6 @@
 		FF858C5B1EBA6C1C003EFEA3 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				FF858C5C1EBA6C33003EFEA3 /* CoreDataManager.swift */,
-				FF453F312513EF4F006F514E /* CoreDataManagerProtocol.swift */,
 				FF73EBE91EE55A27003F069B /* GameCoreDataStorage.swift */,
 				FFB332FC2512973200776A83 /* GameStorage.swift */,
 			);
@@ -359,6 +376,24 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		FFE0BAD829D04619002C457B /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				FF858C5C1EBA6C33003EFEA3 /* CoreDataManager.swift */,
+				FF453F312513EF4F006F514E /* CoreDataManagerProtocol.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		FFE0BAD929D0464A002C457B /* Statistic */ = {
+			isa = PBXGroup;
+			children = (
+				FFE0BADC29D04914002C457B /* StatisticLogger.swift */,
+				FFE0BADE29D04A3E002C457B /* CoreDataStatisticLogger.swift */,
+			);
+			name = Statistic;
+			sourceTree = "<group>";
+		};
 		FFFBBFAE1E4521700052D68B = {
 			isa = PBXGroup;
 			children = (
@@ -405,8 +440,7 @@
 				FF0472091E81D5770054FE13 /* Extensions */,
 				FFFBBFBA1E4521700052D68B /* AppDelegate.swift */,
 				FFFBBFE31E45241D0052D68B /* Models */,
-				FF8407C41ED6ADE7004E5068 /* CoreData */,
-				FFFBBFDC1E4522FC0052D68B /* Managers */,
+				FFFBBFDC1E4522FC0052D68B /* Core */,
 				FF32D4691EEA220100A15F9E /* Constatns.swift */,
 				FF7401F5227833B900FEE070 /* Typealiases.swift */,
 				FF2F7D7B1F93578C00C39520 /* EntityDescription.swift */,
@@ -417,6 +451,7 @@
 		FFFBBFCE1E4521AA0052D68B /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				FF79438F29CF98180025D234 /* Statistic */,
 				FFFBBFD01E4521DA0052D68B /* Game */,
 			);
 			name = Modules;
@@ -471,9 +506,11 @@
 			name = Assambler;
 			sourceTree = "<group>";
 		};
-		FFFBBFDC1E4522FC0052D68B /* Managers */ = {
+		FFFBBFDC1E4522FC0052D68B /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				FFE0BAD929D0464A002C457B /* Statistic */,
+				FFE0BAD829D04619002C457B /* CoreData */,
 				FF32D4661EEA19EB00A15F9E /* Checkers */,
 				FF9748B81EE8A9FA00213F10 /* Loalization */,
 				FF858C5B1EBA6C1C003EFEA3 /* Storage */,
@@ -481,17 +518,19 @@
 				FFFBBFEE1E4526AF0052D68B /* GameLogic */,
 				FFFBBFED1E4526A20052D68B /* TetramonioHelper */,
 			);
-			name = Managers;
+			name = Core;
 			sourceTree = "<group>";
 		};
 		FFFBBFE31E45241D0052D68B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FF8407C41ED6ADE7004E5068 /* CoreData */,
 				FFFBBFF41E4527DB0052D68B /* FieldCell.swift */,
 				FFFBBFE11E4523A10052D68B /* Tetramonio.swift */,
 				FF6931D525060FDC00F3DF1B /* GameScore.swift */,
 				FF6931D725060FEA00F3DF1B /* StartGameConfig.swift */,
 				FF73B78F2520B7AF00E3EB1A /* RestartGameConfig.swift */,
+				FFE0BADA29D0466A002C457B /* StatisticEvent.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -651,6 +690,7 @@
 				FF6931D825060FEA00F3DF1B /* StartGameConfig.swift in Sources */,
 				FF82111225002ECD00D0C3CB /* Array+Teramonio.swift in Sources */,
 				9FDEEF96292163C900AB37B3 /* UILabel+Additions.swift in Sources */,
+				FFE0BADD29D04914002C457B /* StatisticLogger.swift in Sources */,
 				9FDEEF982921642700AB37B3 /* UIButton+Additions.swift in Sources */,
 				FF73EBED1EE564E6003F069B /* Game+CoreDataClass.swift in Sources */,
 				FF9043FE24FF6D270090C4D2 /* ResourceLoadable.swift in Sources */,
@@ -663,11 +703,14 @@
 				FF7401F8227838A500FEE070 /* GameFlowInput.swift in Sources */,
 				FFFBBFE21E4523A10052D68B /* Tetramonio.swift in Sources */,
 				FF74020422783A0800FEE070 /* GameInterractorOutput.swift in Sources */,
+				FFE0BAE329D04B10002C457B /* Statistic+CoreDataProperties.swift in Sources */,
+				FFE0BAE229D04B10002C457B /* Statistic+CoreDataClass.swift in Sources */,
 				FF2BA0BC1EE3F80500263D95 /* Cell+CoreDataClass.swift in Sources */,
 				FF73EBEE1EE564E6003F069B /* Game+CoreDataProperties.swift in Sources */,
 				FF858C5D1EBA6C33003EFEA3 /* CoreDataManager.swift in Sources */,
 				FFE6D62D1E59A47A0060C1C8 /* FieldCollectionViewCell.swift in Sources */,
 				FF90440824FF77B20090C4D2 /* ResourceLoadingError.swift in Sources */,
+				FFE0BADF29D04A3E002C457B /* CoreDataStatisticLogger.swift in Sources */,
 				FFFBBFF01E4526C50052D68B /* GameFlow.swift in Sources */,
 				FFFBBFF51E4527DB0052D68B /* FieldCell.swift in Sources */,
 				FF340C061E56432500EE82E1 /* GameAssembler.swift in Sources */,
@@ -685,6 +728,7 @@
 				FF2F7D7C1F93578C00C39520 /* EntityDescription.swift in Sources */,
 				FF2BA0BD1EE3F80500263D95 /* Cell+CoreDataProperties.swift in Sources */,
 				FFCD971D2524579F009CEA30 /* GameAssemblerProtocol.swift in Sources */,
+				FFE0BADB29D0466A002C457B /* StatisticEvent.swift in Sources */,
 				FF73B7902520B7AF00E3EB1A /* RestartGameConfig.swift in Sources */,
 				FF7401FC2278394000FEE070 /* GameViewOutput.swift in Sources */,
 				FF9748BA1EE8AA1E00213F10 /* Localization.swift in Sources */,
@@ -881,6 +925,7 @@
 				INFOPLIST_FILE = Blocks/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TetroBlocks;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.volodymyrs.blocks;
@@ -908,6 +953,7 @@
 				INFOPLIST_FILE = Blocks/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TetroBlocks;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.volodymyrs.blocks;
