@@ -23,8 +23,14 @@ class GameAssembler: GameAssemblerProtocol {
     var gameFlow: GameFlowInput {
         return GameFlow(interactor: interactor,
                         tetramonioGenerator: tetramonioGenerator,
-                        storage: gameStorage)
+                        storage: gameStorage,
+						statisticLogger: statisticLogger
+		)
     }
+	
+	var statisticLogger: StatisticLogger {
+		return CoreDataStatisticLogger(coreDataManager: coreDataManager)
+	}
     
     init(view: GameViewInput = GameViewController(),
          presenter: GameInteractorOutput & GameViewOutput = GamePresenter(),

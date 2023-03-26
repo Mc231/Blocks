@@ -33,7 +33,8 @@ class FieldCrossLineCheckerTests: XCTestCase {
         // When
         let result = sut.checkForCroosLine(at: &field)
         // Then
-        XCTAssertTrue(result.isEmpty)
+		XCTAssertTrue(result.cells.isEmpty)
+		XCTAssertEqual(result.wipedRows, 0)
     }
     
     func testChecForVerticalAndHorizontalLineReturnsResult() {
@@ -46,6 +47,7 @@ class FieldCrossLineCheckerTests: XCTestCase {
         // When
         let result = sut.checkForCroosLine(at: &field)
         // Then
-        XCTAssertEqual(result.count, expectedUpdatedCells)
+		XCTAssertEqual(result.cells.count, expectedUpdatedCells)
+		XCTAssertEqual(result.wipedRows, 2)
     }
 }

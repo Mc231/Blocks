@@ -32,14 +32,10 @@ final class CoreDataStatisticLogger: StatisticLogger {
 				statistic?.bestScore = score
 			}
 			statistic?.playedGames = playedGames + 1
-		case .lineWiped:
-			statistic?.linesWiped = linesWiped + 1
+		case let .wipedRows(count):
+			statistic?.linesWiped = linesWiped + Int64(count)
 		case .teramonioPlaced:
 			statistic?.placedTetramonios = placedTetramonios + 1
-		case .tetramonioDrawned:
-			statistic?.tetramonioDrawned = tetramonioDrawned + 1
-		case .tetramonioDragged:
-			statistic?.tetramonioDragged = tetramonioDragged + 1
 		case .restartGame:
 			statistic?.gamesRestarted = restartedGames + 1
 		}
@@ -65,14 +61,6 @@ final class CoreDataStatisticLogger: StatisticLogger {
 	
 	var playedGames: Int64 {
 		return statistic?.playedGames ?? .zero
-	}
-	
-	var tetramonioDragged: Int64 {
-		return statistic?.tetramonioDragged ?? .zero
-	}
-	
-	var tetramonioDrawned: Int64 {
-		return statistic?.tetramonioDrawned ?? .zero
 	}
 	
 	var restartedGames: Int64 {

@@ -99,6 +99,21 @@ private extension GameFlowTests {
 			return FieldCell.mockedField
 		}
 	}
+	
+	class MockStatisticLogger:  StatisticLogger {
+		
+		var lastEvent: Blocks.StatisticEvent? = nil
+		var allTimeTotalScore: Int64 = .zero
+		var bestScore: Int64 = .zero
+		var linesWiped: Int64 = .zero
+		var placedTetramonios: Int64 = .zero
+		var playedGames: Int64 = .zero
+		var restartedGames: Int64 = .zero
+		
+		func log(_ event: Blocks.StatisticEvent) {
+			self.lastEvent = event
+		}
+	}
 }
 
 class GameFlowTests: XCTestCase {
@@ -107,11 +122,13 @@ class GameFlowTests: XCTestCase {
 	private let interactor = MockInteractor()
 	private let tetramonioGenerator = MockTetramonioGenerator()
 	private let storage = MockStorage()
+	private let statisticLogger = MockStatisticLogger()
 	
 	override func setUp() {
 		sut = GameFlow(interactor: interactor,
 					   tetramonioGenerator: tetramonioGenerator,
-					   storage: storage)
+					   storage: storage,
+					   statisticLogger: statisticLogger)
 		super.setUp()
 	}
 	
@@ -163,11 +180,13 @@ class GameFlowTests: XCTestCase {
 		// Given
 		let expectedGenerationType: GenerationType = .gameStart
 		XCTAssertNil(tetramonioGenerator.generationType)
+		XCTAssertNil(statisticLogger.lastEvent)
 		// When
 		let restartGameConfig = sut.restartGame()
         // Then
         XCTAssertEqual(tetramonioGenerator.generationType, expectedGenerationType)
         XCTAssertTrue(restartGameConfig.field.isEmpty)
+		XCTAssertEqual(statisticLogger.lastEvent, .restartGame)
 	}
 	
 	func testUpdateFieldWithCell() {
@@ -202,10 +221,12 @@ class GameFlowTests: XCTestCase {
 								  .init(xPosition: 4, yPosition: 4, state: .empty)
 		]
 		storage.field = storage.createField()
+		XCTAssertNil(statisticLogger.lastEvent)
 		_ = sut.startGame()
 		// When
 		sut.updateField(with: cells)
 		// Then
+		XCTAssertEqual(statisticLogger.lastEvent, .gameOver(score: 1))
 		XCTAssertTrue(sut.fieldCells.filter({$0.state == .selected}).isEmpty)
 		XCTAssertTrue(sut.currentTetramonio.isEmpty)
 	}

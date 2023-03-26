@@ -16,6 +16,7 @@ class GameFlow {
     private weak var interactor: GameFlowOutput?
     private(set) var tetramonioGenerator: TetramonioGeneratable
     private(set) var storage: GameStorage
+	private let statisticLogger: StatisticLogger
 
     private(set) var fieldCells = [FieldCell]() {
         didSet {
@@ -34,10 +35,13 @@ class GameFlow {
 	// swiftlint:disable vertical_parameter_alignment
     init(interactor: GameFlowOutput?,
 		 tetramonioGenerator: TetramonioGeneratable,
-		 storage: GameStorage) {
+		 storage: GameStorage,
+		 statisticLogger: StatisticLogger
+	) {
         self.interactor = interactor
         self.tetramonioGenerator = tetramonioGenerator
         self.storage = storage
+		self.statisticLogger = statisticLogger
     }
 }
 
@@ -61,6 +65,7 @@ private extension GameFlow {
                let tetramonioGenerateType = tetramonios.firstIndex(of: tetramonio!)
                 .flatMap({GenerationType(rawValue: $0)}) {
                 generateTetramoniosOf(tetramonioGenerateType)
+				statisticLogger.log(.teramonioPlaced)
                 storeScore()
 			}
 		}else{
@@ -103,9 +108,11 @@ private extension GameFlow {
 
 	func checkCroosLines() {
         let updatedCells = checkForCroosLine(at: &fieldCells)
-        if !updatedCells.isEmpty {
-            storage.storeUpdatedCells(updatedCells)
-            interactor?.gameFlow(self, didUpdate: updatedCells)
+		let cells = updatedCells.cells
+		if !cells.isEmpty {
+			storage.storeUpdatedCells(cells)
+			statisticLogger.log(.wipedRows(count: updatedCells.wipedRows))
+            interactor?.gameFlow(self, didUpdate: cells)
         }
 	}
 	
@@ -118,6 +125,7 @@ private extension GameFlow {
 		let isGameOver = checkGameOver(for: tetramonios, at: fieldCells, with: self)
 		if isGameOver {
 			let score = storage.currentScore
+			statisticLogger.log(.gameOver(score: Int64(score)))
 			interactor?.gameOver(currentScore: score)
 		}
 	}
@@ -176,6 +184,7 @@ extension GameFlow: GameFlowInput {
         generateTetramoniosOf(.gameStart)
 		let restartConfig = storage.restartGame()
 		self.fieldCells = restartConfig.field
+		statisticLogger.log(.restartGame)
 		return restartConfig
     }
     

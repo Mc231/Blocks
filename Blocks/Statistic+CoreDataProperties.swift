@@ -19,10 +19,9 @@ extension Statistic {
 
     @NSManaged public var allTimeTotalScore: Int64
     @NSManaged public var bestScore: Int64
+    @NSManaged public var gamesRestarted: Int64
     @NSManaged public var linesWiped: Int64
     @NSManaged public var placedTetramonios: Int64
     @NSManaged public var playedGames: Int64
-    @NSManaged public var tetramonioDragged: Int64
-    @NSManaged public var tetramonioDrawned: Int64
-	@NSManaged public var gamesRestarted: Int64
+
 }

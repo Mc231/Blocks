@@ -87,4 +87,3 @@ class CoreDataManagerTests: XCTestCase {
 	}
 
 }
-

@@ -9,11 +9,9 @@
 import Foundation
 
 // Represents statistic event that will be logged
-enum StatisticEvent {
+enum StatisticEvent: Equatable {
 	case gameOver(score: Int64)
-	case lineWiped
+	case wipedRows(count: Int)
 	case teramonioPlaced
-	case tetramonioDrawned
-	case tetramonioDragged
 	case restartGame
 }

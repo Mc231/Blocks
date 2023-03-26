@@ -28,7 +28,7 @@ extension FieldCrossLineChecker {
 			? getRows(from: verticalCells, isVertical: true) : []
 		
 		if horizontalRows.isEmpty && verticalRows.isEmpty {
-			return []
+			return ([], 0)
 		}
 		
 		let result = Set(horizontalRows + verticalRows).reduce(into: [FieldCell]()) { (result, cell) in
@@ -37,7 +37,8 @@ extension FieldCrossLineChecker {
                 result.append(field[cellIndex])
 			}
 		}
-		return result
+		let wipedCells = (horizontalRows.count + verticalRows.count) / Constatns.Field.numberOfCellsInRow
+		return (result, wipedCells)
     }
     
     // MARK: - Private methods

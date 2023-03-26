@@ -16,4 +16,5 @@ protocol GameAssemblerProtocol {
     var view: GameViewInput { get }
     var presenter: GameViewOutput & GameInteractorOutput { get }
     var interactor: GameInteractorInput & GameFlowOutput { get }
+	var statisticLogger: StatisticLogger { get }
 }

@@ -77,8 +77,8 @@
 		FFE0BADB29D0466A002C457B /* StatisticEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0BADA29D0466A002C457B /* StatisticEvent.swift */; };
 		FFE0BADD29D04914002C457B /* StatisticLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0BADC29D04914002C457B /* StatisticLogger.swift */; };
 		FFE0BADF29D04A3E002C457B /* CoreDataStatisticLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0BADE29D04A3E002C457B /* CoreDataStatisticLogger.swift */; };
-		FFE0BAE229D04B10002C457B /* Statistic+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0BAE029D04B10002C457B /* Statistic+CoreDataClass.swift */; };
-		FFE0BAE329D04B10002C457B /* Statistic+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0BAE129D04B10002C457B /* Statistic+CoreDataProperties.swift */; };
+		FFE0BAE629D05DDE002C457B /* Statistic+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0BAE429D05DDE002C457B /* Statistic+CoreDataClass.swift */; };
+		FFE0BAE729D05DDE002C457B /* Statistic+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0BAE529D05DDE002C457B /* Statistic+CoreDataProperties.swift */; };
 		FFE6D62D1E59A47A0060C1C8 /* FieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE6D62C1E59A47A0060C1C8 /* FieldCollectionViewCell.swift */; };
 		FFFBBFBB1E4521700052D68B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFBBFBA1E4521700052D68B /* AppDelegate.swift */; };
 		FFFBBFC21E4521700052D68B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFFBBFC11E4521700052D68B /* Assets.xcassets */; };
@@ -137,7 +137,7 @@
 		FF76B0BA1E847EC0001969FA /* TetramonioGeneratorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetramonioGeneratorTests.swift; sourceTree = "<group>"; };
 		FF76B0BC1E847F52001969FA /* TetramonioLoaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TetramonioLoaderTests.swift; sourceTree = "<group>"; };
 		FF76B0BE1E847FA4001969FA /* GameFlowTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameFlowTests.swift; sourceTree = "<group>"; };
-		FF79438E29CF95C90025D234 /* Blocks 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Blocks 2.xcdatamodel"; sourceTree = "<group>"; };
+		FF79438E29CF95C90025D234 /* Blocks 2.xcdatamodel */ = {isa = PBXFileReference; explicitFileType = wrapper.xcdatamodel; path = "Blocks 2.xcdatamodel"; sourceTree = "<group>"; };
 		FF82110D2500224300D0C3CB /* Array+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Additions.swift"; sourceTree = "<group>"; };
 		FF82111125002ECD00D0C3CB /* Array+Teramonio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Teramonio.swift"; sourceTree = "<group>"; };
 		FF858C5C1EBA6C33003EFEA3 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -175,8 +175,8 @@
 		FFE0BADA29D0466A002C457B /* StatisticEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticEvent.swift; sourceTree = "<group>"; };
 		FFE0BADC29D04914002C457B /* StatisticLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticLogger.swift; sourceTree = "<group>"; };
 		FFE0BADE29D04A3E002C457B /* CoreDataStatisticLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStatisticLogger.swift; sourceTree = "<group>"; };
-		FFE0BAE029D04B10002C457B /* Statistic+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Statistic+CoreDataClass.swift"; sourceTree = "<group>"; };
-		FFE0BAE129D04B10002C457B /* Statistic+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Statistic+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FFE0BAE429D05DDE002C457B /* Statistic+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Statistic+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FFE0BAE529D05DDE002C457B /* Statistic+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Statistic+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FFE6D62C1E59A47A0060C1C8 /* FieldCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldCollectionViewCell.swift; sourceTree = "<group>"; };
 		FFFBBFB71E4521700052D68B /* Blocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFFBBFBA1E4521700052D68B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -248,8 +248,8 @@
 		FF8407C41ED6ADE7004E5068 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				FFE0BAE029D04B10002C457B /* Statistic+CoreDataClass.swift */,
-				FFE0BAE129D04B10002C457B /* Statistic+CoreDataProperties.swift */,
+				FFE0BAE429D05DDE002C457B /* Statistic+CoreDataClass.swift */,
+				FFE0BAE529D05DDE002C457B /* Statistic+CoreDataProperties.swift */,
 				FF73EBEB1EE564E6003F069B /* Game+CoreDataClass.swift */,
 				FF73EBEC1EE564E6003F069B /* Game+CoreDataProperties.swift */,
 				FF2BA0BA1EE3F80500263D95 /* Cell+CoreDataClass.swift */,
@@ -703,8 +703,8 @@
 				FF7401F8227838A500FEE070 /* GameFlowInput.swift in Sources */,
 				FFFBBFE21E4523A10052D68B /* Tetramonio.swift in Sources */,
 				FF74020422783A0800FEE070 /* GameInterractorOutput.swift in Sources */,
-				FFE0BAE329D04B10002C457B /* Statistic+CoreDataProperties.swift in Sources */,
-				FFE0BAE229D04B10002C457B /* Statistic+CoreDataClass.swift in Sources */,
+				FFE0BAE729D05DDE002C457B /* Statistic+CoreDataProperties.swift in Sources */,
+				FFE0BAE629D05DDE002C457B /* Statistic+CoreDataClass.swift in Sources */,
 				FF2BA0BC1EE3F80500263D95 /* Cell+CoreDataClass.swift in Sources */,
 				FF73EBEE1EE564E6003F069B /* Game+CoreDataProperties.swift in Sources */,
 				FF858C5D1EBA6C33003EFEA3 /* CoreDataManager.swift in Sources */,
@@ -1007,7 +1007,7 @@
 				FF79438E29CF95C90025D234 /* Blocks 2.xcdatamodel */,
 				FFB82A891E7D2F2A0043BD53 /* Blocks.xcdatamodel */,
 			);
-			currentVersion = FFB82A891E7D2F2A0043BD53 /* Blocks.xcdatamodel */;
+			currentVersion = FF79438E29CF95C90025D234 /* Blocks 2.xcdatamodel */;
 			path = Blocks.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

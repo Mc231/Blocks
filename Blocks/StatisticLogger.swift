@@ -28,10 +28,6 @@ protocol StatisticLogger {
 	var placedTetramonios: Int64 { get }
 	// Number of played games
 	var playedGames: Int64 { get }
-	// Number of dragged  tetramonios
-	var tetramonioDragged: Int64 { get }
-	// Number of drowned tetramonios
-	var tetramonioDrawned: Int64 { get }
 	//Number of restarted games
 	var restartedGames: Int64 { get }
 }
