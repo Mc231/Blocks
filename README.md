@@ -4,7 +4,7 @@ Tetris based game, place figures on the field, wipe lines to get a score.
 
 ## Fatures
 - VIPER arhitecture
-- 83+ Unit test coverage
+- 83+% Unit test coverage
 
 ## Gameplay
 
