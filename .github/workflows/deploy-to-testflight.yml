@@ -1,0 +1,25 @@
+name: Deploy to TestFlight
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v3
+
+      - name: Install Fastlane
+        run: |
+          gem install bundler
+          bundle install
+
+      - name: Run Unit Tests and Deploy
+        env:
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+          FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+        run: |
+          bundle exec fastlane deploy_testflight
