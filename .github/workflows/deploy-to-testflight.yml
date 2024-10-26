@@ -11,15 +11,10 @@ jobs:
       - name: Check out the code
         uses: actions/checkout@v3
 
-      - name: Install Fastlane
-        run: |
-          gem install bundler
-          bundle install
-
-      - name: Run Unit Tests and Deploy
+      - name: Deploy to TestFlight
         env:
           FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
           FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
         run: |
-          bundle exec fastlane deploy_testflight
+          fastlane deploy_testflight
