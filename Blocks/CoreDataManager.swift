@@ -21,7 +21,7 @@
 	lazy var persistentContainer: NSPersistentContainer = {
 		let container = NSPersistentContainer(name: modelName)
 		container.loadPersistentStores { (description, error) in
-			debugPrint(error as Any)
+			
 		}
 		return container
 	}()

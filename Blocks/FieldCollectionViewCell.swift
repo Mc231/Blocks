@@ -18,8 +18,4 @@ class FieldCollectionViewCell: UICollectionViewCell {
         self.cellData = cellData
         backgroundColor = cellData.state.backgroundColor
     }
-	
-	override func isEqual(_ object: Any?) -> Bool {
-        return (object as? FieldCollectionViewCell)?.cellData == cellData
-	}
 }

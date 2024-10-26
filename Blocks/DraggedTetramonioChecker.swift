@@ -9,6 +9,7 @@
 import UIKit
 
 class DraggedTetramonioChecker {
+    
 	
 	// MARK: - Inizialization
 
@@ -26,6 +27,7 @@ class DraggedTetramonioChecker {
 	private var initialCenter = CGPoint()
 
 	func handleDraggedTetramonio(from gesture: UIPanGestureRecognizer,
+                                 matchingThreshold: Int = 8,
 								 animationDuration: TimeInterval = 0.3,
 								 completion: @escaping ([FieldCell]) -> Swift.Void) {
 
@@ -51,7 +53,9 @@ class DraggedTetramonioChecker {
 					piece.selectedCells.forEach({ (tetramonioCell) in
 						let fieldRect = fieldCell.convert(fieldCell.bounds, to: self.view)
 						let tetramonioRect = tetramonioCell.convert(tetramonioCell.bounds, to: self.view)
-						let intersectRect = fieldRect.intersection(tetramonioRect)
+                        let matchingThreshold = 8.0
+                        let intersectRect = fieldRect.insetBy(dx: -matchingThreshold, dy: -matchingThreshold)
+                                            .intersection(tetramonioRect.insetBy(dx: -matchingThreshold, dy: -matchingThreshold))
 						let intersectsTetramonioRect = fieldRect.intersects(tetramonioRect)
 						let intersectRectSzie = intersectRect.width >= 32 && intersectRect.height >= 32
 						if  intersectsTetramonioRect && intersectRectSzie,
