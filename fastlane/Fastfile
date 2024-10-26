@@ -22,11 +22,7 @@ platform :ios do
     build_app(
      scheme: "Blocks",
      export_method: "app-store",
-     output_directory: "./build",
-     output_name: "Blocks.ipa" 
     )
-    upload_to_testflight(
-      ipa: "./build/Blocks.ipa"
-    )
+    upload_to_testflight
   end
 end
